@@ -5,11 +5,11 @@ import type { GameState, Message, PublicPlayer } from '@zeteo/shared-types';
 
 /** 5인 = 사람 4 + 봇 1. 룰북 캡션의 "4인 게임이면 3표"는 MVP 기준과 맞지 않으므로 쓰지 않는다. */
 const players: PublicPlayer[] = [
-  { id: 'p1', label: '팀원A', isAlive: true },
-  { id: 'p2', label: '팀원B', isAlive: true },
-  { id: 'p3', label: '흑기사', isAlive: true },
-  { id: 'p4', label: '팀원C', isAlive: true },
-  { id: 'p5', label: 'AI참가자', isAlive: true }, // 실제로는 봇. 클라이언트는 알 수 없어야 한다.
+  { id: 'p1', label: '팀원A', isAlive: true, isReady: true },
+  { id: 'p2', label: '팀원B', isAlive: true, isReady: true },
+  { id: 'p3', label: '흑기사', isAlive: true, isReady: true },
+  { id: 'p4', label: '팀원C', isAlive: true, isReady: true },
+  { id: 'p5', label: 'AI참가자', isAlive: true, isReady: true }, // 실제로는 봇. 클라이언트는 알 수 없어야 한다.
 ];
 
 const ME = 'p3';
