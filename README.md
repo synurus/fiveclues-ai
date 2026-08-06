@@ -29,12 +29,12 @@ npm run dev -w frontend
 
 ### 파트별 첫 명령어
 
-| 파트         | 담당   | 명령어                                                |
-| ------------ | ------ | ----------------------------------------------------- |
-| A · 서버     | 팀원C | `npm run dev -w backend`                              |
-| B · 봇       | 팀원A | `npm run bot -w backend` ← 서버·화면 없이 봇만 테스트 |
-| C · 게임화면 | 흑기사 | `npm run dev -w frontend` → `/?mock=`                 |
-| D · 공통     | 팀원B   | `npm run dev -w frontend`                             |
+| 파트         | 담당         | 명령어                                                |
+| ------------ | ------------ | ----------------------------------------------------- |
+| A · 서버     | 서버담당     | `npm run dev -w backend`                              |
+| B · 봇       | 봇담당       | `npm run bot -w backend` ← 서버·화면 없이 봇만 테스트 |
+| C · 게임화면 | 화면담당     | `npm run dev -w frontend` → `/?mock=`                 |
+| D · 공통     | 레이아웃담당 | `npm run dev -w frontend`                             |
 
 **서버가 없어도 화면을 볼 수 있다.** `http://localhost:5173/?mock=` 에 들어가면 mock 상태 목록이 나오고, `?mock=debate-voted` 처럼 지정하면 해당 화면으로 바로 진입한다.
 
@@ -101,12 +101,12 @@ import type { GameState, ClientEvent } from '@zeteo/shared-types';
 ## 브랜치
 
 ```
-main            발표·시연용. 항상 동작. 팀원A만 병합
+main            발표·시연용. 항상 동작. 봇담당만 병합
  └ dev          통합. PR + 리뷰 1명 승인으로만 진입
-    ├ feat/server     팀원C
-    ├ feat/bot        팀원A
-    ├ feat/game-ui    흑기사
-    └ feat/layout     팀원B
+    ├ feat/server     서버담당
+    ├ feat/bot        봇담당
+    ├ feat/game-ui    화면담당
+    └ feat/layout     레이아웃담당
 ```
 
 - `main` 직접 push 금지
