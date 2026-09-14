@@ -3,3 +3,6 @@ dist/
 .env
 apps/backend/logs/
 apps/backend/.bot-provider
+
+# 관전 모드 실행 기록 (scripts/spectate.mjs)
+runs/
