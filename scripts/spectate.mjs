@@ -1,66 +1,65 @@
 #!/usr/bin/env node
-// 관전 모드 프로토타입 — 봇만으로 라이어게임 한 판을 돌리고 지표를 뽑는다.
+// 관전 모드 — 사람 없이 묘사를 생성하고, 자동 추측자가 맞히는지로 난이도를 잰다.
+// 기획서 v2 기준. 사람 라벨(결정적/무쓸모)은 못 얻지만 정답률은 무인으로 나온다.
 //
-//   node scripts/spectate.mjs            한 판
-//   GAMES=10 node scripts/spectate.mjs   열 판
-//   DRY=1 node scripts/spectate.mjs      LLM 없이 배선만 확인
+//   DRY=1 node scripts/spectate.mjs     LLM 없이 배선만 확인
+//   node scripts/spectate.mjs           한 판
+//   GAMES=20 node scripts/spectate.mjs  스무 판 (세대 비교 최소 단위)
 //
-// 의존성 없음(Node 22+ 내장 fetch). DB도 안 쓴다 — 결과는 runs/ 에 JSONL로 떨어진다.
+// 의존성 없음(Node 22+ 내장 fetch). 결과는 runs/ 에 JSONL로 떨어진다.
 //
 // 환경변수: BOT_BASE_URL, BOT_API_KEY, BOT_MODEL  (OpenAI 호환 엔드포인트)
 //   Groq     https://api.groq.com/openai/v1
 //   Cerebras https://api.cerebras.ai/v1
 //   로컬     http://localhost:11434/v1   (Ollama)
 
-import { writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 
 const CFG = {
   baseUrl: process.env.BOT_BASE_URL ?? 'https://api.groq.com/openai/v1',
   apiKey: process.env.BOT_API_KEY ?? '',
   model: process.env.BOT_MODEL ?? 'llama-3.3-70b-versatile',
-  bots: Number(process.env.BOTS ?? 5),
+  hints: Number(process.env.HINTS ?? 5), // 라운드당 묘사 개수
   games: Number(process.env.GAMES ?? 1),
-  rounds: Number(process.env.ROUNDS ?? 2),
   dry: process.env.DRY === '1',
 };
 
-const WORDS = {
-  동물: ['사자', '코끼리', '기린', '판다', '캥거루', '펭귄', '호랑이', '낙타'],
-  음식: ['김치찌개', '짜장면', '피자', '초밥', '떡볶이', '삼겹살', '라면', '파스타'],
-  과일: ['사과', '바나나', '딸기', '수박', '포도', '복숭아', '파인애플', '참외'],
-  채소: ['당근', '양파', '감자', '오이', '브로콜리', '고구마', '마늘', '파'],
-  직업: ['의사', '변호사', '소방관', '경찰관', '요리사', '선생님', '미용사', '개발자'],
-  스포츠: ['축구', '야구', '농구', '배구', '수영', '골프', '테니스', '볼링'],
-  탈것: ['자동차', '비행기', '기차', '자전거', '오토바이', '버스', '배', '헬리콥터'],
-  가전제품: ['냉장고', '세탁기', '에어컨', '전자레인지', '청소기', '텔레비전', '정수기', '선풍기'],
-  여행지: ['제주도', '파리', '도쿄', '뉴욕', '하와이', '방콕', '런던', '부산'],
-  학용품: ['연필', '지우개', '볼펜', '필통', '노트', '가위', '풀', '자'],
-  악기: ['피아노', '기타', '드럼', '바이올린', '트럼펫', '플루트', '첼로', '하모니카'],
-  취미: ['독서', '등산', '낚시', '게임', '요리', '그림그리기', '사진찍기', '캠핑'],
-};
+// 목표: 1라운드 정답률 25~35% (기획서 v2 §8)
+const TARGET_BAND = [25, 35];
+
+const STYLES = ['단답형', '문장형', '비유', '용도·기능', '감각', '상황·맥락', '부정형'];
+
+const WORDS = JSON.parse(await readFile(new URL('./words.json', import.meta.url), 'utf8'));
 
 const pick = (a) => a[Math.floor(Math.random() * a.length)];
-const shuffle = (a) => a.map((v) => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map((p) => p[1]);
+const norm = (s) => String(s ?? '').replace(/[\s.,!?"'·]/g, '').trim();
 
 // ── LLM ────────────────────────────────────────────────────────────────
 let calls = 0;
 
-async function llm(system, user, { json = false } = {}) {
+async function llm(system, user) {
   calls++;
-  if (CFG.dry) return json ? `{"vote":"A","leak":"A-1","guess":"사자","reason":"dry"}` : `[DRY] 발언 ${calls}`;
-
+  if (CFG.dry) {
+    return JSON.stringify({
+      hints: Array.from({ length: CFG.hints }, (_, i) => ({
+        text: `[DRY] 묘사 ${calls}-${i + 1}`,
+        style: STYLES[i % STYLES.length],
+      })),
+      guess: '사자',
+    });
+  }
   const res = await fetch(`${CFG.baseUrl}/chat/completions`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${CFG.apiKey}` },
     body: JSON.stringify({
       model: CFG.model,
       temperature: 0.9,
-      max_tokens: 200,
+      max_tokens: 800,
+      response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: system },
         { role: 'user', content: user },
       ],
-      ...(json ? { response_format: { type: 'json_object' } } : {}),
     }),
   });
   if (!res.ok) throw new Error(`LLM ${res.status}: ${(await res.text()).slice(0, 300)}`);
@@ -68,7 +67,7 @@ async function llm(system, user, { json = false } = {}) {
   return data.choices?.[0]?.message?.content?.trim() ?? '';
 }
 
-// 모델이 JSON을 어기는 일이 잦다. 중괄호만 긁어내는 폴백을 둔다.
+// 무료 티어 모델은 response_format 을 줘도 JSON 을 어기는 일이 잦다.
 function parseJson(text, fallback) {
   try {
     return JSON.parse(text);
@@ -80,142 +79,130 @@ function parseJson(text, fallback) {
 }
 
 // ── 프롬프트 ───────────────────────────────────────────────────────────
-const RULES = `
+// 여기가 이 프로젝트의 본체다. 지표를 보고 고칠 곳은 사실상 이 두 함수뿐.
+
+const hintSystem = (round) => `
+너는 한국어 낱말 맞히기 게임의 출제자다. 제시어를 직접 말하지 않고 묘사 ${CFG.hints}개를 만든다.
+
+${round === 1
+  ? `목표 난이도: 이 묘사들만 보고 처음 보는 사람이 맞힐 확률이 약 30%가 되게 한다.
+너무 쉬우면 첫 줄에서 정답이 나오고, 너무 어려우면 아무 정보도 없다.`
+  : `이번은 2라운드다. 1라운드에서 맞히지 못했으므로 **1라운드보다 쉽게** 만든다.
+더 구체적으로 가되, 제시어를 그대로 말하지는 않는다.`}
+
 규칙:
-- 한 문장, 25자 이내. 설명·서론 없이 발언만 출력한다.
-- 제시어 자체와 그 일부를 직접 말하지 않는다.
-- 이미 나온 발언을 반복하거나 바꿔 말하지 않는다.
-`.trim();
+- 제시어와 그 일부 글자를 쓰지 않는다.
+- 각 묘사는 한 문장, 30자 이내.
+- **상위 범주를 직접 말하지 않는다** ("동물이다", "과일이다" 금지).
+- ${CFG.hints}개의 스타일을 서로 다르게 한다. 고를 수 있는 스타일:
+  ${STYLES.join(' / ')}
 
-const citizenSystem = (label, category, word) => `
-너는 라이어 게임 참가자 "${label}"다. 주제는 "${category}", 제시어는 "${word}"다.
+JSON만 출력한다:
+{"hints":[{"text":"묘사","style":"스타일"}]}`.trim();
 
-너는 두 압력 사이에 있다:
-- 너무 모호하면 제시어를 모르는 것처럼 보여 라이어로 의심받는다.
-- 너무 구체적이면 라이어가 제시어를 알아맞힌다.
+const guessSystem = `
+너는 한국어 낱말 맞히기 게임의 참가자다. 묘사만 보고 제시어를 추측한다.
+주제나 범주는 주어지지 않는다. 설명 없이 한국어 명사 하나만 답한다.
 
-${RULES}`.trim();
+JSON만 출력한다: {"guess":"단어"}`.trim();
 
-const liarSystem = (label, category) => `
-너는 라이어 게임의 라이어 "${label}"다. 주제가 "${category}"라는 것만 알고 제시어는 모른다.
+async function makeHints(word, round, previous) {
+  const user = round === 1
+    ? `제시어: ${word}\n\n묘사 ${CFG.hints}개를 만들어라.`
+    : `제시어: ${word}\n\n1라운드에서 이미 나온 묘사(겹치지 말 것):\n` +
+      previous.map((h) => `- ${h.text}`).join('\n') +
+      `\n\n2라운드 묘사 ${CFG.hints}개를 만들어라.`;
+  const raw = await llm(hintSystem(round), user);
+  const hints = parseJson(raw, {}).hints;
+  if (!Array.isArray(hints) || !hints.length) throw new Error('묘사 파싱 실패');
+  return hints.map((h) => ({ text: String(h.text ?? ''), style: String(h.style ?? '?'), round }));
+}
 
-목표: 제시어를 아는 것처럼 보이게 한다. 다른 참가자의 발언에서 단서를 얻되,
-베껴 말하면 들킨다. 주제 안에서 두루 통하는 말을 골라라.
-
-${RULES}`.trim();
-
-const transcriptOf = (msgs) =>
-  msgs.length ? msgs.map((m) => `${m.label}(${m.round}R): ${m.text}`).join('\n') : '(아직 없음)';
+async function autoGuess(hints) {
+  const raw = await llm(guessSystem, `묘사:\n${hints.map((h) => `- ${h.text}`).join('\n')}`);
+  return String(parseJson(raw, {}).guess ?? '');
+}
 
 // ── 한 판 ──────────────────────────────────────────────────────────────
-async function playGame(gameNo) {
-  const category = pick(Object.keys(WORDS));
-  const word = pick(WORDS[category]);
-  const labels = Array.from({ length: CFG.bots }, (_, i) => String.fromCharCode(65 + i));
-  const liar = pick(labels);
+async function playGame(gameNo, used) {
+  const pool = WORDS.filter((w) => !used.has(w.word));
+  const { word, category } = pick(pool.length ? pool : WORDS);
+  used.add(word);
 
-  const messages = [];
+  const r1 = await makeHints(word, 1, []);
+  r1.forEach((h) => console.log(`  1R [${h.style}] ${h.text}`));
+  const guess1 = await autoGuess(r1);
+  const solved1 = norm(guess1) === norm(word);
+  console.log(`  → 1차 추측 "${guess1}" ${solved1 ? '정답' : '오답'}`);
 
-  for (let round = 1; round <= CFG.rounds; round++) {
-    // 발언 순서는 매 라운드 섞는다. 라이어가 첫 순서면 참고할 발언이 없어 불리하다 —
-    // 그 불리함이 실제로 적발률에 나타나는지 보려고 순서를 기록해둔다.
-    for (const label of shuffle(labels)) {
-      const system = label === liar ? liarSystem(label, category) : citizenSystem(label, category, word);
-      const text = await llm(
-        system,
-        `지금까지 나온 발언:\n${transcriptOf(messages)}\n\n${round}라운드, 네 차례다. 발언하라.`,
-      );
-      messages.push({ label, round, text: text.replace(/^["']|["']$/g, '') });
-      process.stdout.write(`  ${label}(${round}R) ${text}\n`);
-    }
+  let r2 = [], guess2 = null, solved2 = false;
+  if (!solved1) {
+    r2 = await makeHints(word, 2, r1);
+    r2.forEach((h) => console.log(`  2R [${h.style}] ${h.text}`));
+    guess2 = await autoGuess([...r1, ...r2]);
+    solved2 = norm(guess2) === norm(word);
+    console.log(`  → 2차 추측 "${guess2}" ${solved2 ? '정답' : '오답'}`);
   }
 
-  // 봇 투표 — 자기 자신은 후보에서 뺀다
-  const liarVotes = {};
-  const leakVotes = {};
-  for (const voter of labels) {
-    const others = shuffle(labels.filter((l) => l !== voter));
-    const raw = await llm(
-      `너는 라이어 게임 참가자 "${voter}"다. 아래 발언들을 보고 판단하라.`,
-      `발언 기록:\n${transcriptOf(messages)}\n\n` +
-        `1) 라이어는 누구인가? 후보: ${others.join(', ')}\n` +
-        `2) 제시어를 가장 많이 노출시킨 발언은 무엇인가? "라벨-라운드" 형식으로.\n\n` +
-        `JSON만 출력: {"vote":"라벨","leak":"라벨-라운드","reason":"20자 이내"}`,
-      { json: true },
-    );
-    const v = parseJson(raw, {});
-    if (others.includes(v.vote)) liarVotes[v.vote] = (liarVotes[v.vote] ?? 0) + 1;
-    if (typeof v.leak === 'string') leakVotes[v.leak] = (leakVotes[v.leak] ?? 0) + 1;
-  }
+  const finalGuess = solved1 ? guess1 : guess2;
+  // 정답은 아닌데 한쪽이 다른 쪽을 포함하면 표기 문제일 수 있다 (텔레비전/TV 등)
+  const nearMiss =
+    !solved1 && !solved2 && finalGuess
+      ? norm(finalGuess).includes(norm(word)) || norm(word).includes(norm(finalGuess))
+      : false;
+  if (nearMiss) console.log(`  ⚠ 표기 차이일 수 있음: 정답 "${word}" vs 추측 "${finalGuess}"`);
 
-  // 자동 추측자 — 사람 대신 힌트만 보고 제시어를 맞혀본다 (제시어 방어율용)
-  const guessRaw = await llm(
-    '너는 라이어 게임의 라이어다. 아래 발언만 보고 제시어를 맞혀라.',
-    `주제: ${category}\n발언:\n${transcriptOf(messages)}\n\nJSON만 출력: {"guess":"단어"}`,
-    { json: true },
-  );
-  const guess = parseJson(guessRaw, {}).guess ?? '';
+  console.log(`  제시어 ${word} (${category}) — ${solved1 ? '1라운드' : solved2 ? '2라운드' : '실패'}\n`);
 
-  const topLiar = Object.entries(liarVotes).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
-  const topLeak = Object.entries(leakVotes).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
-
-  const result = {
-    gameNo,
-    category,
-    word,
-    liar,
-    liarFirstRound1: messages[0]?.label === liar,
-    messages,
-    liarVotes,
-    leakVotes,
-    caught: topLiar === liar,
-    topLiar,
-    topLeak,
-    guess,
-    guessed: guess === word,
+  return {
+    gameNo, word, category,
+    hints: [...r1, ...r2],
+    guess1, guess2, solved1, solved2, nearMiss,
+    outcome: solved1 ? 'round1' : solved2 ? 'round2' : 'fail',
   };
-
-  console.log(
-    `\n  제시어 ${category}/${word} · 라이어 ${liar}` +
-      `\n  봇 지목 ${topLiar ?? '-'} → ${result.caught ? '적발 성공' : '적발 실패'}` +
-      `\n  최대 누출 ${topLeak ?? '-'}` +
-      `\n  자동 추측 "${guess}" → ${result.guessed ? '뚫림' : '방어'}\n`,
-  );
-  return result;
 }
 
 // ── 실행 ───────────────────────────────────────────────────────────────
 const started = Date.now();
 const results = [];
+const used = new Set();
+
+console.log(`제시어 풀 ${WORDS.length}개 · 라운드당 묘사 ${CFG.hints}개${CFG.dry ? ' · DRY' : ''}`);
 
 for (let i = 1; i <= CFG.games; i++) {
   console.log(`\n━━ ${i}/${CFG.games} 판 ━━`);
   try {
-    results.push(await playGame(i));
+    results.push(await playGame(i, used));
   } catch (e) {
     console.error(`  실패: ${e.message}`);
   }
 }
 
-const done = results.length;
-if (done) {
-  const caught = results.filter((r) => r.caught).length;
-  const guessed = results.filter((r) => r.guessed).length;
-  const leakBy = {};
-  for (const r of results) {
-    const label = r.topLeak?.split('-')[0];
-    if (label) leakBy[label] = (leakBy[label] ?? 0) + 1;
-  }
-  console.log('━'.repeat(40));
-  console.log(`판 수            ${done}`);
-  console.log(`라이어 적발률    ${((caught / done) * 100).toFixed(0)}%  (${caught}/${done})`);
-  console.log(`제시어 방어율    ${(((done - guessed) / done) * 100).toFixed(0)}%  (${done - guessed}/${done})`);
-  console.log(`최대 누출 분포   ${JSON.stringify(leakBy)}`);
+const n = results.length;
+if (n) {
+  const r1 = results.filter((r) => r.outcome === 'round1').length;
+  const r2 = results.filter((r) => r.outcome === 'round2').length;
+  const rate1 = (r1 / n) * 100;
+  const styles = {};
+  for (const r of results) for (const h of r.hints) styles[h.style] = (styles[h.style] ?? 0) + 1;
+
+  const verdict =
+    rate1 < TARGET_BAND[0] ? '묘사가 너무 어렵다 — 더 구체적으로'
+    : rate1 > TARGET_BAND[1] ? '묘사가 너무 쉽다 — 더 모호하게'
+    : '목표 밴드 안';
+
+  console.log('━'.repeat(46));
+  console.log(`판 수           ${n}`);
+  console.log(`1라운드 정답률  ${rate1.toFixed(0)}%  (${r1}/${n})   목표 ${TARGET_BAND[0]}~${TARGET_BAND[1]}% → ${verdict}`);
+  console.log(`최종 정답률     ${(((r1 + r2) / n) * 100).toFixed(0)}%  (${r1 + r2}/${n})`);
+  console.log(`실패            ${n - r1 - r2}`);
+  console.log(`스타일 분포     ${JSON.stringify(styles)}`);
+  if (results.some((r) => r.nearMiss)) console.log(`⚠ 표기 차이 의심 ${results.filter((r) => r.nearMiss).length}건 — JSONL 확인`);
   console.log(`LLM 호출 ${calls}회 · ${((Date.now() - started) / 1000).toFixed(0)}초`);
-  console.log('\n⚠️ 판이 적으면 이 숫자들은 운과 구분되지 않는다. 세대 비교는 최소 10판부터.');
+  console.log(`\n⚠️ 판이 적으면 이 숫자는 운과 구분되지 않는다. 세대 비교는 최소 20판부터.`);
 
   await mkdir('runs', { recursive: true });
   const path = `runs/${new Date().toISOString().replace(/[:.]/g, '-')}.jsonl`;
   await writeFile(path, results.map((r) => JSON.stringify(r)).join('\n') + '\n');
-  console.log(`\n기록: ${path}`);
+  console.log(`기록: ${path}`);
 }
