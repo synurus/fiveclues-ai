@@ -39,6 +39,19 @@ const WORDS = JSON.parse(await readFile(new URL('./words.json', import.meta.url)
 const pick = (a) => a[Math.floor(Math.random() * a.length)];
 const norm = (s) => String(s ?? '').replace(/[\s.,!?"'·]/g, '').trim();
 
+// 정답 판정이 이 도구의 자(ruler)다. 자가 틀리면 프롬프트를 엉뚱하게 고치게 된다.
+//   exact  정답과 같거나, words.json 의 accept 에 있는 동의어
+//   loose  한쪽이 다른 쪽을 포함 (경찰관/경찰, 개발자/프론트엔드 개발자, 골프/골프공)
+//   wrong  그 외
+function judge(word, guess, accept = []) {
+  const g = norm(guess);
+  if (!g) return 'wrong';
+  if (g === norm(word)) return 'exact';
+  if (accept.some((a) => norm(a) === g)) return 'exact';
+  if (g.includes(norm(word)) || norm(word).includes(g)) return 'loose';
+  return 'wrong';
+}
+
 // ── LLM ────────────────────────────────────────────────────────────────
 let calls = 0;
 
@@ -217,28 +230,26 @@ async function playGame(gameNo, used) {
   const { word, category } = pick(pool.length ? pool : WORDS);
   used.add(word);
 
+  const accept = WORDS.find((x) => x.word === word)?.accept ?? [];
   const { hints: r1, banned: banned1 } = await makeHints(word, 1, []);
   r1.forEach((h) => console.log(`  1R [${h.style}] ${h.text}`));
   const guess1 = await autoGuess(r1);
-  const solved1 = norm(guess1) === norm(word);
-  console.log(`  → 1차 추측 "${guess1}" ${solved1 ? '정답' : '오답'}`);
+  const v1 = judge(word, guess1, accept);
+  const solved1 = v1 === 'exact';
+  console.log(`  → 1차 추측 "${guess1}" ${v1 === 'exact' ? '정답' : v1 === 'loose' ? '준정답' : '오답'}`);
 
-  let r2 = [], guess2 = null, solved2 = false;
+  let r2 = [], guess2 = null, solved2 = false, v2 = null;
   if (!solved1) {
     ({ hints: r2 } = await makeHints(word, 2, r1));
     r2.forEach((h) => console.log(`  2R [${h.style}] ${h.text}`));
     guess2 = await autoGuess([...r1, ...r2]);
-    solved2 = norm(guess2) === norm(word);
-    console.log(`  → 2차 추측 "${guess2}" ${solved2 ? '정답' : '오답'}`);
+    v2 = judge(word, guess2, accept);
+    solved2 = v2 === 'exact';
+    console.log(`  → 2차 추측 "${guess2}" ${v2 === 'exact' ? '정답' : v2 === 'loose' ? '준정답' : '오답'}`);
   }
 
-  const finalGuess = solved1 ? guess1 : guess2;
-  // 정답은 아닌데 한쪽이 다른 쪽을 포함하면 표기 문제일 수 있다 (텔레비전/TV 등)
-  const nearMiss =
-    !solved1 && !solved2 && finalGuess
-      ? norm(finalGuess).includes(norm(word)) || norm(word).includes(norm(finalGuess))
-      : false;
-  if (nearMiss) console.log(`  ⚠ 표기 차이일 수 있음: 정답 "${word}" vs 추측 "${finalGuess}"`);
+  const loose1 = v1 === 'loose';
+  const loose2 = v2 === 'loose';
 
   console.log(`  제시어 ${word} (${category}) — ${solved1 ? '1라운드' : solved2 ? '2라운드' : '실패'}\n`);
 
@@ -246,8 +257,9 @@ async function playGame(gameNo, used) {
     gameNo, word, category,
     hints: [...r1, ...r2],
     banned: banned1,
-    guess1, guess2, solved1, solved2, nearMiss,
+    guess1, guess2, solved1, solved2, verdict1: v1, verdict2: v2,
     outcome: solved1 ? 'round1' : solved2 ? 'round2' : 'fail',
+    looseOutcome: solved1 || loose1 ? 'round1' : solved2 || loose2 ? 'round2' : 'fail',
   };
 }
 
@@ -287,6 +299,8 @@ const n = results.length;
 if (n) {
   const r1 = results.filter((r) => r.outcome === 'round1').length;
   const r2 = results.filter((r) => r.outcome === 'round2').length;
+  const l1 = results.filter((r) => r.looseOutcome === 'round1').length;
+  const l2 = results.filter((r) => r.looseOutcome === 'round2').length;
   const rate1 = (r1 / n) * 100;
   const styles = {};
   for (const r of results) for (const h of r.hints) styles[h.style] = (styles[h.style] ?? 0) + 1;
@@ -300,9 +314,9 @@ if (n) {
   console.log(`판 수           ${n}`);
   console.log(`1라운드 정답률  ${rate1.toFixed(0)}%  (${r1}/${n})   목표 ${TARGET_BAND[0]}~${TARGET_BAND[1]}% → ${verdict}`);
   console.log(`최종 정답률     ${(((r1 + r2) / n) * 100).toFixed(0)}%  (${r1 + r2}/${n})`);
-  console.log(`실패            ${n - r1 - r2}`);
+  console.log(`  └ 준정답 포함  1R ${((l1 / n) * 100).toFixed(0)}%  최종 ${(((l1 + l2) / n) * 100).toFixed(0)}%   (경찰관/경찰 같은 포함관계)`);
+  console.log(`실패            ${n - l1 - l2}`);
   console.log(`스타일 분포     ${JSON.stringify(styles)}`);
-  if (results.some((r) => r.nearMiss)) console.log(`⚠ 표기 차이 의심 ${results.filter((r) => r.nearMiss).length}건 — JSONL 확인`);
   console.log(`LLM 호출 ${calls}회 · ${((Date.now() - started) / 1000).toFixed(0)}초`);
   console.log(`\n⚠️ 판이 적으면 이 숫자는 운과 구분되지 않는다. 세대 비교는 최소 20판부터.`);
 
