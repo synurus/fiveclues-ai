@@ -14,6 +14,11 @@
 //   로컬     http://localhost:11434/v1   (Ollama)
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+
+// 레포 루트의 .env 를 읽는다(Node 21.7+ 내장, 의존성 없음).
+// 셸 창을 새로 열 때마다 $env: 로 키를 다시 넣지 않아도 된다. .env 는 .gitignore 에 있다.
+if (existsSync('.env')) process.loadEnvFile('.env');
 
 const CFG = {
   baseUrl: process.env.BOT_BASE_URL ?? 'https://api.groq.com/openai/v1',
@@ -52,6 +57,7 @@ async function llm(system, user) {
   calls++;
   if (CFG.dry) {
     return JSON.stringify({
+      banned: ['[DRY] 결정적 특징'],
       hints: Array.from({ length: CFG.hints }, (_, i) => ({
         text: `[DRY] 묘사 ${calls}-${i + 1}`,
         style: STYLES[i % STYLES.length],
@@ -106,7 +112,9 @@ async function llm(system, user) {
           `max_tokens 를 올리거나 reasoning_effort 를 낮춰볼 것.\n${text.slice(0, 300)}`,
       );
     }
-    throw new Error(`LLM ${res.status}: ${text.slice(0, 300)}`);
+    const err = new Error(`LLM ${res.status}: ${text.slice(0, 300)}`);
+    if (res.status === 401 || res.status === 403) err.fatal = true; // 키 문제면 20판 반복해봐야 똑같다
+    throw err;
   }
 }
 
@@ -147,17 +155,23 @@ ${round === 1
   : `이번은 2라운드다. 1라운드에서 맞히지 못했으므로 **1라운드보다 쉽게** 만든다.
 더 구체적으로 가되, 제시어를 그대로 말하지는 않는다.`}
 
+[작업 순서 — 반드시 이 순서로 한다]
+1. 먼저 "banned" 를 채운다: 이 단어를 들으면 누구나 바로 떠올리는 **결정적 특징 5개**.
+   그 단어를 지목하는 데 가장 강력한 단서들이다.
+   (캥거루라면 "뒷다리로 점프", "배에 주머니", "호주" / 달력이라면 "열두 달", "날짜")
+2. 그다음 "hints" 를 만든다. **1번에 적은 특징은 하나도 쓰지 않는다.**
+   바꿔 말한 것, 비유로 돌려 말한 것도 안 된다.
+
+이게 이 작업의 핵심이다. 결정적 특징을 다 빼고도 그럴듯한 묘사를 만드는 것이 목표다.
+
 [금지]
 - 제시어와 그 일부 글자.
 - **제시어가 속한 무리를 가리키는 총칭.** "동물·과일·채소·기계·도구·생물·열매·탈것·악기"
   같은 단어는 어떤 것도 쓰지 않는다. 범주는 플레이어가 묘사에서 스스로 추론해야 한다.
 - **한 문장에 결정적 속성을 두 개 이상 몰아넣는 것.** 색·모양·질감·용도 중 한 문장에는
   하나만 담는다.
-- **제시어를 가장 잘 떠올리게 하는 대표 특징 한 가지는 통째로 뺀다.**
-  (예: 고구마라면 "구워 먹는 겨울 간식", 계산기라면 "숫자를 눌러 답을 얻는다")
 
-[세트 전체 난이도 — 줄 단위보다 이쪽이 중요하다]
-줄마다 속성을 하나로 줄여도, ${CFG.hints}줄을 합쳐 특징을 다 나열하면 정답이 확정된다.
+[세트 전체 난이도]
 **${CFG.hints}개를 전부 읽은 뒤에도 후보가 2~3개는 남아 있어야 한다.**
 마지막 묘사까지 본 사람이 "이것 아니면 저것"에서 고민하는 상태를 목표로 한다.
 
@@ -167,8 +181,8 @@ ${round === 1
   새 스타일 이름을 지어내지 않는다:
   ${STYLES.join(' / ')}
 
-JSON만 출력한다. hints 배열은 모호한 것부터 구체적인 것 순서로 담는다:
-{"hints":[{"text":"묘사","style":"스타일"}]}`.trim();
+JSON만 출력한다. hints 는 모호한 것부터 구체적인 것 순서로 담는다:
+{"banned":["결정적 특징5개"],"hints":[{"text":"묘사","style":"스타일"}]}`.trim();
 
 const guessSystem = `
 너는 한국어 낱말 맞히기 게임의 참가자다. 묘사만 보고 제시어를 추측한다.
@@ -183,9 +197,13 @@ async function makeHints(word, round, previous) {
       previous.map((h) => `- ${h.text}`).join('\n') +
       `\n\n2라운드 묘사 ${CFG.hints}개를 만들어라.`;
   const raw = await llm(hintSystem(round), user);
-  const hints = parseJson(raw, {}).hints;
+  const out = parseJson(raw, {});
+  const hints = out.hints;
   if (!Array.isArray(hints) || !hints.length) throw new Error('묘사 파싱 실패');
-  return hints.map((h) => ({ text: String(h.text ?? ''), style: String(h.style ?? '?'), round }));
+  return {
+    banned: Array.isArray(out.banned) ? out.banned.map(String) : [],
+    hints: hints.map((h) => ({ text: String(h.text ?? ''), style: String(h.style ?? '?'), round })),
+  };
 }
 
 async function autoGuess(hints) {
@@ -199,7 +217,7 @@ async function playGame(gameNo, used) {
   const { word, category } = pick(pool.length ? pool : WORDS);
   used.add(word);
 
-  const r1 = await makeHints(word, 1, []);
+  const { hints: r1, banned: banned1 } = await makeHints(word, 1, []);
   r1.forEach((h) => console.log(`  1R [${h.style}] ${h.text}`));
   const guess1 = await autoGuess(r1);
   const solved1 = norm(guess1) === norm(word);
@@ -207,7 +225,7 @@ async function playGame(gameNo, used) {
 
   let r2 = [], guess2 = null, solved2 = false;
   if (!solved1) {
-    r2 = await makeHints(word, 2, r1);
+    ({ hints: r2 } = await makeHints(word, 2, r1));
     r2.forEach((h) => console.log(`  2R [${h.style}] ${h.text}`));
     guess2 = await autoGuess([...r1, ...r2]);
     solved2 = norm(guess2) === norm(word);
@@ -227,6 +245,7 @@ async function playGame(gameNo, used) {
   return {
     gameNo, word, category,
     hints: [...r1, ...r2],
+    banned: banned1,
     guess1, guess2, solved1, solved2, nearMiss,
     outcome: solved1 ? 'round1' : solved2 ? 'round2' : 'fail',
   };
@@ -237,7 +256,19 @@ const started = Date.now();
 const results = [];
 const used = new Set();
 
-console.log(`제시어 풀 ${WORDS.length}개 · 라운드당 묘사 ${CFG.hints}개${CFG.dry ? ' · DRY' : ''}`);
+if (!CFG.dry && !CFG.apiKey) {
+  console.error(
+    'BOT_API_KEY 가 비어 있다.\n' +
+      '레포 루트에 .env 를 만들고 아래처럼 채운다:\n' +
+      '  BOT_BASE_URL=https://api.groq.com/openai/v1\n' +
+      '  BOT_API_KEY=gsk_...\n' +
+      '  BOT_MODEL=openai/gpt-oss-120b\n' +
+      '(배선만 확인하려면 DRY=1)',
+  );
+  process.exit(1);
+}
+
+console.log(`제시어 풀 ${WORDS.length}개 · 라운드당 묘사 ${CFG.hints}개${CFG.dry ? ' · DRY' : ''} · ${CFG.model}`);
 
 for (let i = 1; i <= CFG.games; i++) {
   console.log(`\n━━ ${i}/${CFG.games} 판 ━━`);
@@ -245,6 +276,10 @@ for (let i = 1; i <= CFG.games; i++) {
     results.push(await playGame(i, used));
   } catch (e) {
     console.error(`  실패: ${e.message}`);
+    if (e.fatal) {
+      console.error('\n키 문제로 보인다. 중단한다.');
+      break;
+    }
   }
 }
 
