@@ -201,9 +201,12 @@ ${round === 2 ? `이번은 2라운드다. 1라운드에서 맞히지 못했으�
 JSON만 출력한다:
 {"banned":["결정적 특징4개"],"hints":[{"text":"묘사","angle":"무엇에 대해 말했나"}]}`.trim();
 
-const guessSystem = (category) => `
+// 주제를 추측자에게 주지 않는다 — 실제 게임에서 플레이어는 주제를 못 본다(기획서 v2).
+// 주제를 주면 후보가 289개에서 10여 개로 줄어서, 묘사가 아니라 주제가 정답을 만든다.
+// 출제자에게는 여전히 준다. "주제 안의 다른 것에도 들어맞게"가 난이도의 핵심이라서.
+const guessSystem = () => `
 너는 한국어 낱말 맞히기 게임의 참가자다. 묘사만 보고 제시어를 추측한다.
-주제는 "${category}"다. 설명 없이 한국어 명사 하나만 답한다.
+설명 없이 한국어 명사 하나만 답한다.
 
 JSON만 출력한다: {"guess":"단어"}`.trim();
 
@@ -223,8 +226,8 @@ async function makeHints(word, category, round, previous) {
   };
 }
 
-async function autoGuess(hints, category) {
-  const raw = await llm(guessSystem(category), `묘사:\n${hints.map((h) => `- ${h.text}`).join('\n')}`);
+async function autoGuess(hints) {
+  const raw = await llm(guessSystem(), `묘사:\n${hints.map((h) => `- ${h.text}`).join('\n')}`);
   return String(parseJson(raw, {}).guess ?? '');
 }
 
@@ -237,7 +240,7 @@ async function playGame(gameNo, used) {
   const accept = WORDS.find((x) => x.word === word)?.accept ?? [];
   const { hints: r1, banned: banned1 } = await makeHints(word, category, 1, []);
   r1.forEach((h) => console.log(`  1R [${h.angle}] ${h.text}`));
-  const guess1 = await autoGuess(r1, category);
+  const guess1 = await autoGuess(r1);
   const v1 = judge(word, guess1, accept);
   const solved1 = v1 === 'exact';
   console.log(`  → 1차 추측 "${guess1}" ${v1 === 'exact' ? '정답' : v1 === 'loose' ? '준정답' : '오답'}`);
@@ -246,7 +249,7 @@ async function playGame(gameNo, used) {
   if (!solved1) {
     ({ hints: r2 } = await makeHints(word, category, 2, r1));
     r2.forEach((h) => console.log(`  2R [${h.angle}] ${h.text}`));
-    guess2 = await autoGuess([...r1, ...r2], category);
+    guess2 = await autoGuess([...r1, ...r2]);
     v2 = judge(word, guess2, accept);
     solved2 = v2 === 'exact';
     console.log(`  → 2차 추측 "${guess2}" ${v2 === 'exact' ? '정답' : v2 === 'loose' ? '준정답' : '오답'}`);
