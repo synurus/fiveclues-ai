@@ -248,14 +248,6 @@
 "category": "음료"
 },
 {
-"word": "주스",
-"category": "음료"
-},
-{
-"word": "탄산음료",
-"category": "음료"
-},
-{
 "word": "녹차",
 "category": "음료"
 },
@@ -312,10 +304,6 @@
 "category": "과일"
 },
 {
-"word": "배",
-"category": "과일"
-},
-{
 "word": "키위",
 "category": "과일"
 },
@@ -356,15 +344,7 @@
 "category": "채소"
 },
 {
-"word": "파",
-"category": "채소"
-},
-{
 "word": "배추",
-"category": "채소"
-},
-{
-"word": "무",
 "category": "채소"
 },
 {
@@ -980,22 +960,6 @@
 "category": "취미"
 },
 {
-"word": "게임",
-"category": "취미"
-},
-{
-"word": "요리",
-"category": "취미"
-},
-{
-"word": "그림그리기",
-"category": "취미"
-},
-{
-"word": "사진찍기",
-"category": "취미"
-},
-{
 "word": "캠핑",
 "category": "취미"
 },
@@ -1054,5 +1018,49 @@
 {
 "word": "저금통",
 "category": "기타"
+},
+{
+"word": "선인장",
+"category": "자연"
+},
+{
+"word": "텐트",
+"category": "취미"
+},
+{
+"word": "배낭",
+"category": "취미"
+},
+{
+"word": "슬리퍼",
+"category": "의류"
+},
+{
+"word": "고드름",
+"category": "자연"
+},
+{
+"word": "화살",
+"category": "도구"
+},
+{
+"word": "그네",
+"category": "건물"
+},
+{
+"word": "시소",
+"category": "건물"
+},
+{
+"word": "미끄럼틀",
+"category": "건물"
+},
+{
+"word": "팽이",
+"category": "기타"
+},
+{
+"word": "돛단배",
+"category": "탈것"
 }
 ]
