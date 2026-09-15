@@ -11,7 +11,8 @@
     "talk": "ts-node --transpileOnly src/bot/talk.ts",
     "provider": "ts-node --transpileOnly src/bot/set-provider.ts",
     "replay": "ts-node --transpileOnly src/bot/replay.ts",
-    "db": "ts-node --transpileOnly src/db/explore.ts"
+    "db": "ts-node --transpileOnly src/db/explore.ts",
+    "turn": "ts-node-dev --respawn src/turnServer.ts"
   },
   "keywords": [],
   "author": "",
