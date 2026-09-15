@@ -1,0 +1,72 @@
+# 자가개선 루프 — 플레이어 피드백(GitHub Issue, 'feedback' 라벨)을 모아
+# apps/backend/src/bot/hintPrompt.ts 수정 PR을 연다. 병합은 사람이 한다.
+# 자세한 설계는 scripts/self-improve/{gather,propose}.mjs 상단 주석 참고.
+#
+# 수동 실행: Actions 탭 → Self-Improve Prompt → Run workflow.
+#   min_feedback 을 낮추면(예: 1) 피드백이 적어도 강제로 PR 시도까지 해볼 수 있다 —
+#   배선 테스트용. 평소(주간 자동 실행)엔 기본값 5를 그대로 쓴다.
+name: Self-Improve Prompt
+
+on:
+  workflow_dispatch:
+    inputs:
+      min_feedback:
+        description: '이 개수 미만이면 PR을 시도하지 않는다'
+        required: false
+        default: '5'
+  schedule:
+    # 매주 월요일 03:00 UTC(한국시간 정오). 그 주에 쌓인 피드백을 모아 한 번만 돈다 —
+    # 실행마다 Groq 호출 1번이라 토큰 한도엔 여유가 크다(문제는 게임 본체 쪽 TPM).
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # tsc 검증(propose.mjs 3단계 안전장치 중 2번째)에 필요한 node_modules.
+      - name: apps/backend 의존성 설치
+        working-directory: apps/backend
+        run: npm ci
+
+      - name: 피드백 이슈 수집
+        id: gather
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/self-improve/gather.mjs
+
+      - name: 피드백이 너무 적으면 여기서 멈춤
+        id: gate
+        run: |
+          MIN="${{ github.event.inputs.min_feedback || '5' }}"
+          COUNT="${{ steps.gather.outputs.count }}"
+          echo "피드백 $COUNT 건 / 기준 $MIN 건"
+          if [ "$COUNT" -lt "$MIN" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # SELFIMPROVE_BOT_* 시크릿이 없으면 게임 본체와 같은 BOT_* 를 그대로 쓴다
+      # (propose.mjs 안에서 fallback 처리 — 여기선 둘 다 넘기기만 하면 된다).
+      - name: 프롬프트 수정 PR 제안
+        if: steps.gate.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SELFIMPROVE_BOT_BASE_URL: ${{ secrets.SELFIMPROVE_BOT_BASE_URL }}
+          SELFIMPROVE_BOT_API_KEY: ${{ secrets.SELFIMPROVE_BOT_API_KEY }}
+          SELFIMPROVE_BOT_MODEL: ${{ secrets.SELFIMPROVE_BOT_MODEL }}
+          BOT_BASE_URL: ${{ secrets.BOT_BASE_URL }}
+          BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
+          BOT_MODEL: ${{ secrets.BOT_MODEL }}
+        run: node scripts/self-improve/propose.mjs

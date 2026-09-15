@@ -17,6 +17,7 @@ import { Router, type Request, type Response } from 'express';
 import { generateHints, judgeGuess, type Hint } from '../bot/wordGuessBot';
 import { encodeSession, decodeSession, InvalidSessionError } from './gameToken';
 import { pickWord } from './wordPool';
+import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
 
 // 기획서 v2: "묘사 횟수(5회냐 4회냐)는 밸런스 보고 정할 것 — 미정". 5로 시작한다.
 const HINT_COUNT = 5;
@@ -75,12 +76,12 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
   const correct = verdict === 'exact' || verdict === 'loose';
 
   if (correct) {
-    res.json({ result: payload.round === 1 ? 'round1' : 'round2', word: payload.word, verdict });
+    res.json({ result: payload.round === 1 ? 'round1' : 'round2', word: payload.word, category: payload.category, verdict });
     return;
   }
 
   if (payload.round === 2) {
-    res.json({ result: 'failed', word: payload.word, verdict });
+    res.json({ result: 'failed', word: payload.word, category: payload.category, verdict });
     return;
   }
 
@@ -98,6 +99,31 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
     const nextSession = encodeSession<SessionPayload>({ ...payload, round: 2 });
 
     res.json({ result: 'continue', session: nextSession, round: 2, hints: toPlayerHints(round2Hints) });
+  } catch (e) {
+    res.status(502).json({ error: errorMessage(e) });
+  }
+});
+
+gameRouter.post('/feedback', async (req: Request, res: Response) => {
+  const body = req.body as Partial<FeedbackPayload>;
+  const outcomeOk = body.outcome === 'round1' || body.outcome === 'round2' || body.outcome === 'failed';
+  if (typeof body.word !== 'string' || typeof body.category !== 'string' || !Array.isArray(body.hints) || !outcomeOk) {
+    res.status(400).json({ error: 'word, category, hints, outcome이 필요합니다.' });
+    return;
+  }
+
+  try {
+    const { issueNumber } = await createFeedbackIssue({
+      word: body.word,
+      category: body.category,
+      hints: body.hints.map(String),
+      outcome: body.outcome as FeedbackPayload['outcome'],
+      keyHintIndex: typeof body.keyHintIndex === 'number' ? body.keyHintIndex : null,
+      uselessHintIndex: typeof body.uselessHintIndex === 'number' ? body.uselessHintIndex : null,
+      feedbackText: typeof body.feedbackText === 'string' ? body.feedbackText : '',
+      nickname: typeof body.nickname === 'string' ? body.nickname : '',
+    });
+    res.json({ ok: true, issueNumber });
   } catch (e) {
     res.status(502).json({ error: errorMessage(e) });
   }
