@@ -32,11 +32,30 @@ const CFG = {
 // 목표: 1라운드 정답률 25~35% (기획서 v2 §8)
 const TARGET_BAND = [25, 35];
 
-const STYLES = ['단답형', '문장형', '비유', '용도·기능', '감각', '상황·맥락', '부정형'];
+// 원래는 형식(단답형/문장형)과 내용(용도·기능/감각)이 섞여 있었다.
+// 형식은 정보량을 통제하지 못하고, '용도·기능'과 '감각'은 가장 결정적인 단서를
+// 대놓고 요구하는 각도였다 — 계산기 "숫자를 눌러 답을 얻는다"가 그렇게 나왔다.
+// Zeteo 의 describePrompt 가 쓰던 '비껴 가는 각도'로 교체한다.
+const ANGLES = [
+  '인상·평가',
+  '마주치는 상황',
+  '사람들이 대하는 태도',
+  '다른 것들과 견준 위치',
+  '따라오는 것',
+  '없을 때 생기는 일',
+];
 
 const WORDS = JSON.parse(await readFile(new URL('./words.json', import.meta.url), 'utf8'));
 
-const pick = (a) => a[Math.floor(Math.random() * a.length)];
+// SEED 를 주면 매 실행이 같은 제시어 순서를 쓴다.
+// 세대끼리 다른 단어로 재면 단어 난이도 편차가 프롬프트 효과를 덮어버린다.
+let _seed = Number(process.env.SEED ?? 0);
+const rnd = () => {
+  if (!_seed) return Math.random();
+  _seed = (_seed * 1103515245 + 12345) & 0x7fffffff;
+  return _seed / 0x7fffffff;
+};
+const pick = (a) => a[Math.floor(rnd() * a.length)];
 const norm = (s) => String(s ?? '').replace(/[\s.,!?"'·]/g, '').trim();
 
 // 정답 판정이 이 도구의 자(ruler)다. 자가 틀리면 프롬프트를 엉뚱하게 고치게 된다.
@@ -73,7 +92,7 @@ async function llm(system, user) {
       banned: ['[DRY] 결정적 특징'],
       hints: Array.from({ length: CFG.hints }, (_, i) => ({
         text: `[DRY] 묘사 ${calls}-${i + 1}`,
-        style: STYLES[i % STYLES.length],
+        style: ANGLES[i % ANGLES.length],
       })),
       guess: '사자',
     });
@@ -157,70 +176,60 @@ function parseJson(text, fallback) {
 // ── 프롬프트 ───────────────────────────────────────────────────────────
 // 여기가 이 프로젝트의 본체다. 지표를 보고 고칠 곳은 사실상 이 두 함수뿐.
 
-const hintSystem = (round) => `
+const hintSystem = (round, category) => `
 너는 한국어 낱말 맞히기 게임의 출제자다. 제시어를 직접 말하지 않고 묘사 ${CFG.hints}개를 만든다.
 
-[난이도 — 가장 중요하다]
-${round === 1
-  ? `1번이 가장 모호하고, 번호가 커질수록 조금씩 구체적이 되게 배열한다.
-마지막 묘사도 정답을 단정하게 만들지는 않는다.
-목표: 이 묘사들만 보고 처음 보는 사람이 맞힐 확률이 약 30%.`
-  : `이번은 2라운드다. 1라운드에서 맞히지 못했으므로 **1라운드보다 쉽게** 만든다.
-더 구체적으로 가되, 제시어를 그대로 말하지는 않는다.`}
+[가장 중요한 규칙]
+각 묘사는 제시어를 아는 사람이 수긍할 말이되,
+**주제 "${category}" 안의 다른 것 두셋에도 똑같이 들어맞아야 한다.**
+얼버무리면 아무 정보가 없고, 정답이 하나로 좁혀지면 그 자리에서 게임이 끝난다.
+그 사이를 노린다.
 
-[작업 순서 — 반드시 이 순서로 한다]
-1. 먼저 "banned" 를 채운다: 이 단어를 들으면 누구나 바로 떠올리는 **결정적 특징 5개**.
-   그 단어를 지목하는 데 가장 강력한 단서들이다.
-   (캥거루라면 "뒷다리로 점프", "배에 주머니", "호주" / 달력이라면 "열두 달", "날짜")
-2. 그다음 "hints" 를 만든다. **1번에 적은 특징은 하나도 쓰지 않는다.**
-   바꿔 말한 것, 비유로 돌려 말한 것도 안 된다.
+${round === 2 ? `이번은 2라운드다. 1라운드에서 맞히지 못했으므로 **조금 더 구체적으로** 간다.\n그래도 한 줄로 확정되게 하지는 않는다.\n` : ''}
+[각도 — 서로 다른 것을 ${CFG.hints}개 고른다]
+${ANGLES.join(' / ')}
 
-이게 이 작업의 핵심이다. 결정적 특징을 다 빼고도 그럴듯한 묘사를 만드는 것이 목표다.
+생김새·색·소리·크기·재질 같은 **물리적 특징과 용도를 직접 말하지 않는다.**
+그것이 정답을 한 번에 좁히는 가장 흔한 통로다.
 
-[금지]
-- 제시어와 그 일부 글자.
-- **제시어가 속한 무리를 가리키는 총칭.** "동물·과일·채소·기계·도구·생물·열매·탈것·악기"
-  같은 단어는 어떤 것도 쓰지 않는다. 범주는 플레이어가 묘사에서 스스로 추론해야 한다.
-- **한 문장에 결정적 속성을 두 개 이상 몰아넣는 것.** 색·모양·질감·용도 중 한 문장에는
-  하나만 담는다.
+[쓰지 말 것]
+- 제시어 자체와 그 일부 글자.
+- 그것만 가리키는 성질. 다른 말로 바꿔 말한 것도 안 된다.
+- 분류나 정의. 주제명("${category}")과 그 동의어도 쓰지 않는다.
 
-[세트 전체 난이도]
-**${CFG.hints}개를 전부 읽은 뒤에도 후보가 2~3개는 남아 있어야 한다.**
-마지막 묘사까지 본 사람이 "이것 아니면 저것"에서 고민하는 상태를 목표로 한다.
+[작업 순서]
+1. 먼저 "banned" 를 채운다: 이 단어를 들으면 누구나 바로 떠올리는 결정적 특징 4개.
+2. 그다음 "hints" 를 만든다. 1번에 적은 것은 하나도 쓰지 않는다.
 
-[형식]
-- 각 묘사는 한 문장, 30자 이내.
-- ${CFG.hints}개의 스타일을 서로 다르게 한다. **아래 목록의 단어를 글자 그대로** 쓴다.
-  새 스타일 이름을 지어내지 않는다:
-  ${STYLES.join(' / ')}
+각 묘사는 한 문장, 30자 이내.
 
-JSON만 출력한다. hints 는 모호한 것부터 구체적인 것 순서로 담는다:
-{"banned":["결정적 특징5개"],"hints":[{"text":"묘사","style":"스타일"}]}`.trim();
+JSON만 출력한다:
+{"banned":["결정적 특징4개"],"hints":[{"text":"묘사","angle":"각도"}]}`.trim();
 
-const guessSystem = `
+const guessSystem = (category) => `
 너는 한국어 낱말 맞히기 게임의 참가자다. 묘사만 보고 제시어를 추측한다.
-주제나 범주는 주어지지 않는다. 설명 없이 한국어 명사 하나만 답한다.
+주제는 "${category}"다. 설명 없이 한국어 명사 하나만 답한다.
 
 JSON만 출력한다: {"guess":"단어"}`.trim();
 
-async function makeHints(word, round, previous) {
+async function makeHints(word, category, round, previous) {
   const user = round === 1
     ? `제시어: ${word}\n\n묘사 ${CFG.hints}개를 만들어라.`
     : `제시어: ${word}\n\n1라운드에서 이미 나온 묘사(겹치지 말 것):\n` +
       previous.map((h) => `- ${h.text}`).join('\n') +
       `\n\n2라운드 묘사 ${CFG.hints}개를 만들어라.`;
-  const raw = await llm(hintSystem(round), user);
+  const raw = await llm(hintSystem(round, category), user);
   const out = parseJson(raw, {});
   const hints = out.hints;
   if (!Array.isArray(hints) || !hints.length) throw new Error('묘사 파싱 실패');
   return {
     banned: Array.isArray(out.banned) ? out.banned.map(String) : [],
-    hints: hints.map((h) => ({ text: String(h.text ?? ''), style: String(h.style ?? '?'), round })),
+    hints: hints.map((h) => ({ text: String(h.text ?? ''), angle: String(h.angle ?? '?'), round })),
   };
 }
 
-async function autoGuess(hints) {
-  const raw = await llm(guessSystem, `묘사:\n${hints.map((h) => `- ${h.text}`).join('\n')}`);
+async function autoGuess(hints, category) {
+  const raw = await llm(guessSystem(category), `묘사:\n${hints.map((h) => `- ${h.text}`).join('\n')}`);
   return String(parseJson(raw, {}).guess ?? '');
 }
 
@@ -231,18 +240,18 @@ async function playGame(gameNo, used) {
   used.add(word);
 
   const accept = WORDS.find((x) => x.word === word)?.accept ?? [];
-  const { hints: r1, banned: banned1 } = await makeHints(word, 1, []);
-  r1.forEach((h) => console.log(`  1R [${h.style}] ${h.text}`));
-  const guess1 = await autoGuess(r1);
+  const { hints: r1, banned: banned1 } = await makeHints(word, category, 1, []);
+  r1.forEach((h) => console.log(`  1R [${h.angle}] ${h.text}`));
+  const guess1 = await autoGuess(r1, category);
   const v1 = judge(word, guess1, accept);
   const solved1 = v1 === 'exact';
   console.log(`  → 1차 추측 "${guess1}" ${v1 === 'exact' ? '정답' : v1 === 'loose' ? '준정답' : '오답'}`);
 
   let r2 = [], guess2 = null, solved2 = false, v2 = null;
   if (!solved1) {
-    ({ hints: r2 } = await makeHints(word, 2, r1));
-    r2.forEach((h) => console.log(`  2R [${h.style}] ${h.text}`));
-    guess2 = await autoGuess([...r1, ...r2]);
+    ({ hints: r2 } = await makeHints(word, category, 2, r1));
+    r2.forEach((h) => console.log(`  2R [${h.angle}] ${h.text}`));
+    guess2 = await autoGuess([...r1, ...r2], category);
     v2 = judge(word, guess2, accept);
     solved2 = v2 === 'exact';
     console.log(`  → 2차 추측 "${guess2}" ${v2 === 'exact' ? '정답' : v2 === 'loose' ? '준정답' : '오답'}`);
@@ -280,7 +289,10 @@ if (!CFG.dry && !CFG.apiKey) {
   process.exit(1);
 }
 
-console.log(`제시어 풀 ${WORDS.length}개 · 라운드당 묘사 ${CFG.hints}개${CFG.dry ? ' · DRY' : ''} · ${CFG.model}`);
+console.log(
+  `제시어 풀 ${WORDS.length}개 · 라운드당 묘사 ${CFG.hints}개${CFG.dry ? ' · DRY' : ''} · ${CFG.model}` +
+    (process.env.SEED ? ` · SEED=${process.env.SEED}` : ' · SEED 없음(매번 다른 단어)'),
+);
 
 for (let i = 1; i <= CFG.games; i++) {
   console.log(`\n━━ ${i}/${CFG.games} 판 ━━`);
@@ -303,7 +315,7 @@ if (n) {
   const l2 = results.filter((r) => r.looseOutcome === 'round2').length;
   const rate1 = (r1 / n) * 100;
   const styles = {};
-  for (const r of results) for (const h of r.hints) styles[h.style] = (styles[h.style] ?? 0) + 1;
+  for (const r of results) for (const h of r.hints) styles[h.angle] = (styles[h.angle] ?? 0) + 1;
 
   const verdict =
     rate1 < TARGET_BAND[0] ? '묘사가 너무 어렵다 — 더 구체적으로'
@@ -316,7 +328,7 @@ if (n) {
   console.log(`최종 정답률     ${(((r1 + r2) / n) * 100).toFixed(0)}%  (${r1 + r2}/${n})`);
   console.log(`  └ 준정답 포함  1R ${((l1 / n) * 100).toFixed(0)}%  최종 ${(((l1 + l2) / n) * 100).toFixed(0)}%   (경찰관/경찰 같은 포함관계)`);
   console.log(`실패            ${n - l1 - l2}`);
-  console.log(`스타일 분포     ${JSON.stringify(styles)}`);
+  console.log(`각도 분포     ${JSON.stringify(styles)}`);
   console.log(`LLM 호출 ${calls}회 · ${((Date.now() - started) / 1000).toFixed(0)}초`);
   console.log(`\n⚠️ 판이 적으면 이 숫자는 운과 구분되지 않는다. 세대 비교는 최소 20판부터.`);
 

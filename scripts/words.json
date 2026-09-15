@@ -1086,5 +1086,97 @@
 {
 "word": "자몽",
 "category": "과일"
+},
+{
+"word": "식혜",
+"category": "음료"
+},
+{
+"word": "매실차",
+"category": "음료"
+},
+{
+"word": "레모네이드",
+"category": "음료"
+},
+{
+"word": "아메리카노",
+"category": "음료"
+},
+{
+"word": "수정과",
+"category": "음료"
+},
+{
+"word": "진딧물",
+"category": "곤충"
+},
+{
+"word": "매미",
+"category": "곤충"
+},
+{
+"word": "귀뚜라미",
+"category": "곤충"
+},
+{
+"word": "무당벌레",
+"category": "곤충"
+},
+{
+"word": "미역",
+"category": "바다생물"
+},
+{
+"word": "전복",
+"category": "바다생물"
+},
+{
+"word": "성게",
+"category": "바다생물"
+},
+{
+"word": "멸치",
+"category": "바다생물"
+},
+{
+"word": "마카롱",
+"category": "디저트"
+},
+{
+"word": "와플",
+"category": "디저트"
+},
+{
+"word": "푸딩",
+"category": "디저트"
+},
+{
+"word": "약과",
+"category": "디저트"
+},
+{
+"word": "자수",
+"category": "취미"
+},
+{
+"word": "서예",
+"category": "취미"
+},
+{
+"word": "식탁",
+"category": "가구"
+},
+{
+"word": "서랍장",
+"category": "가구"
+},
+{
+"word": "책장",
+"category": "가구"
+},
+{
+"word": "스툴",
+"category": "가구"
 }
 ]
