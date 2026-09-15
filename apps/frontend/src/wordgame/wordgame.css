@@ -1,0 +1,63 @@
+/* AI 라이어게임 — tokens.css 의 다크 테마 변수를 그대로 쓴다(별도 테마 없음). */
+.wg-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.wg-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: calc(var(--space-4) * 1.5);
+}
+
+.wg-title {
+  font-size: var(--text-caption);
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
+.wg-round {
+  color: var(--color-accent);
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+}
+
+.wg-hints {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  min-height: 140px;
+}
+
+.wg-hints li {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--text-body);
+}
+
+.wg-input {
+  width: 100%;
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  box-sizing: border-box;
+}
+
+.wg-result-badge {
+  font-size: var(--text-emphasis);
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
