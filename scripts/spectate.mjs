@@ -9,7 +9,7 @@
 // 의존성 없음(Node 22+ 내장 fetch). 결과는 runs/ 에 JSONL로 떨어진다.
 //
 // 환경변수: BOT_BASE_URL, BOT_API_KEY, BOT_MODEL  (OpenAI 호환 엔드포인트)
-//   Groq     https://api.groq.com/openai/v1
+//   Groq     https://api.groq.com/openai/v1   (모델: openai/gpt-oss-120b)
 //   Cerebras https://api.cerebras.ai/v1
 //   로컬     http://localhost:11434/v1   (Ollama)
 
@@ -18,7 +18,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 const CFG = {
   baseUrl: process.env.BOT_BASE_URL ?? 'https://api.groq.com/openai/v1',
   apiKey: process.env.BOT_API_KEY ?? '',
-  model: process.env.BOT_MODEL ?? 'llama-3.3-70b-versatile',
+  model: process.env.BOT_MODEL ?? 'openai/gpt-oss-120b',
   hints: Number(process.env.HINTS ?? 5), // 라운드당 묘사 개수
   games: Number(process.env.GAMES ?? 1),
   dry: process.env.DRY === '1',
@@ -37,6 +37,17 @@ const norm = (s) => String(s ?? '').replace(/[\s.,!?"'·]/g, '').trim();
 // ── LLM ────────────────────────────────────────────────────────────────
 let calls = 0;
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// 서버가 "몇 초 뒤 재시도"를 알려준다. 헤더 우선, 없으면 메시지에서 긁는다.
+function retryAfterMs(res, body) {
+  const h = Number(res.headers.get('retry-after'));
+  if (Number.isFinite(h) && h > 0) return h * 1000 + 500;
+  const m = body.match(/try again in ([\d.]+)\s*s/i);
+  if (m) return Number(m[1]) * 1000 + 500;
+  return 5000;
+}
+
 async function llm(system, user) {
   calls++;
   if (CFG.dry) {
@@ -48,23 +59,67 @@ async function llm(system, user) {
       guess: '사자',
     });
   }
-  const res = await fetch(`${CFG.baseUrl}/chat/completions`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', authorization: `Bearer ${CFG.apiKey}` },
-    body: JSON.stringify({
-      model: CFG.model,
-      temperature: 0.9,
-      max_tokens: 800,
-      response_format: { type: 'json_object' },
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: user },
-      ],
-    }),
+
+  // gpt-oss 계열은 추론 모델이라 추론 토큰이 max_tokens 예산을 같이 먹는다.
+  // 예산이 모자라면 최종 답이 통째로 잘려 빈 응답이 나오고 JSON 검증이 실패한다.
+  // 그리고 JSON 모드에서는 reasoning_format 을 parsed/hidden 으로 둬야 한다.
+  const isGptOss = /gpt-oss/.test(CFG.model);
+  const body = JSON.stringify({
+    model: CFG.model,
+    temperature: 0.9,
+    max_tokens: 4000,
+    response_format: { type: 'json_object' },
+    ...(isGptOss ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
+    messages: [
+      { role: 'system', content: system },
+      { role: 'user', content: user },
+    ],
   });
-  if (!res.ok) throw new Error(`LLM ${res.status}: ${(await res.text()).slice(0, 300)}`);
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content?.trim() ?? '';
+
+  for (let attempt = 1; ; attempt++) {
+    const res = await fetch(`${CFG.baseUrl}/chat/completions`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${CFG.apiKey}` },
+      body,
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.choices?.[0]?.message?.content?.trim() ?? '';
+    }
+
+    const text = await res.text();
+
+    // 무료 티어는 분당 토큰(TPM) 한도가 빡빡하다. 서버가 알려준 만큼 기다렸다 이어서 한다.
+    if (res.status === 429 && attempt <= 6) {
+      const ms = retryAfterMs(res, text);
+      process.stdout.write(`  … 한도 대기 ${(ms / 1000).toFixed(1)}초\n`);
+      await sleep(ms);
+      continue;
+    }
+    // 모델 이름은 제공자 사정으로 자주 바뀐다. 404면 이 키로 쓸 수 있는 목록을 바로 보여준다.
+    if (res.status === 404 && text.includes('model_not_found')) {
+      throw new Error(`모델 "${CFG.model}" 을(를) 이 키로 쓸 수 없다.\n사용 가능한 모델:\n${await listModels()}`);
+    }
+    if (text.includes('json_validate_failed')) {
+      throw new Error(
+        `JSON 생성 실패. 추론 토큰이 max_tokens 를 다 먹었을 가능성이 크다 — ` +
+          `max_tokens 를 올리거나 reasoning_effort 를 낮춰볼 것.\n${text.slice(0, 300)}`,
+      );
+    }
+    throw new Error(`LLM ${res.status}: ${text.slice(0, 300)}`);
+  }
+}
+
+async function listModels() {
+  try {
+    const res = await fetch(`${CFG.baseUrl}/models`, {
+      headers: { authorization: `Bearer ${CFG.apiKey}` },
+    });
+    const ids = (await res.json()).data?.map((m) => m.id).sort() ?? [];
+    return ids.length ? ids.map((id) => `  ${id}`).join('\n') : '  (목록을 받지 못했다)';
+  } catch {
+    return '  (목록 조회 실패)';
+  }
 }
 
 // 무료 티어 모델은 response_format 을 줘도 JSON 을 어기는 일이 잦다.
@@ -84,20 +139,35 @@ function parseJson(text, fallback) {
 const hintSystem = (round) => `
 너는 한국어 낱말 맞히기 게임의 출제자다. 제시어를 직접 말하지 않고 묘사 ${CFG.hints}개를 만든다.
 
+[난이도 — 가장 중요하다]
 ${round === 1
-  ? `목표 난이도: 이 묘사들만 보고 처음 보는 사람이 맞힐 확률이 약 30%가 되게 한다.
-너무 쉬우면 첫 줄에서 정답이 나오고, 너무 어려우면 아무 정보도 없다.`
+  ? `1번이 가장 모호하고, 번호가 커질수록 조금씩 구체적이 되게 배열한다.
+마지막 묘사도 정답을 단정하게 만들지는 않는다.
+목표: 이 묘사들만 보고 처음 보는 사람이 맞힐 확률이 약 30%.`
   : `이번은 2라운드다. 1라운드에서 맞히지 못했으므로 **1라운드보다 쉽게** 만든다.
 더 구체적으로 가되, 제시어를 그대로 말하지는 않는다.`}
 
-규칙:
-- 제시어와 그 일부 글자를 쓰지 않는다.
+[금지]
+- 제시어와 그 일부 글자.
+- **제시어가 속한 무리를 가리키는 총칭.** "동물·과일·채소·기계·도구·생물·열매·탈것·악기"
+  같은 단어는 어떤 것도 쓰지 않는다. 범주는 플레이어가 묘사에서 스스로 추론해야 한다.
+- **한 문장에 결정적 속성을 두 개 이상 몰아넣는 것.** 색·모양·질감·용도 중 한 문장에는
+  하나만 담는다.
+- **제시어를 가장 잘 떠올리게 하는 대표 특징 한 가지는 통째로 뺀다.**
+  (예: 고구마라면 "구워 먹는 겨울 간식", 계산기라면 "숫자를 눌러 답을 얻는다")
+
+[세트 전체 난이도 — 줄 단위보다 이쪽이 중요하다]
+줄마다 속성을 하나로 줄여도, ${CFG.hints}줄을 합쳐 특징을 다 나열하면 정답이 확정된다.
+**${CFG.hints}개를 전부 읽은 뒤에도 후보가 2~3개는 남아 있어야 한다.**
+마지막 묘사까지 본 사람이 "이것 아니면 저것"에서 고민하는 상태를 목표로 한다.
+
+[형식]
 - 각 묘사는 한 문장, 30자 이내.
-- **상위 범주를 직접 말하지 않는다** ("동물이다", "과일이다" 금지).
-- ${CFG.hints}개의 스타일을 서로 다르게 한다. 고를 수 있는 스타일:
+- ${CFG.hints}개의 스타일을 서로 다르게 한다. **아래 목록의 단어를 글자 그대로** 쓴다.
+  새 스타일 이름을 지어내지 않는다:
   ${STYLES.join(' / ')}
 
-JSON만 출력한다:
+JSON만 출력한다. hints 배열은 모호한 것부터 구체적인 것 순서로 담는다:
 {"hints":[{"text":"묘사","style":"스타일"}]}`.trim();
 
 const guessSystem = `
