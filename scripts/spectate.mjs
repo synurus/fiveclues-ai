@@ -210,11 +210,17 @@ const guessSystem = () => `
 
 JSON만 출력한다: {"guess":"단어"}`.trim();
 
-async function makeHints(word, category, round, previous) {
+// wrongGuess: 1라운드 오답. 존재만 알려주고 "OOO 아니다"처럼 직접 부정하게는 시키지
+// 않는다 — 직접 부정하면 그 범주 전체가 한 번에 배제돼 오히려 너무 쉬워진다.
+// 그냥 놔두면 1라운드 힌트가 우연히 만든 인상(예: 카페인)을 2라운드가 그대로 이어받아
+// 같은 오답이 반복된다(매실차 → 커피 → 커피, 실측 재현됨).
+async function makeHints(word, category, round, previous, wrongGuess) {
   const user = round === 1
     ? `제시어: ${word}\n\n묘사 ${CFG.hints}개를 만들어라.`
     : `제시어: ${word}\n\n1라운드에서 이미 나온 묘사(겹치지 말 것):\n` +
       previous.map((h) => `- ${h.text}`).join('\n') +
+      `\n\n1라운드 추측은 "${wrongGuess}"였고 오답이었다. 그 추측이 다시 나올 만한 인상은` +
+      ` 피하되, "${wrongGuess}가 아니다"처럼 직접 부정하지는 마라.` +
       `\n\n2라운드 묘사 ${CFG.hints}개를 만들어라.`;
   const raw = await llm(hintSystem(round, category), user);
   const out = parseJson(raw, {});
@@ -247,7 +253,7 @@ async function playGame(gameNo, used) {
 
   let r2 = [], guess2 = null, solved2 = false, v2 = null;
   if (!solved1) {
-    ({ hints: r2 } = await makeHints(word, category, 2, r1));
+    ({ hints: r2 } = await makeHints(word, category, 2, r1, guess1));
     r2.forEach((h) => console.log(`  2R [${h.angle}] ${h.text}`));
     guess2 = await autoGuess([...r1, ...r2]);
     v2 = judge(word, guess2, accept);
