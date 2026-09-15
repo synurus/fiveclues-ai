@@ -14,9 +14,22 @@ export interface StartResponse {
 }
 
 export type GuessResponse =
-  | { result: 'round1' | 'round2'; word: string; verdict: 'exact' | 'loose' }
+  | { result: 'round1' | 'round2'; word: string; category: string; verdict: 'exact' | 'loose' }
   | { result: 'continue'; session: string; round: 2; hints: Hint[] }
-  | { result: 'failed'; word: string; verdict: 'wrong' };
+  | { result: 'failed'; word: string; category: string; verdict: 'wrong' };
+
+// 자가개선 루프(scripts/self-improve/)가 GitHub Issue로 쌓는 피드백.
+// apps/backend/src/github/feedbackIssue.ts 의 FeedbackPayload 와 필드가 같아야 한다.
+export interface FeedbackInput {
+  word: string;
+  category: string;
+  hints: string[]; // 1·2라운드 전부, 순서대로 — keyHintIndex/uselessHintIndex가 이 배열의 인덱스다.
+  outcome: 'round1' | 'round2' | 'failed';
+  keyHintIndex: number | null;
+  uselessHintIndex: number | null;
+  feedbackText: string;
+  nickname: string;
+}
 
 async function postJson<T>(path: string, body?: unknown): Promise<T> {
   const res = await fetch(path, {
@@ -37,4 +50,8 @@ export function startGame(): Promise<StartResponse> {
 
 export function submitGuess(session: string, guess: string): Promise<GuessResponse> {
   return postJson<GuessResponse>('/game/guess', { session, guess });
+}
+
+export function submitFeedback(input: FeedbackInput): Promise<{ ok: true; issueNumber: number }> {
+  return postJson('/game/feedback', input);
 }
