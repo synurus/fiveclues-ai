@@ -61,3 +61,58 @@
   color: var(--color-accent);
   margin-bottom: var(--space-2);
 }
+
+/* 결과 화면 피드백 폼 — 자가개선 루프(scripts/self-improve/)의 입력. */
+.wg-feedback {
+  margin: var(--space-4) 0;
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.wg-feedback-title {
+  font-size: var(--text-caption);
+  color: var(--color-text);
+  margin: var(--space-2) 0 var(--space-1);
+}
+
+.wg-feedback-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.wg-feedback-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-body);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.wg-feedback-option input {
+  flex-shrink: 0;
+}
+
+.wg-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.wg-feedback-done {
+  text-align: center;
+  color: var(--color-accent);
+  margin: var(--space-4) 0;
+}
