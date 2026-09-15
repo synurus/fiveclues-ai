@@ -88,10 +88,6 @@
 "category": "곤충"
 },
 {
-"word": "벌",
-"category": "곤충"
-},
-{
 "word": "잠자리",
 "category": "곤충"
 },
@@ -133,7 +129,10 @@
 },
 {
 "word": "게",
-"category": "바다생물"
+"category": "바다생물",
+"accept": [
+"꽃게"
+]
 },
 {
 "word": "오징어",
@@ -824,10 +823,6 @@
 "category": "건물"
 },
 {
-"word": "성",
-"category": "건물"
-},
-{
 "word": "병원",
 "category": "건물"
 },
@@ -893,7 +888,10 @@
 },
 {
 "word": "섬",
-"category": "자연"
+"category": "자연",
+"accept": [
+"무인도"
+]
 },
 {
 "word": "동굴",
@@ -1060,10 +1058,6 @@
 "category": "기타"
 },
 {
-"word": "돛단배",
-"category": "탈것"
-},
-{
 "word": "지휘자",
 "category": "직업"
 },
@@ -1178,5 +1172,17 @@
 {
 "word": "스툴",
 "category": "가구"
+},
+{
+"word": "궁궐",
+"category": "건물"
+},
+{
+"word": "말벌",
+"category": "곤충"
+},
+{
+"word": "요트",
+"category": "탈것"
 }
 ]
