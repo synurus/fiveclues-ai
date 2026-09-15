@@ -1,0 +1,1188 @@
+[
+{
+"word": "사자",
+"category": "동물"
+},
+{
+"word": "코끼리",
+"category": "동물"
+},
+{
+"word": "기린",
+"category": "동물"
+},
+{
+"word": "판다",
+"category": "동물"
+},
+{
+"word": "캥거루",
+"category": "동물"
+},
+{
+"word": "펭귄",
+"category": "동물"
+},
+{
+"word": "호랑이",
+"category": "동물"
+},
+{
+"word": "낙타",
+"category": "동물"
+},
+{
+"word": "늑대",
+"category": "동물"
+},
+{
+"word": "여우",
+"category": "동물"
+},
+{
+"word": "다람쥐",
+"category": "동물"
+},
+{
+"word": "고래",
+"category": "동물"
+},
+{
+"word": "돌고래",
+"category": "동물"
+},
+{
+"word": "원숭이",
+"category": "동물"
+},
+{
+"word": "토끼",
+"category": "동물"
+},
+{
+"word": "거북이",
+"category": "동물"
+},
+{
+"word": "악어",
+"category": "동물"
+},
+{
+"word": "하마",
+"category": "동물"
+},
+{
+"word": "사슴",
+"category": "동물"
+},
+{
+"word": "고슴도치",
+"category": "동물"
+},
+{
+"word": "나비",
+"category": "곤충"
+},
+{
+"word": "개미",
+"category": "곤충"
+},
+{
+"word": "잠자리",
+"category": "곤충"
+},
+{
+"word": "사슴벌레",
+"category": "곤충"
+},
+{
+"word": "거미",
+"category": "곤충"
+},
+{
+"word": "모기",
+"category": "곤충"
+},
+{
+"word": "반딧불이",
+"category": "곤충"
+},
+{
+"word": "문어",
+"category": "바다생물"
+},
+{
+"word": "상어",
+"category": "바다생물"
+},
+{
+"word": "해파리",
+"category": "바다생물"
+},
+{
+"word": "불가사리",
+"category": "바다생물"
+},
+{
+"word": "새우",
+"category": "바다생물"
+},
+{
+"word": "게",
+"category": "바다생물",
+"accept": [
+"꽃게"
+]
+},
+{
+"word": "오징어",
+"category": "바다생물"
+},
+{
+"word": "산호",
+"category": "바다생물"
+},
+{
+"word": "김치찌개",
+"category": "음식"
+},
+{
+"word": "짜장면",
+"category": "음식"
+},
+{
+"word": "피자",
+"category": "음식"
+},
+{
+"word": "초밥",
+"category": "음식"
+},
+{
+"word": "떡볶이",
+"category": "음식"
+},
+{
+"word": "삼겹살",
+"category": "음식"
+},
+{
+"word": "라면",
+"category": "음식"
+},
+{
+"word": "파스타",
+"category": "음식"
+},
+{
+"word": "햄버거",
+"category": "음식"
+},
+{
+"word": "치킨",
+"category": "음식"
+},
+{
+"word": "김밥",
+"category": "음식"
+},
+{
+"word": "비빔밥",
+"category": "음식"
+},
+{
+"word": "만두",
+"category": "음식"
+},
+{
+"word": "카레",
+"category": "음식"
+},
+{
+"word": "샌드위치",
+"category": "음식"
+},
+{
+"word": "스테이크",
+"category": "음식"
+},
+{
+"word": "아이스크림",
+"category": "디저트"
+},
+{
+"word": "초콜릿",
+"category": "디저트"
+},
+{
+"word": "케이크",
+"category": "디저트"
+},
+{
+"word": "사탕",
+"category": "디저트"
+},
+{
+"word": "팝콘",
+"category": "디저트"
+},
+{
+"word": "도넛",
+"category": "디저트"
+},
+{
+"word": "빙수",
+"category": "디저트"
+},
+{
+"word": "젤리",
+"category": "디저트"
+},
+{
+"word": "커피",
+"category": "음료"
+},
+{
+"word": "우유",
+"category": "음료"
+},
+{
+"word": "녹차",
+"category": "음료"
+},
+{
+"word": "코코아",
+"category": "음료"
+},
+{
+"word": "사과",
+"category": "과일"
+},
+{
+"word": "바나나",
+"category": "과일"
+},
+{
+"word": "딸기",
+"category": "과일"
+},
+{
+"word": "수박",
+"category": "과일"
+},
+{
+"word": "포도",
+"category": "과일"
+},
+{
+"word": "복숭아",
+"category": "과일"
+},
+{
+"word": "파인애플",
+"category": "과일"
+},
+{
+"word": "참외",
+"category": "과일"
+},
+{
+"word": "오렌지",
+"category": "과일"
+},
+{
+"word": "레몬",
+"category": "과일"
+},
+{
+"word": "멜론",
+"category": "과일"
+},
+{
+"word": "키위",
+"category": "과일"
+},
+{
+"word": "체리",
+"category": "과일"
+},
+{
+"word": "망고",
+"category": "과일"
+},
+{
+"word": "당근",
+"category": "채소"
+},
+{
+"word": "양파",
+"category": "채소"
+},
+{
+"word": "감자",
+"category": "채소"
+},
+{
+"word": "오이",
+"category": "채소"
+},
+{
+"word": "브로콜리",
+"category": "채소"
+},
+{
+"word": "고구마",
+"category": "채소"
+},
+{
+"word": "마늘",
+"category": "채소"
+},
+{
+"word": "배추",
+"category": "채소"
+},
+{
+"word": "호박",
+"category": "채소"
+},
+{
+"word": "버섯",
+"category": "채소"
+},
+{
+"word": "시금치",
+"category": "채소"
+},
+{
+"word": "상추",
+"category": "채소"
+},
+{
+"word": "토마토",
+"category": "채소"
+},
+{
+"word": "옥수수",
+"category": "채소"
+},
+{
+"word": "의사",
+"category": "직업"
+},
+{
+"word": "변호사",
+"category": "직업"
+},
+{
+"word": "소방관",
+"category": "직업"
+},
+{
+"word": "경찰관",
+"category": "직업"
+},
+{
+"word": "요리사",
+"category": "직업"
+},
+{
+"word": "선생님",
+"category": "직업"
+},
+{
+"word": "미용사",
+"category": "직업"
+},
+{
+"word": "개발자",
+"category": "직업"
+},
+{
+"word": "간호사",
+"category": "직업"
+},
+{
+"word": "파일럿",
+"category": "직업"
+},
+{
+"word": "농부",
+"category": "직업"
+},
+{
+"word": "가수",
+"category": "직업"
+},
+{
+"word": "화가",
+"category": "직업"
+},
+{
+"word": "기자",
+"category": "직업"
+},
+{
+"word": "우주비행사",
+"category": "직업"
+},
+{
+"word": "축구",
+"category": "스포츠"
+},
+{
+"word": "야구",
+"category": "스포츠"
+},
+{
+"word": "농구",
+"category": "스포츠"
+},
+{
+"word": "배구",
+"category": "스포츠"
+},
+{
+"word": "수영",
+"category": "스포츠"
+},
+{
+"word": "골프",
+"category": "스포츠"
+},
+{
+"word": "테니스",
+"category": "스포츠"
+},
+{
+"word": "볼링",
+"category": "스포츠"
+},
+{
+"word": "태권도",
+"category": "스포츠"
+},
+{
+"word": "스키",
+"category": "스포츠"
+},
+{
+"word": "복싱",
+"category": "스포츠"
+},
+{
+"word": "마라톤",
+"category": "스포츠"
+},
+{
+"word": "양궁",
+"category": "스포츠"
+},
+{
+"word": "탁구",
+"category": "스포츠"
+},
+{
+"word": "자동차",
+"category": "탈것"
+},
+{
+"word": "비행기",
+"category": "탈것"
+},
+{
+"word": "기차",
+"category": "탈것"
+},
+{
+"word": "자전거",
+"category": "탈것",
+"accept": [
+"사이클"
+]
+},
+{
+"word": "오토바이",
+"category": "탈것"
+},
+{
+"word": "버스",
+"category": "탈것"
+},
+{
+"word": "헬리콥터",
+"category": "탈것"
+},
+{
+"word": "지하철",
+"category": "탈것"
+},
+{
+"word": "트럭",
+"category": "탈것"
+},
+{
+"word": "택시",
+"category": "탈것"
+},
+{
+"word": "구급차",
+"category": "탈것"
+},
+{
+"word": "잠수함",
+"category": "탈것"
+},
+{
+"word": "열기구",
+"category": "탈것"
+},
+{
+"word": "냉장고",
+"category": "가전제품"
+},
+{
+"word": "세탁기",
+"category": "가전제품"
+},
+{
+"word": "에어컨",
+"category": "가전제품"
+},
+{
+"word": "전자레인지",
+"category": "가전제품",
+"accept": [
+"전자렌지",
+"렌지"
+]
+},
+{
+"word": "청소기",
+"category": "가전제품"
+},
+{
+"word": "텔레비전",
+"category": "가전제품",
+"accept": [
+"TV",
+"티비",
+"티브이"
+]
+},
+{
+"word": "정수기",
+"category": "가전제품"
+},
+{
+"word": "선풍기",
+"category": "가전제품"
+},
+{
+"word": "드라이기",
+"category": "가전제품"
+},
+{
+"word": "다리미",
+"category": "가전제품"
+},
+{
+"word": "컴퓨터",
+"category": "가전제품",
+"accept": [
+"PC",
+"피시"
+]
+},
+{
+"word": "스피커",
+"category": "가전제품"
+},
+{
+"word": "카메라",
+"category": "가전제품"
+},
+{
+"word": "밥솥",
+"category": "가전제품"
+},
+{
+"word": "침대",
+"category": "가구"
+},
+{
+"word": "소파",
+"category": "가구"
+},
+{
+"word": "책상",
+"category": "가구"
+},
+{
+"word": "의자",
+"category": "가구"
+},
+{
+"word": "옷장",
+"category": "가구"
+},
+{
+"word": "거울",
+"category": "가구"
+},
+{
+"word": "시계",
+"category": "가구"
+},
+{
+"word": "커튼",
+"category": "가구"
+},
+{
+"word": "스탠드",
+"category": "가구"
+},
+{
+"word": "모자",
+"category": "의류"
+},
+{
+"word": "신발",
+"category": "의류"
+},
+{
+"word": "우산",
+"category": "의류"
+},
+{
+"word": "안경",
+"category": "의류"
+},
+{
+"word": "장갑",
+"category": "의류"
+},
+{
+"word": "목도리",
+"category": "의류",
+"accept": [
+"스카프",
+"머플러"
+]
+},
+{
+"word": "양말",
+"category": "의류"
+},
+{
+"word": "넥타이",
+"category": "의류"
+},
+{
+"word": "청바지",
+"category": "의류"
+},
+{
+"word": "코트",
+"category": "의류"
+},
+{
+"word": "연필",
+"category": "학용품"
+},
+{
+"word": "지우개",
+"category": "학용품"
+},
+{
+"word": "볼펜",
+"category": "학용품"
+},
+{
+"word": "필통",
+"category": "학용품"
+},
+{
+"word": "노트",
+"category": "학용품"
+},
+{
+"word": "가위",
+"category": "학용품"
+},
+{
+"word": "크레파스",
+"category": "학용품"
+},
+{
+"word": "스케치북",
+"category": "학용품"
+},
+{
+"word": "계산기",
+"category": "학용품"
+},
+{
+"word": "책가방",
+"category": "학용품"
+},
+{
+"word": "형광펜",
+"category": "학용품"
+},
+{
+"word": "피아노",
+"category": "악기"
+},
+{
+"word": "기타",
+"category": "악기"
+},
+{
+"word": "드럼",
+"category": "악기"
+},
+{
+"word": "바이올린",
+"category": "악기"
+},
+{
+"word": "트럼펫",
+"category": "악기"
+},
+{
+"word": "플루트",
+"category": "악기"
+},
+{
+"word": "첼로",
+"category": "악기"
+},
+{
+"word": "하모니카",
+"category": "악기"
+},
+{
+"word": "색소폰",
+"category": "악기"
+},
+{
+"word": "아코디언",
+"category": "악기"
+},
+{
+"word": "실로폰",
+"category": "악기"
+},
+{
+"word": "장구",
+"category": "악기"
+},
+{
+"word": "망치",
+"category": "도구"
+},
+{
+"word": "드라이버",
+"category": "도구"
+},
+{
+"word": "사다리",
+"category": "도구"
+},
+{
+"word": "빗자루",
+"category": "도구"
+},
+{
+"word": "톱",
+"category": "도구"
+},
+{
+"word": "자물쇠",
+"category": "도구"
+},
+{
+"word": "열쇠",
+"category": "도구"
+},
+{
+"word": "손전등",
+"category": "도구"
+},
+{
+"word": "나침반",
+"category": "도구"
+},
+{
+"word": "등대",
+"category": "건물"
+},
+{
+"word": "다리",
+"category": "건물"
+},
+{
+"word": "병원",
+"category": "건물"
+},
+{
+"word": "학교",
+"category": "건물"
+},
+{
+"word": "도서관",
+"category": "건물"
+},
+{
+"word": "백화점",
+"category": "건물"
+},
+{
+"word": "놀이공원",
+"category": "건물"
+},
+{
+"word": "공항",
+"category": "건물"
+},
+{
+"word": "주유소",
+"category": "건물"
+},
+{
+"word": "화산",
+"category": "자연"
+},
+{
+"word": "폭포",
+"category": "자연"
+},
+{
+"word": "사막",
+"category": "자연"
+},
+{
+"word": "무지개",
+"category": "자연"
+},
+{
+"word": "번개",
+"category": "자연"
+},
+{
+"word": "별",
+"category": "자연"
+},
+{
+"word": "달",
+"category": "자연"
+},
+{
+"word": "태양",
+"category": "자연"
+},
+{
+"word": "구름",
+"category": "자연"
+},
+{
+"word": "섬",
+"category": "자연",
+"accept": [
+"무인도"
+]
+},
+{
+"word": "동굴",
+"category": "자연"
+},
+{
+"word": "빙산",
+"category": "자연"
+},
+{
+"word": "눈사람",
+"category": "자연"
+},
+{
+"word": "제주도",
+"category": "여행지"
+},
+{
+"word": "도쿄",
+"category": "여행지"
+},
+{
+"word": "뉴욕",
+"category": "여행지"
+},
+{
+"word": "하와이",
+"category": "여행지"
+},
+{
+"word": "방콕",
+"category": "여행지"
+},
+{
+"word": "런던",
+"category": "여행지"
+},
+{
+"word": "부산",
+"category": "여행지"
+},
+{
+"word": "로마",
+"category": "여행지"
+},
+{
+"word": "이집트",
+"category": "여행지"
+},
+{
+"word": "독서",
+"category": "취미"
+},
+{
+"word": "등산",
+"category": "취미"
+},
+{
+"word": "낚시",
+"category": "취미"
+},
+{
+"word": "캠핑",
+"category": "취미"
+},
+{
+"word": "뜨개질",
+"category": "취미"
+},
+{
+"word": "서핑",
+"category": "취미"
+},
+{
+"word": "지도",
+"category": "기타"
+},
+{
+"word": "편지",
+"category": "기타"
+},
+{
+"word": "지폐",
+"category": "기타",
+"accept": [
+"돈",
+"현금"
+]
+},
+{
+"word": "여권",
+"category": "기타"
+},
+{
+"word": "달력",
+"category": "기타"
+},
+{
+"word": "신호등",
+"category": "기타"
+},
+{
+"word": "소화기",
+"category": "기타"
+},
+{
+"word": "마이크",
+"category": "기타"
+},
+{
+"word": "로봇",
+"category": "기타"
+},
+{
+"word": "풍선",
+"category": "기타"
+},
+{
+"word": "지팡이",
+"category": "기타"
+},
+{
+"word": "저금통",
+"category": "기타"
+},
+{
+"word": "선인장",
+"category": "자연"
+},
+{
+"word": "텐트",
+"category": "취미"
+},
+{
+"word": "배낭",
+"category": "취미"
+},
+{
+"word": "슬리퍼",
+"category": "의류"
+},
+{
+"word": "고드름",
+"category": "자연"
+},
+{
+"word": "화살",
+"category": "도구"
+},
+{
+"word": "그네",
+"category": "건물"
+},
+{
+"word": "시소",
+"category": "건물"
+},
+{
+"word": "미끄럼틀",
+"category": "건물"
+},
+{
+"word": "팽이",
+"category": "기타"
+},
+{
+"word": "지휘자",
+"category": "직업"
+},
+{
+"word": "베네치아",
+"category": "여행지"
+},
+{
+"word": "펜치",
+"category": "도구"
+},
+{
+"word": "스테이플러",
+"category": "학용품"
+},
+{
+"word": "줄자",
+"category": "도구"
+},
+{
+"word": "자몽",
+"category": "과일"
+},
+{
+"word": "식혜",
+"category": "음료"
+},
+{
+"word": "매실차",
+"category": "음료"
+},
+{
+"word": "레모네이드",
+"category": "음료"
+},
+{
+"word": "아메리카노",
+"category": "음료"
+},
+{
+"word": "수정과",
+"category": "음료"
+},
+{
+"word": "진딧물",
+"category": "곤충"
+},
+{
+"word": "매미",
+"category": "곤충"
+},
+{
+"word": "귀뚜라미",
+"category": "곤충"
+},
+{
+"word": "무당벌레",
+"category": "곤충"
+},
+{
+"word": "미역",
+"category": "바다생물"
+},
+{
+"word": "전복",
+"category": "바다생물"
+},
+{
+"word": "성게",
+"category": "바다생물"
+},
+{
+"word": "멸치",
+"category": "바다생물"
+},
+{
+"word": "마카롱",
+"category": "디저트"
+},
+{
+"word": "와플",
+"category": "디저트"
+},
+{
+"word": "푸딩",
+"category": "디저트"
+},
+{
+"word": "약과",
+"category": "디저트"
+},
+{
+"word": "자수",
+"category": "취미"
+},
+{
+"word": "서예",
+"category": "취미"
+},
+{
+"word": "식탁",
+"category": "가구"
+},
+{
+"word": "서랍장",
+"category": "가구"
+},
+{
+"word": "책장",
+"category": "가구"
+},
+{
+"word": "스툴",
+"category": "가구"
+},
+{
+"word": "궁궐",
+"category": "건물"
+},
+{
+"word": "말벌",
+"category": "곤충"
+},
+{
+"word": "요트",
+"category": "탈것"
+}
+]
