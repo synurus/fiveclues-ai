@@ -112,9 +112,11 @@ async function playOne(index: number): Promise<void> {
   const { word, category, accept } = pickWord();
   const hintsSoFar: Hint[] = [];
   const guesses: string[] = [];
+  const roundHintCounts: number[] = [];
 
   const r1 = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT });
   hintsSoFar.push(...r1.hints);
+  roundHintCounts.push(r1.hints.length);
   const guess1 = await guessWord(hintsSoFar);
   guesses.push(guess1);
   const verdict1 = judgeGuess(word, guess1, accept ?? []);
@@ -132,6 +134,7 @@ async function playOne(index: number): Promise<void> {
       wrongGuess: guess1,
     });
     hintsSoFar.push(...r2.hints);
+    roundHintCounts.push(r2.hints.length);
     const guess2 = await guessWord(hintsSoFar);
     guesses.push(guess2);
     const verdict2 = judgeGuess(word, guess2, accept ?? []);
@@ -144,6 +147,7 @@ async function playOne(index: number): Promise<void> {
     word,
     category,
     hints: hintsSoFar.map((h) => h.text),
+    roundHintCounts,
     outcome,
     keyHintIndexes: reflection.keyHintIndexes,
     uselessHintIndexes: reflection.uselessHintIndexes,
