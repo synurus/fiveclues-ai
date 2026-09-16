@@ -12,10 +12,15 @@
 // 그 안의 개행·따옴표를 JSON 문자열로 이스케이프하다 깨뜨릴 위험이 있다. 대신
 // "===FILE===...===END===" 같은 구분자로 평문 그대로 받는다.
 //
-// 안전장치 3단계:
-//   1) 응답에서 뽑은 파일이 구조 가드(함수 시그니처·JSON 스키마 문구)를 통과해야 한다
-//   2) apps/backend 에서 tsc --noEmit 이 통과해야 한다 — 실패하면 파일을 되돌리고 끝낸다
-//   3) 그래도 병합은 사람이 한다 — PR만 열고, 피드백 이슈는 "Closes #N"으로 머지 시에만 닫힌다
+// 안전장치 4단계:
+//   1) 이미 열려있는(병합 안 된) 자가개선 PR이 있으면 그 자리에서 멈춘다 — 매일
+//      08시 KST(self-improve.yml) 한 번만 돌지만, 전날 PR을 아직 안 처리했으면
+//      같은 피드백으로 새 PR이 또 생기는 걸 막는 백업 안전장치다. 이슈는
+//      "Closes #N"으로 머지 시에만 닫히므로, 사람이 그 PR을 처리하기 전까지는
+//      재실행해도 항상 여기서 끝난다.
+//   2) 응답에서 뽑은 파일이 구조 가드(함수 시그니처·JSON 스키마 문구)를 통과해야 한다
+//   3) apps/backend 에서 tsc --noEmit 이 통과해야 한다 — 실패하면 파일을 되돌리고 끝낸다
+//   4) 그래도 병합은 사람이 한다 — PR만 열고, 피드백 이슈는 "Closes #N"으로 머지 시에만 닫힌다
 //
 //   DRY=1 node scripts/self-improve/propose.mjs   네트워크·git 없이 배선만 확인
 
@@ -153,6 +158,22 @@ function parseLlmResponse(text) {
   return { summary: summaryMatch[1].trim(), file: fileMatch[1].trim() + '\n' };
 }
 
+// 이미 병합 안 된 자가개선 PR이 있으면 그 브랜치를 반환한다(없으면 null).
+// 하루 여러 번 도는 스케줄에서 같은 피드백으로 PR이 중복 생성되는 걸 막는 게
+// 목적이라, 조회 자체가 실패하면(권한 문제 등) 최악의 경우 중복 PR 하나 더 생기는
+// 정도로 끝나게 — 막지 않고 그냥 계속 진행한다(fail-open).
+function getOpenSelfImprovePr() {
+  try {
+    const out = shOut(`gh pr list --repo "${REPO}" --state open --json headRefName,url`);
+    const prs = JSON.parse(out);
+    const found = prs.find((pr) => pr.headRefName.startsWith('self-improve/'));
+    return found ?? null;
+  } catch (e) {
+    console.error('열려있는 PR 조회 실패 — 안전하게 계속 진행한다:', e instanceof Error ? e.message : e);
+    return null;
+  }
+}
+
 // 구조 가드 — 모델이 형식은 지켰지만 내용을 이상하게 바꿨을 가능성을 걸러낸다.
 function structuralGuardOk(fileContent) {
   const checks = [
@@ -169,6 +190,14 @@ function structuralGuardOk(fileContent) {
 }
 
 async function main() {
+  if (!DRY) {
+    const openPr = getOpenSelfImprovePr();
+    if (openPr) {
+      console.log(`이미 열려있는 자가개선 PR이 있다 — 병합되거나 닫힐 때까지 새로 안 연다: ${openPr.url}`);
+      return;
+    }
+  }
+
   const feedback = await loadFeedback();
   if (feedback.length === 0) {
     console.log('처리할 피드백이 없다 — 종료.');
