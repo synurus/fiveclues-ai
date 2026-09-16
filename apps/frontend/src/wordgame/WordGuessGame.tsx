@@ -238,7 +238,9 @@ export function WordGuessGame() {
             <p className="wg-result-badge">
               {stage.outcome === 'round1' ? '참 잘했어요' : stage.outcome === 'round2' ? '잘했어요' : '아쉬워요'}
             </p>
-            <p className="text-muted">정답은 "{stage.word}" 였습니다.</p>
+            <p className="wg-answer">
+              정답은 "{stage.word}({stage.category})" 였습니다.
+            </p>
 
             {feedbackStatus === 'sent' ? (
               <p className="wg-feedback-done">피드백 고마워요! 다음 프롬프트 개선에 참고할게요.</p>
