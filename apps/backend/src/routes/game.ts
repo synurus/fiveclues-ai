@@ -42,6 +42,11 @@ const errorMessage = (e: unknown): string => (e instanceof Error ? e.message : S
 const toIndexArray = (v: unknown): number[] =>
   Array.isArray(v) ? v.filter((n): n is number => typeof n === 'number' && Number.isInteger(n)) : [];
 
+const toCountArray = (v: unknown): number[] =>
+  Array.isArray(v) ? v.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 0) : [];
+
+const toGuessArray = (v: unknown): string[] => (Array.isArray(v) ? v.filter((s): s is string => typeof s === 'string') : []);
+
 export const gameRouter = Router();
 
 gameRouter.post('/start', async (_req: Request, res: Response) => {
@@ -124,11 +129,13 @@ gameRouter.post('/feedback', async (req: Request, res: Response) => {
       word: body.word,
       category: body.category,
       hints: body.hints.map(String),
+      roundHintCounts: toCountArray(body.roundHintCounts),
       outcome: body.outcome as FeedbackPayload['outcome'],
       keyHintIndexes: toIndexArray(body.keyHintIndexes),
       uselessHintIndexes: toIndexArray(body.uselessHintIndexes),
       feedbackText: typeof body.feedbackText === 'string' ? body.feedbackText : '',
       nickname: typeof body.nickname === 'string' ? body.nickname : '',
+      guesses: toGuessArray(body.guesses),
     });
     res.json({ ok: true, issueNumber });
   } catch (e) {

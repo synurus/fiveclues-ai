@@ -15,6 +15,10 @@ export interface FeedbackPayload {
   word: string;
   category: string;
   hints: string[]; // 1·2라운드 전부, 순서대로
+  /** hints를 라운드별로 다시 자를 때 쓰는 길이들 — 합이 hints.length와 같다.
+   *  예: [5, 5]면 hints[0..4]가 1라운드, hints[5..9]가 2라운드. 이슈 본문에서
+   *  라운드 사이 구분선을 그리는 데 쓴다(2026-09-16). */
+  roundHintCounts: number[];
   outcome: 'round1' | 'round2' | 'failed';
   /** 결정적이었던 힌트들의 hints 인덱스. 여러 개 고를 수 있다(2026-09-16, 말풍선
    *  하나만 고르게 강제하니 "묘사 두 개가 같이 확신을 줬다" 같은 경우를 못 담아서
@@ -24,12 +28,42 @@ export interface FeedbackPayload {
   uselessHintIndexes: number[];
   feedbackText: string;
   nickname: string;
-  /** 실제로 뭐라고 추측했는지, 순서대로(라운드마다 하나). 실제 플레이어 피드백(routes/game.ts
-   *  의 /feedback)엔 없어서 빈다 — 사람 플레이어의 추측은 /guess 판정 시점에만 오가고
-   *  결과 화면 피드백엔 따로 안 남긴다. AI 자동플레이(bot/autoPlay.ts)는 항상 채워서
-   *  보낸다 — "힌트는 괜찮았는데 AI가 헛짚었다"와 "힌트 자체가 안 좋았다"를 이슈만
-   *  보고도 구분하려는 것(2026-09-16, 파일럿/직업 오답 사례에서 필요해짐). */
-  guesses?: string[];
+  /** 실제로 뭐라고 추측했는지, 라운드마다 하나씩 순서대로 — roundHintCounts와 길이가
+   *  같다. 실제 플레이어 피드백(routes/game.ts의 /feedback)도 결과 화면이 라운드별
+   *  추측을 들고 있어서(2026-09-16) 채워 보낸다. AI 자동플레이(bot/autoPlay.ts)도
+   *  항상 채운다 — "힌트는 괜찮았는데 헛짚었다"와 "힌트 자체가 안 좋았다"를 이슈만
+   *  보고도 구분하려는 것. */
+  guesses: string[];
+}
+
+// hints를 roundHintCounts 길이대로 잘라 라운드별 배열로 되돌린다. roundHintCounts가
+// 비었거나 합이 안 맞으면(방어적으로) 한 라운드로 취급 — 렌더링이 깨지진 않게.
+function splitByRound(hints: string[], roundHintCounts: number[]): string[][] {
+  const total = roundHintCounts.reduce((a, b) => a + b, 0);
+  if (roundHintCounts.length === 0 || total !== hints.length) return [hints];
+  const rounds: string[][] = [];
+  let offset = 0;
+  for (const count of roundHintCounts) {
+    rounds.push(hints.slice(offset, offset + count));
+    offset += count;
+  }
+  return rounds;
+}
+
+// 이슈 본문 인트로에 라운드별 힌트 + 그 라운드에 뭐라고 추측했는지·맞았는지를
+// 구분선(────)으로 나눠 보여준다(2026-09-16) — 예전엔 "추측: A → B" 한 줄만 있어서
+// 어떤 힌트를 보고 그 추측을 했는지 이슈만 봐서는 알 수 없었다.
+function buildHintLog(data: FeedbackPayload): string {
+  const rounds = splitByRound(data.hints, data.roundHintCounts);
+  return rounds
+    .map((hints, i) => {
+      const guess = data.guesses[i] ?? '(기록 없음)';
+      const isLastRound = i === rounds.length - 1;
+      const wrong = !(isLastRound && data.outcome !== 'failed');
+      const hintLines = hints.map((h) => `- ${h}`).join('\n');
+      return `${hintLines}\n→ 추측 "${guess}" (${wrong ? '오답' : '정답'})`;
+    })
+    .join('\n\n────────────\n\n');
 }
 
 function required(name: string, value: string | undefined): string {
@@ -44,12 +78,14 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   const title = `[feedback] ${data.word} · ${data.outcome}`;
   const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(Boolean);
-  // 본문은 사람이 Issues 탭에서 읽을 요약 한 줄 + self-improve/gather.mjs 가 그대로
-  // 파싱하는 JSON 코드블록. 형식을 바꾸면 gather.mjs의 정규식도 같이 고쳐야 한다.
+  // 본문은 사람이 Issues 탭에서 읽을 요약(라운드별 힌트+추측 로그 포함) + self-improve/
+  // gather.mjs 가 그대로 파싱하는 JSON 코드블록. JSON 코드블록의 ```json\n...\n``` 형식만
+  // 안 바꾸면 되고(gather.mjs 정규식이 그것만 본다), 그 위 요약 텍스트는 자유롭게 바꿔도
+  // 된다 — guesses/roundHintCounts는 JSON 쪽에도 그대로 담겨 있다.
   const body =
     `${data.nickname || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
-    (data.guesses?.length ? `\n추측: ${data.guesses.join(' → ')}` : '') +
-    (keyText.length ? `\n결정적: ${keyText.map((t) => `"${t}"`).join(', ')}` : '') +
+    `\n\n${buildHintLog(data)}` +
+    (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${t}"`).join(', ')}` : '') +
     (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${t}"`).join(', ')}` : '') +
     (data.feedbackText ? `\n\n> ${data.feedbackText}` : '') +
     '\n\n```json\n' +
