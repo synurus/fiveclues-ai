@@ -1,5 +1,5 @@
 {
-  "name": "ai-liar-game",
+  "name": "fiveclues-ai",
   "version": "1.0.0",
   "description": "AI가 묘사하는 제시어를 맞추는 낱말 게임 — 자가개선 루프로 힌트 프롬프트가 스스로 좋아진다",
   "private": true,
