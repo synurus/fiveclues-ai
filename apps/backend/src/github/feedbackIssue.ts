@@ -20,6 +20,12 @@ export interface FeedbackPayload {
   uselessHintIndex: number | null;
   feedbackText: string;
   nickname: string;
+  /** 실제로 뭐라고 추측했는지, 순서대로(라운드마다 하나). 실제 플레이어 피드백(routes/game.ts
+   *  의 /feedback)엔 없어서 빈다 — 사람 플레이어의 추측은 /guess 판정 시점에만 오가고
+   *  결과 화면 피드백엔 따로 안 남긴다. AI 자동플레이(bot/autoPlay.ts)는 항상 채워서
+   *  보낸다 — "힌트는 괜찮았는데 AI가 헛짚었다"와 "힌트 자체가 안 좋았다"를 이슈만
+   *  보고도 구분하려는 것(2026-09-16, 파일럿/직업 오답 사례에서 필요해짐). */
+  guesses?: string[];
 }
 
 function required(name: string, value: string | undefined): string {
@@ -36,6 +42,7 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   // 파싱하는 JSON 코드블록. 형식을 바꾸면 gather.mjs의 정규식도 같이 고쳐야 한다.
   const body =
     `${data.nickname || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
+    (data.guesses?.length ? `\n추측: ${data.guesses.join(' → ')}` : '') +
     (data.feedbackText ? `\n\n> ${data.feedbackText}` : '') +
     '\n\n```json\n' +
     JSON.stringify(data, null, 2) +

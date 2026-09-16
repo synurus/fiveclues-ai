@@ -131,6 +131,7 @@ async function playOne(index: number): Promise<void> {
     uselessHintIndex: reflection.uselessHintIndex,
     feedbackText: reflection.feedbackText,
     nickname: NICKNAME,
+    guesses, // 실제로 뭐라고 찍었는지 — 힌트가 나빴는지 AI가 헛짚었는지 이슈만 보고 구분하려는 것.
   };
   const { issueNumber } = await createFeedbackIssue(payload);
 
