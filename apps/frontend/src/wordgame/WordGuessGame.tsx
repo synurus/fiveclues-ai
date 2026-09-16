@@ -1,4 +1,4 @@
-// AI 라이어게임 — 턴제 API(apps/backend/src/routes/game.ts) 전용 화면.
+// 다섯고개 — 턴제 API(apps/backend/src/routes/game.ts) 전용 화면.
 //
 // 결과 화면의 피드백(결정적/무쓸모 힌트 태그 + 자유 코멘트)은 자가개선 루프
 // (scripts/self-improve/) 의 입력이다 — /game/feedback 이 GitHub Issue로 쌓고,
@@ -123,7 +123,7 @@ export function WordGuessGame() {
   return (
     <div className="wg-page">
       <div className="wg-card">
-        <h1 className="wg-title">AI 라이어게임</h1>
+        <h1 className="wg-title">다섯고개</h1>
 
         {stage.kind === 'nickname' && (
           <>

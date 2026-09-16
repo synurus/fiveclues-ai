@@ -1,4 +1,4 @@
-// AI 라이어게임 턴제 API 클라이언트. apps/backend/src/routes/game.ts 와 짝이다.
+// 다섯고개 턴제 API 클라이언트. apps/backend/src/routes/game.ts 와 짝이다.
 // dev: vite.config.ts 의 /game 프록시가 localhost:3000(server.ts)으로 넘긴다.
 // prod(Vercel): 프론트와 API가 같은 origin에서 서빙된다 — vercel.json의 rewrites가
 // /game/* 을 서버리스 함수(api/index.ts)로 보낸다. 그래서 여기선 항상 상대 경로만 쓴다.
