@@ -29,9 +29,15 @@ const GH_TOKEN = process.env.GH_TOKEN;
 // SELFIMPROVE_BOT_* 가 있으면 그걸 쓰고, 없으면 게임 봇과 같은 BOT_* 를 그대로 쓴다 —
 // 별도 키를 안 만들어도 당장은 돌아가되, 자가개선 호출량이 게임 본체의 TPM 예산을
 // 갉아먹는 게 문제가 되면 그때 SELFIMPROVE_BOT_* 를 따로 발급해 분리할 수 있다.
-const BASE_URL = process.env.SELFIMPROVE_BOT_BASE_URL ?? process.env.BOT_BASE_URL ?? 'https://api.groq.com/openai/v1';
-const API_KEY = process.env.SELFIMPROVE_BOT_API_KEY ?? process.env.BOT_API_KEY ?? '';
-const MODEL = process.env.SELFIMPROVE_BOT_MODEL ?? process.env.BOT_MODEL ?? 'openai/gpt-oss-120b';
+//
+// ⚠️ ?? 가 아니라 || 를 쓴다. GitHub Actions는 존재하지 않는 시크릿을 참조해도
+// 그 env 를 "빈 문자열"로 채우지 undefined 로 두지 않는다 — SELFIMPROVE_BOT_* 를
+// 안 만든 레포에서도 워크플로의 env: 블록이 그 이름을 선언해두면 process.env.SELFIMPROVE_BOT_API_KEY
+// 는 "" 가 된다. ??는 null/undefined 일 때만 다음으로 넘어가고 ""는 "값 있음"으로
+// 쳐버려서, BOT_API_KEY를 제대로 넣어도 계속 빈 값으로 잡히는 버그가 났었다(2026-09-16).
+const BASE_URL = process.env.SELFIMPROVE_BOT_BASE_URL || process.env.BOT_BASE_URL || 'https://api.groq.com/openai/v1';
+const API_KEY = process.env.SELFIMPROVE_BOT_API_KEY || process.env.BOT_API_KEY || '';
+const MODEL = process.env.SELFIMPROVE_BOT_MODEL || process.env.BOT_MODEL || 'openai/gpt-oss-120b';
 
 const PROMPT_FILE = 'apps/backend/src/bot/hintPrompt.ts';
 const FEEDBACK_FILE = 'data/self-improve/feedback.json';
