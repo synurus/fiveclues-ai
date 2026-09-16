@@ -22,7 +22,16 @@ import './wordgame.css';
 type Stage =
   | { kind: 'nickname' }
   | { kind: 'loading' }
-  | { kind: 'playing'; session: string; round: 1 | 2; hints: string[] }
+  | {
+      kind: 'playing';
+      session: string;
+      round: 1 | 2;
+      hints: string[];
+      // 2라운드 진입 시 1라운드 화면이 리셋되면서 방금 본 힌트·오답을 까먹는
+      // 문제(2026-09-16)가 있어, round===2일 때만 채워 결과 화면 바로 위에
+      // 요약으로 다시 보여준다.
+      previous?: { hints: string[]; guess: string };
+    }
   | { kind: 'result'; outcome: 'round1' | 'round2' | 'failed'; word: string; category: string; hintsSoFar: string[] }
   | { kind: 'error'; message: string };
 
@@ -82,14 +91,21 @@ export function WordGuessGame() {
   const handleGuess = async () => {
     if (stage.kind !== 'playing' || !guess.trim() || submitting) return;
     setSubmitting(true);
+    const attemptedGuess = guess.trim();
     try {
-      const res: GuessResponse = await submitGuess(stage.session, guess.trim());
+      const res: GuessResponse = await submitGuess(stage.session, attemptedGuess);
       if (res.result === 'continue') {
         const round2Hints = res.hints.map((h) => h.text);
         setRevealed(0);
         setGuess('');
         setHintsSoFar((prev) => [...prev, ...round2Hints]);
-        setStage({ kind: 'playing', session: res.session, round: res.round, hints: round2Hints });
+        setStage({
+          kind: 'playing',
+          session: res.session,
+          round: res.round,
+          hints: round2Hints,
+          previous: { hints: stage.hints, guess: attemptedGuess },
+        });
       } else {
         setStage({ kind: 'result', outcome: res.result, word: res.word, category: res.category, hintsSoFar });
       }
@@ -146,6 +162,19 @@ export function WordGuessGame() {
 
         {stage.kind === 'playing' && (
           <>
+            {stage.previous && (
+              <div className="wg-recap">
+                <p className="wg-round wg-round-recap">1라운드 힌트</p>
+                <ul className="wg-hints wg-hints-recap">
+                  {stage.previous.hints.map((text, i) => (
+                    <li key={`recap-${i}`}>{text}</li>
+                  ))}
+                </ul>
+                <p className="wg-recap-guess">
+                  내 추측 "{stage.previous.guess}" <span className="wg-recap-wrong">[땡! 틀렸습니다]</span>
+                </p>
+              </div>
+            )}
             <p className="wg-round">{stage.round}라운드</p>
             <ul className="wg-hints">
               {stage.hints.map((text, i) =>
