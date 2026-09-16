@@ -69,6 +69,14 @@
   margin-bottom: var(--space-2);
 }
 
+/* 결과 화면 "정답은 ..." 줄 — text-muted 대신 전용 클래스로 뺐다(2026-09-16).
+   text-muted는 닉네임/로딩 화면에도 같이 쓰여서, 거기까지 같이 하얗게 굵어지는 걸
+   막으려고 이 줄만 따로 뗐다. */
+.wg-answer {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
 /* 결과 화면 피드백 — 자가개선 루프(scripts/self-improve/)의 입력. */
 .wg-feedback {
   margin: var(--space-4) 0;
@@ -159,6 +167,14 @@
   font-size: var(--text-body);
   box-sizing: border-box;
   resize: vertical;
+}
+
+/* placeholder는 브라우저 기본값이 색을 지정해도 반투명하게 흐려 보이게 만든다
+   (2026-09-16) — opacity:1로 풀어주지 않으면 아무리 밝은 색을 줘도 칙칙해 보인다. */
+.wg-textarea::placeholder {
+  color: var(--color-text);
+  opacity: 1;
+  font-weight: 700;
 }
 
 .wg-feedback-done {
