@@ -1,21 +1,33 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "AI 라이어게임 턴제 API",
-  "main": "dist/server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/server.ts",
+    "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/index.js",
+    "bot": "ts-node --transpileOnly src/bot/playground.ts",
+    "talk": "ts-node --transpileOnly src/bot/talk.ts",
+    "provider": "ts-node --transpileOnly src/bot/set-provider.ts",
+    "replay": "ts-node --transpileOnly src/bot/replay.ts",
+    "db": "ts-node --transpileOnly src/db/explore.ts",
+    "turn": "ts-node-dev --respawn src/turnServer.ts",
     "autoplay": "ts-node --transpileOnly src/bot/autoPlay.ts"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
+    "@supabase/supabase-js": "^2.112.2",
+    "@zeteo/shared-types": "*",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "openai": "^7.4.0",
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

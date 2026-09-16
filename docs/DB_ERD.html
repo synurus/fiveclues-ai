@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>Zeteo 데이터베이스 ERD</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --panel: #f7f8fa;
+    --border: #d8dbe0;
+    --text: #1f2328;
+    --muted: #6b7280;
+    --accent: #4f6df5;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", "Noto Sans KR", sans-serif;
+  }
+  header {
+    padding: 28px 32px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .legend {
+    display: flex;
+    gap: 18px;
+    padding: 10px 32px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .legend span { white-space: nowrap; }
+  .legend b { color: var(--text); }
+  #diagram-wrap, #diagram-wrap2 {
+    width: 100%;
+    overflow: auto;
+    padding: 24px 12px 40px;
+  }
+  .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+  .note {
+    margin: 0 32px 20px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .note b { color: var(--accent); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Zeteo 데이터베이스 ERD (3차 · 봇 루프 스키마 반영 · 2026-08-25)</h1>
+    <p>games 테이블을 중심으로 한 라운드(판)별 기록 구조 · categories/words, survey_questions/survey_reasons는 게임과 독립된 마스터 데이터</p>
+  </header>
+  <div class="legend">
+    <span><b>PK</b> = 기본키</span>
+    <span><b>FK</b> = 외래키</span>
+    <span><b>UK</b> = 유니크(복합키 포함)</span>
+    <span><b>||--o{</b> = 1(부모) : N(자식) 관계</span>
+    <span><b>★</b> = 2026-08-25 변경분</span>
+  </div>
+  <div class="note">
+    <b>2차 → 3차 달라진 점 (2026-08-25 · 봇 자가개선 루프용 스키마):</b> 컬럼 6개 추가 · 1개 삭제, 제약 2건 완화, 인덱스 2개 추가. 다이어그램 ①에서 <b>★</b> 표시된 항목이 이번 변경분이다.
+    <table style="margin-top:8px">
+      <tr><th>테이블</th><th>변경</th><th>왜</th></tr>
+      <tr><td><code>games</code></td><td>+ <code>bot_commit_sha</code> <code>bot_provider</code> <code>bot_model</code></td>
+          <td>판마다 어떤 봇이 돌았는지. SHA만으로는 부족 — <code>/x/provider</code>가 재배포 없이 프로바이더를 바꿔서 같은 SHA에 다른 봇인 판이 생긴다</td></tr>
+      <tr><td><code>game_messages</code></td><td>+ <code>runtime_id</code></td>
+          <td>화면이 들고 있는 <code>Message.id</code>(<code>m{ts}_{rand}</code>)와 DB uuid가 달라 "이 발언"을 못 찾던 문제. PK를 바꾸지 않고 칸을 더했다</td></tr>
+      <tr><td><code>survey_questions</code></td><td>+ <code>is_active</code></td>
+          <td>문항을 덮어쓰지 않고 세대별로 쌓기 위해. 코드가 활성 세대 하나만 읽는다</td></tr>
+      <tr><td><code>survey_responses</code></td><td>+ <code>picked_message_runtime_id</code></td>
+          <td>"가장 봇 같았던 발언" 선택 결과. 안 골랐으면 null</td></tr>
+      <tr><td><code>survey_responses</code></td><td><code>guessed_bot_label</code> <code>guessed_correctly</code> <b>NOT NULL 해제</b></td>
+          <td>봇 지목(20초 타이머)을 놓치면 설문이 통째로 버려지던 문제. 지목과 설문은 별개 정보라 분리했다</td></tr>
+      <tr><td><code>players</code></td><td>− <code>eliminated_round</code> <b>삭제</b></td>
+          <td>룰이 "중도 탈락 없음"으로 굳으면서 채워질 일이 없어진 칸. 155행 전부 NULL 이었고 앱 코드·<code>fn_start_game</code> 어디서도 안 쓰고 있었다. 1차 설계 때 "라운드마다 탈락자가 생기는" 룰을 가정한 흔적</td></tr>
+    </table>
+    <p style="margin:8px 0 0"><b>인덱스 2개</b>(Mermaid 표기 불가라 여기 적음) — <code>uniq_survey_questions_active</code>: 부분 유니크(<code>WHERE is_active</code>)로 활성 문항을 항상 최대 1개로 강제. 둘이 켜지면 조회가 에러로 떨어져 설문 선택지가 통째로 안 뜬다. <code>uniq_game_messages_runtime</code>: <code>(game_id, runtime_id)</code> 유니크로 발언 조인을 1:1 보장.</p>
+    <p style="margin:8px 0 0"><b>이 ERD에 없는 뷰 2개</b> — <code>v_survey_reason_counts</code>, <code>v_survey_free_texts</code>가 DB에 있지만 <b>사람이 눈으로 보려고 만든 조회용</b>이라 그리지 않았다. 앱 코드는 이 뷰들을 쓰지 않는다(레포 전수 확인). 다만 설문 집계를 담고 있으므로, 위 <code>guessed_correctly</code> NOT NULL 해제 이후로는 <b>"지목 안 함"이 섞여 들어온다</b>는 점만 염두에 둘 것.</p>
+  </div>
+  <div class="note">
+    <b>1차 → 2차 달라진 점:</b> 마스터 데이터 테이블(categories/words/survey_questions/survey_reasons)과 games의 PK/FK는 <b>bigint → integer</b>로 변경 완료. players/game_messages/game_votes/survey_responses의 <b>id는 uuid</b>(원래부터 UUID, bigint였던 적 없음). 그리고 <b>라벨 매칭 복합 FK</b>가 실제로 추가돼 있음 — 아래 다이어그램 2에서 별도로 보여줌.
+  </div>
+
+  <h2 style="margin: 24px 32px 0; font-size: 15px;">① 기본 구조 — 숫자 PK/FK</h2>
+  <p style="margin: 4px 32px 0; font-size: 12px; color: var(--muted);">모든 컬럼 포함. games를 중심으로 한 트리 구조.</p>
+  <div id="diagram-wrap">
+    <pre class="mermaid">
+erDiagram
+    CATEGORIES ||--o{ WORDS : "category_id"
+    SURVEY_QUESTIONS ||--o{ SURVEY_REASONS : "question_id"
+    GAMES ||--o{ PLAYERS : "game_id"
+    GAMES ||--o{ GAME_MESSAGES : "game_id"
+    GAMES ||--o{ GAME_VOTES : "game_id"
+    GAMES ||--o{ SURVEY_RESPONSES : "game_id"
+    SURVEY_RESPONSES ||--o{ SURVEY_RESPONSE_REASONS : "survey_response_id"
+    SURVEY_REASONS ||--o{ SURVEY_RESPONSE_REASONS : "reason_id"
+
+    CATEGORIES {
+        int id PK
+        text name
+    }
+    WORDS {
+        int id PK
+        int category_id FK
+        text text
+    }
+    SURVEY_QUESTIONS {
+        int id PK
+        text code UK
+        text text
+        text description
+        bool is_active UK "★ 8/25 추가"
+        timestamptz created_at
+    }
+    SURVEY_REASONS {
+        int id PK
+        int question_id FK
+        text code
+        text text
+        int sort_order
+        bool is_other
+        timestamptz created_at
+    }
+    GAMES {
+        int id PK
+        text room_id
+        text category
+        text word
+        text bot_label
+        text liar_label
+        text liar_game_result
+        int bot_detected_count
+        int bot_voter_total
+        int final_round
+        text bot_commit_sha "★ 8/25 추가"
+        text bot_provider "★ 8/25 추가"
+        text bot_model "★ 8/25 추가"
+        timestamptz created_at
+        timestamptz ended_at
+    }
+    PLAYERS {
+        uuid id PK
+        int game_id FK
+        text player_label UK
+        bool is_bot
+        text role
+    }
+    GAME_MESSAGES {
+        uuid id PK
+        int game_id FK
+        text runtime_id UK "★ 8/25 추가"
+        text speaker_label
+        text speaker_type
+        text role
+        int round
+        text phase
+        text text
+        timestamptz at
+    }
+    GAME_VOTES {
+        uuid id PK
+        int game_id FK
+        int round
+        text vote_type
+        text phase
+        text voter_label
+        text target_label
+        timestamptz at
+    }
+    SURVEY_RESPONSES {
+        uuid id PK
+        int game_id FK
+        text voter_label
+        text guessed_bot_label "★ 8/25 null 허용"
+        bool guessed_correctly "★ 8/25 null 허용"
+        text picked_message_runtime_id "★ 8/25 추가"
+        text free_text
+        timestamptz created_at
+    }
+    SURVEY_RESPONSE_REASONS {
+        uuid survey_response_id PK
+        int reason_id PK
+        text free_text
+    }
+    </pre>
+  </div>
+
+  <h2 style="margin: 8px 32px 0; font-size: 15px;">② 라벨 매칭 보조 정합성 — 복합 FK</h2>
+  <p style="margin: 4px 32px 0; font-size: 12px; color: var(--muted);">각 테이블의 라벨 컬럼이 "같은 게임(game_id) 안에 실제로 존재하는 player_label"인지 보장하는 제약. PLAYERS가 중심(참조 대상)이라 ①과 별도 다이어그램으로 분리 — 안 그러면 games↔players 사이에 선이 양방향으로 겹쳐서 지저분해짐. 필요한 컬럼만 축약 표시.</p>
+  <div id="diagram-wrap2">
+    <pre class="mermaid">
+erDiagram
+    PLAYERS ||--o{ GAMES : "bot_label / liar_label"
+    PLAYERS ||--o{ GAME_MESSAGES : "speaker_label"
+    PLAYERS ||--o{ GAME_VOTES : "voter_label / target_label"
+    PLAYERS ||--o{ SURVEY_RESPONSES : "voter_label"
+
+    PLAYERS {
+        uuid id PK
+        int game_id FK
+        text player_label UK
+    }
+    GAMES {
+        int id PK
+        text bot_label FK
+        text liar_label FK
+    }
+    GAME_MESSAGES {
+        uuid id PK
+        text speaker_label FK
+    }
+    GAME_VOTES {
+        uuid id PK
+        text voter_label FK
+        text target_label FK
+    }
+    SURVEY_RESPONSES {
+        uuid id PK
+        text voter_label FK
+    }
+    </pre>
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#eef1ff',
+        primaryBorderColor: '#4f6df5',
+        primaryTextColor: '#1f2328',
+        lineColor: '#8891a5',
+        fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Pretendard, Noto Sans KR, sans-serif',
+        fontSize: '13px'
+      },
+      er: {
+        layoutDirection: 'TB',
+        minEntityWidth: 140,
+        minEntityHeight: 60,
+        entityPadding: 12,
+        useMaxWidth: false
+      }
+    });
+  </script>
+</body>
+</html>

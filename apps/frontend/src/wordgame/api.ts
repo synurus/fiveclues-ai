@@ -1,7 +1,7 @@
 // AI 라이어게임 턴제 API 클라이언트. apps/backend/src/routes/game.ts 와 짝이다.
-// dev: vite.config.ts 의 /game 프록시가 localhost:3000(server.ts)으로 넘긴다.
-// prod(Vercel): 프론트와 API가 같은 origin에서 서빙된다 — vercel.json의 rewrites가
-// /game/* 을 서버리스 함수(api/index.ts)로 보낸다. 그래서 여기선 항상 상대 경로만 쓴다.
+// dev: vite.config.ts 의 /game 프록시가 localhost:3000(turnServer.ts)으로 넘긴다.
+// prod: 프론트와 API가 같은 origin에서 서빙된다고 가정한다 — 배포처가 아직
+// 미확정이라(Vercel Functions 유력) 지금은 상대 경로로만 써둔다.
 
 export interface Hint {
   text: string;
@@ -23,10 +23,10 @@ export type GuessResponse =
 export interface FeedbackInput {
   word: string;
   category: string;
-  hints: string[]; // 1·2라운드 전부, 순서대로 — keyHintIndexes/uselessHintIndexes가 이 배열의 인덱스다.
+  hints: string[]; // 1·2라운드 전부, 순서대로 — keyHintIndex/uselessHintIndex가 이 배열의 인덱스다.
   outcome: 'round1' | 'round2' | 'failed';
-  keyHintIndexes: number[]; // 결정적이었던 힌트(들). 여러 개 태그 가능, 없으면 [].
-  uselessHintIndexes: number[]; // 무쓸모였던 힌트(들). 여러 개 태그 가능, 없으면 [].
+  keyHintIndex: number | null;
+  uselessHintIndex: number | null;
   feedbackText: string;
   nickname: string;
 }
