@@ -75,7 +75,14 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   const token = required('GITHUB_FEEDBACK_TOKEN', process.env.GITHUB_FEEDBACK_TOKEN);
   const repo = required('GITHUB_REPO', process.env.GITHUB_REPO);
 
-  const title = `[feedback] ${data.word} · ${data.outcome}`;
+  // 이슈 목록에서 피드백 코멘트를 바로 볼 수 있게 제목에도 넣는다(2026-09-16) —
+  // 개행은 공백으로 뭉개고 40자 넘으면 자른다(제목 줄이 길어지는 걸 막는 용도라
+  // GitHub 제목 길이 한도 자체는 훨씬 넉넉하다).
+  const titleComment = data.feedbackText.replace(/\s+/g, ' ').trim();
+  const titleCommentPart = titleComment
+    ? ` · "${titleComment.length > 40 ? `${titleComment.slice(0, 40)}…` : titleComment}"`
+    : '';
+  const title = `[feedback] ${data.word} · ${data.outcome}${titleCommentPart}`;
   const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   // 본문은 사람이 Issues 탭에서 읽을 요약(라운드별 힌트+추측 로그 포함) + self-improve/
