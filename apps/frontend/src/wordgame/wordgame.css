@@ -184,3 +184,23 @@
   color: var(--color-danger);
   font-weight: 700;
 }
+
+/* 결과 화면 힌트 로그 — 라운드 구분선과 그 라운드의 추측(2026-09-16). 둘 다
+   .wg-hint-row 와 달리 태그 버튼이 없는 평범한 텍스트 행이라 패딩만 맞춘다. */
+.wg-hint-divider {
+  border: none;
+  border-top: 1px dashed var(--color-line);
+  margin: var(--space-2) 0;
+  padding: 0;
+}
+
+.wg-hint-guess-row {
+  font-size: var(--text-body);
+  color: var(--color-text);
+  opacity: 0.85;
+}
+
+.wg-hint-guess-wrong {
+  color: var(--color-danger);
+  font-weight: 700;
+}
