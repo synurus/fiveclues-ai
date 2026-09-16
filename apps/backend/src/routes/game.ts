@@ -110,7 +110,15 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
 
     const nextSession = encodeSession<SessionPayload>({ ...payload, round: 2 });
 
-    res.json({ result: 'continue', session: nextSession, round: 2, hints: toPlayerHints(round2Hints) });
+    // 2라운드부터는 카테고리를 공개한다(2026-09-16) — 1라운드는 지금처럼 범위 없이
+    // 순수 추론, 2라운드는 "1라운드 오답"에 더해 카테고리까지 주는 구제책.
+    res.json({
+      result: 'continue',
+      session: nextSession,
+      round: 2,
+      category: payload.category,
+      hints: toPlayerHints(round2Hints),
+    });
   } catch (e) {
     res.status(502).json({ error: errorMessage(e) });
   }
