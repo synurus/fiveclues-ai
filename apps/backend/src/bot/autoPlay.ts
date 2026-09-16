@@ -65,13 +65,24 @@ async function reflectFeedback(
   outcome: Outcome,
   guesses: string[],
 ): Promise<Reflection> {
+  // feedbackText 는 이 게임의 유일한 자유서술 필드라 — propose.mjs 가 이걸 그대로
+  // LLM에 보여주고 hintPrompt.ts 를 고치게 시킨다. "재밌었다/아쉬웠다" 같은 감상은
+  // 프롬프트를 고치는 데 아무 쓸모가 없어서, 진단(왜 그 단어를 떠올렸는지 · 힌트의
+  // 어떤 부분이 오답 쪽으로 끌고 갔는지)을 쓰게 명시적으로 요구한다(2026-09-16,
+  // "캥거루"를 "개구리"로 두 번 헛짚었는데 feedbackText가 "아쉬웠다"뿐이라 왜
+  // 헷갈렸는지 전혀 안 남았던 사례에서 고침).
   const system =
-    `너는 방금 아래 낱말 맞히기 게임을 플레이한 참가자다. 게임이 끝난 뒤 소감을 남긴다.\n` +
+    `너는 방금 아래 낱말 맞히기 게임을 플레이한 참가자다. 게임을 만든 사람에게 실제로 ` +
+    `도움이 될 구체적인 피드백을 남긴다.\n` +
     `JSON만 출력한다:\n` +
-    `{"keyHintIndex": 숫자 또는 null, "uselessHintIndex": 숫자 또는 null, "feedbackText": "한국어 한 문장 소감"}\n` +
+    `{"keyHintIndex": 숫자 또는 null, "uselessHintIndex": 숫자 또는 null, "feedbackText": "한국어 피드백 한두 문장"}\n` +
     `- keyHintIndex: 그 묘사 덕분에 확신을 갖고 정답을 맞혔다면 그 묘사의 인덱스. 못 맞혔거나 ` +
     `특별히 결정적인 묘사가 없었으면 null.\n` +
-    `- uselessHintIndex: 전혀 도움이 안 됐던 묘사의 인덱스. 없으면 null.`;
+    `- uselessHintIndex: 전혀 도움이 안 됐던 묘사의 인덱스. 없으면 null.\n` +
+    `- feedbackText: "재밌었다"/"아쉬웠다" 같은 감상은 절대 쓰지 마라. 대신 진단을 써라 — ` +
+    `틀렸다면 왜 그 단어를 떠올렸는지, 묘사들의 어떤 공통된 인상이 오답 쪽으로 끌고 갔는지, ` +
+    `제시어만의 특징이 안 보여서 다른 단어와 구별이 안 됐는지를 구체적으로. 맞혔다면 무엇이 ` +
+    `결정적이었는지를 구체적으로.`;
   const hintList = hints.map((h, i) => `${i}: ${h.text}`).join('\n');
   const outcomeKo = outcome === 'round1' ? '1라운드에 맞힘' : outcome === 'round2' ? '2라운드에 맞힘' : '끝까지 못 맞힘';
   const user =
