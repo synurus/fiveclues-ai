@@ -24,9 +24,12 @@
 import 'dotenv/config';
 import { hintSystem } from './hintPrompt';
 
-const BASE_URL = process.env.BOT_BASE_URL ?? 'https://api.groq.com/openai/v1';
+// Vercel 등에서 값을 안 채운 환경변수는 undefined가 아니라 빈 문자열로 온다.
+// ??는 ""를 "값 있음"으로 쳐서 기본값으로 안 넘어가므로 ||를 쓴다
+// (CLAUDE.md에 적힌 것과 같은 함정 — propose.mjs도 같은 이유로 ||를 쓴다).
+const BASE_URL = process.env.BOT_BASE_URL || 'https://api.groq.com/openai/v1';
 const API_KEY = process.env.BOT_API_KEY ?? '';
-const MODEL = process.env.BOT_MODEL ?? 'openai/gpt-oss-120b';
+const MODEL = process.env.BOT_MODEL || 'openai/gpt-oss-120b';
 
 export interface Hint {
   text: string;
