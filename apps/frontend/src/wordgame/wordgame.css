@@ -93,16 +93,22 @@
 
 .wg-hint-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-2);
-  padding: var(--space-2) 0;
+  padding: calc(var(--space-2) * 1.5) 0;
   border-bottom: 1px solid var(--color-line);
 }
 
+/* min-width: 0 없이 flex:1이면 기본값(min-width: auto)이 줄바꿈을 막아
+   긴 힌트가 "..."로 잘려 보였다(2026-09-16) — 명시적으로 줄바꿈을 강제한다. */
 .wg-hint-text {
   flex: 1;
+  min-width: 0;
   font-size: var(--text-body);
   color: var(--color-text);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
 }
 
 .wg-hint-tag {
