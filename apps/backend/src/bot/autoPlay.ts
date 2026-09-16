@@ -3,16 +3,16 @@
  * (.github/workflows/self-improve-autoplay.yml 이 01~07시 KST 매시 이 스크립트를 돌리고,
  *  08시엔 self-improve.yml의 propose.mjs가 그 피드백들을 모아 PR을 낸다 — 2026-09-16 결정)
  *
- * 서버가 아직 어디에도 배포돼 있지 않아서(로컬 npm run turn 뿐) HTTP로 게임을 호출할
+ * 서버가 아직 어디에도 배포돼 있지 않아서(로컬 npm run dev 뿐) HTTP로 게임을 호출할
  * 수가 없다 — 그래서 scripts/spectate.mjs 가 그랬던 것처럼 프로덕션 힌트 생성
  * 로직(generateHints/judgeGuess/pickWord)을 직접 import해서 서버 없이 한 판을
  * 통째로 흉내 낸다.
  *
  * 흐름: 단어 뽑기 → 1라운드 힌트 생성(프로덕션 코드) → 추측자 LLM이 카테고리 없이
  * 힌트만 보고 추측(사람 플레이어와 동일 조건) → 틀리면 2라운드도 같은 방식 → 게임이
- * 끝나면 그 추측자에게 "방금 뭘 플레이했다" 소감을 물어서 결정적/무쓸모 힌트와
- * 코멘트를 뽑아냄(사람이 결과 화면에서 직접 고르는 걸 대신) → createFeedbackIssue()를
- * HTTP 없이 직접 호출.
+ * 끝나면 그 추측자에게 "방금 뭘 플레이했다" 소감을 물어서 결정적/무쓸모 힌트(들)와
+ * 코멘트를 뽑아냄(사람이 결과 화면에서 말풍선을 클릭해 태그하는 걸 대신) →
+ * createFeedbackIssue()를 HTTP 없이 직접 호출.
  *
  * 닉네임은 항상 "AI자동플레이"로 고정 — Issues 목록·PR 본문에서 실제 플레이어
  * 피드백과 한눈에 구분되게 하려는 것.
@@ -53,8 +53,8 @@ async function guessWord(hints: Hint[]): Promise<string> {
 
 // ── 소감 — 같은 추측자에게 방금 판을 되돌아보게 한다. 사람이 결과 화면에서 하는 선택을 대신. ──
 interface Reflection {
-  keyHintIndex: number | null;
-  uselessHintIndex: number | null;
+  keyHintIndexes: number[];
+  uselessHintIndexes: number[];
   feedbackText: string;
 }
 
@@ -71,14 +71,19 @@ async function reflectFeedback(
   // 어떤 부분이 오답 쪽으로 끌고 갔는지)을 쓰게 명시적으로 요구한다(2026-09-16,
   // "캥거루"를 "개구리"로 두 번 헛짚었는데 feedbackText가 "아쉬웠다"뿐이라 왜
   // 헷갈렸는지 전혀 안 남았던 사례에서 고침).
+  //
+  // keyHintIndex/uselessHintIndex는 원래 각각 숫자 하나였는데, 사람 플레이어가
+  // 결과 화면 말풍선 여러 개를 동시에 태그할 수 있게 되면서(2026-09-16) 배열로
+  // 바뀌었다 — 이 추측자도 같은 스키마로 답해야 gather.mjs/propose.mjs가 사람
+  // 피드백과 AI 피드백을 구분 없이 처리할 수 있다.
   const system =
     `너는 방금 아래 낱말 맞히기 게임을 플레이한 참가자다. 게임을 만든 사람에게 실제로 ` +
     `도움이 될 구체적인 피드백을 남긴다.\n` +
     `JSON만 출력한다:\n` +
-    `{"keyHintIndex": 숫자 또는 null, "uselessHintIndex": 숫자 또는 null, "feedbackText": "한국어 피드백 한두 문장"}\n` +
-    `- keyHintIndex: 그 묘사 덕분에 확신을 갖고 정답을 맞혔다면 그 묘사의 인덱스. 못 맞혔거나 ` +
-    `특별히 결정적인 묘사가 없었으면 null.\n` +
-    `- uselessHintIndex: 전혀 도움이 안 됐던 묘사의 인덱스. 없으면 null.\n` +
+    `{"keyHintIndexes": [숫자, ...], "uselessHintIndexes": [숫자, ...], "feedbackText": "한국어 피드백 한두 문장"}\n` +
+    `- keyHintIndexes: 확신을 갖고 정답을 맞히는 데 실제로 도움이 된 묘사(들)의 인덱스. ` +
+    `여러 개가 같이 결정적이었으면 전부 넣어라. 못 맞혔거나 딱히 결정적인 묘사가 없었으면 빈 배열.\n` +
+    `- uselessHintIndexes: 전혀 도움이 안 됐던 묘사(들)의 인덱스. 없으면 빈 배열.\n` +
     `- feedbackText: "재밌었다"/"아쉬웠다" 같은 감상은 절대 쓰지 마라. 대신 진단을 써라 — ` +
     `틀렸다면 왜 그 단어를 떠올렸는지, 묘사들의 어떤 공통된 인상이 오답 쪽으로 끌고 갔는지, ` +
     `제시어만의 특징이 안 보여서 다른 단어와 구별이 안 됐는지를 구체적으로. 맞혔다면 무엇이 ` +
@@ -89,14 +94,16 @@ async function reflectFeedback(
     `제시어: ${word} (주제: ${category})\n\n묘사 목록:\n${hintList}\n\n` +
     `내가 한 추측: ${guesses.join(' → ')}\n결과: ${outcomeKo}`;
   const raw = await callBot(system, user);
-  const parsed = parseJson<{ keyHintIndex?: unknown; uselessHintIndex?: unknown; feedbackText?: unknown }>(raw, {});
+  const parsed = parseJson<{ keyHintIndexes?: unknown; uselessHintIndexes?: unknown; feedbackText?: unknown }>(raw, {});
 
-  const toIndex = (v: unknown): number | null =>
-    typeof v === 'number' && Number.isInteger(v) && v >= 0 && v < hints.length ? v : null;
+  const toIndexArray = (v: unknown): number[] =>
+    Array.isArray(v)
+      ? [...new Set(v.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 0 && n < hints.length))]
+      : [];
 
   return {
-    keyHintIndex: toIndex(parsed.keyHintIndex),
-    uselessHintIndex: toIndex(parsed.uselessHintIndex),
+    keyHintIndexes: toIndexArray(parsed.keyHintIndexes),
+    uselessHintIndexes: toIndexArray(parsed.uselessHintIndexes),
     feedbackText: String(parsed.feedbackText ?? '').slice(0, 200),
   };
 }
@@ -138,8 +145,8 @@ async function playOne(index: number): Promise<void> {
     category,
     hints: hintsSoFar.map((h) => h.text),
     outcome,
-    keyHintIndex: reflection.keyHintIndex,
-    uselessHintIndex: reflection.uselessHintIndex,
+    keyHintIndexes: reflection.keyHintIndexes,
+    uselessHintIndexes: reflection.uselessHintIndexes,
     feedbackText: reflection.feedbackText,
     nickname: NICKNAME,
     guesses, // 실제로 뭐라고 찍었는지 — 힌트가 나빴는지 AI가 헛짚었는지 이슈만 보고 구분하려는 것.
