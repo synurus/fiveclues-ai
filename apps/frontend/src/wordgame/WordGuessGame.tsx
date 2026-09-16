@@ -19,6 +19,8 @@ import { startGame, submitGuess, submitFeedback, type GuessResponse } from './ap
 import { Typewriter } from './Typewriter';
 import './wordgame.css';
 
+type RoundLog = { hints: string[]; guess: string };
+
 type Stage =
   | { kind: 'nickname' }
   | { kind: 'loading' }
@@ -30,12 +32,35 @@ type Stage =
       // 2라운드 진입 시 1라운드 화면이 리셋되면서 방금 본 힌트·오답을 까먹는
       // 문제(2026-09-16)가 있어, round===2일 때만 채워 결과 화면 바로 위에
       // 요약으로 다시 보여준다.
-      previous?: { hints: string[]; guess: string };
+      previous?: RoundLog;
     }
-  | { kind: 'result'; outcome: 'round1' | 'round2' | 'failed'; word: string; category: string; hintsSoFar: string[] }
+  | { kind: 'result'; outcome: 'round1' | 'round2' | 'failed'; word: string; category: string; rounds: RoundLog[] }
   | { kind: 'error'; message: string };
 
 type FeedbackStatus = 'idle' | 'sending' | 'sent' | 'error';
+
+// 결과 화면 로그를 "힌트 행 / 라운드 구분선 / 그 라운드에 뭐라고 추측했는지" 순서로
+// 펼친다(2026-09-16). 힌트 행의 index는 라운드를 넘나드는 전역 인덱스 — 피드백
+// payload의 keyHintIndexes/uselessHintIndexes가 이 인덱스를 그대로 쓴다.
+type ResultRow =
+  | { kind: 'hint'; index: number; text: string }
+  | { kind: 'guess'; text: string; wrong: boolean }
+  | { kind: 'divider' };
+
+function buildResultRows(rounds: RoundLog[], outcome: 'round1' | 'round2' | 'failed'): ResultRow[] {
+  const rows: ResultRow[] = [];
+  let index = 0;
+  rounds.forEach((round, ri) => {
+    if (ri > 0) rows.push({ kind: 'divider' });
+    round.hints.forEach((text) => {
+      rows.push({ kind: 'hint', index, text });
+      index += 1;
+    });
+    const isFinalGuess = ri === rounds.length - 1;
+    rows.push({ kind: 'guess', text: round.guess, wrong: !(isFinalGuess && outcome !== 'failed') });
+  });
+  return rows;
+}
 
 export function WordGuessGame() {
   const [nickname, setNickname] = useState('');
@@ -43,7 +68,6 @@ export function WordGuessGame() {
   const [revealed, setRevealed] = useState(0);
   const [guess, setGuess] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const [hintsSoFar, setHintsSoFar] = useState<string[]>([]);
 
   const [keyHints, setKeyHints] = useState<Set<number>>(new Set());
   const [uselessHints, setUselessHints] = useState<Set<number>>(new Set());
@@ -77,7 +101,6 @@ export function WordGuessGame() {
       const firstHints = res.hints.map((h) => h.text);
       setRevealed(0);
       setGuess('');
-      setHintsSoFar(firstHints);
       setKeyHints(new Set());
       setUselessHints(new Set());
       setFeedbackText('');
@@ -98,7 +121,6 @@ export function WordGuessGame() {
         const round2Hints = res.hints.map((h) => h.text);
         setRevealed(0);
         setGuess('');
-        setHintsSoFar((prev) => [...prev, ...round2Hints]);
         setStage({
           kind: 'playing',
           session: res.session,
@@ -107,7 +129,10 @@ export function WordGuessGame() {
           previous: { hints: stage.hints, guess: attemptedGuess },
         });
       } else {
-        setStage({ kind: 'result', outcome: res.result, word: res.word, category: res.category, hintsSoFar });
+        const rounds: RoundLog[] = stage.previous
+          ? [stage.previous, { hints: stage.hints, guess: attemptedGuess }]
+          : [{ hints: stage.hints, guess: attemptedGuess }];
+        setStage({ kind: 'result', outcome: res.result, word: res.word, category: res.category, rounds });
       }
     } catch (e) {
       setStage({ kind: 'error', message: e instanceof Error ? e.message : String(e) });
@@ -123,7 +148,7 @@ export function WordGuessGame() {
       await submitFeedback({
         word: stage.word,
         category: stage.category,
-        hints: stage.hintsSoFar,
+        hints: stage.rounds.flatMap((r) => r.hints),
         outcome: stage.outcome,
         keyHintIndexes: [...keyHints].sort((a, b) => a - b),
         uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),
@@ -212,12 +237,21 @@ export function WordGuessGame() {
               <div className="wg-feedback">
                 <p className="wg-feedback-title">결정적이었던 힌트엔 👍, 전혀 도움 안 된 힌트엔 👎 — 여러 개 골라도 돼요.</p>
                 <ul className="wg-hints wg-hints-taggable">
-                  {stage.hintsSoFar.map((text, i) => {
-                    const isKey = keyHints.has(i);
-                    const isUseless = uselessHints.has(i);
+                  {buildResultRows(stage.rounds, stage.outcome).map((row, ri) => {
+                    if (row.kind === 'divider') return <li key={`div-${ri}`} className="wg-hint-divider" />;
+                    if (row.kind === 'guess') {
+                      return (
+                        <li key={`guess-${ri}`} className="wg-hint-guess-row">
+                          내 추측 "{row.text}"{' '}
+                          {row.wrong && <span className="wg-hint-guess-wrong">[땡! 틀렸습니다]</span>}
+                        </li>
+                      );
+                    }
+                    const isKey = keyHints.has(row.index);
+                    const isUseless = uselessHints.has(row.index);
                     return (
                       <li
-                        key={i}
+                        key={row.index}
                         className={
                           'wg-hint-row' + (isKey ? ' wg-hint-row-key' : '') + (isUseless ? ' wg-hint-row-useless' : '')
                         }
@@ -227,17 +261,17 @@ export function WordGuessGame() {
                           className={'wg-hint-tag' + (isKey ? ' wg-hint-tag-active' : '')}
                           aria-pressed={isKey}
                           aria-label="결정적인 힌트로 표시"
-                          onClick={() => toggleKey(i)}
+                          onClick={() => toggleKey(row.index)}
                         >
                           👍
                         </button>
-                        <span className="wg-hint-text">{text}</span>
+                        <span className="wg-hint-text">{row.text}</span>
                         <button
                           type="button"
                           className={'wg-hint-tag' + (isUseless ? ' wg-hint-tag-active' : '')}
                           aria-pressed={isUseless}
                           aria-label="무쓸모한 힌트로 표시"
-                          onClick={() => toggleUseless(i)}
+                          onClick={() => toggleUseless(row.index)}
                         >
                           👎
                         </button>
