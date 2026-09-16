@@ -24,6 +24,8 @@ export interface FeedbackInput {
   word: string;
   category: string;
   hints: string[]; // 1·2라운드 전부, 순서대로 — keyHintIndexes/uselessHintIndexes가 이 배열의 인덱스다.
+  roundHintCounts: number[]; // hints를 라운드별로 다시 자를 때 쓰는 길이들 — 합은 hints.length와 같다.
+  guesses: string[]; // 라운드별로 실제 뭐라고 추측했는지, 순서대로.
   outcome: 'round1' | 'round2' | 'failed';
   keyHintIndexes: number[]; // 결정적이었던 힌트(들). 여러 개 태그 가능, 없으면 [].
   uselessHintIndexes: number[]; // 무쓸모였던 힌트(들). 여러 개 태그 가능, 없으면 [].

@@ -149,6 +149,8 @@ export function WordGuessGame() {
         word: stage.word,
         category: stage.category,
         hints: stage.rounds.flatMap((r) => r.hints),
+        roundHintCounts: stage.rounds.map((r) => r.hints.length),
+        guesses: stage.rounds.map((r) => r.guess),
         outcome: stage.outcome,
         keyHintIndexes: [...keyHints].sort((a, b) => a - b),
         uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),
@@ -289,7 +291,7 @@ export function WordGuessGame() {
                 />
 
                 <Button
-                  variant="secondary"
+                  variant="primary"
                   block
                   onClick={handleFeedbackSubmit}
                   disabled={feedbackStatus === 'sending'}
@@ -299,7 +301,9 @@ export function WordGuessGame() {
               </div>
             )}
 
-            <Button variant="primary" block onClick={handleStart}>
+            {/* 피드백 보내기 전엔 그쪽을 강조하려고 secondary, 보내고 나면(버튼이
+                사라지고) 다시 원래 강조 스타일로(2026-09-16). */}
+            <Button variant={feedbackStatus === 'sent' ? 'primary' : 'secondary'} block onClick={handleStart}>
               다시하기
             </Button>
           </>
