@@ -270,9 +270,14 @@ async function main() {
   const usedNumbers = feedback.slice(0, MAX_FEEDBACK_FOR_PROMPT).map((f) => f.number);
   const branch = `self-improve/${Date.now()}`;
   const prTitle = `자가개선: 출제자 프롬프트 문구 조정 (피드백 ${usedNumbers.length}건)`;
+  // nickname 을 같이 보여준다 — "AI자동플레이"(scripts/self-improve/autoPlay와 짝인
+  // apps/backend/src/bot/autoPlay.ts가 매기는 고정 닉네임)와 실제 플레이어 피드백을
+  // 리뷰할 때 한눈에 구분하려는 것. LLM에 보내는 프롬프트 쪽(summarizeForPrompt)엔
+  // 안 넣는다 — "이건 AI가 낸 피드백이니 무시해도 된다"는 식으로 모델이 편향되지
+  // 않게, 내용만으로 판단하게 둔다.
   const feedbackLines = feedback
     .slice(0, MAX_FEEDBACK_FOR_PROMPT)
-    .map(({ number, data }) => `- #${number} "${data.word}"(${data.category}) · ${data.outcome}`)
+    .map(({ number, data }) => `- #${number} "${data.word}"(${data.category}) · ${data.outcome} · ${data.nickname || '익명'}`)
     .join('\n');
   const prBody =
     `이 PR은 \`scripts/self-improve/propose.mjs\` 가 \`feedback\` 라벨 이슈 ${usedNumbers.length}건을 바탕으로 ` +
