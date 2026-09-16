@@ -244,7 +244,13 @@ export function WordGuessGame() {
               <p className="wg-feedback-done">피드백 고마워요! 다음 프롬프트 개선에 참고할게요.</p>
             ) : (
               <div className="wg-feedback">
-                <p className="wg-feedback-title">결정적이었던 힌트엔 👍, 전혀 도움 안 된 힌트엔 👎 — 여러 개 골라도 돼요.</p>
+                <p className="wg-feedback-title">
+                  결정적 힌트는 👍
+                  <br />
+                  무쓸모 힌트는 👎
+                  <br />
+                  여러 개 골라도 돼요
+                </p>
                 <ul className="wg-hints wg-hints-taggable">
                   {buildResultRows(stage.rounds, stage.outcome).map((row, ri) => {
                     if (row.kind === 'divider') return <li key={`div-${ri}`} className="wg-hint-divider" />;
