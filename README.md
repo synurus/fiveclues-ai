@@ -13,7 +13,7 @@ apps/
   frontend/   React + Vite 화면 하나(WordGuessGame).
 api/          Vercel 서버리스 함수 진입점 — apps/backend의 Express 앱을 그대로 감싼다.
 scripts/
-  words.json          제시어 풀(단일 소스, ~290개).
+  words.json          제시어 풀(단일 소스, ~930개, 22개 카테고리).
   spectate.mjs         서버 없이 힌트 프롬프트를 실측/튜닝하는 관전 모드.
   self-improve/        자가개선 루프 본체(아래 참고).
 .github/workflows/     자가개선 루프를 매일 밤 돌리는 스케줄.
