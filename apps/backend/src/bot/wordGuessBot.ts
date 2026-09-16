@@ -102,7 +102,10 @@ async function listModels(): Promise<string> {
 /** gpt-oss 계열은 추론 토큰이 max_tokens 예산을 같이 먹는다 — 예산 부족하면 빈 JSON이 온다. */
 const isReasoningModel = (model: string): boolean => /gpt-oss/.test(model);
 
-async function callBot(system: string, user: string): Promise<string> {
+// export: autoPlay.ts(자가개선 AI 자동플레이)가 같은 재시도·reasoning-model
+// 처리 로직을 그대로 재사용한다 — 추측자·소감 LLM 호출도 출제자와 같은 엔드포인트/
+// 429 재시도 규칙을 타므로 새로 짤 이유가 없다.
+export async function callBot(system: string, user: string): Promise<string> {
   const body = JSON.stringify({
     model: MODEL,
     temperature: 0.9,
@@ -148,7 +151,8 @@ async function callBot(system: string, user: string): Promise<string> {
   }
 }
 
-function parseJson<T>(text: string, fallback: T): T {
+// export: autoPlay.ts 도 LLM 응답(추측·소감)을 같은 방식으로 관대하게 파싱해야 해서 재사용.
+export function parseJson<T>(text: string, fallback: T): T {
   try {
     return JSON.parse(text) as T;
   } catch {
