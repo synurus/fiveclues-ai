@@ -11,6 +11,8 @@
  *       봐야 한다는 실측 논의를 그대로 따름): 결과 + 정답 공개
  *     - 1라운드에서 틀리면: 2라운드 묘사를 그 자리에서 같이 생성해 한 번에 돌려준다
  *     - 2라운드에서도 틀리면: 실패 + 정답 공개
+ *   POST /game/feedback → 결과 화면에서 고른 결정적/무쓸모 힌트(복수 선택 가능) +
+ *     코멘트를 GitHub Issue로 쌓는다(자가개선 루프 입력)
  */
 
 import { Router, type Request, type Response } from 'express';
@@ -34,6 +36,11 @@ interface SessionPayload {
 const toPlayerHints = (hints: Hint[]): { text: string }[] => hints.map((h) => ({ text: h.text }));
 
 const errorMessage = (e: unknown): string => (e instanceof Error ? e.message : String(e));
+
+// body에서 온 값을 "유효한 인덱스 배열"로만 걸러낸다 — 범위 검사는 hints 길이를
+// 몰라서(라우트 핸들러 시점) 여기선 못 하고, 숫자 타입만 걸러 feedbackIssue.ts로 넘긴다.
+const toIndexArray = (v: unknown): number[] =>
+  Array.isArray(v) ? v.filter((n): n is number => typeof n === 'number' && Number.isInteger(n)) : [];
 
 export const gameRouter = Router();
 
@@ -118,8 +125,8 @@ gameRouter.post('/feedback', async (req: Request, res: Response) => {
       category: body.category,
       hints: body.hints.map(String),
       outcome: body.outcome as FeedbackPayload['outcome'],
-      keyHintIndex: typeof body.keyHintIndex === 'number' ? body.keyHintIndex : null,
-      uselessHintIndex: typeof body.uselessHintIndex === 'number' ? body.uselessHintIndex : null,
+      keyHintIndexes: toIndexArray(body.keyHintIndexes),
+      uselessHintIndexes: toIndexArray(body.uselessHintIndexes),
       feedbackText: typeof body.feedbackText === 'string' ? body.feedbackText : '',
       nickname: typeof body.nickname === 'string' ? body.nickname : '',
     });

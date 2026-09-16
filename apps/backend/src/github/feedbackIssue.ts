@@ -16,8 +16,12 @@ export interface FeedbackPayload {
   category: string;
   hints: string[]; // 1·2라운드 전부, 순서대로
   outcome: 'round1' | 'round2' | 'failed';
-  keyHintIndex: number | null; // hints 인덱스. "없음"이면 null
-  uselessHintIndex: number | null;
+  /** 결정적이었던 힌트들의 hints 인덱스. 여러 개 고를 수 있다(2026-09-16, 말풍선
+   *  하나만 고르게 강제하니 "묘사 두 개가 같이 확신을 줬다" 같은 경우를 못 담아서
+   *  배열로 바꿨다). 없으면 빈 배열. */
+  keyHintIndexes: number[];
+  /** 전혀 도움이 안 됐던 힌트들의 인덱스. 여러 개 가능, 없으면 빈 배열. */
+  uselessHintIndexes: number[];
   feedbackText: string;
   nickname: string;
   /** 실제로 뭐라고 추측했는지, 순서대로(라운드마다 하나). 실제 플레이어 피드백(routes/game.ts
@@ -38,11 +42,15 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   const repo = required('GITHUB_REPO', process.env.GITHUB_REPO);
 
   const title = `[feedback] ${data.word} · ${data.outcome}`;
+  const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(Boolean);
+  const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   // 본문은 사람이 Issues 탭에서 읽을 요약 한 줄 + self-improve/gather.mjs 가 그대로
   // 파싱하는 JSON 코드블록. 형식을 바꾸면 gather.mjs의 정규식도 같이 고쳐야 한다.
   const body =
     `${data.nickname || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
     (data.guesses?.length ? `\n추측: ${data.guesses.join(' → ')}` : '') +
+    (keyText.length ? `\n결정적: ${keyText.map((t) => `"${t}"`).join(', ')}` : '') +
+    (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${t}"`).join(', ')}` : '') +
     (data.feedbackText ? `\n\n> ${data.feedbackText}` : '') +
     '\n\n```json\n' +
     JSON.stringify(data, null, 2) +

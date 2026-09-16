@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm run build -w frontend",
+  "outputDirectory": "apps/frontend/dist",
+  "installCommand": "npm ci",
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": "scripts/words.json"
+    }
+  },
+  "rewrites": [
+    { "source": "/game/:path*", "destination": "/api" }
+  ]
+}
