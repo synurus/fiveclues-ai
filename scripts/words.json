@@ -1,5 +1,861 @@
 [
   {
+    "word": "떡볶이",
+    "category": "음식"
+  },
+  {
+    "word": "김밥",
+    "category": "음식"
+  },
+  {
+    "word": "삼겹살",
+    "category": "음식"
+  },
+  {
+    "word": "치킨",
+    "category": "음식"
+  },
+  {
+    "word": "피자",
+    "category": "음식"
+  },
+  {
+    "word": "초밥",
+    "category": "음식"
+  },
+  {
+    "word": "라면",
+    "category": "음식"
+  },
+  {
+    "word": "냉면",
+    "category": "음식"
+  },
+  {
+    "word": "부대찌개",
+    "category": "음식"
+  },
+  {
+    "word": "김치찌개",
+    "category": "음식"
+  },
+  {
+    "word": "짜장면",
+    "category": "음식"
+  },
+  {
+    "word": "짬뽕",
+    "category": "음식"
+  },
+  {
+    "word": "탕수육",
+    "category": "음식"
+  },
+  {
+    "word": "마라탕",
+    "category": "음식"
+  },
+  {
+    "word": "햄버거",
+    "category": "음식"
+  },
+  {
+    "word": "샌드위치",
+    "category": "음식"
+  },
+  {
+    "word": "카레",
+    "category": "음식"
+  },
+  {
+    "word": "돈가스",
+    "category": "음식"
+  },
+  {
+    "word": "족발",
+    "category": "음식"
+  },
+  {
+    "word": "보쌈",
+    "category": "음식"
+  },
+  {
+    "word": "순대",
+    "category": "음식"
+  },
+  {
+    "word": "파스타",
+    "category": "음식"
+  },
+  {
+    "word": "삼계탕",
+    "category": "음식"
+  },
+  {
+    "word": "갈비탕",
+    "category": "음식"
+  },
+  {
+    "word": "비빔밥",
+    "category": "음식"
+  },
+  {
+    "word": "곱창",
+    "category": "음식"
+  },
+  {
+    "word": "닭발",
+    "category": "음식"
+  },
+  {
+    "word": "쌀국수",
+    "category": "음식"
+  },
+  {
+    "word": "샤브샤브",
+    "category": "음식"
+  },
+  {
+    "word": "오므라이스",
+    "category": "음식"
+  },
+  {
+    "word": "제육볶음",
+    "category": "음식"
+  },
+  {
+    "word": "갈비찜",
+    "category": "음식"
+  },
+  {
+    "word": "우동",
+    "category": "음식"
+  },
+  {
+    "word": "갈비",
+    "category": "음식"
+  },
+  {
+    "word": "된장찌개",
+    "category": "음식"
+  },
+  {
+    "word": "감자탕",
+    "category": "음식"
+  },
+  {
+    "word": "만두",
+    "category": "음식"
+  },
+  {
+    "word": "칼국수",
+    "category": "음식"
+  },
+  {
+    "word": "수제비",
+    "category": "음식"
+  },
+  {
+    "word": "파전",
+    "category": "음식"
+  },
+  {
+    "word": "김치전",
+    "category": "음식"
+  },
+  {
+    "word": "잡채",
+    "category": "음식"
+  },
+  {
+    "word": "불고기",
+    "category": "음식"
+  },
+  {
+    "word": "핫도그",
+    "category": "음식"
+  },
+  {
+    "word": "볶음밥",
+    "category": "음식"
+  },
+  {
+    "word": "유부초밥",
+    "category": "음식"
+  },
+  {
+    "word": "타코",
+    "category": "음식"
+  },
+  {
+    "word": "스테이크",
+    "category": "음식"
+  },
+  {
+    "word": "전골",
+    "category": "음식"
+  },
+  {
+    "word": "수육",
+    "category": "음식"
+  },
+  {
+    "word": "육개장",
+    "category": "음식"
+  },
+  {
+    "word": "설렁탕",
+    "category": "음식"
+  },
+  {
+    "word": "케밥",
+    "category": "음식"
+  },
+  {
+    "word": "쌈밥",
+    "category": "음식"
+  },
+  {
+    "word": "비빔국수",
+    "category": "음식"
+  },
+  {
+    "word": "콩국수",
+    "category": "음식"
+  },
+  {
+    "word": "막국수",
+    "category": "음식"
+  },
+  {
+    "word": "떡국",
+    "category": "음식"
+  },
+  {
+    "word": "만둣국",
+    "category": "음식"
+  },
+  {
+    "word": "전복죽",
+    "category": "음식"
+  },
+  {
+    "word": "호박죽",
+    "category": "음식"
+  },
+  {
+    "word": "닭갈비",
+    "category": "음식"
+  },
+  {
+    "word": "찜닭",
+    "category": "음식"
+  },
+  {
+    "word": "생선구이",
+    "category": "음식"
+  },
+  {
+    "word": "두부조림",
+    "category": "음식"
+  },
+  {
+    "word": "계란말이",
+    "category": "음식"
+  },
+  {
+    "word": "계란찜",
+    "category": "음식"
+  },
+  {
+    "word": "장조림",
+    "category": "음식"
+  },
+  {
+    "word": "깍두기",
+    "category": "음식"
+  },
+  {
+    "word": "라볶이",
+    "category": "음식"
+  },
+  {
+    "word": "쫄면",
+    "category": "음식"
+  },
+  {
+    "word": "오징어볶음",
+    "category": "음식"
+  },
+  {
+    "word": "회덮밥",
+    "category": "음식"
+  },
+  {
+    "word": "새우튀김",
+    "category": "음식"
+  },
+  {
+    "word": "떡갈비",
+    "category": "음식"
+  },
+  {
+    "word": "순두부찌개",
+    "category": "음식"
+  },
+  {
+    "word": "미역국",
+    "category": "음식"
+  },
+  {
+    "word": "아이스크림",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "초콜릿",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "붕어빵",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "호떡",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "도넛",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "마카롱",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "케이크",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "젤리",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "팝콘",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "감자칩",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "약과",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "군고구마",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "솜사탕",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "츄러스",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "와플",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "푸딩",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "쿠키",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "크로플",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "탕후루",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "빙수",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "꿀떡",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "군밤",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "티라미수",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "에그타르트",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "마들렌",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "스콘",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "꽈배기",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "달고나",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "뻥튀기",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "인절미",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "마시멜로",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "사탕",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "단팥빵",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "소보로빵",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "카스텔라",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "브라우니",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "슈크림",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "크레페",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "아이스바",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "한과",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "밤양갱",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "젤라또",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "캐러멜",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "초코파이",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "바게트",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "호두과자",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "식빵",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "크루아상",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "베이글",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "프레첼",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "건포도",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "곶감",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "땅콩과자",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "알사탕",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "막대사탕",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "풍선껌",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "초코바",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "비스킷",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "크래커",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "아이스크림콘",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "컵케이크",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "치즈케이크",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "롤케이크",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "파운드케이크",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "과자",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "양갱",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "생크림케이크",
+    "category": "간식·디저트"
+  },
+  {
+    "word": "사과",
+    "category": "과일·채소"
+  },
+  {
+    "word": "바나나",
+    "category": "과일·채소"
+  },
+  {
+    "word": "수박",
+    "category": "과일·채소"
+  },
+  {
+    "word": "딸기",
+    "category": "과일·채소"
+  },
+  {
+    "word": "포도",
+    "category": "과일·채소"
+  },
+  {
+    "word": "복숭아",
+    "category": "과일·채소"
+  },
+  {
+    "word": "참외",
+    "category": "과일·채소"
+  },
+  {
+    "word": "멜론",
+    "category": "과일·채소"
+  },
+  {
+    "word": "망고",
+    "category": "과일·채소"
+  },
+  {
+    "word": "파인애플",
+    "category": "과일·채소"
+  },
+  {
+    "word": "키위",
+    "category": "과일·채소"
+  },
+  {
+    "word": "체리",
+    "category": "과일·채소"
+  },
+  {
+    "word": "블루베리",
+    "category": "과일·채소"
+  },
+  {
+    "word": "토마토",
+    "category": "과일·채소"
+  },
+  {
+    "word": "오이",
+    "category": "과일·채소"
+  },
+  {
+    "word": "당근",
+    "category": "과일·채소"
+  },
+  {
+    "word": "감자",
+    "category": "과일·채소"
+  },
+  {
+    "word": "고구마",
+    "category": "과일·채소"
+  },
+  {
+    "word": "양파",
+    "category": "과일·채소"
+  },
+  {
+    "word": "마늘",
+    "category": "과일·채소"
+  },
+  {
+    "word": "배추",
+    "category": "과일·채소"
+  },
+  {
+    "word": "옥수수",
+    "category": "과일·채소"
+  },
+  {
+    "word": "아보카도",
+    "category": "과일·채소"
+  },
+  {
+    "word": "석류",
+    "category": "과일·채소"
+  },
+  {
+    "word": "자몽",
+    "category": "과일·채소"
+  },
+  {
+    "word": "레몬",
+    "category": "과일·채소"
+  },
+  {
+    "word": "브로콜리",
+    "category": "과일·채소"
+  },
+  {
+    "word": "파프리카",
+    "category": "과일·채소"
+  },
+  {
+    "word": "버섯",
+    "category": "과일·채소"
+  },
+  {
+    "word": "가지",
+    "category": "과일·채소"
+  },
+  {
+    "word": "자두",
+    "category": "과일·채소"
+  },
+  {
+    "word": "살구",
+    "category": "과일·채소"
+  },
+  {
+    "word": "코코넛",
+    "category": "과일·채소"
+  },
+  {
+    "word": "라임",
+    "category": "과일·채소"
+  },
+  {
+    "word": "오렌지",
+    "category": "과일·채소"
+  },
+  {
+    "word": "대추",
+    "category": "과일·채소"
+  },
+  {
+    "word": "호두",
+    "category": "과일·채소"
+  },
+  {
+    "word": "땅콩",
+    "category": "과일·채소"
+  },
+  {
+    "word": "양배추",
+    "category": "과일·채소"
+  },
+  {
+    "word": "상추",
+    "category": "과일·채소"
+  },
+  {
+    "word": "시금치",
+    "category": "과일·채소"
+  },
+  {
+    "word": "콩나물",
+    "category": "과일·채소"
+  },
+  {
+    "word": "호박",
+    "category": "과일·채소"
+  },
+  {
+    "word": "생강",
+    "category": "과일·채소"
+  },
+  {
+    "word": "부추",
+    "category": "과일·채소"
+  },
+  {
+    "word": "피망",
+    "category": "과일·채소"
+  },
+  {
+    "word": "아스파라거스",
+    "category": "과일·채소"
+  },
+  {
+    "word": "셀러리",
+    "category": "과일·채소"
+  },
+  {
+    "word": "청포도",
+    "category": "과일·채소"
+  },
+  {
+    "word": "유자",
+    "category": "과일·채소"
+  },
+  {
+    "word": "매실",
+    "category": "과일·채소"
+  },
+  {
+    "word": "앵두",
+    "category": "과일·채소"
+  },
+  {
+    "word": "산딸기",
+    "category": "과일·채소"
+  },
+  {
+    "word": "크랜베리",
+    "category": "과일·채소"
+  },
+  {
+    "word": "비트",
+    "category": "과일·채소"
+  },
+  {
+    "word": "미나리",
+    "category": "과일·채소"
+  },
+  {
+    "word": "깻잎",
+    "category": "과일·채소"
+  },
+  {
+    "word": "연근",
+    "category": "과일·채소"
+  },
+  {
+    "word": "우엉",
+    "category": "과일·채소"
+  },
+  {
+    "word": "올리브",
+    "category": "과일·채소"
+  },
+  {
+    "word": "완두콩",
+    "category": "과일·채소"
+  },
+  {
+    "word": "대파",
+    "category": "과일·채소"
+  },
+  {
+    "word": "양상추",
+    "category": "과일·채소"
+  },
+  {
+    "word": "케일",
+    "category": "과일·채소"
+  },
+  {
+    "word": "방울토마토",
+    "category": "과일·채소"
+  },
+  {
+    "word": "애호박",
+    "category": "과일·채소"
+  },
+  {
+    "word": "단호박",
+    "category": "과일·채소"
+  },
+  {
+    "word": "강아지",
+    "category": "동물"
+  },
+  {
+    "word": "고양이",
+    "category": "동물"
+  },
+  {
+    "word": "호랑이",
+    "category": "동물"
+  },
+  {
     "word": "사자",
     "category": "동물"
   },
@@ -16,63 +872,11 @@
     "category": "동물"
   },
   {
-    "word": "캥거루",
-    "category": "동물"
-  },
-  {
-    "word": "펭귄",
-    "category": "동물"
-  },
-  {
-    "word": "호랑이",
-    "category": "동물"
-  },
-  {
-    "word": "낙타",
-    "category": "동물"
-  },
-  {
-    "word": "늑대",
-    "category": "동물"
-  },
-  {
-    "word": "여우",
-    "category": "동물"
-  },
-  {
-    "word": "다람쥐",
-    "category": "동물"
-  },
-  {
-    "word": "고래",
-    "category": "동물"
-  },
-  {
-    "word": "돌고래",
-    "category": "동물"
-  },
-  {
-    "word": "원숭이",
-    "category": "동물"
-  },
-  {
     "word": "토끼",
     "category": "동물"
   },
   {
-    "word": "거북이",
-    "category": "동물"
-  },
-  {
-    "word": "악어",
-    "category": "동물"
-  },
-  {
-    "word": "하마",
-    "category": "동물"
-  },
-  {
-    "word": "사슴",
+    "word": "햄스터",
     "category": "동물"
   },
   {
@@ -80,299 +884,255 @@
     "category": "동물"
   },
   {
-    "word": "나비",
-    "category": "곤충"
+    "word": "펭귄",
+    "category": "동물"
   },
   {
-    "word": "개미",
-    "category": "곤충"
-  },
-  {
-    "word": "잠자리",
-    "category": "곤충"
-  },
-  {
-    "word": "사슴벌레",
-    "category": "곤충"
-  },
-  {
-    "word": "거미",
-    "category": "곤충"
-  },
-  {
-    "word": "모기",
-    "category": "곤충"
-  },
-  {
-    "word": "반딧불이",
-    "category": "곤충"
-  },
-  {
-    "word": "문어",
-    "category": "바다생물"
+    "word": "돌고래",
+    "category": "동물"
   },
   {
     "word": "상어",
-    "category": "바다생물"
+    "category": "동물"
   },
   {
-    "word": "해파리",
-    "category": "바다생물"
+    "word": "문어",
+    "category": "동물"
   },
   {
-    "word": "불가사리",
-    "category": "바다생물"
+    "word": "독수리",
+    "category": "동물"
   },
   {
-    "word": "새우",
-    "category": "바다생물"
+    "word": "부엉이",
+    "category": "동물"
   },
   {
-    "word": "게",
-    "category": "바다생물",
-    "accept": [
-      "꽃게"
-    ]
+    "word": "낙타",
+    "category": "동물"
   },
   {
-    "word": "오징어",
-    "category": "바다생물"
+    "word": "캥거루",
+    "category": "동물"
   },
   {
-    "word": "산호",
-    "category": "바다생물"
+    "word": "코알라",
+    "category": "동물"
   },
   {
-    "word": "김치찌개",
-    "category": "음식"
+    "word": "다람쥐",
+    "category": "동물"
   },
   {
-    "word": "짜장면",
-    "category": "음식"
+    "word": "여우",
+    "category": "동물"
   },
   {
-    "word": "피자",
-    "category": "음식"
+    "word": "늑대",
+    "category": "동물"
   },
   {
-    "word": "초밥",
-    "category": "음식"
+    "word": "악어",
+    "category": "동물"
   },
   {
-    "word": "떡볶이",
-    "category": "음식"
+    "word": "앵무새",
+    "category": "동물"
   },
   {
-    "word": "삼겹살",
-    "category": "음식"
+    "word": "수달",
+    "category": "동물"
   },
   {
-    "word": "라면",
-    "category": "음식"
+    "word": "카멜레온",
+    "category": "동물"
   },
   {
-    "word": "파스타",
-    "category": "음식"
+    "word": "알파카",
+    "category": "동물"
   },
   {
-    "word": "햄버거",
-    "category": "음식"
+    "word": "홍학",
+    "category": "동물"
   },
   {
-    "word": "치킨",
-    "category": "음식"
+    "word": "두더지",
+    "category": "동물"
   },
   {
-    "word": "김밥",
-    "category": "음식"
+    "word": "하마",
+    "category": "동물"
   },
   {
-    "word": "비빔밥",
-    "category": "음식"
+    "word": "코뿔소",
+    "category": "동물"
   },
   {
-    "word": "만두",
-    "category": "음식"
+    "word": "사슴",
+    "category": "동물"
   },
   {
-    "word": "카레",
-    "category": "음식"
+    "word": "너구리",
+    "category": "동물"
   },
   {
-    "word": "샌드위치",
-    "category": "음식"
+    "word": "박쥐",
+    "category": "동물"
   },
   {
-    "word": "스테이크",
-    "category": "음식"
+    "word": "원숭이",
+    "category": "동물"
   },
   {
-    "word": "아이스크림",
-    "category": "디저트"
+    "word": "고릴라",
+    "category": "동물"
   },
   {
-    "word": "초콜릿",
-    "category": "디저트"
+    "word": "염소",
+    "category": "동물"
   },
   {
-    "word": "케이크",
-    "category": "디저트"
+    "word": "돼지",
+    "category": "동물"
   },
   {
-    "word": "사탕",
-    "category": "디저트"
+    "word": "오리",
+    "category": "동물"
   },
   {
-    "word": "팝콘",
-    "category": "디저트"
+    "word": "거위",
+    "category": "동물"
   },
   {
-    "word": "도넛",
-    "category": "디저트"
+    "word": "칠면조",
+    "category": "동물"
   },
   {
-    "word": "빙수",
-    "category": "디저트"
+    "word": "공작",
+    "category": "동물"
   },
   {
-    "word": "젤리",
-    "category": "디저트"
+    "word": "얼룩말",
+    "category": "동물"
   },
   {
-    "word": "커피",
-    "category": "음료"
+    "word": "치타",
+    "category": "동물"
   },
   {
-    "word": "우유",
-    "category": "음료"
+    "word": "표범",
+    "category": "동물"
   },
   {
-    "word": "녹차",
-    "category": "음료"
+    "word": "재규어",
+    "category": "동물"
   },
   {
-    "word": "코코아",
-    "category": "음료"
+    "word": "물소",
+    "category": "동물"
   },
   {
-    "word": "사과",
-    "category": "과일"
+    "word": "라마",
+    "category": "동물"
   },
   {
-    "word": "바나나",
-    "category": "과일"
+    "word": "순록",
+    "category": "동물"
   },
   {
-    "word": "딸기",
-    "category": "과일"
+    "word": "비버",
+    "category": "동물"
   },
   {
-    "word": "수박",
-    "category": "과일"
+    "word": "족제비",
+    "category": "동물"
   },
   {
-    "word": "포도",
-    "category": "과일"
+    "word": "북극곰",
+    "category": "동물"
   },
   {
-    "word": "복숭아",
-    "category": "과일"
+    "word": "타조",
+    "category": "동물"
   },
   {
-    "word": "파인애플",
-    "category": "과일"
+    "word": "황새",
+    "category": "동물"
   },
   {
-    "word": "참외",
-    "category": "과일"
+    "word": "두루미",
+    "category": "동물"
   },
   {
-    "word": "오렌지",
-    "category": "과일"
+    "word": "제비",
+    "category": "동물"
   },
   {
-    "word": "레몬",
-    "category": "과일"
+    "word": "참새",
+    "category": "동물"
   },
   {
-    "word": "멜론",
-    "category": "과일"
+    "word": "까치",
+    "category": "동물"
   },
   {
-    "word": "키위",
-    "category": "과일"
+    "word": "까마귀",
+    "category": "동물"
   },
   {
-    "word": "체리",
-    "category": "과일"
+    "word": "비둘기",
+    "category": "동물"
   },
   {
-    "word": "망고",
-    "category": "과일"
+    "word": "올빼미",
+    "category": "동물"
   },
   {
-    "word": "당근",
-    "category": "채소"
+    "word": "기러기",
+    "category": "동물"
   },
   {
-    "word": "양파",
-    "category": "채소"
+    "word": "백조",
+    "category": "동물"
   },
   {
-    "word": "감자",
-    "category": "채소"
+    "word": "청둥오리",
+    "category": "동물"
   },
   {
-    "word": "오이",
-    "category": "채소"
+    "word": "뻐꾸기",
+    "category": "동물"
   },
   {
-    "word": "브로콜리",
-    "category": "채소"
+    "word": "개구리",
+    "category": "동물"
   },
   {
-    "word": "고구마",
-    "category": "채소"
+    "word": "거북이",
+    "category": "동물"
   },
   {
-    "word": "마늘",
-    "category": "채소"
+    "word": "도마뱀",
+    "category": "동물"
   },
   {
-    "word": "배추",
-    "category": "채소"
-  },
-  {
-    "word": "호박",
-    "category": "채소"
-  },
-  {
-    "word": "버섯",
-    "category": "채소"
-  },
-  {
-    "word": "시금치",
-    "category": "채소"
-  },
-  {
-    "word": "상추",
-    "category": "채소"
-  },
-  {
-    "word": "토마토",
-    "category": "채소"
-  },
-  {
-    "word": "옥수수",
-    "category": "채소"
+    "word": "물고기",
+    "category": "동물"
   },
   {
     "word": "의사",
     "category": "직업"
   },
   {
-    "word": "변호사",
+    "word": "간호사",
     "category": "직업"
+  },
+  {
+    "word": "경찰관",
+    "category": "직업",
+    "accept": [
+      "경찰"
+    ]
   },
   {
     "word": "소방관",
@@ -382,10 +1142,10 @@
     ]
   },
   {
-    "word": "경찰관",
+    "word": "교사",
     "category": "직업",
     "accept": [
-      "경찰"
+      "선생님"
     ]
   },
   {
@@ -397,11 +1157,51 @@
     ]
   },
   {
-    "word": "선생님",
+    "word": "프로그래머",
     "category": "직업",
     "accept": [
-      "교사"
+      "개발자"
     ]
+  },
+  {
+    "word": "디자이너",
+    "category": "직업"
+  },
+  {
+    "word": "변호사",
+    "category": "직업"
+  },
+  {
+    "word": "판사",
+    "category": "직업"
+  },
+  {
+    "word": "기자",
+    "category": "직업"
+  },
+  {
+    "word": "아나운서",
+    "category": "직업"
+  },
+  {
+    "word": "유튜버",
+    "category": "직업"
+  },
+  {
+    "word": "가수",
+    "category": "직업"
+  },
+  {
+    "word": "배우",
+    "category": "직업"
+  },
+  {
+    "word": "운동선수",
+    "category": "직업"
+  },
+  {
+    "word": "택배기사",
+    "category": "직업"
   },
   {
     "word": "미용사",
@@ -411,14 +1211,15 @@
     ]
   },
   {
-    "word": "개발자",
-    "category": "직업",
-    "accept": [
-      "프로그래머"
-    ]
+    "word": "바리스타",
+    "category": "직업"
   },
   {
-    "word": "간호사",
+    "word": "약사",
+    "category": "직업"
+  },
+  {
+    "word": "수의사",
     "category": "직업"
   },
   {
@@ -429,11 +1230,59 @@
     ]
   },
   {
+    "word": "승무원",
+    "category": "직업"
+  },
+  {
     "word": "농부",
     "category": "직업"
   },
   {
-    "word": "가수",
+    "word": "어부",
+    "category": "직업"
+  },
+  {
+    "word": "건축가",
+    "category": "직업"
+  },
+  {
+    "word": "통역사",
+    "category": "직업"
+  },
+  {
+    "word": "사진작가",
+    "category": "직업"
+  },
+  {
+    "word": "마술사",
+    "category": "직업"
+  },
+  {
+    "word": "탐정",
+    "category": "직업"
+  },
+  {
+    "word": "군인",
+    "category": "직업"
+  },
+  {
+    "word": "대통령",
+    "category": "직업"
+  },
+  {
+    "word": "치과의사",
+    "category": "직업"
+  },
+  {
+    "word": "경비원",
+    "category": "직업"
+  },
+  {
+    "word": "회계사",
+    "category": "직업"
+  },
+  {
+    "word": "개그맨",
     "category": "직업"
   },
   {
@@ -441,83 +1290,391 @@
     "category": "직업"
   },
   {
-    "word": "기자",
+    "word": "버스기사",
     "category": "직업"
   },
   {
-    "word": "우주비행사",
-    "category": "직업",
+    "word": "목수",
+    "category": "직업"
+  },
+  {
+    "word": "정비사",
+    "category": "직업"
+  },
+  {
+    "word": "제빵사",
+    "category": "직업"
+  },
+  {
+    "word": "사서",
+    "category": "직업"
+  },
+  {
+    "word": "플로리스트",
+    "category": "직업"
+  },
+  {
+    "word": "교수",
+    "category": "직업"
+  },
+  {
+    "word": "연구원",
+    "category": "직업"
+  },
+  {
+    "word": "과학자",
+    "category": "직업"
+  },
+  {
+    "word": "물리치료사",
+    "category": "직업"
+  },
+  {
+    "word": "한의사",
+    "category": "직업"
+  },
+  {
+    "word": "조종사",
+    "category": "직업"
+  },
+  {
+    "word": "기관사",
+    "category": "직업"
+  },
+  {
+    "word": "선장",
+    "category": "직업"
+  },
+  {
+    "word": "경호원",
+    "category": "직업"
+  },
+  {
+    "word": "판매원",
+    "category": "직업"
+  },
+  {
+    "word": "계산원",
+    "category": "직업"
+  },
+  {
+    "word": "우체부",
+    "category": "직업"
+  },
+  {
+    "word": "환경미화원",
+    "category": "직업"
+  },
+  {
+    "word": "조경사",
+    "category": "직업"
+  },
+  {
+    "word": "전기기사",
+    "category": "직업"
+  },
+  {
+    "word": "조각가",
+    "category": "직업"
+  },
+  {
+    "word": "작곡가",
+    "category": "직업"
+  },
+  {
+    "word": "지휘자",
+    "category": "직업"
+  },
+  {
+    "word": "성우",
+    "category": "직업"
+  },
+  {
+    "word": "작가",
+    "category": "직업"
+  },
+  {
+    "word": "학교",
+    "category": "장소"
+  },
+  {
+    "word": "병원",
+    "category": "장소"
+  },
+  {
+    "word": "도서관",
+    "category": "장소"
+  },
+  {
+    "word": "영화관",
+    "category": "장소"
+  },
+  {
+    "word": "놀이공원",
+    "category": "장소",
     "accept": [
-      "우주인"
+      "테마파크"
     ]
   },
   {
-    "word": "축구",
-    "category": "스포츠"
+    "word": "수영장",
+    "category": "장소"
   },
   {
-    "word": "야구",
-    "category": "스포츠"
+    "word": "노래방",
+    "category": "장소"
   },
   {
-    "word": "농구",
-    "category": "스포츠"
+    "word": "편의점",
+    "category": "장소"
   },
   {
-    "word": "배구",
-    "category": "스포츠"
+    "word": "백화점",
+    "category": "장소"
   },
   {
-    "word": "수영",
-    "category": "스포츠"
+    "word": "지하철역",
+    "category": "장소"
   },
   {
-    "word": "골프",
-    "category": "스포츠"
+    "word": "공항",
+    "category": "장소"
   },
   {
-    "word": "테니스",
-    "category": "스포츠"
+    "word": "해수욕장",
+    "category": "장소"
   },
   {
-    "word": "볼링",
-    "category": "스포츠"
+    "word": "캠핑장",
+    "category": "장소"
   },
   {
-    "word": "태권도",
-    "category": "스포츠"
+    "word": "미용실",
+    "category": "장소"
   },
   {
-    "word": "스키",
-    "category": "스포츠"
+    "word": "은행",
+    "category": "장소"
   },
   {
-    "word": "복싱",
-    "category": "스포츠"
+    "word": "주유소",
+    "category": "장소"
   },
   {
-    "word": "마라톤",
-    "category": "스포츠"
+    "word": "전통시장",
+    "category": "장소"
   },
   {
-    "word": "양궁",
-    "category": "스포츠"
+    "word": "헬스장",
+    "category": "장소"
   },
   {
-    "word": "탁구",
-    "category": "스포츠"
+    "word": "목욕탕",
+    "category": "장소"
   },
   {
-    "word": "자동차",
-    "category": "탈것"
+    "word": "동물원",
+    "category": "장소"
   },
   {
-    "word": "비행기",
-    "category": "탈것"
+    "word": "박물관",
+    "category": "장소"
   },
   {
-    "word": "기차",
-    "category": "탈것"
+    "word": "스키장",
+    "category": "장소"
+  },
+  {
+    "word": "온천",
+    "category": "장소"
+  },
+  {
+    "word": "교회",
+    "category": "장소"
+  },
+  {
+    "word": "성당",
+    "category": "장소"
+  },
+  {
+    "word": "법원",
+    "category": "장소"
+  },
+  {
+    "word": "소방서",
+    "category": "장소"
+  },
+  {
+    "word": "방송국",
+    "category": "장소"
+  },
+  {
+    "word": "마트",
+    "category": "장소"
+  },
+  {
+    "word": "시장",
+    "category": "장소"
+  },
+  {
+    "word": "카페",
+    "category": "장소"
+  },
+  {
+    "word": "우체국",
+    "category": "장소"
+  },
+  {
+    "word": "세탁소",
+    "category": "장소"
+  },
+  {
+    "word": "약국",
+    "category": "장소"
+  },
+  {
+    "word": "공원",
+    "category": "장소"
+  },
+  {
+    "word": "수족관",
+    "category": "장소"
+  },
+  {
+    "word": "미술관",
+    "category": "장소"
+  },
+  {
+    "word": "기차역",
+    "category": "장소"
+  },
+  {
+    "word": "터미널",
+    "category": "장소"
+  },
+  {
+    "word": "항구",
+    "category": "장소"
+  },
+  {
+    "word": "등대",
+    "category": "장소"
+  },
+  {
+    "word": "골프장",
+    "category": "장소"
+  },
+  {
+    "word": "버스정류장",
+    "category": "장소"
+  },
+  {
+    "word": "횡단보도",
+    "category": "장소"
+  },
+  {
+    "word": "육교",
+    "category": "장소"
+  },
+  {
+    "word": "지하도",
+    "category": "장소"
+  },
+  {
+    "word": "고속도로",
+    "category": "장소"
+  },
+  {
+    "word": "터널",
+    "category": "장소"
+  },
+  {
+    "word": "다리",
+    "category": "장소"
+  },
+  {
+    "word": "발전소",
+    "category": "장소"
+  },
+  {
+    "word": "공장",
+    "category": "장소"
+  },
+  {
+    "word": "창고",
+    "category": "장소"
+  },
+  {
+    "word": "경찰서",
+    "category": "장소"
+  },
+  {
+    "word": "시청",
+    "category": "장소"
+  },
+  {
+    "word": "구청",
+    "category": "장소"
+  },
+  {
+    "word": "치과",
+    "category": "장소"
+  },
+  {
+    "word": "한의원",
+    "category": "장소"
+  },
+  {
+    "word": "안경점",
+    "category": "장소"
+  },
+  {
+    "word": "문구점",
+    "category": "장소"
+  },
+  {
+    "word": "철물점",
+    "category": "장소"
+  },
+  {
+    "word": "빵집",
+    "category": "장소"
+  },
+  {
+    "word": "정육점",
+    "category": "장소"
+  },
+  {
+    "word": "생선가게",
+    "category": "장소"
+  },
+  {
+    "word": "식당",
+    "category": "장소"
+  },
+  {
+    "word": "놀이터",
+    "category": "장소"
+  },
+  {
+    "word": "그네",
+    "category": "장소"
+  },
+  {
+    "word": "시소",
+    "category": "장소"
+  },
+  {
+    "word": "미끄럼틀",
+    "category": "장소"
+  },
+  {
+    "word": "궁궐",
+    "category": "장소",
+    "accept": [
+      "궁",
+      "왕궁"
+    ]
   },
   {
     "word": "자전거",
@@ -535,13 +1692,6 @@
     "category": "탈것"
   },
   {
-    "word": "헬리콥터",
-    "category": "탈것",
-    "accept": [
-      "헬기"
-    ]
-  },
-  {
     "word": "지하철",
     "category": "탈것",
     "accept": [
@@ -549,11 +1699,38 @@
     ]
   },
   {
+    "word": "택시",
+    "category": "탈것"
+  },
+  {
+    "word": "기차",
+    "category": "탈것"
+  },
+  {
+    "word": "비행기",
+    "category": "탈것"
+  },
+  {
+    "word": "헬리콥터",
+    "category": "탈것",
+    "accept": [
+      "헬기"
+    ]
+  },
+  {
+    "word": "유람선",
+    "category": "탈것"
+  },
+  {
+    "word": "킥보드",
+    "category": "탈것"
+  },
+  {
     "word": "트럭",
     "category": "탈것"
   },
   {
-    "word": "택시",
+    "word": "소방차",
     "category": "탈것"
   },
   {
@@ -564,12 +1741,1820 @@
     ]
   },
   {
-    "word": "잠수함",
+    "word": "경찰차",
+    "category": "탈것"
+  },
+  {
+    "word": "케이블카",
     "category": "탈것"
   },
   {
     "word": "열기구",
     "category": "탈것"
+  },
+  {
+    "word": "잠수함",
+    "category": "탈것"
+  },
+  {
+    "word": "우주선",
+    "category": "탈것"
+  },
+  {
+    "word": "스쿠터",
+    "category": "탈것"
+  },
+  {
+    "word": "리무진",
+    "category": "탈것"
+  },
+  {
+    "word": "요트",
+    "category": "탈것"
+  },
+  {
+    "word": "모노레일",
+    "category": "탈것"
+  },
+  {
+    "word": "트램",
+    "category": "탈것"
+  },
+  {
+    "word": "카트",
+    "category": "탈것"
+  },
+  {
+    "word": "트랙터",
+    "category": "탈것"
+  },
+  {
+    "word": "불도저",
+    "category": "탈것"
+  },
+  {
+    "word": "크레인",
+    "category": "탈것"
+  },
+  {
+    "word": "스케이트보드",
+    "category": "탈것"
+  },
+  {
+    "word": "롤러스케이트",
+    "category": "탈것"
+  },
+  {
+    "word": "유모차",
+    "category": "탈것"
+  },
+  {
+    "word": "휠체어",
+    "category": "탈것"
+  },
+  {
+    "word": "롤러코스터",
+    "category": "탈것"
+  },
+  {
+    "word": "관람차",
+    "category": "탈것"
+  },
+  {
+    "word": "회전목마",
+    "category": "탈것"
+  },
+  {
+    "word": "로켓",
+    "category": "탈것"
+  },
+  {
+    "word": "썰매",
+    "category": "탈것"
+  },
+  {
+    "word": "카누",
+    "category": "탈것"
+  },
+  {
+    "word": "견인차",
+    "category": "탈것"
+  },
+  {
+    "word": "유조차",
+    "category": "탈것"
+  },
+  {
+    "word": "전기자전거",
+    "category": "탈것"
+  },
+  {
+    "word": "수레",
+    "category": "탈것"
+  },
+  {
+    "word": "손수레",
+    "category": "탈것"
+  },
+  {
+    "word": "페리",
+    "category": "탈것"
+  },
+  {
+    "word": "고무보트",
+    "category": "탈것"
+  },
+  {
+    "word": "제트스키",
+    "category": "탈것"
+  },
+  {
+    "word": "수상스키",
+    "category": "탈것"
+  },
+  {
+    "word": "패러글라이더",
+    "category": "탈것"
+  },
+  {
+    "word": "행글라이더",
+    "category": "탈것"
+  },
+  {
+    "word": "비행선",
+    "category": "탈것"
+  },
+  {
+    "word": "어선",
+    "category": "탈것"
+  },
+  {
+    "word": "탱크",
+    "category": "탈것"
+  },
+  {
+    "word": "장갑차",
+    "category": "탈것"
+  },
+  {
+    "word": "자동차",
+    "category": "탈것"
+  },
+  {
+    "word": "여객선",
+    "category": "탈것"
+  },
+  {
+    "word": "축구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "야구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "농구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "배구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "탁구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "테니스",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "배드민턴",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "골프",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "볼링",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "당구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "수영",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "스키",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "스노보드",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "마라톤",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "복싱",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "태권도",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "유도",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "씨름",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "클라이밍",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "요가",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "필라테스",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "낚시",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "양궁",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "펜싱",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "스케이트",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "컬링",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "리듬체조",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "역도",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "높이뛰기",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "멀리뛰기",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "피구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "다이빙",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "피겨스케이팅",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "아이스하키",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "체조",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "등산",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "서핑",
+    "category": "스포츠·운동",
+    "accept": [
+      "파도타기"
+    ]
+  },
+  {
+    "word": "스쿠버다이빙",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "사격",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "검도",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "레슬링",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "승마",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "번지점프",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "줄다리기",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "핸드볼",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "럭비",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "미식축구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "크리켓",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "하키",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "스쿼시",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "족구",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "철봉",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "평행봉",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "링운동",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "뜀틀",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "매트운동",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "카약",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "스노클링",
+    "category": "스포츠·운동"
+  },
+  {
+    "word": "아메리카노",
+    "category": "음료"
+  },
+  {
+    "word": "카페라떼",
+    "category": "음료"
+  },
+  {
+    "word": "콜라",
+    "category": "음료"
+  },
+  {
+    "word": "사이다",
+    "category": "음료"
+  },
+  {
+    "word": "딸기우유",
+    "category": "음료"
+  },
+  {
+    "word": "바나나우유",
+    "category": "음료"
+  },
+  {
+    "word": "식혜",
+    "category": "음료"
+  },
+  {
+    "word": "녹차",
+    "category": "음료"
+  },
+  {
+    "word": "밀크티",
+    "category": "음료"
+  },
+  {
+    "word": "스무디",
+    "category": "음료"
+  },
+  {
+    "word": "소주",
+    "category": "음료"
+  },
+  {
+    "word": "맥주",
+    "category": "음료"
+  },
+  {
+    "word": "막걸리",
+    "category": "음료"
+  },
+  {
+    "word": "와인",
+    "category": "음료"
+  },
+  {
+    "word": "위스키",
+    "category": "음료"
+  },
+  {
+    "word": "하이볼",
+    "category": "음료"
+  },
+  {
+    "word": "칵테일",
+    "category": "음료"
+  },
+  {
+    "word": "에너지드링크",
+    "category": "음료"
+  },
+  {
+    "word": "생수",
+    "category": "음료"
+  },
+  {
+    "word": "코코아",
+    "category": "음료"
+  },
+  {
+    "word": "유자차",
+    "category": "음료"
+  },
+  {
+    "word": "버블티",
+    "category": "음료"
+  },
+  {
+    "word": "슬러시",
+    "category": "음료"
+  },
+  {
+    "word": "레모네이드",
+    "category": "음료"
+  },
+  {
+    "word": "아이스티",
+    "category": "음료"
+  },
+  {
+    "word": "핫초코",
+    "category": "음료"
+  },
+  {
+    "word": "홍차",
+    "category": "음료"
+  },
+  {
+    "word": "생강차",
+    "category": "음료"
+  },
+  {
+    "word": "두유",
+    "category": "음료"
+  },
+  {
+    "word": "우유",
+    "category": "음료"
+  },
+  {
+    "word": "초코우유",
+    "category": "음료"
+  },
+  {
+    "word": "요구르트",
+    "category": "음료"
+  },
+  {
+    "word": "환타",
+    "category": "음료"
+  },
+  {
+    "word": "에이드",
+    "category": "음료"
+  },
+  {
+    "word": "매실차",
+    "category": "음료"
+  },
+  {
+    "word": "보리차",
+    "category": "음료"
+  },
+  {
+    "word": "스파클링워터",
+    "category": "음료"
+  },
+  {
+    "word": "탄산수",
+    "category": "음료"
+  },
+  {
+    "word": "국화차",
+    "category": "음료"
+  },
+  {
+    "word": "캐모마일",
+    "category": "음료"
+  },
+  {
+    "word": "페퍼민트",
+    "category": "음료"
+  },
+  {
+    "word": "마키아토",
+    "category": "음료"
+  },
+  {
+    "word": "더치커피",
+    "category": "음료"
+  },
+  {
+    "word": "콜드브루",
+    "category": "음료"
+  },
+  {
+    "word": "에스프레소",
+    "category": "음료"
+  },
+  {
+    "word": "카푸치노",
+    "category": "음료"
+  },
+  {
+    "word": "모카",
+    "category": "음료"
+  },
+  {
+    "word": "바닐라라떼",
+    "category": "음료"
+  },
+  {
+    "word": "캐러멜마키아토",
+    "category": "음료"
+  },
+  {
+    "word": "수박주스",
+    "category": "음료"
+  },
+  {
+    "word": "토마토주스",
+    "category": "음료"
+  },
+  {
+    "word": "당근주스",
+    "category": "음료"
+  },
+  {
+    "word": "알로에음료",
+    "category": "음료"
+  },
+  {
+    "word": "피아노",
+    "category": "악기"
+  },
+  {
+    "word": "기타",
+    "category": "악기"
+  },
+  {
+    "word": "드럼",
+    "category": "악기"
+  },
+  {
+    "word": "바이올린",
+    "category": "악기"
+  },
+  {
+    "word": "첼로",
+    "category": "악기"
+  },
+  {
+    "word": "하프",
+    "category": "악기"
+  },
+  {
+    "word": "플루트",
+    "category": "악기"
+  },
+  {
+    "word": "클라리넷",
+    "category": "악기"
+  },
+  {
+    "word": "색소폰",
+    "category": "악기"
+  },
+  {
+    "word": "트럼펫",
+    "category": "악기"
+  },
+  {
+    "word": "트롬본",
+    "category": "악기"
+  },
+  {
+    "word": "리코더",
+    "category": "악기"
+  },
+  {
+    "word": "하모니카",
+    "category": "악기"
+  },
+  {
+    "word": "아코디언",
+    "category": "악기",
+    "accept": [
+      "손풍금"
+    ]
+  },
+  {
+    "word": "실로폰",
+    "category": "악기"
+  },
+  {
+    "word": "탐버린",
+    "category": "악기"
+  },
+  {
+    "word": "트라이앵글",
+    "category": "악기"
+  },
+  {
+    "word": "심벌즈",
+    "category": "악기"
+  },
+  {
+    "word": "우쿨렐레",
+    "category": "악기"
+  },
+  {
+    "word": "가야금",
+    "category": "악기"
+  },
+  {
+    "word": "장구",
+    "category": "악기"
+  },
+  {
+    "word": "꽹과리",
+    "category": "악기"
+  },
+  {
+    "word": "전기기타",
+    "category": "악기"
+  },
+  {
+    "word": "오르간",
+    "category": "악기"
+  },
+  {
+    "word": "파이프오르간",
+    "category": "악기"
+  },
+  {
+    "word": "팀파니",
+    "category": "악기"
+  },
+  {
+    "word": "튜바",
+    "category": "악기"
+  },
+  {
+    "word": "호른",
+    "category": "악기"
+  },
+  {
+    "word": "피리",
+    "category": "악기"
+  },
+  {
+    "word": "베이스기타",
+    "category": "악기"
+  },
+  {
+    "word": "신시사이저",
+    "category": "악기"
+  },
+  {
+    "word": "나팔",
+    "category": "악기"
+  },
+  {
+    "word": "비올라",
+    "category": "악기"
+  },
+  {
+    "word": "드럼스틱",
+    "category": "악기"
+  },
+  {
+    "word": "메트로놈",
+    "category": "악기"
+  },
+  {
+    "word": "악보",
+    "category": "악기"
+  },
+  {
+    "word": "지휘봉",
+    "category": "악기"
+  },
+  {
+    "word": "고래",
+    "category": "바다생물"
+  },
+  {
+    "word": "오징어",
+    "category": "바다생물"
+  },
+  {
+    "word": "낙지",
+    "category": "바다생물"
+  },
+  {
+    "word": "불가사리",
+    "category": "바다생물"
+  },
+  {
+    "word": "소라",
+    "category": "바다생물"
+  },
+  {
+    "word": "조개",
+    "category": "바다생물"
+  },
+  {
+    "word": "새우",
+    "category": "바다생물"
+  },
+  {
+    "word": "꽃게",
+    "category": "바다생물"
+  },
+  {
+    "word": "랍스터",
+    "category": "바다생물"
+  },
+  {
+    "word": "가재",
+    "category": "바다생물"
+  },
+  {
+    "word": "성게",
+    "category": "바다생물"
+  },
+  {
+    "word": "해삼",
+    "category": "바다생물"
+  },
+  {
+    "word": "멍게",
+    "category": "바다생물"
+  },
+  {
+    "word": "미역",
+    "category": "바다생물"
+  },
+  {
+    "word": "다시마",
+    "category": "바다생물"
+  },
+  {
+    "word": "산호",
+    "category": "바다생물"
+  },
+  {
+    "word": "바다거북",
+    "category": "바다생물"
+  },
+  {
+    "word": "물개",
+    "category": "바다생물"
+  },
+  {
+    "word": "바다사자",
+    "category": "바다생물"
+  },
+  {
+    "word": "가오리",
+    "category": "바다생물"
+  },
+  {
+    "word": "복어",
+    "category": "바다생물"
+  },
+  {
+    "word": "참치",
+    "category": "바다생물"
+  },
+  {
+    "word": "연어",
+    "category": "바다생물"
+  },
+  {
+    "word": "고등어",
+    "category": "바다생물"
+  },
+  {
+    "word": "갈치",
+    "category": "바다생물"
+  },
+  {
+    "word": "멸치",
+    "category": "바다생물"
+  },
+  {
+    "word": "장어",
+    "category": "바다생물"
+  },
+  {
+    "word": "광어",
+    "category": "바다생물"
+  },
+  {
+    "word": "도미",
+    "category": "바다생물"
+  },
+  {
+    "word": "해마",
+    "category": "바다생물"
+  },
+  {
+    "word": "대게",
+    "category": "바다생물"
+  },
+  {
+    "word": "전복",
+    "category": "바다생물"
+  },
+  {
+    "word": "범고래",
+    "category": "바다생물"
+  },
+  {
+    "word": "향유고래",
+    "category": "바다생물"
+  },
+  {
+    "word": "흰수염고래",
+    "category": "바다생물"
+  },
+  {
+    "word": "아귀",
+    "category": "바다생물"
+  },
+  {
+    "word": "홍어",
+    "category": "바다생물"
+  },
+  {
+    "word": "주꾸미",
+    "category": "바다생물"
+  },
+  {
+    "word": "홍합",
+    "category": "바다생물"
+  },
+  {
+    "word": "가리비",
+    "category": "바다생물"
+  },
+  {
+    "word": "바지락",
+    "category": "바다생물"
+  },
+  {
+    "word": "꼬막",
+    "category": "바다생물"
+  },
+  {
+    "word": "소라게",
+    "category": "바다생물"
+  },
+  {
+    "word": "방어",
+    "category": "바다생물"
+  },
+  {
+    "word": "삼치",
+    "category": "바다생물"
+  },
+  {
+    "word": "청어",
+    "category": "바다생물"
+  },
+  {
+    "word": "정어리",
+    "category": "바다생물"
+  },
+  {
+    "word": "산호초",
+    "category": "바다생물"
+  },
+  {
+    "word": "나비",
+    "category": "곤충"
+  },
+  {
+    "word": "나방",
+    "category": "곤충"
+  },
+  {
+    "word": "잠자리",
+    "category": "곤충"
+  },
+  {
+    "word": "매미",
+    "category": "곤충"
+  },
+  {
+    "word": "개미",
+    "category": "곤충"
+  },
+  {
+    "word": "꿀벌",
+    "category": "곤충"
+  },
+  {
+    "word": "말벌",
+    "category": "곤충"
+  },
+  {
+    "word": "파리",
+    "category": "곤충"
+  },
+  {
+    "word": "모기",
+    "category": "곤충"
+  },
+  {
+    "word": "바퀴벌레",
+    "category": "곤충"
+  },
+  {
+    "word": "귀뚜라미",
+    "category": "곤충"
+  },
+  {
+    "word": "메뚜기",
+    "category": "곤충"
+  },
+  {
+    "word": "무당벌레",
+    "category": "곤충"
+  },
+  {
+    "word": "풍뎅이",
+    "category": "곤충"
+  },
+  {
+    "word": "사슴벌레",
+    "category": "곤충"
+  },
+  {
+    "word": "장수풍뎅이",
+    "category": "곤충"
+  },
+  {
+    "word": "하늘소",
+    "category": "곤충"
+  },
+  {
+    "word": "반딧불이",
+    "category": "곤충"
+  },
+  {
+    "word": "거미",
+    "category": "곤충"
+  },
+  {
+    "word": "지네",
+    "category": "곤충"
+  },
+  {
+    "word": "달팽이",
+    "category": "곤충"
+  },
+  {
+    "word": "애벌레",
+    "category": "곤충"
+  },
+  {
+    "word": "번데기",
+    "category": "곤충"
+  },
+  {
+    "word": "누에",
+    "category": "곤충"
+  },
+  {
+    "word": "벼룩",
+    "category": "곤충"
+  },
+  {
+    "word": "호랑나비",
+    "category": "곤충"
+  },
+  {
+    "word": "배추흰나비",
+    "category": "곤충"
+  },
+  {
+    "word": "제비나비",
+    "category": "곤충"
+  },
+  {
+    "word": "장수하늘소",
+    "category": "곤충"
+  },
+  {
+    "word": "왕사슴벌레",
+    "category": "곤충"
+  },
+  {
+    "word": "딱정벌레",
+    "category": "곤충"
+  },
+  {
+    "word": "하루살이",
+    "category": "곤충"
+  },
+  {
+    "word": "초파리",
+    "category": "곤충"
+  },
+  {
+    "word": "장수말벌",
+    "category": "곤충"
+  },
+  {
+    "word": "냄비",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "프라이팬",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "주걱",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "국자",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "뒤집개",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "집게",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "젓가락",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "숟가락",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "포크",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "도마",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "거품기",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "오븐",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "에어프라이어",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "토스터",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "믹서기",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "주전자",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "김치냉장고",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "식기세척기",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "인덕션",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "가스레인지",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "앞치마",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "오븐장갑",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "호일",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "도시락통",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "보온병",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "머그컵",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "접시",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "대접",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "쟁반",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "찜기",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "압력솥",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "전기포트",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "밀대",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "타이머",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "온도계",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "병따개",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "와인오프너",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "수세미",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "고무장갑",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "행주",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "국그릇",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "밥그릇",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "수저통",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "냄비받침",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "싱크대",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "식탁보",
+    "category": "주방·조리도구"
+  },
+  {
+    "word": "연필",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "만년필",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "매직",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "크레파스",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "색연필",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "물감",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "팔레트",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "스케치북",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "도화지",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "다이어리",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "수정테이프",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "삼각자",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "각도기",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "컴퍼스",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "딱풀",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "펀치",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "클립",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "파일",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "바인더",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "서류봉투",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "계산기",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "연필깎이",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "책갈피",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "사인펜",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "수정액",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "물풀",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "커터칼",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "압정",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "편지지",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "우표",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "보드마카",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "샤프심",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "잉크",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "색종이",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "복사용지",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "네임펜",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "노트",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "서류철",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "클립보드",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "칠판지우개",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "연필꽂이",
+    "category": "문구·사무용품"
+  },
+  {
+    "word": "스테이플러",
+    "category": "문구·사무용품",
+    "accept": [
+      "호치키스"
+    ]
+  },
+  {
+    "word": "해바라기",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "선인장",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "장미",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "튤립",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "민들레",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "클로버",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "코스모스",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "무궁화",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "진달래",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "개나리",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "나팔꽃",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "백합",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "국화",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "수국",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "안개꽃",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "카네이션",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "라벤더",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "목련",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "동백꽃",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "연꽃",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "수선화",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "봉숭아",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "제비꽃",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "벚나무",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "소나무",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "대나무",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "버드나무",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "야자수",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "단풍나무",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "은행나무",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "은행잎",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "화분",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "화단",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "잔디밭",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "잡초",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "이끼",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "갈대",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "넝쿨",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "새싹",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "꽃봉오리",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "꽃다발",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "꽃바구니",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "화환",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "분재",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "솔방울",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "도토리",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "나뭇가지",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "나뭇잎",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "꽃잎",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "씨앗",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "매화",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "온실",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "꽃병",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "낙엽",
+    "category": "식물·꽃"
+  },
+  {
+    "word": "드릴",
+    "category": "공구"
+  },
+  {
+    "word": "나사",
+    "category": "공구"
+  },
+  {
+    "word": "렌치",
+    "category": "공구"
+  },
+  {
+    "word": "도끼",
+    "category": "공구"
+  },
+  {
+    "word": "니퍼",
+    "category": "공구"
+  },
+  {
+    "word": "대패",
+    "category": "공구"
+  },
+  {
+    "word": "용접기",
+    "category": "공구"
+  },
+  {
+    "word": "볼트",
+    "category": "공구"
+  },
+  {
+    "word": "너트",
+    "category": "공구"
+  },
+  {
+    "word": "공구함",
+    "category": "공구"
+  },
+  {
+    "word": "작업대",
+    "category": "공구"
+  },
+  {
+    "word": "안전모",
+    "category": "공구"
+  },
+  {
+    "word": "안전화",
+    "category": "공구"
+  },
+  {
+    "word": "보안경",
+    "category": "공구"
+  },
+  {
+    "word": "곡괭이",
+    "category": "공구"
+  },
+  {
+    "word": "전동톱",
+    "category": "공구"
+  },
+  {
+    "word": "페인트",
+    "category": "공구"
+  },
+  {
+    "word": "밧줄",
+    "category": "공구"
+  },
+  {
+    "word": "호미",
+    "category": "공구"
+  },
+  {
+    "word": "갈퀴",
+    "category": "공구"
+  },
+  {
+    "word": "전지가위",
+    "category": "공구"
+  },
+  {
+    "word": "물뿌리개",
+    "category": "공구"
+  },
+  {
+    "word": "목장갑",
+    "category": "공구"
+  },
+  {
+    "word": "송곳",
+    "category": "공구"
+  },
+  {
+    "word": "화산",
+    "category": "자연"
+  },
+  {
+    "word": "폭포",
+    "category": "자연"
+  },
+  {
+    "word": "사막",
+    "category": "자연"
+  },
+  {
+    "word": "무지개",
+    "category": "자연"
+  },
+  {
+    "word": "번개",
+    "category": "자연"
+  },
+  {
+    "word": "별",
+    "category": "자연"
+  },
+  {
+    "word": "달",
+    "category": "자연"
+  },
+  {
+    "word": "태양",
+    "category": "자연"
+  },
+  {
+    "word": "구름",
+    "category": "자연"
+  },
+  {
+    "word": "섬",
+    "category": "자연",
+    "accept": [
+      "무인도"
+    ]
+  },
+  {
+    "word": "동굴",
+    "category": "자연"
+  },
+  {
+    "word": "빙산",
+    "category": "자연"
+  },
+  {
+    "word": "눈사람",
+    "category": "자연"
+  },
+  {
+    "word": "고드름",
+    "category": "자연"
   },
   {
     "word": "냉장고",
@@ -681,6 +3666,22 @@
     "category": "가구"
   },
   {
+    "word": "식탁",
+    "category": "가구"
+  },
+  {
+    "word": "서랍장",
+    "category": "가구"
+  },
+  {
+    "word": "책장",
+    "category": "가구"
+  },
+  {
+    "word": "스툴",
+    "category": "가구"
+  },
+  {
     "word": "모자",
     "category": "의류"
   },
@@ -725,233 +3726,8 @@
     "category": "의류"
   },
   {
-    "word": "연필",
-    "category": "학용품"
-  },
-  {
-    "word": "지우개",
-    "category": "학용품"
-  },
-  {
-    "word": "볼펜",
-    "category": "학용품"
-  },
-  {
-    "word": "필통",
-    "category": "학용품"
-  },
-  {
-    "word": "노트",
-    "category": "학용품"
-  },
-  {
-    "word": "가위",
-    "category": "학용품"
-  },
-  {
-    "word": "크레파스",
-    "category": "학용품"
-  },
-  {
-    "word": "스케치북",
-    "category": "학용품"
-  },
-  {
-    "word": "계산기",
-    "category": "학용품"
-  },
-  {
-    "word": "책가방",
-    "category": "학용품"
-  },
-  {
-    "word": "형광펜",
-    "category": "학용품"
-  },
-  {
-    "word": "피아노",
-    "category": "악기"
-  },
-  {
-    "word": "기타",
-    "category": "악기"
-  },
-  {
-    "word": "드럼",
-    "category": "악기"
-  },
-  {
-    "word": "바이올린",
-    "category": "악기"
-  },
-  {
-    "word": "트럼펫",
-    "category": "악기"
-  },
-  {
-    "word": "플루트",
-    "category": "악기"
-  },
-  {
-    "word": "첼로",
-    "category": "악기"
-  },
-  {
-    "word": "하모니카",
-    "category": "악기"
-  },
-  {
-    "word": "색소폰",
-    "category": "악기"
-  },
-  {
-    "word": "아코디언",
-    "category": "악기",
-    "accept": [
-      "손풍금"
-    ]
-  },
-  {
-    "word": "실로폰",
-    "category": "악기"
-  },
-  {
-    "word": "장구",
-    "category": "악기"
-  },
-  {
-    "word": "망치",
-    "category": "도구"
-  },
-  {
-    "word": "드라이버",
-    "category": "도구"
-  },
-  {
-    "word": "사다리",
-    "category": "도구"
-  },
-  {
-    "word": "빗자루",
-    "category": "도구"
-  },
-  {
-    "word": "톱",
-    "category": "도구"
-  },
-  {
-    "word": "자물쇠",
-    "category": "도구"
-  },
-  {
-    "word": "열쇠",
-    "category": "도구"
-  },
-  {
-    "word": "손전등",
-    "category": "도구",
-    "accept": [
-      "플래시",
-      "후레쉬"
-    ]
-  },
-  {
-    "word": "나침반",
-    "category": "도구"
-  },
-  {
-    "word": "등대",
-    "category": "건물"
-  },
-  {
-    "word": "다리",
-    "category": "건물"
-  },
-  {
-    "word": "병원",
-    "category": "건물"
-  },
-  {
-    "word": "학교",
-    "category": "건물"
-  },
-  {
-    "word": "도서관",
-    "category": "건물"
-  },
-  {
-    "word": "백화점",
-    "category": "건물"
-  },
-  {
-    "word": "놀이공원",
-    "category": "건물",
-    "accept": [
-      "테마파크"
-    ]
-  },
-  {
-    "word": "공항",
-    "category": "건물"
-  },
-  {
-    "word": "주유소",
-    "category": "건물"
-  },
-  {
-    "word": "화산",
-    "category": "자연"
-  },
-  {
-    "word": "폭포",
-    "category": "자연"
-  },
-  {
-    "word": "사막",
-    "category": "자연"
-  },
-  {
-    "word": "무지개",
-    "category": "자연"
-  },
-  {
-    "word": "번개",
-    "category": "자연"
-  },
-  {
-    "word": "별",
-    "category": "자연"
-  },
-  {
-    "word": "달",
-    "category": "자연"
-  },
-  {
-    "word": "태양",
-    "category": "자연"
-  },
-  {
-    "word": "구름",
-    "category": "자연"
-  },
-  {
-    "word": "섬",
-    "category": "자연",
-    "accept": [
-      "무인도"
-    ]
-  },
-  {
-    "word": "동굴",
-    "category": "자연"
-  },
-  {
-    "word": "빙산",
-    "category": "자연"
-  },
-  {
-    "word": "눈사람",
-    "category": "자연"
+    "word": "슬리퍼",
+    "category": "의류"
   },
   {
     "word": "제주도",
@@ -993,15 +3769,11 @@
     "category": "여행지"
   },
   {
+    "word": "베네치아",
+    "category": "여행지"
+  },
+  {
     "word": "독서",
-    "category": "취미"
-  },
-  {
-    "word": "등산",
-    "category": "취미"
-  },
-  {
-    "word": "낚시",
     "category": "취미"
   },
   {
@@ -1013,72 +3785,6 @@
     "category": "취미"
   },
   {
-    "word": "서핑",
-    "category": "취미",
-    "accept": [
-      "파도타기"
-    ]
-  },
-  {
-    "word": "지도",
-    "category": "기타"
-  },
-  {
-    "word": "편지",
-    "category": "기타"
-  },
-  {
-    "word": "지폐",
-    "category": "기타",
-    "accept": [
-      "돈",
-      "현금"
-    ]
-  },
-  {
-    "word": "여권",
-    "category": "기타"
-  },
-  {
-    "word": "달력",
-    "category": "기타"
-  },
-  {
-    "word": "신호등",
-    "category": "기타"
-  },
-  {
-    "word": "소화기",
-    "category": "기타"
-  },
-  {
-    "word": "마이크",
-    "category": "기타",
-    "accept": [
-      "마이크로폰"
-    ]
-  },
-  {
-    "word": "로봇",
-    "category": "기타"
-  },
-  {
-    "word": "풍선",
-    "category": "기타"
-  },
-  {
-    "word": "지팡이",
-    "category": "기타"
-  },
-  {
-    "word": "저금통",
-    "category": "기타"
-  },
-  {
-    "word": "선인장",
-    "category": "자연"
-  },
-  {
     "word": "텐트",
     "category": "취미"
   },
@@ -1087,166 +3793,11 @@
     "category": "취미"
   },
   {
-    "word": "슬리퍼",
-    "category": "의류"
-  },
-  {
-    "word": "고드름",
-    "category": "자연"
-  },
-  {
-    "word": "화살",
-    "category": "도구"
-  },
-  {
-    "word": "그네",
-    "category": "건물"
-  },
-  {
-    "word": "시소",
-    "category": "건물"
-  },
-  {
-    "word": "미끄럼틀",
-    "category": "건물"
-  },
-  {
-    "word": "팽이",
-    "category": "기타"
-  },
-  {
-    "word": "지휘자",
-    "category": "직업"
-  },
-  {
-    "word": "베네치아",
-    "category": "여행지"
-  },
-  {
-    "word": "펜치",
-    "category": "도구"
-  },
-  {
-    "word": "스테이플러",
-    "category": "학용품",
-    "accept": [
-      "호치키스"
-    ]
-  },
-  {
-    "word": "줄자",
-    "category": "도구"
-  },
-  {
-    "word": "자몽",
-    "category": "과일"
-  },
-  {
-    "word": "식혜",
-    "category": "음료"
-  },
-  {
-    "word": "매실차",
-    "category": "음료"
-  },
-  {
-    "word": "레모네이드",
-    "category": "음료"
-  },
-  {
-    "word": "아메리카노",
-    "category": "음료"
-  },
-  {
-    "word": "수정과",
-    "category": "음료"
-  },
-  {
-    "word": "진딧물",
-    "category": "곤충"
-  },
-  {
-    "word": "매미",
-    "category": "곤충"
-  },
-  {
-    "word": "귀뚜라미",
-    "category": "곤충"
-  },
-  {
-    "word": "무당벌레",
-    "category": "곤충"
-  },
-  {
-    "word": "미역",
-    "category": "바다생물"
-  },
-  {
-    "word": "전복",
-    "category": "바다생물"
-  },
-  {
-    "word": "성게",
-    "category": "바다생물"
-  },
-  {
-    "word": "멸치",
-    "category": "바다생물"
-  },
-  {
-    "word": "마카롱",
-    "category": "디저트"
-  },
-  {
-    "word": "와플",
-    "category": "디저트"
-  },
-  {
-    "word": "푸딩",
-    "category": "디저트"
-  },
-  {
-    "word": "약과",
-    "category": "디저트"
-  },
-  {
     "word": "자수",
     "category": "취미"
   },
   {
     "word": "서예",
     "category": "취미"
-  },
-  {
-    "word": "식탁",
-    "category": "가구"
-  },
-  {
-    "word": "서랍장",
-    "category": "가구"
-  },
-  {
-    "word": "책장",
-    "category": "가구"
-  },
-  {
-    "word": "스툴",
-    "category": "가구"
-  },
-  {
-    "word": "궁궐",
-    "category": "건물",
-    "accept": [
-      "궁",
-      "왕궁"
-    ]
-  },
-  {
-    "word": "말벌",
-    "category": "곤충"
-  },
-  {
-    "word": "요트",
-    "category": "탈것"
   }
 ]
