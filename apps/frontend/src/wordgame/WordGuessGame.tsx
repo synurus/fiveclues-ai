@@ -33,6 +33,9 @@ type Stage =
       // 문제(2026-09-16)가 있어, round===2일 때만 채워 결과 화면 바로 위에
       // 요약으로 다시 보여준다.
       previous?: RoundLog;
+      // 1라운드는 범위 없이 순수 추론, 2라운드부터 카테고리 공개(2026-09-16) —
+      // round===2일 때만 채워진다.
+      category?: string;
     }
   | { kind: 'result'; outcome: 'round1' | 'round2' | 'failed'; word: string; category: string; rounds: RoundLog[] }
   | { kind: 'error'; message: string };
@@ -126,6 +129,7 @@ export function WordGuessGame() {
           session: res.session,
           round: res.round,
           hints: round2Hints,
+          category: res.category,
           previous: { hints: stage.hints, guess: attemptedGuess },
         });
       } else {
@@ -202,7 +206,10 @@ export function WordGuessGame() {
                 </p>
               </div>
             )}
-            <p className="wg-round">{stage.round}라운드</p>
+            <p className="wg-round">
+              {stage.round}라운드
+              {stage.category && <span className="wg-category"> · {stage.category}</span>}
+            </p>
             <ul className="wg-hints">
               {stage.hints.map((text, i) =>
                 i <= revealed ? (

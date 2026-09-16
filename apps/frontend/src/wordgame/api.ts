@@ -15,7 +15,7 @@ export interface StartResponse {
 
 export type GuessResponse =
   | { result: 'round1' | 'round2'; word: string; category: string; verdict: 'exact' | 'loose' }
-  | { result: 'continue'; session: string; round: 2; hints: Hint[] }
+  | { result: 'continue'; session: string; round: 2; category: string; hints: Hint[] }
   | { result: 'failed'; word: string; category: string; verdict: 'wrong' };
 
 // 자가개선 루프(scripts/self-improve/)가 GitHub Issue로 쌓는 피드백.
