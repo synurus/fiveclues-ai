@@ -208,7 +208,7 @@ export function WordGuessGame() {
             )}
             <p className="wg-round">
               {stage.round}라운드
-              {stage.category && <span className="wg-category"> · {stage.category}</span>}
+              {stage.category && <span className="wg-category"> · 제시어 카테고리 : {stage.category}</span>}
             </p>
             <ul className="wg-hints">
               {stage.hints.map((text, i) =>
