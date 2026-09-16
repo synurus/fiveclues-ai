@@ -25,8 +25,8 @@ async function listFeedbackIssues() {
             category: '악기',
             hints: ['통이 둘로 나뉘어', '치는 손이 다르면 소리도 다르다', '전통 혼례에 자주 쓰였다'],
             outcome: 'round2',
-            keyHintIndexes: [1],
-            uselessHintIndexes: [0],
+            keyHintIndex: 1,
+            uselessHintIndex: 0,
             feedbackText: '두 번째 힌트가 결정적이었어요',
             nickname: '더미',
           }) +
