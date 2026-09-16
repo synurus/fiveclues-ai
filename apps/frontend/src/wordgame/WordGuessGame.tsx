@@ -1,14 +1,20 @@
 // AI 라이어게임 — 턴제 API(apps/backend/src/routes/game.ts) 전용 화면.
-// 기존 App.tsx는 실시간(socket.io) 게임 전용 상태머신(useGameState)에 묶여 있어서
-// 그 트리에 얹지 않고 완전히 독립된 화면으로 뒀다(2026-09-15, 실시간 불필요 판단).
 //
-// 결과 화면의 피드백 폼(결정적/무쓸모 힌트 선택 + 자유 코멘트)은 자가개선 루프
+// 결과 화면의 피드백(결정적/무쓸모 힌트 태그 + 자유 코멘트)은 자가개선 루프
 // (scripts/self-improve/) 의 입력이다 — /game/feedback 이 GitHub Issue로 쌓고,
-// 주간 워크플로가 그 이슈들을 읽어 hintPrompt.ts 수정 PR을 연다. 제출은 선택이고
-// "다시하기" 는 피드백을 보내든 안 보내든 항상 가능하다.
+// 매일 08시 KST 워크플로가 그 이슈들을 읽어 hintPrompt.ts 수정 PR을 연다. 제출은
+// 선택이고 "다시하기" 는 피드백을 보내든 안 보내든 항상 가능하다.
+//
+// 힌트 선택 UX(2026-09-16 개편): 재생됐던 힌트 말풍선(채팅 로그)을 결과 화면에도
+// 그대로 띄우고, 말풍선 왼쪽 👍/오른쪽 👎을 직접 클릭해 태그한다. 예전엔 힌트
+// 텍스트를 라디오 버튼 목록으로 따로 다시 나열했는데, 그러면 "지금 본 그 말풍선"과
+// "고르는 목록"이 시각적으로 분리돼 대응 관계가 흐려졌다. 결정적/무쓸모 둘 다
+// 복수 선택 가능 — 힌트 여러 개가 같이 결정적이었거나(또는 같이 무쓸모였거나) 하는
+// 실제 상황을 하나만 고르라고 강제하면 정보가 사라진다. 한 말풍선이 동시에
+// 결정적이면서 무쓸모일 수는 없게 막는다(토글 시 반대쪽에서 자동으로 뺀다).
 import { useState } from 'react';
 import Button from '../components/Button';
-import { NAME_MAX_LENGTH } from '../roomConfig';
+import { NAME_MAX_LENGTH } from './constants';
 import { startGame, submitGuess, submitFeedback, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
 import './wordgame.css';
@@ -30,10 +36,30 @@ export function WordGuessGame() {
   const [submitting, setSubmitting] = useState(false);
   const [hintsSoFar, setHintsSoFar] = useState<string[]>([]);
 
-  const [keyHintIndex, setKeyHintIndex] = useState<number | null>(null);
-  const [uselessHintIndex, setUselessHintIndex] = useState<number | null>(null);
+  const [keyHints, setKeyHints] = useState<Set<number>>(new Set());
+  const [uselessHints, setUselessHints] = useState<Set<number>>(new Set());
   const [feedbackText, setFeedbackText] = useState('');
   const [feedbackStatus, setFeedbackStatus] = useState<FeedbackStatus>('idle');
+
+  const toggleKey = (i: number) => {
+    setKeyHints((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+    setUselessHints((prev) => (prev.has(i) ? new Set([...prev].filter((x) => x !== i)) : prev));
+  };
+
+  const toggleUseless = (i: number) => {
+    setUselessHints((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+    setKeyHints((prev) => (prev.has(i) ? new Set([...prev].filter((x) => x !== i)) : prev));
+  };
 
   const handleStart = async () => {
     setStage({ kind: 'loading' });
@@ -43,8 +69,8 @@ export function WordGuessGame() {
       setRevealed(0);
       setGuess('');
       setHintsSoFar(firstHints);
-      setKeyHintIndex(null);
-      setUselessHintIndex(null);
+      setKeyHints(new Set());
+      setUselessHints(new Set());
       setFeedbackText('');
       setFeedbackStatus('idle');
       setStage({ kind: 'playing', session: res.session, round: res.round, hints: firstHints });
@@ -83,8 +109,8 @@ export function WordGuessGame() {
         category: stage.category,
         hints: stage.hintsSoFar,
         outcome: stage.outcome,
-        keyHintIndex,
-        uselessHintIndex,
+        keyHintIndexes: [...keyHints].sort((a, b) => a - b),
+        uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),
         feedbackText: feedbackText.trim(),
         nickname,
       });
@@ -155,53 +181,41 @@ export function WordGuessGame() {
               <p className="wg-feedback-done">피드백 고마워요! 다음 프롬프트 개선에 참고할게요.</p>
             ) : (
               <div className="wg-feedback">
-                <p className="wg-feedback-title">어떤 힌트가 결정적이었나요?</p>
-                <div className="wg-feedback-options">
-                  <label className="wg-feedback-option">
-                    <input
-                      type="radio"
-                      name="key-hint"
-                      checked={keyHintIndex === null}
-                      onChange={() => setKeyHintIndex(null)}
-                    />
-                    없음
-                  </label>
-                  {stage.hintsSoFar.map((text, i) => (
-                    <label className="wg-feedback-option" key={`key-${i}`}>
-                      <input
-                        type="radio"
-                        name="key-hint"
-                        checked={keyHintIndex === i}
-                        onChange={() => setKeyHintIndex(i)}
-                      />
-                      {text}
-                    </label>
-                  ))}
-                </div>
-
-                <p className="wg-feedback-title">어떤 힌트가 전혀 도움이 안 됐나요?</p>
-                <div className="wg-feedback-options">
-                  <label className="wg-feedback-option">
-                    <input
-                      type="radio"
-                      name="useless-hint"
-                      checked={uselessHintIndex === null}
-                      onChange={() => setUselessHintIndex(null)}
-                    />
-                    없음
-                  </label>
-                  {stage.hintsSoFar.map((text, i) => (
-                    <label className="wg-feedback-option" key={`useless-${i}`}>
-                      <input
-                        type="radio"
-                        name="useless-hint"
-                        checked={uselessHintIndex === i}
-                        onChange={() => setUselessHintIndex(i)}
-                      />
-                      {text}
-                    </label>
-                  ))}
-                </div>
+                <p className="wg-feedback-title">결정적이었던 힌트엔 👍, 전혀 도움 안 된 힌트엔 👎 — 여러 개 골라도 돼요.</p>
+                <ul className="wg-hints wg-hints-taggable">
+                  {stage.hintsSoFar.map((text, i) => {
+                    const isKey = keyHints.has(i);
+                    const isUseless = uselessHints.has(i);
+                    return (
+                      <li
+                        key={i}
+                        className={
+                          'wg-hint-row' + (isKey ? ' wg-hint-row-key' : '') + (isUseless ? ' wg-hint-row-useless' : '')
+                        }
+                      >
+                        <button
+                          type="button"
+                          className={'wg-hint-tag' + (isKey ? ' wg-hint-tag-active' : '')}
+                          aria-pressed={isKey}
+                          aria-label="결정적인 힌트로 표시"
+                          onClick={() => toggleKey(i)}
+                        >
+                          👍
+                        </button>
+                        <span className="wg-hint-text">{text}</span>
+                        <button
+                          type="button"
+                          className={'wg-hint-tag' + (isUseless ? ' wg-hint-tag-active' : '')}
+                          aria-pressed={isUseless}
+                          aria-label="무쓸모한 힌트로 표시"
+                          onClick={() => toggleUseless(i)}
+                        >
+                          👎
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
 
                 <textarea
                   className="wg-textarea"

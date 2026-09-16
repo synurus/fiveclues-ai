@@ -65,14 +65,24 @@ async function loadFeedback() {
 }
 
 // gather.mjs 가 저장한 형태: [{ number, data: FeedbackPayload }, ...]
+// keyHintIndex/uselessHintIndex는 원래 숫자 하나였는데, 결과 화면에서 말풍선
+// 여러 개를 동시에 태그할 수 있게 되면서(2026-09-16) 배열(keyHintIndexes/
+// uselessHintIndexes)로 바뀌었다 — 옛 이슈(마이그레이션 전에 쌓인 것)가 아직
+// 남아있을 수 있어 두 형태 다 받아준다.
+function hintTexts(hints, indexes) {
+  const list = Array.isArray(indexes) ? indexes : typeof indexes === 'number' ? [indexes] : [];
+  const texts = list.map((i) => hints?.[i]).filter((t) => typeof t === 'string');
+  return texts.length ? texts.map((t) => `"${t}"`).join(', ') : '없음';
+}
+
 function summarizeForPrompt(items) {
   const tally = { round1: 0, round2: 0, failed: 0 };
   const lines = items.slice(0, MAX_FEEDBACK_FOR_PROMPT).map(({ number, data }) => {
     tally[data.outcome] = (tally[data.outcome] ?? 0) + 1;
-    const key = typeof data.keyHintIndex === 'number' ? (data.hints[data.keyHintIndex] ?? '?') : '없음';
-    const useless = typeof data.uselessHintIndex === 'number' ? (data.hints[data.uselessHintIndex] ?? '?') : '없음';
+    const key = hintTexts(data.hints, data.keyHintIndexes ?? data.keyHintIndex);
+    const useless = hintTexts(data.hints, data.uselessHintIndexes ?? data.uselessHintIndex);
     const comment = data.feedbackText ? ` · "${data.feedbackText}"` : '';
-    return `- #${number} [${data.outcome}] "${data.word}"(${data.category}) 결정적:"${key}" 무쓸모:"${useless}"${comment}`;
+    return `- #${number} [${data.outcome}] "${data.word}"(${data.category}) 결정적:${key} 무쓸모:${useless}${comment}`;
   });
   const tallyLine = `집계: 1라운드에 맞음 ${tally.round1 ?? 0} · 2라운드까지 가서 맞음 ${tally.round2 ?? 0} · 실패(정답 공개) ${tally.failed ?? 0}`;
   return `${tallyLine}\n\n${lines.join('\n')}`;

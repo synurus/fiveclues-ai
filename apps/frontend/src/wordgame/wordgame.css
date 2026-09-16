@@ -62,7 +62,7 @@
   margin-bottom: var(--space-2);
 }
 
-/* 결과 화면 피드백 폼 — 자가개선 루프(scripts/self-improve/)의 입력. */
+/* 결과 화면 피드백 — 자가개선 루프(scripts/self-improve/)의 입력. */
 .wg-feedback {
   margin: var(--space-4) 0;
   padding: var(--space-2) 0;
@@ -76,24 +76,61 @@
   margin: var(--space-2) 0 var(--space-1);
 }
 
-.wg-feedback-options {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  margin-bottom: var(--space-2);
+/* 재생됐던 힌트 말풍선을 결과 화면에도 그대로 띄우고, 각 말풍선 양옆의
+   👍/👎 버튼으로 태그한다(2026-09-16 — 힌트 텍스트를 라디오 목록으로 다시
+   나열하던 예전 방식 대체). min-height는 재생 중 화면(타자기 애니메이션용)
+   전용이라 여기선 끈다. */
+.wg-hints-taggable {
+  min-height: 0;
 }
 
-.wg-feedback-option {
+.wg-hint-row {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-  font-size: var(--text-body);
-  color: var(--color-text);
-  cursor: pointer;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-line);
 }
 
-.wg-feedback-option input {
+.wg-hint-text {
+  flex: 1;
+  font-size: var(--text-body);
+  color: var(--color-text);
+}
+
+.wg-hint-tag {
   flex-shrink: 0;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  padding: 2px 8px;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.wg-hint-tag:hover {
+  opacity: 0.8;
+}
+
+.wg-hint-tag:active {
+  transform: scale(0.92);
+}
+
+.wg-hint-tag-active {
+  opacity: 1;
+  border-color: var(--color-accent);
+}
+
+.wg-hint-row-key .wg-hint-text {
+  color: var(--color-accent);
+}
+
+.wg-hint-row-useless .wg-hint-text {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 .wg-textarea {
