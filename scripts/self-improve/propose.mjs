@@ -121,7 +121,9 @@ async function callLlm(system, user) {
       return data.choices?.[0]?.message?.content?.trim() ?? '';
     }
     const text = await res.text();
-    if (res.status === 429 && attempt <= 6) {
+    // 503(UNAVAILABLE)은 Gemini 무료 티어에서 "일시적 과부하"로 흔히 나는
+    // 응답이다(재시도하면 대개 풀린다) — 429(rate limit)와 같은 재시도 경로를 탄다.
+    if ((res.status === 429 || res.status === 503) && attempt <= 6) {
       await sleep(retryAfterMs(res, text));
       continue;
     }
