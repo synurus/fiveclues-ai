@@ -125,14 +125,19 @@ async function callLlm(system, user) {
     }
     const text = await res.text();
     // 503(UNAVAILABLE)은 Gemini 무료 티어에서 "일시적 과부하"로 흔히 나는
-    // 응답이다(재시도하면 대개 풀린다) — 429(rate limit)와 같은 재시도 경로를 탄다.
-    // 8회까지 지수 백오프로 재시도(최대 약 5분) — 6회×5초 고정 대기로는 부족했던
-    // 사례가 있어 늘림(2026-09-17).
-    if ((res.status === 429 || res.status === 503) && attempt <= 8) {
+    // 응답이라 재시도하면 대개 풀린다 — 8회까지 지수 백오프(최대 약 5분, 2026-09-17).
+    // 429는 예전엔 같은 재시도 경로를 탔는데, "You exceeded your current quota"
+    // 메시지는 대개 하루 단위(RPD) 하드 한도라 그날 안엔 재시도해도 절대 안 풀리고
+    // 실패한 요청도 quota를 깎아먹기만 해서(2026-09-17, propose 재시도 1건이
+    // autoplay 게산이나 다음 실행 몫까지 같이 태워버린 사례) 재시도 없이 바로 포기한다.
+    if (res.status === 503 && attempt <= 8) {
       await sleep(retryAfterMs(res, text, attempt));
       continue;
     }
-    throw new Error(`LLM 호출 실패 ${res.status}: ${text.slice(0, 300)}`);
+    // 300자로 자르면 quota 에러의 핵심(어떤 한도를 넘었는지)이 잘려서 안 보이던
+    // 문제가 있었다(2026-09-17) — 원인 파악용으로 넉넉히 남긴다.
+    console.error(`[propose] LLM 응답 실패 ${res.status}:\n${text}`);
+    throw new Error(`LLM 호출 실패 ${res.status}: ${text.slice(0, 1000)}`);
   }
 }
 
