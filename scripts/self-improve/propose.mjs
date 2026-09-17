@@ -88,12 +88,15 @@ function summarizeForPrompt(items) {
   return `${tallyLine}\n\n${lines.join('\n')}`;
 }
 
-function retryAfterMs(res, body) {
+function retryAfterMs(res, body, attempt) {
   const h = Number(res.headers.get('retry-after'));
   if (Number.isFinite(h) && h > 0) return h * 1000 + 500;
   const m = body.match(/try again in ([\d.]+)\s*s/i);
   if (m) return Number(m[1]) * 1000 + 500;
-  return 5000;
+  // Gemini 503(UNAVAILABLE)엔 retry-after가 안 실려 온다 — 지수 백오프로 대체.
+  // 5→10→20→40→60초(상한)로 늘려가며 기다린다(2026-09-17, 과부하가 30초 넘게
+  // 가서 6회×5초 고정 대기로는 다 씹힌 사례가 있어 늘림).
+  return Math.min(5000 * 2 ** (attempt - 1), 60000);
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const isReasoningModel = (model) => /gpt-oss/.test(model);
@@ -123,8 +126,10 @@ async function callLlm(system, user) {
     const text = await res.text();
     // 503(UNAVAILABLE)은 Gemini 무료 티어에서 "일시적 과부하"로 흔히 나는
     // 응답이다(재시도하면 대개 풀린다) — 429(rate limit)와 같은 재시도 경로를 탄다.
-    if ((res.status === 429 || res.status === 503) && attempt <= 6) {
-      await sleep(retryAfterMs(res, text));
+    // 8회까지 지수 백오프로 재시도(최대 약 5분) — 6회×5초 고정 대기로는 부족했던
+    // 사례가 있어 늘림(2026-09-17).
+    if ((res.status === 429 || res.status === 503) && attempt <= 8) {
+      await sleep(retryAfterMs(res, text, attempt));
       continue;
     }
     throw new Error(`LLM 호출 실패 ${res.status}: ${text.slice(0, 300)}`);

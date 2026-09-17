@@ -50,4 +50,10 @@ jobs:
           GITHUB_FEEDBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPO: ${{ github.repository }}
           AUTO_PLAY_GAMES: ${{ github.event.inputs.games || '2' }}
+          # 제미나이 추측자 비교 실험(2026-09-17, apps/backend/src/bot/autoPlay.ts).
+          # 전용 시크릿을 안 만들고 self-improve.yml이 쓰는 SELFIMPROVE_BOT_*를 그대로
+          # 재사용한다 — 없으면(둘 다 미설정) autoPlay.ts가 알아서 실험을 끈다.
+          SELFIMPROVE_BOT_BASE_URL: ${{ secrets.SELFIMPROVE_BOT_BASE_URL }}
+          SELFIMPROVE_BOT_API_KEY: ${{ secrets.SELFIMPROVE_BOT_API_KEY }}
+          SELFIMPROVE_BOT_MODEL: ${{ secrets.SELFIMPROVE_BOT_MODEL }}
         run: npm run autoplay -w backend
