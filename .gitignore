@@ -5,3 +5,5 @@ dist/
 
 # 관전 모드 실행 기록 (scripts/spectate.mjs)
 runs/
+
+Claude outputs/
