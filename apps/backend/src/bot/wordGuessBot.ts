@@ -61,7 +61,9 @@ export interface GenerateHintsInput {
 
 export type GuessJudgement = 'exact' | 'loose' | 'wrong';
 
-const normalize = (s: string): string => String(s ?? '').replace(/[\s.,!?"'·]/g, '').trim();
+// .toLowerCase()가 없으면 영어판에서 "Tambourine"과 "tambourine"이 다른 문자열로
+// 취급돼 오답 처리된다(2026-09-17 발견 — 한국어는 대소문자가 없어서 여태 안 드러났다).
+const normalize = (s: string): string => String(s ?? '').toLowerCase().replace(/[\s.,!?"'·]/g, '').trim();
 
 /**
  * 정답 판정. LLM을 쓰지 않는다 — 플레이어가 직접 입력하므로 문자열 비교면 된다.
