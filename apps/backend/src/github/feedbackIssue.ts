@@ -32,6 +32,10 @@ export interface FeedbackPayload {
    *  피드백만 골라 propose.mjs(hintPrompt.ts 자가개선)에 넘긴다. 영어 힌트
    *  프롬프트(hintPromptEn.ts)는 아직 이 루프 대상이 아니라서다. */
   lang: 'ko' | 'en';
+  /** 자가플레이에서 추측을 대신 맡은 모델(2026-09-17, 제미나이 추측자 비교 실험).
+   *  사람 피드백이나 실험 미적용 판에서는 아예 없음(undefined) — 늘 Groq(BOT_*)가
+   *  추측했다는 뜻. */
+  guesserModel?: string;
   /** 실제로 뭐라고 추측했는지, 라운드마다 하나씩 순서대로 — roundHintCounts와 길이가
    *  같다. 실제 플레이어 피드백(routes/game.ts의 /feedback)도 결과 화면이 라운드별
    *  추측을 들고 있어서(2026-09-16) 채워 보낸다. AI 자동플레이(bot/autoPlay.ts)도

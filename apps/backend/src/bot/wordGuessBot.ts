@@ -97,9 +97,19 @@ function retryAfterMs(res: Response, body: string): number {
   return 5000;
 }
 
-async function listModels(): Promise<string> {
+// callBot()에 override로 다른 엔드포인트를 줄 때 쓴다(2026-09-17 — 자가플레이
+// 추측자를 제미나이로 비교 실험할 때). baseUrl 뒤에 슬래시(/)를 붙이지 말 것 —
+// callBot()이 `${baseUrl}/chat/completions`처럼 직접 이어 붙인다(propose.mjs에서
+// 슬래시 중복으로 404 났던 것과 같은 함정).
+export interface BotConfig {
+  baseUrl: string;
+  apiKey: string;
+  model: string;
+}
+
+async function listModels(baseUrl: string, apiKey: string): Promise<string> {
   try {
-    const res = await fetch(`${BASE_URL}/models`, { headers: { authorization: `Bearer ${API_KEY}` } });
+    const res = await fetch(`${baseUrl}/models`, { headers: { authorization: `Bearer ${apiKey}` } });
     const data = (await res.json()) as { data?: { id: string }[] };
     const ids = data.data?.map((m) => m.id).sort() ?? [];
     return ids.length ? ids.map((id) => `  ${id}`).join('\n') : '  (목록을 받지 못했다)';
@@ -114,13 +124,21 @@ const isReasoningModel = (model: string): boolean => /gpt-oss/.test(model);
 // export: autoPlay.ts(자가개선 AI 자동플레이)가 같은 재시도·reasoning-model
 // 처리 로직을 그대로 재사용한다 — 추측자·소감 LLM 호출도 출제자와 같은 엔드포인트/
 // 429 재시도 규칙을 타므로 새로 짤 이유가 없다.
-export async function callBot(system: string, user: string): Promise<string> {
+//
+// override를 주면 이 호출 하나만 모듈 상단의 BASE_URL/API_KEY/MODEL(=BOT_*) 대신
+// 다른 엔드포인트를 쓴다(2026-09-17 — autoPlay.ts가 추측자를 제미나이로 바꿔서
+// 비교할 때). 안 주면 지금까지처럼 BOT_* 그대로다.
+export async function callBot(system: string, user: string, override?: BotConfig): Promise<string> {
+  const baseUrl = override?.baseUrl ?? BASE_URL;
+  const apiKey = override?.apiKey ?? API_KEY;
+  const model = override?.model ?? MODEL;
+
   const body = JSON.stringify({
-    model: MODEL,
+    model,
     temperature: 0.9,
     max_tokens: 4000,
     response_format: { type: 'json_object' },
-    ...(isReasoningModel(MODEL) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
+    ...(isReasoningModel(model) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
     messages: [
       { role: 'system', content: system },
       { role: 'user', content: user },
@@ -128,9 +146,9 @@ export async function callBot(system: string, user: string): Promise<string> {
   });
 
   for (let attempt = 1; ; attempt++) {
-    const res = await fetch(`${BASE_URL}/chat/completions`, {
+    const res = await fetch(`${baseUrl}/chat/completions`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${API_KEY}` },
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
       body,
     });
     if (res.ok) {
@@ -140,13 +158,14 @@ export async function callBot(system: string, user: string): Promise<string> {
 
     const text = await res.text();
 
-    // 무료 티어 TPM 한도. 서버가 알려준 만큼 기다렸다 이어간다.
-    if (res.status === 429 && attempt <= 6) {
+    // 429는 무료 티어 TPM/RPM 한도, 503은 제미나이 쪽에서 흔한 "일시적 과부하"
+    // (propose.mjs의 503 재시도와 같은 이유, 2026-09-17) — 둘 다 같은 방식으로 기다렸다 이어간다.
+    if ((res.status === 429 || res.status === 503) && attempt <= 6) {
       await sleep(retryAfterMs(res, text));
       continue;
     }
     if (res.status === 404 && text.includes('model_not_found')) {
-      throw new Error(`모델 "${MODEL}" 을(를) 이 키로 쓸 수 없다.\n사용 가능한 모델:\n${await listModels()}`);
+      throw new Error(`모델 "${model}" 을(를) 이 키로 쓸 수 없다.\n사용 가능한 모델:\n${await listModels(baseUrl, apiKey)}`);
     }
     if (text.includes('json_validate_failed')) {
       throw new Error(
