@@ -154,6 +154,7 @@ async function playOne(index: number): Promise<void> {
     feedbackText: reflection.feedbackText,
     nickname: NICKNAME,
     guesses, // 실제로 뭐라고 찍었는지 — 힌트가 나빴는지 AI가 헛짚었는지 이슈만 보고 구분하려는 것.
+    lang: 'ko', // 자동플레이는 한국어 게임만 돈다(2026-09-17 영어 버전 추가 — generateHints도 lang 미지정 시 'ko').
   };
   const { issueNumber } = await createFeedbackIssue(payload);
 

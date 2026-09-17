@@ -22,7 +22,8 @@
  */
 
 import 'dotenv/config';
-import { hintSystem } from './hintPrompt';
+import { hintSystem as hintSystemKo } from './hintPrompt';
+import { hintSystem as hintSystemEn } from './hintPromptEn';
 
 // Vercel 등에서 값을 안 채운 환경변수는 undefined가 아니라 빈 문자열로 온다.
 // ??는 ""를 "값 있음"으로 쳐서 기본값으로 안 넘어가므로 ||를 쓴다
@@ -53,6 +54,9 @@ export interface GenerateHintsInput {
   previousHints?: Hint[];
   /** round === 2 일 때 필수 — 1라운드 오답. */
   wrongGuess?: string;
+  /** 미지정 시 'ko'(기존 동작 그대로) — autoPlay.ts/spectate.mjs 등 기존 호출부는
+   *  안 넘겨도 그대로 한국어로 동작한다(2026-09-17, 영어 버전 추가). */
+  lang?: 'ko' | 'en';
 }
 
 export type GuessJudgement = 'exact' | 'loose' | 'wrong';
@@ -172,7 +176,8 @@ export function parseJson<T>(text: string, fallback: T): T {
 }
 
 // ── 프롬프트 ───────────────────────────────────────────────────────────
-// hintSystem 은 hintPrompt.ts 로 옮겼다(자가개선 워크플로가 그 파일만 건드리게 하려고).
+// hintSystem 은 hintPrompt.ts(한국어)·hintPromptEn.ts(영어)로 옮겼다(자가개선
+// 워크플로가 hintPrompt.ts만 건드리게 하려고 — hintPromptEn.ts는 그 대상이 아니다).
 
 function hintUser(
   word: string,
@@ -196,18 +201,42 @@ function hintUser(
   );
 }
 
+// hintUser의 영어판. hintPromptEn.ts와 짝이다 — 시스템 프롬프트만 영어고 유저
+// 메시지는 한국어면 모델이 뒤섞어 응답할 위험이 있어 둘 다 언어를 맞춘다.
+function hintUserEn(
+  word: string,
+  round: 1 | 2,
+  hintCount: number,
+  previousHints?: Hint[],
+  wrongGuess?: string,
+): string {
+  if (round === 1) {
+    return `Target word: ${word}\n\nWrite ${hintCount} clues.`;
+  }
+  const prev = (previousHints ?? []).map((h) => `- ${h.text}`).join('\n');
+  return (
+    `Target word: ${word}\n\nClues already given in round 1 (don't repeat these):\n${prev}\n\n` +
+    `The round 1 guess was "${wrongGuess}" and it was wrong. Avoid clues that would lead back to` +
+    ` that same guess, but don't directly say "it's not ${wrongGuess}".\n\n` +
+    `Write ${hintCount} round 2 clues.`
+  );
+}
+
 /**
  * 묘사 생성. 라운드당 LLM 호출 1번(기획서 v2 — "봇을 5번 부르지 않는다").
  * round === 2 면 previousHints·wrongGuess 가 필수다.
  */
 export async function generateHints(input: GenerateHintsInput): Promise<HintRound> {
-  const { word, category, round, hintCount, previousHints, wrongGuess } = input;
+  const { word, category, round, hintCount, previousHints, wrongGuess, lang } = input;
   if (round === 2 && (!previousHints || wrongGuess === undefined)) {
     throw new Error('2라운드는 previousHints 와 wrongGuess 가 필요하다.');
   }
 
-  const system = hintSystem(round, category, hintCount);
-  const user = hintUser(word, round, hintCount, previousHints, wrongGuess);
+  const isEn = (lang ?? 'ko') === 'en';
+  const system = isEn ? hintSystemEn(round, category, hintCount) : hintSystemKo(round, category, hintCount);
+  const user = isEn
+    ? hintUserEn(word, round, hintCount, previousHints, wrongGuess)
+    : hintUser(word, round, hintCount, previousHints, wrongGuess);
   const raw = await callBot(system, user);
   const out = parseJson<{ banned?: unknown; hints?: unknown }>(raw, {});
 

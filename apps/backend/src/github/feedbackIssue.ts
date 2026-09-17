@@ -28,6 +28,10 @@ export interface FeedbackPayload {
   uselessHintIndexes: number[];
   feedbackText: string;
   nickname: string;
+  /** 'ko'|'en'. 2026-09-17 영어 버전 추가 — gather.mjs가 이 값으로 한국어
+   *  피드백만 골라 propose.mjs(hintPrompt.ts 자가개선)에 넘긴다. 영어 힌트
+   *  프롬프트(hintPromptEn.ts)는 아직 이 루프 대상이 아니라서다. */
+  lang: 'ko' | 'en';
   /** 실제로 뭐라고 추측했는지, 라운드마다 하나씩 순서대로 — roundHintCounts와 길이가
    *  같다. 실제 플레이어 피드백(routes/game.ts의 /feedback)도 결과 화면이 라운드별
    *  추측을 들고 있어서(2026-09-16) 채워 보낸다. AI 자동플레이(bot/autoPlay.ts)도
@@ -82,7 +86,7 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   const titleCommentPart = titleComment
     ? ` · "${titleComment.length > 40 ? `${titleComment.slice(0, 40)}…` : titleComment}"`
     : '';
-  const title = `[feedback] ${data.word} · ${data.outcome}${titleCommentPart}`;
+  const title = `[feedback]${data.lang === 'en' ? ' [EN]' : ''} ${data.word} · ${data.outcome}${titleCommentPart}`;
   const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   // 본문은 사람이 Issues 탭에서 읽을 요약(라운드별 힌트+추측 로그 포함) + self-improve/

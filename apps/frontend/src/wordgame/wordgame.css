@@ -22,6 +22,35 @@
   margin-bottom: var(--space-4);
 }
 
+/* 닉네임 화면 우상단 언어 전환(2026-09-17). 각 언어명은 그 언어 자체로 항상
+   같은 표기(한글/English)를 쓴다 — 현재 화면 언어에 맞춰 라벨까지 바꾸면
+   상대 언어를 아는 사람이 못 알아볼 수 있어서다. */
+.wg-lang-toggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: 0.8rem;
+}
+
+.wg-lang-toggle button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.wg-lang-toggle button.wg-lang-active {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.wg-lang-sep {
+  color: var(--color-line);
+}
+
 .wg-round {
   color: var(--color-muted); /* 연한 붉은색(2026-09-16) — 예전엔 accent였다. */
   font-weight: 600;

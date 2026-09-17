@@ -17,6 +17,7 @@ import Button from '../components/Button';
 import { NAME_MAX_LENGTH } from './constants';
 import { startGame, submitGuess, submitFeedback, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
+import { strings, detectLang, saveLang, type Lang } from './i18n';
 import './wordgame.css';
 
 type RoundLog = { hints: string[]; guess: string };
@@ -71,6 +72,13 @@ export function WordGuessGame() {
   const [revealed, setRevealed] = useState(0);
   const [guess, setGuess] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [lang, setLang] = useState<Lang>(detectLang);
+  const s = strings[lang];
+
+  const switchLang = (next: Lang) => {
+    setLang(next);
+    saveLang(next);
+  };
 
   const [keyHints, setKeyHints] = useState<Set<number>>(new Set());
   const [uselessHints, setUselessHints] = useState<Set<number>>(new Set());
@@ -100,7 +108,7 @@ export function WordGuessGame() {
   const handleStart = async () => {
     setStage({ kind: 'loading' });
     try {
-      const res = await startGame();
+      const res = await startGame(lang);
       const firstHints = res.hints.map((h) => h.text);
       setRevealed(0);
       setGuess('');
@@ -160,6 +168,7 @@ export function WordGuessGame() {
         uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),
         feedbackText: feedbackText.trim(),
         nickname,
+        lang,
       });
       setFeedbackStatus('sent');
     } catch {
@@ -170,45 +179,54 @@ export function WordGuessGame() {
   return (
     <div className="wg-page">
       <div className="wg-card">
-        <h1 className="wg-title">다섯고개</h1>
+        <h1 className="wg-title">{s.title}</h1>
 
         {stage.kind === 'nickname' && (
           <>
-            <p className="text-muted">AI가 묘사하는 제시어를 맞혀보세요.</p>
+            <div className="wg-lang-toggle">
+              <button type="button" className={lang === 'ko' ? 'wg-lang-active' : ''} onClick={() => switchLang('ko')}>
+                한글
+              </button>
+              <span className="wg-lang-sep">|</span>
+              <button type="button" className={lang === 'en' ? 'wg-lang-active' : ''} onClick={() => switchLang('en')}>
+                English
+              </button>
+            </div>
+            <p className="text-muted">{s.subtitle}</p>
             <input
               className="wg-input"
-              placeholder="닉네임"
+              placeholder={s.nicknamePlaceholder}
               maxLength={NAME_MAX_LENGTH}
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleStart()}
             />
             <Button variant="primary" block onClick={handleStart}>
-              시작
+              {s.start}
             </Button>
           </>
         )}
 
-        {stage.kind === 'loading' && <p className="text-muted">묘사를 만드는 중…</p>}
+        {stage.kind === 'loading' && <p className="text-muted">{s.loading}</p>}
 
         {stage.kind === 'playing' && (
           <>
             {stage.previous && (
               <div className="wg-recap">
-                <p className="wg-round wg-round-recap">1라운드 힌트</p>
+                <p className="wg-round wg-round-recap">{s.recapRoundLabel}</p>
                 <ul className="wg-hints wg-hints-recap">
                   {stage.previous.hints.map((text, i) => (
                     <li key={`recap-${i}`}>{text}</li>
                   ))}
                 </ul>
                 <p className="wg-recap-guess">
-                  내 추측 "{stage.previous.guess}" <span className="wg-recap-wrong">[땡! 틀렸습니다]</span>
+                  {s.myGuess(stage.previous.guess)} <span className="wg-recap-wrong">{s.wrongTag}</span>
                 </p>
               </div>
             )}
             <p className="wg-round">
-              {stage.round}라운드
-              {stage.category && <span className="wg-category"> · 제시어 카테고리 : {stage.category}</span>}
+              {s.round(stage.round)}
+              {stage.category && <span className="wg-category">{s.category(stage.category)}</span>}
             </p>
             <ul className="wg-hints">
               {stage.hints.map((text, i) =>
@@ -221,37 +239,34 @@ export function WordGuessGame() {
             </ul>
             <input
               className="wg-input"
-              placeholder="정답을 입력하세요"
+              placeholder={s.guessPlaceholder}
               value={guess}
               onChange={(e) => setGuess(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleGuess()}
               disabled={submitting}
             />
             <Button variant="primary" block onClick={handleGuess} disabled={submitting || !guess.trim()}>
-              추측하기
+              {s.guess}
             </Button>
           </>
         )}
 
         {stage.kind === 'result' && (
           <>
-            <p className="wg-result-badge">
-              {stage.outcome === 'round1' ? '참 잘했어요' : stage.outcome === 'round2' ? '잘했어요' : '아쉬워요'}
-            </p>
-            <p className="wg-answer">
-              정답은 "{stage.word}({stage.category})" 였습니다.
-            </p>
+            <p className="wg-result-badge">{s.resultBadge[stage.outcome]}</p>
+            <p className="wg-answer">{s.answer(stage.word, stage.category)}</p>
 
             {feedbackStatus === 'sent' ? (
-              <p className="wg-feedback-done">피드백 고마워요! 다음 프롬프트 개선에 참고할게요.</p>
+              <p className="wg-feedback-done">{s.feedbackDone}</p>
             ) : (
               <div className="wg-feedback">
                 <p className="wg-feedback-title">
-                  결정적 힌트는 👍
-                  <br />
-                  무쓸모 힌트는 👎
-                  <br />
-                  여러 개 골라도 돼요
+                  {s.feedbackTitle.map((line, i) => (
+                    <span key={line}>
+                      {i > 0 && <br />}
+                      {line}
+                    </span>
+                  ))}
                 </p>
                 <ul className="wg-hints wg-hints-taggable">
                   {buildResultRows(stage.rounds, stage.outcome).map((row, ri) => {
@@ -259,8 +274,7 @@ export function WordGuessGame() {
                     if (row.kind === 'guess') {
                       return (
                         <li key={`guess-${ri}`} className="wg-hint-guess-row">
-                          내 추측 "{row.text}"{' '}
-                          {row.wrong && <span className="wg-hint-guess-wrong">[땡! 틀렸습니다]</span>}
+                          {s.myGuess(row.text)} {row.wrong && <span className="wg-hint-guess-wrong">{s.wrongTag}</span>}
                         </li>
                       );
                     }
@@ -299,7 +313,7 @@ export function WordGuessGame() {
 
                 <textarea
                   className="wg-textarea"
-                  placeholder="추가로 남기고 싶은 말 (선택)"
+                  placeholder={s.feedbackPlaceholder}
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}
                   maxLength={300}
@@ -311,7 +325,7 @@ export function WordGuessGame() {
                   onClick={handleFeedbackSubmit}
                   disabled={feedbackStatus === 'sending'}
                 >
-                  {feedbackStatus === 'sending' ? '보내는 중…' : feedbackStatus === 'error' ? '다시 시도' : '피드백 보내기'}
+                  {feedbackStatus === 'sending' ? s.feedbackSending : feedbackStatus === 'error' ? s.feedbackRetry : s.feedbackSubmit}
                 </Button>
               </div>
             )}
@@ -319,7 +333,7 @@ export function WordGuessGame() {
             {/* 피드백 보내기 전엔 그쪽을 강조하려고 secondary, 보내고 나면(버튼이
                 사라지고) 다시 원래 강조 스타일로(2026-09-16). */}
             <Button variant={feedbackStatus === 'sent' ? 'primary' : 'secondary'} block onClick={handleStart}>
-              다시하기
+              {s.playAgain}
             </Button>
           </>
         )}
@@ -328,7 +342,7 @@ export function WordGuessGame() {
           <>
             <p style={{ color: 'var(--color-danger)' }}>{stage.message}</p>
             <Button variant="secondary" block onClick={handleStart}>
-              다시 시도
+              {s.retry}
             </Button>
           </>
         )}

@@ -61,7 +61,11 @@ function parseFeedback(issueBody) {
 const issues = await listFeedbackIssues();
 const items = issues
   .map((issue) => ({ number: issue.number, data: parseFeedback(issue.body ?? '') }))
-  .filter((x) => x.data !== null);
+  .filter((x) => x.data !== null)
+  // hintPrompt.ts는 한국어 프롬프트라 한국어 피드백만 반영해야 한다(2026-09-17
+  // 영어 버전 추가). lang 필드가 없는 옛 이슈는 전부 영어 버전 이전 것이므로
+  // 한국어로 본다 — ?? 'ko' 가 그 하위호환이다.
+  .filter((x) => (x.data.lang ?? 'ko') === 'ko');
 
 await mkdir('data/self-improve', { recursive: true });
 await writeFile('data/self-improve/feedback.json', JSON.stringify(items, null, 2));

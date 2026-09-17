@@ -1,0 +1,553 @@
+[
+  {
+    "word": "lion",
+    "category": "Animals"
+  },
+  {
+    "word": "elephant",
+    "category": "Animals"
+  },
+  {
+    "word": "giraffe",
+    "category": "Animals"
+  },
+  {
+    "word": "penguin",
+    "category": "Animals"
+  },
+  {
+    "word": "kangaroo",
+    "category": "Animals"
+  },
+  {
+    "word": "owl",
+    "category": "Animals"
+  },
+  {
+    "word": "dolphin",
+    "category": "Animals"
+  },
+  {
+    "word": "octopus",
+    "category": "Animals"
+  },
+  {
+    "word": "squirrel",
+    "category": "Animals"
+  },
+  {
+    "word": "turtle",
+    "category": "Animals"
+  },
+  {
+    "word": "camel",
+    "category": "Animals"
+  },
+  {
+    "word": "rabbit",
+    "category": "Animals"
+  },
+  {
+    "word": "wolf",
+    "category": "Animals"
+  },
+  {
+    "word": "deer",
+    "category": "Animals"
+  },
+  {
+    "word": "walrus",
+    "category": "Animals"
+  },
+  {
+    "word": "butterfly",
+    "category": "Insects"
+  },
+  {
+    "word": "ladybug",
+    "category": "Insects"
+  },
+  {
+    "word": "dragonfly",
+    "category": "Insects"
+  },
+  {
+    "word": "ant",
+    "category": "Insects"
+  },
+  {
+    "word": "bee",
+    "category": "Insects"
+  },
+  {
+    "word": "grasshopper",
+    "category": "Insects"
+  },
+  {
+    "word": "firefly",
+    "category": "Insects"
+  },
+  {
+    "word": "mosquito",
+    "category": "Insects"
+  },
+  {
+    "word": "cricket",
+    "category": "Insects"
+  },
+  {
+    "word": "beetle",
+    "category": "Insects"
+  },
+  {
+    "word": "violin",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "drum",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "trumpet",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "guitar",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "piano",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "flute",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "harp",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "accordion",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "tambourine",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "saxophone",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "cello",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "xylophone",
+    "category": "Musical Instruments"
+  },
+  {
+    "word": "bicycle",
+    "category": "Vehicles"
+  },
+  {
+    "word": "helicopter",
+    "category": "Vehicles"
+  },
+  {
+    "word": "submarine",
+    "category": "Vehicles"
+  },
+  {
+    "word": "train",
+    "category": "Vehicles"
+  },
+  {
+    "word": "ferry",
+    "category": "Vehicles",
+    "accept": [
+      "passenger ferry"
+    ]
+  },
+  {
+    "word": "scooter",
+    "category": "Vehicles"
+  },
+  {
+    "word": "hot air balloon",
+    "category": "Vehicles",
+    "accept": [
+      "balloon"
+    ]
+  },
+  {
+    "word": "sailboat",
+    "category": "Vehicles",
+    "accept": [
+      "yacht",
+      "sailing boat"
+    ]
+  },
+  {
+    "word": "tractor",
+    "category": "Vehicles"
+  },
+  {
+    "word": "ambulance",
+    "category": "Vehicles"
+  },
+  {
+    "word": "Paris",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Venice",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Bangkok",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Hawaii",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Iceland",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Egypt",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Rome",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "Bali",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "the Alps",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "the Sahara",
+    "category": "Travel Destinations"
+  },
+  {
+    "word": "pizza",
+    "category": "Food"
+  },
+  {
+    "word": "mango",
+    "category": "Food"
+  },
+  {
+    "word": "biscuit",
+    "category": "Food"
+  },
+  {
+    "word": "sushi",
+    "category": "Food"
+  },
+  {
+    "word": "pancake",
+    "category": "Food"
+  },
+  {
+    "word": "watermelon",
+    "category": "Food"
+  },
+  {
+    "word": "popcorn",
+    "category": "Food"
+  },
+  {
+    "word": "sandwich",
+    "category": "Food"
+  },
+  {
+    "word": "dumpling",
+    "category": "Food"
+  },
+  {
+    "word": "honey",
+    "category": "Food"
+  },
+  {
+    "word": "iced tea",
+    "category": "Drinks"
+  },
+  {
+    "word": "lemonade",
+    "category": "Drinks"
+  },
+  {
+    "word": "espresso",
+    "category": "Drinks"
+  },
+  {
+    "word": "smoothie",
+    "category": "Drinks"
+  },
+  {
+    "word": "hot chocolate",
+    "category": "Drinks"
+  },
+  {
+    "word": "milkshake",
+    "category": "Drinks"
+  },
+  {
+    "word": "compass",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "stapler",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "paperclip",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "scissors",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "eraser",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "highlighter",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "envelope",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "calculator",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "ruler",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "glue stick",
+    "category": "Office Supplies"
+  },
+  {
+    "word": "basketball",
+    "category": "Sports"
+  },
+  {
+    "word": "badminton",
+    "category": "Sports"
+  },
+  {
+    "word": "bowling",
+    "category": "Sports"
+  },
+  {
+    "word": "surfing",
+    "category": "Sports"
+  },
+  {
+    "word": "archery",
+    "category": "Sports"
+  },
+  {
+    "word": "fencing",
+    "category": "Sports"
+  },
+  {
+    "word": "golf",
+    "category": "Sports"
+  },
+  {
+    "word": "skateboarding",
+    "category": "Sports"
+  },
+  {
+    "word": "rock climbing",
+    "category": "Sports"
+  },
+  {
+    "word": "volleyball",
+    "category": "Sports"
+  },
+  {
+    "word": "firefighter",
+    "category": "Occupations",
+    "accept": [
+      "fireman"
+    ]
+  },
+  {
+    "word": "astronaut",
+    "category": "Occupations"
+  },
+  {
+    "word": "chef",
+    "category": "Occupations"
+  },
+  {
+    "word": "dentist",
+    "category": "Occupations"
+  },
+  {
+    "word": "pilot",
+    "category": "Occupations"
+  },
+  {
+    "word": "librarian",
+    "category": "Occupations"
+  },
+  {
+    "word": "plumber",
+    "category": "Occupations"
+  },
+  {
+    "word": "photographer",
+    "category": "Occupations"
+  },
+  {
+    "word": "tailor",
+    "category": "Occupations"
+  },
+  {
+    "word": "lifeguard",
+    "category": "Occupations"
+  },
+  {
+    "word": "umbrella",
+    "category": "Household Items"
+  },
+  {
+    "word": "candle",
+    "category": "Household Items"
+  },
+  {
+    "word": "mirror",
+    "category": "Household Items"
+  },
+  {
+    "word": "blanket",
+    "category": "Household Items"
+  },
+  {
+    "word": "kettle",
+    "category": "Household Items",
+    "accept": [
+      "tea kettle"
+    ]
+  },
+  {
+    "word": "broom",
+    "category": "Household Items"
+  },
+  {
+    "word": "thermometer",
+    "category": "Household Items"
+  },
+  {
+    "word": "doorbell",
+    "category": "Household Items"
+  },
+  {
+    "word": "flashlight",
+    "category": "Household Items",
+    "accept": [
+      "torch"
+    ]
+  },
+  {
+    "word": "clothespin",
+    "category": "Household Items"
+  },
+  {
+    "word": "rainbow",
+    "category": "Nature"
+  },
+  {
+    "word": "volcano",
+    "category": "Nature"
+  },
+  {
+    "word": "waterfall",
+    "category": "Nature"
+  },
+  {
+    "word": "glacier",
+    "category": "Nature"
+  },
+  {
+    "word": "desert",
+    "category": "Nature"
+  },
+  {
+    "word": "coral reef",
+    "category": "Nature"
+  },
+  {
+    "word": "tornado",
+    "category": "Nature"
+  },
+  {
+    "word": "avalanche",
+    "category": "Nature"
+  },
+  {
+    "word": "geyser",
+    "category": "Nature"
+  },
+  {
+    "word": "meteor",
+    "category": "Nature"
+  },
+  {
+    "word": "scarf",
+    "category": "Clothing"
+  },
+  {
+    "word": "backpack",
+    "category": "Clothing"
+  },
+  {
+    "word": "sunglasses",
+    "category": "Clothing"
+  },
+  {
+    "word": "raincoat",
+    "category": "Clothing"
+  },
+  {
+    "word": "mittens",
+    "category": "Clothing"
+  },
+  {
+    "word": "sandals",
+    "category": "Clothing"
+  },
+  {
+    "word": "beret",
+    "category": "Clothing"
+  },
+  {
+    "word": "apron",
+    "category": "Clothing"
+  },
+  {
+    "word": "bowtie",
+    "category": "Clothing"
+  },
+  {
+    "word": "poncho",
+    "category": "Clothing"
+  }
+]
