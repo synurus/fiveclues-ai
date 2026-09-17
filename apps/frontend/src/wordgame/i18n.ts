@@ -45,7 +45,7 @@ export const strings = {
     resultBadge: { round1: 'Nailed it!', round2: 'Nice!', failed: 'So close!' },
     answer: (word: string, category: string) => `The answer was "${word}" (${category}).`,
     feedbackDone: "Thanks for the feedback — it'll help improve future clues.",
-    feedbackTitle: ['👍 the clue that nailed it', '👎 the useless ones', 'Pick as many as you like'],
+    feedbackTitle: ['👍 the CRUCIAL clues', '👎 the USELESS clues', 'Multiple picks OK'],
     feedbackPlaceholder: 'Anything else? (optional)',
     feedbackSending: 'Sending…',
     feedbackRetry: 'Retry',
