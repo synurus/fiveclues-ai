@@ -30,7 +30,12 @@ interface SessionPayload {
   accept: string[];
   round: 1 | 2; // 이 토큰으로 판정할 라운드
   round1Hints: string[]; // 2라운드 생성 시 "겹치지 말 것"에 쓴다
+  lang: 'ko' | 'en'; // 한 판 내내 언어를 고정한다 — 2라운드 힌트도 이 값을 그대로 쓴다.
 }
+
+// body.lang이 'en'이 아니면 전부 'ko'로 본다(기존 클라이언트·값 없는 요청과
+// 호환되게, 2026-09-17 영어 버전 추가).
+const toLang = (v: unknown): 'ko' | 'en' => (v === 'en' ? 'en' : 'ko');
 
 // 플레이어 화면엔 묘사 문장만 나간다 — angle은 기록·분석용이라 노출할 이유가 없다.
 const toPlayerHints = (hints: Hint[]): { text: string }[] => hints.map((h) => ({ text: h.text }));
@@ -49,10 +54,11 @@ const toGuessArray = (v: unknown): string[] => (Array.isArray(v) ? v.filter((s):
 
 export const gameRouter = Router();
 
-gameRouter.post('/start', async (_req: Request, res: Response) => {
+gameRouter.post('/start', async (req: Request, res: Response) => {
   try {
-    const { word, category, accept } = pickWord();
-    const { hints } = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT });
+    const lang = toLang((req.body as { lang?: unknown } | undefined)?.lang);
+    const { word, category, accept } = pickWord(lang);
+    const { hints } = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT, lang });
 
     const session = encodeSession<SessionPayload>({
       word,
@@ -60,6 +66,7 @@ gameRouter.post('/start', async (_req: Request, res: Response) => {
       accept: accept ?? [],
       round: 1,
       round1Hints: hints.map((h) => h.text),
+      lang,
     });
 
     res.json({ session, round: 1, hints: toPlayerHints(hints) });
@@ -106,6 +113,7 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
       hintCount: HINT_COUNT,
       previousHints,
       wrongGuess: guess,
+      lang: payload.lang,
     });
 
     const nextSession = encodeSession<SessionPayload>({ ...payload, round: 2 });
@@ -144,6 +152,7 @@ gameRouter.post('/feedback', async (req: Request, res: Response) => {
       feedbackText: typeof body.feedbackText === 'string' ? body.feedbackText : '',
       nickname: typeof body.nickname === 'string' ? body.nickname : '',
       guesses: toGuessArray(body.guesses),
+      lang: toLang(body.lang),
     });
     res.json({ ok: true, issueNumber });
   } catch (e) {

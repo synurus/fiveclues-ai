@@ -13,6 +13,10 @@ export interface StartResponse {
   hints: Hint[];
 }
 
+// 세션 발급 시 한 번만 넘긴다 — 2라운드부터는 세션 토큰 안의 값을 서버가 그대로
+// 쓴다(2026-09-17 영어 버전 추가).
+export type Lang = 'ko' | 'en';
+
 export type GuessResponse =
   | { result: 'round1' | 'round2'; word: string; category: string; verdict: 'exact' | 'loose' }
   | { result: 'continue'; session: string; round: 2; category: string; hints: Hint[] }
@@ -31,6 +35,7 @@ export interface FeedbackInput {
   uselessHintIndexes: number[]; // 무쓸모였던 힌트(들). 여러 개 태그 가능, 없으면 [].
   feedbackText: string;
   nickname: string;
+  lang: Lang;
 }
 
 async function postJson<T>(path: string, body?: unknown): Promise<T> {
@@ -46,8 +51,8 @@ async function postJson<T>(path: string, body?: unknown): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export function startGame(): Promise<StartResponse> {
-  return postJson<StartResponse>('/game/start');
+export function startGame(lang: Lang): Promise<StartResponse> {
+  return postJson<StartResponse>('/game/start', { lang });
 }
 
 export function submitGuess(session: string, guess: string): Promise<GuessResponse> {
