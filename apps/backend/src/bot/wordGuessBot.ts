@@ -32,6 +32,10 @@ const BASE_URL = process.env.BOT_BASE_URL || 'https://api.groq.com/openai/v1';
 const API_KEY = process.env.BOT_API_KEY ?? '';
 const MODEL = process.env.BOT_MODEL || 'openai/gpt-oss-120b';
 
+// override 없이 callBot()을 부를 때 실제로 쓰이는 모델 이름. autoPlay.ts가 이슈에
+// "어떤 모델이 추측했는지"를 항상 남기려고(override가 없을 때도) 가져다 쓴다(2026-09-18).
+export const DEFAULT_MODEL = MODEL;
+
 export interface Hint {
   text: string;
   /** 무엇에 대해 말했는지 기록용 라벨. 생성 제약이 아니라 사후 분석용이다. */

@@ -32,9 +32,11 @@ export interface FeedbackPayload {
    *  피드백만 골라 propose.mjs(hintPrompt.ts 자가개선)에 넘긴다. 영어 힌트
    *  프롬프트(hintPromptEn.ts)는 아직 이 루프 대상이 아니라서다. */
   lang: 'ko' | 'en';
-  /** 자가플레이에서 추측을 대신 맡은 모델(2026-09-17, 제미나이 추측자 비교 실험).
-   *  사람 피드백이나 실험 미적용 판에서는 아예 없음(undefined) — 늘 Groq(BOT_*)가
-   *  추측했다는 뜻. */
+  /** 어떤 모델이 추측했는지(2026-09-17 제미나이 추측자 비교 실험용으로 추가,
+   *  2026-09-18부터 자가플레이는 항상 채운다 — override가 없을 때도 실제 기본
+   *  모델 이름(DEFAULT_MODEL)을 넣어서, 이슈만 보고 "이번엔 어떤 AI가 플레이했는지"를
+   *  바로 알 수 있게). 사람 피드백(routes/game.ts의 /feedback)엔 없음 — 사람이
+   *  플레이했다는 뜻이라 넣을 모델이 없다. */
   guesserModel?: string;
   /** 실제로 뭐라고 추측했는지, 라운드마다 하나씩 순서대로 — roundHintCounts와 길이가
    *  같다. 실제 플레이어 피드백(routes/game.ts의 /feedback)도 결과 화면이 라운드별
@@ -90,7 +92,10 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   const titleCommentPart = titleComment
     ? ` · "${titleComment.length > 40 ? `${titleComment.slice(0, 40)}…` : titleComment}"`
     : '';
-  const title = `[feedback]${data.lang === 'en' ? ' [EN]' : ''} ${data.word} · ${data.outcome}${titleCommentPart}`;
+  // guesserModel이 있으면(AI 자동플레이) 제목에도 태그를 붙인다(2026-09-18) —
+  // 이슈 목록만 훑어봐도 이번엔 어떤 AI가 플레이했는지 바로 보이게.
+  const guesserTag = data.guesserModel ? ` [🤖${data.guesserModel}]` : '';
+  const title = `[feedback]${data.lang === 'en' ? ' [EN]' : ''}${guesserTag} ${data.word} · ${data.outcome}${titleCommentPart}`;
   const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(Boolean);
   // 본문은 사람이 Issues 탭에서 읽을 요약(라운드별 힌트+추측 로그 포함) + self-improve/
@@ -99,6 +104,7 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   // 된다 — guesses/roundHintCounts는 JSON 쪽에도 그대로 담겨 있다.
   const body =
     `${data.nickname || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
+    (data.guesserModel ? ` · 추측자: ${data.guesserModel}` : '') +
     `\n\n${buildHintLog(data)}` +
     (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${t}"`).join(', ')}` : '') +
     (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${t}"`).join(', ')}` : '') +

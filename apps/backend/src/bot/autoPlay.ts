@@ -26,13 +26,17 @@
  *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2),
  *   AUTOPLAY_GUESSER_BOT_BASE_URL/API_KEY/MODEL·AUTOPLAY_GUESSER_HOURS(2026-09-17
  *   추가 — 제미나이 추측자 비교 실험. 전용 키가 없으면 SELFIMPROVE_BOT_*(propose.mjs
- *   용)를 재사용한다. 아래 GUESSER_HOURS/GUESSER_OVERRIDE 참고)
+ *   용)를 재사용한다. 아래 GUESSER_HOURS/GUESSER_OVERRIDE 참고),
+ *   AUTOPLAY_GUESSER_MODE(2026-09-18 추가 — GitHub Actions에서 수동 실행
+ *   (workflow_dispatch)할 때 추측자를 직접 고를 수 있게. 'auto'(기본, 시간대별 자동
+ *   전환) | 'groq'(이번 실행은 전 판을 강제로 Groq) | 'gemini'(전 판을 강제로 제미나이 —
+ *   시간대·"첫 판만" 제한을 다 무시하니 판 수만큼 제미나이 콜을 쓴다는 점 주의)
  *
  *   로컬 테스트: npm run autoplay -w backend
  */
 
 import 'dotenv/config';
-import { generateHints, judgeGuess, callBot, parseJson, type Hint, type BotConfig } from './wordGuessBot';
+import { generateHints, judgeGuess, callBot, parseJson, DEFAULT_MODEL, type Hint, type BotConfig } from './wordGuessBot';
 import { pickWord } from '../routes/wordPool';
 import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
 
@@ -70,8 +74,22 @@ const GUESSER_OVERRIDE: BotConfig | undefined = GUESSER_API_KEY
 
 const currentKstHour = (): number => (new Date().getUTCHours() + 9) % 24;
 
-// index===1(이 실행의 첫 판)이고 지금이 GUESSER_HOURS에 든 시각일 때만 override를 준다.
+// GitHub Actions에서 수동 실행(workflow_dispatch) 시 추측자를 직접 고르는 스위치
+// (2026-09-18). 스케줄(cron) 실행에는 이 값이 안 실려서 항상 'auto'다.
+type GuesserMode = 'auto' | 'groq' | 'gemini';
+const rawMode = (process.env.AUTOPLAY_GUESSER_MODE || 'auto').trim().toLowerCase();
+const GUESSER_MODE: GuesserMode = rawMode === 'groq' || rawMode === 'gemini' ? rawMode : 'auto';
+if (GUESSER_MODE === 'gemini' && !GUESSER_OVERRIDE) {
+  // 제미나이를 강제로 지정했는데 키가 없으면 조용히 Groq로 새는 대신 바로 알린다 —
+  // 로그를 안 보면 "왜 이번 실행은 제미나이가 아니지?"를 모르고 넘어갈 수 있어서.
+  console.error('[autoPlay] AUTOPLAY_GUESSER_MODE=gemini 인데 제미나이 키(AUTOPLAY_GUESSER_BOT_API_KEY/SELFIMPROVE_BOT_API_KEY)가 없다 — Groq로 진행한다.');
+}
+
+// index===1(이 실행의 첫 판)이고 지금이 GUESSER_HOURS에 든 시각일 때만 override를 준다
+// — 단, GUESSER_MODE로 수동 강제한 경우엔 시간대·"첫 판만" 제한을 전부 무시한다.
 function guesserOverrideFor(index: number): BotConfig | undefined {
+  if (GUESSER_MODE === 'groq') return undefined;
+  if (GUESSER_MODE === 'gemini') return GUESSER_OVERRIDE; // 키가 없으면 위에서 이미 경고했고 undefined라 그냥 Groq.
   if (!GUESSER_OVERRIDE || index !== 1) return undefined;
   return GUESSER_HOURS.has(currentKstHour()) ? GUESSER_OVERRIDE : undefined;
 }
@@ -184,6 +202,12 @@ async function playOne(index: number): Promise<void> {
 
   const reflection = await reflectFeedback(word, category, hintsSoFar, outcome, guesses, guesser);
 
+  // guesser가 없으면(override 미적용) 기본 Groq 모델(DEFAULT_MODEL)이 추측한 것이다 —
+  // 예전엔 이 경우 guesserModel을 아예 안 남겨서 이슈만 보고는 "Groq였겠거니" 짐작해야
+  // 했는데, 항상 실제 모델 이름을 남기게 바꿨다(2026-09-18, "어떤 AI가 플레이했는지
+  // 이슈에서 바로 보이게 해달라"는 요청).
+  const guesserModel = guesser?.model ?? DEFAULT_MODEL;
+
   const payload: FeedbackPayload = {
     word,
     category,
@@ -196,17 +220,17 @@ async function playOne(index: number): Promise<void> {
     nickname: NICKNAME,
     guesses, // 실제로 뭐라고 찍었는지 — 힌트가 나빴는지 AI가 헛짚었는지 이슈만 보고 구분하려는 것.
     lang: 'ko', // 자동플레이는 한국어 게임만 돈다(2026-09-17 영어 버전 추가 — generateHints도 lang 미지정 시 'ko').
-    ...(guesser ? { guesserModel: guesser.model } : {}), // exactOptionalPropertyTypes라 undefined를 명시로 넣지 않는다.
+    guesserModel,
   };
   const { issueNumber } = await createFeedbackIssue(payload);
 
   console.log(
-    `[${index}/${GAMES}]${guesser ? ` [추측자=${guesser.model}]` : ''} [${outcome}] "${word}"(${category}) 추측=${guesses.join(' → ')} → 이슈 #${issueNumber}`,
+    `[${index}/${GAMES}] [추측자=${guesserModel}] [${outcome}] "${word}"(${category}) 추측=${guesses.join(' → ')} → 이슈 #${issueNumber}`,
   );
 }
 
 async function main(): Promise<void> {
-  console.log(`AI 자동플레이 ${GAMES}판 시작`);
+  console.log(`AI 자동플레이 ${GAMES}판 시작 (추측자 모드: ${GUESSER_MODE})`);
   for (let i = 1; i <= GAMES; i++) {
     try {
       await playOne(i);
