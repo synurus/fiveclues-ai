@@ -52,13 +52,13 @@
 }
 
 .wg-round {
-  color: var(--color-muted); /* 연한 붉은색(2026-09-16) — 예전엔 accent였다. */
+  color: var(--color-muted); /* 연한 톤(2026-09-16) — 예전엔 accent였다. */
   font-weight: 600;
   margin: 0 0 var(--space-2);
 }
 
 /* 2라운드부터 공개되는 카테고리(2026-09-16) — wg-round가 muted로 빠지면서
-   비워준 진한 빨강(accent)을 여기로 가져와 붉은 계열 톤으로 구분한다. */
+   비워준 accent를 여기로 가져와 진한 톤으로 구분한다. */
 .wg-category {
   color: var(--color-accent);
   font-weight: 400;
