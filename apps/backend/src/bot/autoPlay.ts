@@ -44,16 +44,16 @@ const HINT_COUNT = 5; // routes/game.ts의 HINT_COUNT와 같은 값이어야 실
 const GAMES = Math.max(1, Number(process.env.AUTO_PLAY_GAMES ?? '2') || 2);
 const NICKNAME = 'AI자동플레이';
 
-// ── 제미나이 추측자 비교(2026-09-17) ──────────────────────────────────────
+// ── 제미나이 추측자 비교(2026-09-17, 2026-09-18에 01~05시로 확장) ──────────
 // hintPrompt.ts 자체가 안 좋은 건지, 추측하는 모델(Groq gpt-oss-120b)이 유독
 // 못 맞히는 건지 구분해보려는 실험. 힌트 생성은 항상 BOT_*(Groq) 그대로 두고,
 // GUESSER_HOURS에 든 KST 시각의 "그 실행의 첫 판"만 추측+소감을 이 엔드포인트가
-// 대신 맡는다. 기본 01~04시·판당 1개 = 하루 4판(판당 콜 2~3개, 8~12콜) — 제미나이
+// 대신 맡는다. 기본 01~05시·판당 1개 = 하루 5판(판당 콜 2~3개, 10~15콜) — 제미나이
 // 무료 티어 하루 20건(RPD, 2026-09-17 확인) 안에서 자가개선 분석(SELFIMPROVE_BOT_*,
-// 제미나이면 하루 1콜)까지 합쳐도 여유 있게 두려는 계산이다. 시간·판수를 늘리려면
-// 그 합이 20을 넘지 않는지 다시 계산해볼 것.
+// 제미나이면 하루 1콜)까지 합쳐도 11~16콜로 여유 있게 두려는 계산이다. 시간·판수를
+// 더 늘리려면 그 합이 20을 넘지 않는지 다시 계산해볼 것.
 const GUESSER_HOURS = new Set(
-  (process.env.AUTOPLAY_GUESSER_HOURS || '1,2,3,4')
+  (process.env.AUTOPLAY_GUESSER_HOURS || '1,2,3,4,5')
     .split(',')
     .map((s) => Number(s.trim()))
     .filter((n) => !Number.isNaN(n)),
