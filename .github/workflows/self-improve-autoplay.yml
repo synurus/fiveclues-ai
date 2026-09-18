@@ -13,6 +13,15 @@ on:
         description: '이번 실행에서 플레이할 판 수'
         required: false
         default: '2'
+      guesser:
+        description: '추측자 강제 지정 — auto(시간대별 자동) / groq(전 판 Groq) / gemini(전 판 제미나이, 시간대 제한 무시)'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - groq
+          - gemini
   schedule:
     # 01~07시 KST(UTC+9) 매시 = 전날 UTC 16~22시. 정각(0분)이 아니라 7분으로 둔다 —
     # 매시 정각은 전 세계 예약 워크플로가 몰려서 GitHub이 부하가 높으면 그 실행을
@@ -56,4 +65,7 @@ jobs:
           SELFIMPROVE_BOT_BASE_URL: ${{ secrets.SELFIMPROVE_BOT_BASE_URL }}
           SELFIMPROVE_BOT_API_KEY: ${{ secrets.SELFIMPROVE_BOT_API_KEY }}
           SELFIMPROVE_BOT_MODEL: ${{ secrets.SELFIMPROVE_BOT_MODEL }}
+          # 수동 실행에서 추측자를 직접 고를 때만 값이 실린다(2026-09-18) — 스케줄
+          # (cron) 실행엔 이 input 자체가 없어서 항상 'auto'로 떨어진다.
+          AUTOPLAY_GUESSER_MODE: ${{ github.event.inputs.guesser || 'auto' }}
         run: npm run autoplay -w backend
