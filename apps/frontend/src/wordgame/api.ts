@@ -51,8 +51,11 @@ async function postJson<T>(path: string, body?: unknown): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export function startGame(lang: Lang): Promise<StartResponse> {
-  return postJson<StartResponse>('/game/start', { lang });
+// exclude: 이번 브라우저 세션에서 이미 나온 단어들 — 반복 출제 방지(2026-09-19).
+// 서버가 "최근 단어"를 기억할 상태가 없어서(DB 없음, 서버리스) 클라이언트가 들고
+// 다니다 매번 같이 보낸다.
+export function startGame(lang: Lang, exclude: string[] = []): Promise<StartResponse> {
+  return postJson<StartResponse>('/game/start', { lang, exclude });
 }
 
 export function submitGuess(session: string, guess: string): Promise<GuessResponse> {

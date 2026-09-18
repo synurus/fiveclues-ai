@@ -52,12 +52,16 @@ const toCountArray = (v: unknown): number[] =>
 
 const toGuessArray = (v: unknown): string[] => (Array.isArray(v) ? v.filter((s): s is string => typeof s === 'string') : []);
 
+// body.exclude — 클라이언트가 이번 세션에서 이미 본 단어들. wordPool.ts의 pickWord 참고.
+const toExcludeArray = toGuessArray;
+
 export const gameRouter = Router();
 
 gameRouter.post('/start', async (req: Request, res: Response) => {
   try {
-    const lang = toLang((req.body as { lang?: unknown } | undefined)?.lang);
-    const { word, category, accept } = pickWord(lang);
+    const body = req.body as { lang?: unknown; exclude?: unknown } | undefined;
+    const lang = toLang(body?.lang);
+    const { word, category, accept } = pickWord(lang, toExcludeArray(body?.exclude));
     const { hints } = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT, lang });
 
     const session = encodeSession<SessionPayload>({
