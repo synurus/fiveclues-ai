@@ -92,10 +92,6 @@
     "category": "음식"
   },
   {
-    "word": "갈비탕",
-    "category": "음식"
-  },
-  {
     "word": "비빔밥",
     "category": "음식"
   },
@@ -121,10 +117,6 @@
   },
   {
     "word": "제육볶음",
-    "category": "음식"
-  },
-  {
-    "word": "갈비찜",
     "category": "음식"
   },
   {
@@ -160,10 +152,6 @@
     "category": "음식"
   },
   {
-    "word": "김치전",
-    "category": "음식"
-  },
-  {
     "word": "잡채",
     "category": "음식"
   },
@@ -177,10 +165,6 @@
   },
   {
     "word": "볶음밥",
-    "category": "음식"
-  },
-  {
-    "word": "유부초밥",
     "category": "음식"
   },
   {
@@ -208,10 +192,6 @@
     "category": "음식"
   },
   {
-    "word": "케밥",
-    "category": "음식"
-  },
-  {
     "word": "쌈밥",
     "category": "음식"
   },
@@ -221,10 +201,6 @@
   },
   {
     "word": "콩국수",
-    "category": "음식"
-  },
-  {
-    "word": "막국수",
     "category": "음식"
   },
   {
@@ -245,10 +221,6 @@
   },
   {
     "word": "닭갈비",
-    "category": "음식"
-  },
-  {
-    "word": "찜닭",
     "category": "음식"
   },
   {
@@ -288,15 +260,7 @@
     "category": "음식"
   },
   {
-    "word": "회덮밥",
-    "category": "음식"
-  },
-  {
     "word": "새우튀김",
-    "category": "음식"
-  },
-  {
-    "word": "떡갈비",
     "category": "음식"
   },
   {
@@ -328,10 +292,6 @@
     "category": "간식·디저트"
   },
   {
-    "word": "마카롱",
-    "category": "간식·디저트"
-  },
-  {
     "word": "케이크",
     "category": "간식·디저트"
   },
@@ -360,10 +320,6 @@
     "category": "간식·디저트"
   },
   {
-    "word": "츄러스",
-    "category": "간식·디저트"
-  },
-  {
     "word": "와플",
     "category": "간식·디저트"
   },
@@ -376,14 +332,6 @@
     "category": "간식·디저트"
   },
   {
-    "word": "크로플",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "탕후루",
-    "category": "간식·디저트"
-  },
-  {
     "word": "빙수",
     "category": "간식·디저트"
   },
@@ -393,22 +341,6 @@
   },
   {
     "word": "군밤",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "티라미수",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "에그타르트",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "마들렌",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "스콘",
     "category": "간식·디저트"
   },
   {
@@ -428,10 +360,6 @@
     "category": "간식·디저트"
   },
   {
-    "word": "마시멜로",
-    "category": "간식·디저트"
-  },
-  {
     "word": "사탕",
     "category": "간식·디저트"
   },
@@ -448,35 +376,11 @@
     "category": "간식·디저트"
   },
   {
-    "word": "브라우니",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "슈크림",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "크레페",
-    "category": "간식·디저트"
-  },
-  {
     "word": "아이스바",
     "category": "간식·디저트"
   },
   {
-    "word": "한과",
-    "category": "간식·디저트"
-  },
-  {
     "word": "밤양갱",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "젤라또",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "캐러멜",
     "category": "간식·디저트"
   },
   {
@@ -501,10 +405,6 @@
   },
   {
     "word": "베이글",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "프레첼",
     "category": "간식·디저트"
   },
   {
@@ -536,10 +436,6 @@
     "category": "간식·디저트"
   },
   {
-    "word": "비스킷",
-    "category": "간식·디저트"
-  },
-  {
     "word": "크래커",
     "category": "간식·디저트"
   },
@@ -548,31 +444,7 @@
     "category": "간식·디저트"
   },
   {
-    "word": "컵케이크",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "치즈케이크",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "롤케이크",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "파운드케이크",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "과자",
-    "category": "간식·디저트"
-  },
-  {
     "word": "양갱",
-    "category": "간식·디저트"
-  },
-  {
-    "word": "생크림케이크",
     "category": "간식·디저트"
   },
   {
@@ -1084,15 +956,7 @@
     "category": "동물"
   },
   {
-    "word": "기러기",
-    "category": "동물"
-  },
-  {
     "word": "백조",
-    "category": "동물"
-  },
-  {
-    "word": "청둥오리",
     "category": "동물"
   },
   {
@@ -2571,10 +2435,6 @@
     "category": "바다생물"
   },
   {
-    "word": "가오리",
-    "category": "바다생물"
-  },
-  {
     "word": "복어",
     "category": "바다생물"
   },
@@ -2668,10 +2528,6 @@
   },
   {
     "word": "방어",
-    "category": "바다생물"
-  },
-  {
-    "word": "삼치",
     "category": "바다생물"
   },
   {
@@ -3294,10 +3150,6 @@
     "category": "식물·꽃"
   },
   {
-    "word": "은행잎",
-    "category": "식물·꽃"
-  },
-  {
     "word": "화분",
     "category": "식물·꽃"
   },
@@ -3776,19 +3628,51 @@
     "category": "취미"
   },
   {
-    "word": "텐트",
-    "category": "취미"
-  },
-  {
-    "word": "배낭",
-    "category": "취미"
-  },
-  {
     "word": "자수",
     "category": "취미"
   },
   {
     "word": "서예",
+    "category": "취미"
+  },
+  {
+    "word": "요리",
+    "category": "취미"
+  },
+  {
+    "word": "베이킹",
+    "category": "취미"
+  },
+  {
+    "word": "그림그리기",
+    "category": "취미"
+  },
+  {
+    "word": "사진",
+    "category": "취미"
+  },
+  {
+    "word": "원예",
+    "category": "취미"
+  },
+  {
+    "word": "보드게임",
+    "category": "취미"
+  },
+  {
+    "word": "도자기",
+    "category": "취미"
+  },
+  {
+    "word": "캘리그라피",
+    "category": "취미"
+  },
+  {
+    "word": "프라모델",
+    "category": "취미"
+  },
+  {
+    "word": "방탈출",
     "category": "취미"
   }
 ]
