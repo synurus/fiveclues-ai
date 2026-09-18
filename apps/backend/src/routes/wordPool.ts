@@ -32,9 +32,19 @@ const WORDS_EN_PATH = path.join(__dirname, '../../../../scripts/wordsEn.json');
 const POOL_KO: WordEntry[] = JSON.parse(fs.readFileSync(WORDS_PATH, 'utf8'));
 const POOL_EN: WordEntry[] = JSON.parse(fs.readFileSync(WORDS_EN_PATH, 'utf8'));
 
-export function pickWord(lang: Lang = 'ko'): WordEntry {
+// exclude: 클라이언트가 이번 세션에서 이미 본 단어 목록(2026-09-19, 반복 출제
+// 피드백 대응 — 예: 이슈 #99/#104가 같은 날 둘 다 "주전자"). DB도 서버 메모리도
+// 안 쓰는 이 프로젝트 구조상(CLAUDE.md — 세션은 암호화 토큰, 서버는 매 요청마다
+// 새로 뜰 수 있음) 서버가 "최근에 낸 단어"를 기억할 방법이 없다 — 그래서 클라이언트가
+// 자기가 본 단어를 들고 있다가 매번 "이건 빼줘"로 넘긴다. exclude가 풀 전체를
+// 덮어버리면(단어 수보다 많이 플레이한 경우) 그냥 무시하고 전체 풀에서 뽑는다 —
+// 반복 방지가 "더 이상 뽑을 새 단어가 없어서 게임이 멈추는 것"보다 낮은 우선순위.
+export function pickWord(lang: Lang = 'ko', exclude: string[] = []): WordEntry {
   const pool = lang === 'en' ? POOL_EN : POOL_KO;
-  const entry = pool[Math.floor(Math.random() * pool.length)];
+  const excludeSet = new Set(exclude);
+  const candidates = excludeSet.size ? pool.filter((w) => !excludeSet.has(w.word)) : pool;
+  const usable = candidates.length ? candidates : pool;
+  const entry = usable[Math.floor(Math.random() * usable.length)];
   if (!entry) throw new Error('단어 풀이 비어 있습니다.');
   return entry;
 }
