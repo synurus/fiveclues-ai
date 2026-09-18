@@ -246,10 +246,6 @@
     "category": "Food"
   },
   {
-    "word": "biscuit",
-    "category": "Food"
-  },
-  {
     "word": "sushi",
     "category": "Food"
   },
@@ -516,7 +512,7 @@
   },
   {
     "word": "backpack",
-    "category": "Clothing"
+    "category": "Household Items"
   },
   {
     "word": "sunglasses",
