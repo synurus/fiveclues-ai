@@ -1086,7 +1086,8 @@
     "word": "파일럿",
     "category": "직업",
     "accept": [
-      "비행사"
+      "비행사",
+      "조종사"
     ]
   },
   {
@@ -1191,10 +1192,6 @@
   },
   {
     "word": "한의사",
-    "category": "직업"
-  },
-  {
-    "word": "조종사",
     "category": "직업"
   },
   {
@@ -1473,10 +1470,6 @@
     "category": "장소"
   },
   {
-    "word": "구청",
-    "category": "장소"
-  },
-  {
     "word": "치과",
     "category": "장소"
   },
@@ -1514,18 +1507,6 @@
   },
   {
     "word": "놀이터",
-    "category": "장소"
-  },
-  {
-    "word": "그네",
-    "category": "장소"
-  },
-  {
-    "word": "시소",
-    "category": "장소"
-  },
-  {
-    "word": "미끄럼틀",
     "category": "장소"
   },
   {
@@ -1709,10 +1690,6 @@
     "category": "탈것"
   },
   {
-    "word": "손수레",
-    "category": "탈것"
-  },
-  {
     "word": "페리",
     "category": "탈것",
     "accept": [
@@ -1758,10 +1735,6 @@
   },
   {
     "word": "자동차",
-    "category": "탈것"
-  },
-  {
-    "word": "여객선",
     "category": "탈것"
   },
   {
@@ -1956,10 +1929,6 @@
     "category": "스포츠·운동"
   },
   {
-    "word": "크리켓",
-    "category": "스포츠·운동"
-  },
-  {
     "word": "하키",
     "category": "스포츠·운동"
   },
@@ -2140,10 +2109,6 @@
     "category": "음료"
   },
   {
-    "word": "스파클링워터",
-    "category": "음료"
-  },
-  {
     "word": "탄산수",
     "category": "음료"
   },
@@ -2161,10 +2126,6 @@
   },
   {
     "word": "마키아토",
-    "category": "음료"
-  },
-  {
-    "word": "더치커피",
     "category": "음료"
   },
   {
@@ -2307,10 +2268,6 @@
     "category": "악기"
   },
   {
-    "word": "파이프오르간",
-    "category": "악기"
-  },
-  {
     "word": "팀파니",
     "category": "악기"
   },
@@ -2332,30 +2289,6 @@
   },
   {
     "word": "신시사이저",
-    "category": "악기"
-  },
-  {
-    "word": "나팔",
-    "category": "악기"
-  },
-  {
-    "word": "비올라",
-    "category": "악기"
-  },
-  {
-    "word": "드럼스틱",
-    "category": "악기"
-  },
-  {
-    "word": "메트로놈",
-    "category": "악기"
-  },
-  {
-    "word": "악보",
-    "category": "악기"
-  },
-  {
-    "word": "지휘봉",
     "category": "악기"
   },
   {
@@ -2603,10 +2536,6 @@
     "category": "곤충"
   },
   {
-    "word": "장수풍뎅이",
-    "category": "곤충"
-  },
-  {
     "word": "하늘소",
     "category": "곤충"
   },
@@ -2639,39 +2568,11 @@
     "category": "곤충"
   },
   {
-    "word": "호랑나비",
-    "category": "곤충"
-  },
-  {
-    "word": "배추흰나비",
-    "category": "곤충"
-  },
-  {
-    "word": "제비나비",
-    "category": "곤충"
-  },
-  {
-    "word": "장수하늘소",
-    "category": "곤충"
-  },
-  {
-    "word": "왕사슴벌레",
-    "category": "곤충"
-  },
-  {
-    "word": "딱정벌레",
-    "category": "곤충"
-  },
-  {
     "word": "하루살이",
     "category": "곤충"
   },
   {
     "word": "초파리",
-    "category": "곤충"
-  },
-  {
-    "word": "장수말벌",
     "category": "곤충"
   },
   {
