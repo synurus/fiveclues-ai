@@ -31,11 +31,17 @@
 - **피드백 저장소는 GitHub Issues.** 파일 커밋(Contents API)이 아니라 Issue를
   쓰는 이유는 동시에 여러 명이 피드백을 보내도 SHA 충돌이 없어서다
   (`apps/backend/src/github/feedbackIssue.ts`).
-- **자가개선 루프가 건드리는 범위는 `hintPrompt.ts` 파일 하나뿐이다.**
-  `wordGuessBot.ts`에서 일부러 분리해뒀다 — 재시도·타입·API 호출 같은 코드
-  로직은 자동화가 절대 못 건드리게, 손이 닿는 범위를 "프롬프트 문구"로
-  물리적으로 좁힌 것. 안전장치 4단계는 `scripts/self-improve/propose.mjs`
-  상단 주석 참고.
+- **자가개선 루프가 건드리는 범위는 `hintPrompt.ts`(한국어판) 파일 하나뿐이다
+  — 영어판 `hintPromptEn.ts`는 대상이 아니다(2026-09-17 결정).** `wordGuessBot.ts`에서
+  일부러 분리해뒀다 — 재시도·타입·API 호출 같은 코드 로직은 자동화가 절대
+  못 건드리게, 손이 닿는 범위를 "프롬프트 문구"로 물리적으로 좁힌 것. 안전장치
+  4단계는 `scripts/self-improve/propose.mjs` 상단 주석 참고. 영어판을 자동화
+  대상에서 뺀 이유는 토큰/요청 예산보다 **데이터 부족이 우선** — `gather.mjs`가
+  `lang !== 'ko'` 피드백 이슈를 아예 걸러내고(`hintPromptEn.ts` 8행 참고),
+  자동플레이(`autoPlay.ts`)도 `lang: 'ko'` 고정이라 영어판 피드백은 사람이
+  직접 남긴 것 외엔 없다 — 표본이 쌓이기 전엔 자동화할 근거 자체가 없다.
+  `hintPrompt.ts`에 반영된 개선을 `hintPromptEn.ts`에 맞출지는 사람이 수동으로
+  판단한다.
 - **배포는 Vercel(2026-09-16 결정).** `apps/backend/src/app.ts`가 Express 앱
   본체(라우팅만, `app.listen()` 없음)이고, `server.ts`(로컬 개발)와
   `/api/index.ts`(Vercel 서버리스 함수) 둘 다 이걸 재사용한다.
@@ -71,10 +77,14 @@
   결과 화면(`WordGuessGame.tsx`)의 `RoundLog[]` 상태를 그대로 펼친 것 —
   프론트에서 이 필드를 안 보내면 `feedbackIssue.ts`가 한 라운드로 뭉뚱그려
   방어적으로 처리한다(`splitByRound`).
-- **`scripts/words.json`이 유일한 정본이다.** `apps/backend/src/data/`에
+- **`scripts/words.json`(한국어)·`scripts/wordsEn.json`(영어, 2026-09-17 영어
+  버전 추가로 생김)이 각 언어의 유일한 정본이다.** `apps/backend/src/data/`에
   사본을 두지 마라(2026-09-16 이전엔 둘이 있었고 내용이 갈라질 위험이
-  실제로 있었다) — 단어를 고치거나 추가할 땐 이 파일 하나만 고치면
-  `wordPool.ts`(런타임)와 `spectate.mjs`(관전 모드)가 둘 다 따라간다.
+  실제로 있었다) — 한국어 단어를 고치거나 추가할 땐 `words.json` 하나만
+  고치면 `wordPool.ts`(런타임)와 `spectate.mjs`(관전 모드)가 둘 다 따라간다.
+  **`spectate.mjs`는 `words.json`만 읽는다 — `wordsEn.json`(영어 풀)은 관전
+  모드로 실측할 수 없다.** 자동플레이(`autoPlay.ts`)도 `lang: 'ko'` 고정이라
+  한국어만 돈다(2026-09-17 결정, 영어 자동플레이는 아직 없음).
 - **`scripts/spectate.mjs`는 서버 없이 `generateHints`/`judgeGuess`를 직접
   import해서 프롬프트를 실측하는 도구다.** `bot/autoPlay.ts`도 같은 이유로
   같은 패턴을 쓴다 — 서버가 항상 떠 있다는 보장이 없는(서버리스) 배포에서
@@ -82,13 +92,42 @@
 
 ## 자가개선 루프 스케줄 (KST 기준)
 
-- **01~07시, 매시** — `.github/workflows/self-improve-autoplay.yml`이
-  `bot/autoPlay.ts`를 돌려 AI가 직접 몇 판을 플레이하고 피드백 이슈를 쌓는다.
-  Groq 무료 티어 TPM 한도를 게임 본체와 나눠 써서, 여러 판을 동시에 돌리지
-  않고 순서대로 돈다.
-- **08시, 하루 한 번** — `.github/workflows/self-improve.yml`이 그때까지
-  쌓인 피드백(사람 + AI)을 전부 모아 `hintPrompt.ts` 수정 PR을 연다. 07시가
-  아니라 08시인 이유: 자동플레이의 마지막 실행(07시)과 Groq 호출이 겹치는
-  걸 피하려고 한 시간 늦췄다.
+- **01~07시, 매시(설계상 목표) — `.github/workflows/self-improve-autoplay.yml`
+  의 cron은 `7 16-22 * * *`(UTC) = KST 01:07~07:07, 매시 7개 슬롯.** `bot/autoPlay.ts`를
+  돌려 AI가 직접 몇 판을 플레이하고 피드백 이슈를 쌓는다. Groq 무료 티어 TPM
+  한도를 게임 본체와 나눠 써서, 여러 판을 동시에 돌리지 않고 순서대로 돈다.
+  **하지만 실제로는 7개 슬롯 중 2개 정도만 돈다.** GitHub Actions의 예약 실행은
+  전역 부하가 높으면 재시도 없이 그냥 스킵되는데(공식 문서에 명시, 정각 실행을
+  피해 7분으로 옮긴 이유이기도 하다), 그래도 스킵이 심하다 — 실제 실행 기록
+  (workflow run `created_at`, 2026-09-18 기준):
+  - 9/16→9/17 밤: 04:08, 07:25 KST 딱 2번만 실행 (5개 슬롯 스킵)
+  - 9/17→9/18 밤: 04:41, 07:47 KST 딱 2번만 실행 (5개 슬롯 스킵)
+  "매시"는 의도이지 실제 빈도가 아니다 — 자가개선 신호가 예상보다 적게 쌓이고
+  있다고 가정하고 판단할 것. 피드백 부족이 이상하게 느껴지면 이게 원인일 수
+  있다.
+- **08시, 하루 한 번(설계상 목표) — `.github/workflows/self-improve.yml`의
+  cron은 `7 23 * * *`(UTC) = KST 08:07.** 그때까지 쌓인 피드백(사람 + AI)을
+  전부 모아 `hintPrompt.ts` 수정 PR을 연다. 07시가 아니라 08시인 이유: 자동플레이의
+  마지막 실행(07시)과 Groq 호출이 겹치는 걸 피하려고 한 시간 늦췄다. **실제
+  관측된 유일한 예약 실행(run #17)은 2026-09-18 01:08:32 UTC = KST 10:08:32에
+  돎 — 목표(08:07 KST)보다 2시간가량 늦었다.** 표본이 1개뿐이라 이게 매번
+  이러는 건지 그날만 GitHub 부하가 심했는지는 아직 모른다 — 계속 늦게 돌면
+  `gather.mjs`가 "그 시점까지 쌓인 전체"를 긁어오는 방식이라 결과 자체엔
+  문제 없지만, PR이 언제 뜨는지 기다리는 사람 입장에선 08시가 아니라
+  "새벽 늦게~오전 중"으로 기대하는 게 맞다.
 - 병합은 항상 사람이 한다. PR이 이상하면 그냥 닫으면 된다 — 다음 실행 때
   새 PR이 다시 열린다.
+
+## 알아두면 좋은 것
+
+- **`judgeGuess()`의 loose 판정(부분 문자열 포함이면 정답 처리, `wordGuessBot.ts`)이
+  가끔 과하게 관대하다** (예: 정답 "줄자"에 "자"만 입력해도 맞은 걸로 침) — 의미상
+  봐줄 만하다고 판단해 일부러 안 고쳤다. 같은 유형의 문제(짧은 단어가 다른 단어에
+  통째로 포함돼 오판정)가 다시 보고되면 그때 고칠 것.
+- **제미나이 무료 티어 quota는 하루 20 RPD.** `propose.mjs`와 `autoPlay.ts`의 추측자
+  실험(`AUTOPLAY_GUESSER_MODE=gemini`)이 같은 `SELFIMPROVE_BOT_*` 키를 나눠 쓴다 —
+  quota 에러가 나면 `propose.mjs`가 전체 에러 본문을 로그에 찍으니 RPD/RPM부터
+  구분해서 대응할 것.
+- **이 머신엔 `gh` CLI가 설치돼 있지 않다.** GitHub 이슈/PR은 WebFetch로 개별 페이지
+  (`/issues/N`, `/pull/N`)와 목록 페이지(`/issues`, `/pulls?state=...`) 둘 다
+  문제없이 읽힌다.
