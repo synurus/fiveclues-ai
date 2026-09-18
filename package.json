@@ -7,6 +7,7 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "npm run dev -w backend",
     "dev:web": "npm run dev -w frontend",
     "build": "npm run build -w frontend && npm run build -w backend",
@@ -19,6 +20,7 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "concurrently": "^10.0.5",
     "prettier": "^3.9.6"
   }
 }
