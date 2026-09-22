@@ -270,11 +270,22 @@ export async function generateHints(input: GenerateHintsInput): Promise<HintRoun
     throw new Error('묘사 파싱 실패: ' + raw.slice(0, 300));
   }
 
+  // 모델이 hintCount보다 많이 만들면서 뒷부분을 text 없이 채우는 경우가 있다
+  // (2026-09-22, 이슈 #115 — 커터칼 1라운드가 5개가 아니라 "5개 실제 + 빈 문자열
+  // 3개"로 8개가 왔다. roundHintCounts가 그대로 8을 기록해 결과 화면 힌트 로그에
+  // 빈 줄 3개가 끼어들었다). 빈 텍스트를 걸러내고 hintCount개로 자른다 — 그래도
+  // 부족하면(모델이 진짜 부족하게 만든 경우) 파싱 실패로 취급해 재시도를 유도한다.
+  const cleaned = (hints as { text?: unknown; angle?: unknown }[])
+    .map((h) => ({ text: String(h.text ?? '').trim(), angle: String(h.angle ?? '?').slice(0, 20) }))
+    .filter((h) => h.text.length > 0);
+  if (cleaned.length < hintCount) {
+    throw new Error(
+      `묘사 파싱 실패: ${hintCount}개 요청했는데 유효한 게 ${cleaned.length}개뿐(원본 ${hints.length}개). ` + raw.slice(0, 300),
+    );
+  }
+
   return {
     banned: Array.isArray(out.banned) ? out.banned.map(String) : [],
-    hints: (hints as { text?: unknown; angle?: unknown }[]).map((h) => ({
-      text: String(h.text ?? ''),
-      angle: String(h.angle ?? '?').slice(0, 20),
-    })),
+    hints: cleaned.slice(0, hintCount),
   };
 }
