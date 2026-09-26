@@ -32,6 +32,13 @@ const WORDS_EN_PATH = path.join(__dirname, '../../../../scripts/wordsEn.json');
 const POOL_KO: WordEntry[] = JSON.parse(fs.readFileSync(WORDS_PATH, 'utf8'));
 const POOL_EN: WordEntry[] = JSON.parse(fs.readFileSync(WORDS_EN_PATH, 'utf8'));
 
+// 두 풀의 모든 제시어와 동의어(accept). judgeGuess()가 "다른 제시어를 댄 추측"을
+// 포함 관계만으로 정답 처리하지 않게 쓴다(2026-09-26 — "고래"가 "돌고래"에, "ant"가
+// "elephant"에 들어 있어 오답이 정답이 되던 문제).
+export function allPoolTerms(): string[] {
+  return [...POOL_KO, ...POOL_EN].flatMap((w) => [w.word, ...(w.accept ?? [])]);
+}
+
 // exclude: 클라이언트가 이번 세션에서 이미 본 단어 목록(2026-09-19, 반복 출제
 // 피드백 대응 — 예: 이슈 #99/#104가 같은 날 둘 다 "주전자"). DB도 서버 메모리도
 // 안 쓰는 이 프로젝트 구조상(CLAUDE.md — 세션은 암호화 토큰, 서버는 매 요청마다
