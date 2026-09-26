@@ -41,7 +41,11 @@ jobs:
   propose:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 — gather.mjs가 hintPrompt.ts가 main에 마지막으로 반영된 시각을
+      # git log로 읽어서 그 전에 만든 AI 피드백을 걸러낸다(기본값 1이면 이력이 없다).
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
