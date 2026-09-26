@@ -132,7 +132,19 @@ const isReasoningModel = (model: string): boolean => /gpt-oss/.test(model);
 // override를 주면 이 호출 하나만 모듈 상단의 BASE_URL/API_KEY/MODEL(=BOT_*) 대신
 // 다른 엔드포인트를 쓴다(2026-09-17 — autoPlay.ts가 추측자를 제미나이로 바꿔서
 // 비교할 때). 안 주면 지금까지처럼 BOT_* 그대로다.
-export async function callBot(system: string, user: string, override?: BotConfig): Promise<string> {
+// patient: 503(일시 과부하)을 몇 분씩 기다려도 되는 배치 호출(자동플레이)에서만 켠다.
+// 실제 게임 요청은 Vercel 함수 타임아웃이 먼저 와서 오래 못 기다린다 — 기본값은
+// 지금까지처럼 짧게 6번.
+export interface CallOptions {
+  patient?: boolean;
+}
+
+export async function callBot(
+  system: string,
+  user: string,
+  override?: BotConfig,
+  opts: CallOptions = {},
+): Promise<string> {
   const baseUrl = override?.baseUrl ?? BASE_URL;
   const apiKey = override?.apiKey ?? API_KEY;
   const model = override?.model ?? MODEL;
@@ -162,6 +174,13 @@ export async function callBot(system: string, user: string, override?: BotConfig
 
     const text = await res.text();
 
+    // 제미나이 503엔 retry-after가 안 실려 와서 5초 고정 대기 6번(~30초)으로는 과부하
+    // 시간대(KST 새벽 = 미국 낮)를 못 버텼다(2026-09-26 — 9/24~26 새벽 제미나이 판이
+    // 3번 연속 사라짐). propose.mjs와 같은 지수 백오프(5→10→20→40→60초, 8회, 최대 약 5분).
+    if (res.status === 503 && opts.patient && attempt <= 8) {
+      await sleep(Math.min(5000 * 2 ** (attempt - 1), 60000));
+      continue;
+    }
     // 429는 무료 티어 TPM/RPM 한도, 503은 제미나이 쪽에서 흔한 "일시적 과부하"
     // (propose.mjs의 503 재시도와 같은 이유, 2026-09-17) — 둘 다 같은 방식으로 기다렸다 이어간다.
     if ((res.status === 429 || res.status === 503) && attempt <= 6) {

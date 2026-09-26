@@ -103,7 +103,7 @@ async function guessWord(hints: Hint[], guesser?: BotConfig): Promise<string> {
     `주제는 알려주지 않는다 — 묘사만으로 추론해야 한다. 망설여지면 그래도 가장 그럴듯한 단어 하나를 골라라.\n` +
     `JSON만 출력한다: {"guess":"네 생각에 정답인 단어"}`;
   const user = hints.map((h) => `- ${h.text}`).join('\n');
-  const raw = await callBot(system, user, guesser);
+  const raw = await callBot(system, user, guesser, { patient: true });
   const parsed = parseJson<{ guess?: unknown }>(raw, {});
   return String(parsed.guess ?? '').trim();
 }
@@ -151,7 +151,7 @@ async function reflectFeedback(
   const user =
     `제시어: ${word} (주제: ${category})\n\n묘사 목록:\n${hintList}\n\n` +
     `내가 한 추측: ${guesses.join(' → ')}\n결과: ${outcomeKo}`;
-  const raw = await callBot(system, user, guesser);
+  const raw = await callBot(system, user, guesser, { patient: true });
   const parsed = parseJson<{ keyHintIndexes?: unknown; uselessHintIndexes?: unknown; feedbackText?: unknown }>(raw, {});
 
   const toIndexArray = (v: unknown): number[] =>
@@ -166,12 +166,11 @@ async function reflectFeedback(
   };
 }
 
-async function playOne(index: number): Promise<void> {
+async function playOne(index: number, guesser: BotConfig | undefined): Promise<void> {
   const { word, category, accept } = pickWord();
   const hintsSoFar: Hint[] = [];
   const guesses: string[] = [];
   const roundHintCounts: number[] = [];
-  const guesser = guesserOverrideFor(index);
 
   const r1 = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT });
   hintsSoFar.push(...r1.hints);
@@ -229,15 +228,38 @@ async function playOne(index: number): Promise<void> {
   );
 }
 
+// 판 실패를 GitHub Actions 경고 주석으로도 남긴다(2026-09-26). 한 판이 실패해도
+// 워크플로는 "성공"으로 끝나서 console.error만으로는 로그인해 로그를 열어봐야 알 수
+// 있었다 — 9/24~26 제미나이 판이 3번 연속 사라진 걸 이슈 개수를 세서야 알아챘다.
+// 주석(annotation)은 실행 요약 화면에 로그인 없이 보인다.
+function warn(message: string): void {
+  console.error(message);
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    const escaped = message.slice(0, 500).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+    console.log(`::warning title=autoPlay 판 실패::${escaped}`);
+  }
+}
+
+const errorMessage = (e: unknown): string => (e instanceof Error ? e.message : String(e));
+
 async function main(): Promise<void> {
   console.log(`AI 자동플레이 ${GAMES}판 시작 (추측자 모드: ${GUESSER_MODE})`);
   for (let i = 1; i <= GAMES; i++) {
+    const guesser = guesserOverrideFor(i);
     try {
-      await playOne(i);
+      await playOne(i, guesser);
     } catch (e) {
       // 한 판이 실패해도(LLM 오류 등) 나머지 판은 계속 — 밤새 여러 번 도는 배치라
       // 하나 실패했다고 전체를 죽일 이유가 없다.
-      console.error(`[${i}/${GAMES}] 실패:`, e instanceof Error ? e.message : e);
+      warn(`[${i}/${GAMES}] 추측자=${guesser?.model ?? DEFAULT_MODEL} 실패: ${errorMessage(e)}`);
+      if (!guesser) continue;
+      // 제미나이 판이 (지수 백오프를 다 쓰고도) 실패하면 그 판을 Groq로 한 번 더 —
+      // 제미나이 비교 데이터는 못 얻어도 그날 밤 피드백 한 건이 통째로 사라지는 건 막는다.
+      try {
+        await playOne(i, undefined);
+      } catch (e2) {
+        warn(`[${i}/${GAMES}] Groq 대체 판도 실패: ${errorMessage(e2)}`);
+      }
     }
   }
 }
