@@ -46,6 +46,7 @@ import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIss
 const HINT_COUNT = 5; // routes/game.ts의 HINT_COUNT와 같은 값이어야 실제 게임과 동일 조건이 된다.
 const GAMES = Math.max(1, Number(process.env.AUTO_PLAY_GAMES ?? '2') || 2);
 const NICKNAME = 'AI자동플레이';
+const MAX_KEY_HINTS = 2; // 소감에서 "결정적" 태그 최대 개수 — reflectFeedback() 주석 참고
 
 // ── 제미나이 추측자 비교(2026-09-17, 2026-09-26에 시간대 기반→판 순서 기반으로 변경) ──
 // hintPrompt.ts 자체가 안 좋은 건지, 추측하는 모델(Groq gpt-oss-120b)이 유독
@@ -131,6 +132,10 @@ async function reflectFeedback(
   // "캥거루"를 "개구리"로 두 번 헛짚었는데 feedbackText가 "아쉬웠다"뿐이라 왜
   // 헷갈렸는지 전혀 안 남았던 사례에서 고침).
   //
+  // "결정적"은 최대 MAX_KEY_HINTS개(2026-09-26) — 예전엔 "여러 개가 같이 결정적이면
+  // 전부"라고 시켜서 AI가 힌트 5개를 전부 결정적으로 태그하곤 했다(#147 비행선). 그러면
+  // propose.mjs 입장에선 어떤 힌트가 좋았는지 구분할 정보가 사라진다.
+  //
   // keyHintIndex/uselessHintIndex는 원래 각각 숫자 하나였는데, 사람 플레이어가
   // 결과 화면 말풍선 여러 개를 동시에 태그할 수 있게 되면서(2026-09-16) 배열로
   // 바뀌었다 — 이 추측자도 같은 스키마로 답해야 gather.mjs/propose.mjs가 사람
@@ -140,8 +145,9 @@ async function reflectFeedback(
     `도움이 될 구체적인 피드백을 남긴다.\n` +
     `JSON만 출력한다:\n` +
     `{"keyHintIndexes": [숫자, ...], "uselessHintIndexes": [숫자, ...], "feedbackText": "한국어 피드백 한두 문장"}\n` +
-    `- keyHintIndexes: 확신을 갖고 정답을 맞히는 데 실제로 도움이 된 묘사(들)의 인덱스. ` +
-    `여러 개가 같이 결정적이었으면 전부 넣어라. 못 맞혔거나 딱히 결정적인 묘사가 없었으면 빈 배열.\n` +
+    `- keyHintIndexes: 정답을 떠올리게 한 가장 결정적인 묘사, 최대 ${MAX_KEY_HINTS}개(더 결정적인 것부터). ` +
+    `"다 도움이 됐다"는 신호가 못 된다 — 그것만 빠졌어도 못 맞혔을 묘사만 골라라. ` +
+    `못 맞혔거나 딱히 결정적인 묘사가 없었으면 빈 배열.\n` +
     `- uselessHintIndexes: 전혀 도움이 안 됐던 묘사(들)의 인덱스. 없으면 빈 배열.\n` +
     `- feedbackText: "재밌었다"/"아쉬웠다" 같은 감상은 절대 쓰지 마라. 대신 진단을 써라 — ` +
     `틀렸다면 왜 그 단어를 떠올렸는지, 묘사들의 어떤 공통된 인상이 오답 쪽으로 끌고 갔는지, ` +
@@ -160,9 +166,11 @@ async function reflectFeedback(
       ? [...new Set(v.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 0 && n < hints.length))]
       : [];
 
+  // 프롬프트로 최대 개수를 요구해도 모델이 넘길 수 있어서 코드에서도 자른다(앞쪽 = 더 결정적).
+  const keyHintIndexes = toIndexArray(parsed.keyHintIndexes).slice(0, MAX_KEY_HINTS);
   return {
-    keyHintIndexes: toIndexArray(parsed.keyHintIndexes),
-    uselessHintIndexes: toIndexArray(parsed.uselessHintIndexes),
+    keyHintIndexes,
+    uselessHintIndexes: toIndexArray(parsed.uselessHintIndexes).filter((i) => !keyHintIndexes.includes(i)),
     feedbackText: String(parsed.feedbackText ?? '').slice(0, 200),
   };
 }
