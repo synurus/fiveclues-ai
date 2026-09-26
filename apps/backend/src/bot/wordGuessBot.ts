@@ -125,6 +125,15 @@ async function listModels(baseUrl: string, apiKey: string): Promise<string> {
 /** gpt-oss 계열은 추론 토큰이 max_tokens 예산을 같이 먹는다 — 예산 부족하면 빈 JSON이 온다. */
 const isReasoningModel = (model: string): boolean => /gpt-oss/.test(model);
 
+// Groq(gpt-oss)엔 max_tokens를 2000으로 준다(2026-09-26, 원래 4000). Groq 무료 티어의
+// 하루 토큰 한도(TPD 200,000)가 한도 검사 때 요청한 max_tokens까지 잡는 것으로 보여서
+// (한도 근처에서 작은 요청은 통과하는데 4000짜리 게임 요청만 계속 막혔다), 실제로는
+// 다 쓰지도 않을 예산을 줄였다 — 실측 출력(숨은 추론 포함)은 많아야 약 1,300이었다.
+// 그래도 모자라면 Groq가 json_validate_failed로 JSON을 못 만드니, 그때만 4000으로
+// 한 번 다시 부른다. 제미나이 등 다른 모델은 이 한도와 무관해서 4000 그대로.
+const MAX_TOKENS = 4000;
+const REASONING_MAX_TOKENS = 2000;
+
 // export: autoPlay.ts(자가개선 AI 자동플레이)가 같은 재시도·reasoning-model
 // 처리 로직을 그대로 재사용한다 — 추측자·소감 LLM 호출도 출제자와 같은 엔드포인트/
 // 429 재시도 규칙을 타므로 새로 짤 이유가 없다.
@@ -149,27 +158,37 @@ export async function callBot(
   const apiKey = override?.apiKey ?? API_KEY;
   const model = override?.model ?? MODEL;
 
-  const body = JSON.stringify({
-    model,
-    temperature: 0.9,
-    max_tokens: 4000,
-    response_format: { type: 'json_object' },
-    ...(isReasoningModel(model) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
-    messages: [
-      { role: 'system', content: system },
-      { role: 'user', content: user },
-    ],
-  });
+  let maxTokens = isReasoningModel(model) ? REASONING_MAX_TOKENS : MAX_TOKENS;
+  const buildBody = (): string =>
+    JSON.stringify({
+      model,
+      temperature: 0.9,
+      max_tokens: maxTokens,
+      response_format: { type: 'json_object' },
+      ...(isReasoningModel(model) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: user },
+      ],
+    });
 
   for (let attempt = 1; ; attempt++) {
     const res = await fetch(`${baseUrl}/chat/completions`, {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
-      body,
+      body: buildBody(),
     });
     if (res.ok) {
-      const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-      return data.choices?.[0]?.message?.content?.trim() ?? '';
+      const data = (await res.json()) as {
+        choices?: { message?: { content?: string }; finish_reason?: string }[];
+      };
+      const content = data.choices?.[0]?.message?.content?.trim() ?? '';
+      // 추론 도중 예산이 끊기면 에러 대신 빈 내용 + finish_reason "length"로 올 수도 있다.
+      if (!content && data.choices?.[0]?.finish_reason === 'length' && maxTokens < MAX_TOKENS) {
+        maxTokens = MAX_TOKENS;
+        continue;
+      }
+      return content;
     }
 
     const text = await res.text();
@@ -191,6 +210,11 @@ export async function callBot(
       throw new Error(`모델 "${model}" 을(를) 이 키로 쓸 수 없다.\n사용 가능한 모델:\n${await listModels(baseUrl, apiKey)}`);
     }
     if (text.includes('json_validate_failed')) {
+      // 줄여둔 예산(REASONING_MAX_TOKENS)이 모자랐을 수 있다 — 원래 예산으로 한 번만 더.
+      if (maxTokens < MAX_TOKENS) {
+        maxTokens = MAX_TOKENS;
+        continue;
+      }
       throw new Error(
         `JSON 생성 실패. 추론 토큰이 max_tokens 를 다 먹었을 가능성이 크다 — ` +
           `max_tokens 를 올리거나 reasoning_effort 를 낮춰볼 것.\n${text.slice(0, 300)}`,
