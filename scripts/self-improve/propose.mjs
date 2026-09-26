@@ -48,6 +48,15 @@ const PROMPT_FILE = 'apps/backend/src/bot/hintPrompt.ts';
 const FEEDBACK_FILE = 'data/self-improve/feedback.json';
 const MAX_FEEDBACK_FOR_PROMPT = 10; // gather.mjs 는 최대 20개를 모으지만, 토큰 예산 때문에 여기선 더 줄인다.
 
+// 프롬프트 본문(return 뒤 템플릿 리터럴)의 허용 증가 폭 — 이 부분은 게임 매 호출마다
+// 통째로 들어가 Groq 하루 토큰(TPD)을 먹는다. 자가개선 PR 10건 중 9건이 파일을 키워서
+// (2026-09-26 확인) 상한을 뒀다. 헤더 주석은 게임 호출엔 안 들어가서 여기선 안 잰다.
+const MAX_BODY_GROWTH = 1.1;
+function promptBodyLength(fileContent) {
+  const m = fileContent.match(/return `([\s\S]*)`\.trim\(\);/);
+  return m ? m[1].length : null;
+}
+
 function sh(cmd) {
   return execSync(cmd, { stdio: 'inherit' });
 }
@@ -82,7 +91,10 @@ function summarizeForPrompt(items) {
     const key = hintTexts(data.hints, data.keyHintIndexes ?? data.keyHintIndex);
     const useless = hintTexts(data.hints, data.uselessHintIndexes ?? data.uselessHintIndex);
     const comment = data.feedbackText ? ` · "${data.feedbackText}"` : '';
-    return `- #${number} [${data.outcome}] "${data.word}"(${data.category}) 결정적:${key} 무쓸모:${useless}${comment}`;
+    // 라운드별 실제 추측(오답 경로) — "양갱 → 약과 → 유과"처럼 힌트가 어느 쪽으로
+    // 오도했는지를 판당 몇 토큰으로 보여주는 가장 싼 신호라 넣는다(2026-09-26).
+    const guesses = Array.isArray(data.guesses) && data.guesses.length ? ` 추측:${data.guesses.join('→')}` : '';
+    return `- #${number} [${data.outcome}] "${data.word}"(${data.category})${guesses} 결정적:${key} 무쓸모:${useless}${comment}`;
   });
   const tallyLine = `집계: 1라운드에 맞음 ${tally.round1 ?? 0} · 2라운드까지 가서 맞음 ${tally.round2 ?? 0} · 실패(정답 공개) ${tally.failed ?? 0}`;
   return `${tallyLine}\n\n${lines.join('\n')}`;
@@ -152,8 +164,9 @@ function buildSystemPrompt() {
     `시그니처 + 그 안의 template literal 하나. 이 시그니처 줄은 글자 하나도 바꾸지 마라.\n` +
     `2. import 문을 새로 추가하지 마라. 다른 export 를 추가하지 마라.\n` +
     `3. 맨 끝의 JSON 출력 스키마 줄 ` +
-    `{"banned":["결정적 특징4개"],"hints":[{"text":"묘사","angle":"무엇에 대해 말했나"}]} ` +
-    `의 키 이름(banned/hints/text/angle)은 절대 바꾸지 마라 — 백엔드가 이 키로 파싱한다.\n` +
+    `{"banned":["결정적 특징"],"avoidFillers":["뻔한 곁다리 표현"],"hints":[{"text":"묘사","angle":"무엇에 대해"}]} ` +
+    `의 키 이름(banned/avoidFillers/hints/text/angle)은 절대 바꾸지 마라 — 백엔드가 이 키로 파싱한다. ` +
+    `banned·avoidFillers를 "정확히 N개"로 강제하지 마라(최대 N개 유지 — 억지로 채우면 쓸 힌트가 안 남는다는 게 실측으로 확인됐다).\n` +
     `4. round/category/hintCount 세 매개변수는 지금과 같은 방식으로 계속 써야 한다(템플릿 리터럴 안에서).\n` +
     `5. 피드백에 나온 구체적인 단어(예: "장구")에 맞춰 프롬프트를 고치지 마라 — ` +
     `이 프롬프트는 매판 다른 단어에 쓰인다. 피드백에서 읽어낼 "패턴"(예: 특정 종류의 묘사가 ` +
@@ -166,7 +179,11 @@ function buildSystemPrompt() {
     `(예: "이 종류는 전부 금지"를 "이 종류 중 정답을 바로 특정시키는 것만 금지"로). ` +
     `반대로 "너무 쉽다/바로 맞혔다"류 피드백일 땐 금지를 추가하거나 넓혀도 된다. ` +
     `이번 피드백에서 뚜렷하게 여러 방향의 신호가 겹치지 않는 한, 한 판에 새 규칙을 ` +
-    `여러 개 쌓지 말고 가장 근거가 확실한 것 하나만 고쳐라 — 작게, 자주 옳게 고치는 쪽이 낫다.\n\n` +
+    `여러 개 쌓지 말고 가장 근거가 확실한 것 하나만 고쳐라 — 작게, 자주 옳게 고치는 쪽이 낫다.\n` +
+    `8. 프롬프트 본문(return 뒤 템플릿 리터럴)은 게임 매 호출마다 통째로 들어가 무료 티어 하루 토큰을 먹는다. ` +
+    `새 규칙은 줄을 덧붙이지 말고 기존 줄을 고쳐 끼워 넣어라 — 본문 글자 수가 지금보다 ` +
+    `${Math.round((MAX_BODY_GROWTH - 1) * 100)}% 넘게 늘면 자동 검증에서 버려진다. ` +
+    `맨 위 주석에도 날짜별 변경 이력을 쌓지 마라(이력은 git log에 있다).\n\n` +
     `[출력 형식 — 이 형식을 벗어나면 자동 파싱이 실패해 PR이 안 열린다]\n` +
     `===SUMMARY===\n(무엇을 왜 바꿨는지 한국어 2~3문장. 안 바꿨으면 "변경 없음"과 이유)\n` +
     `===FILE===\n(hintPrompt.ts 의 완성된 전체 내용. 이 마커 사이엔 파일 내용 말고 아무것도 넣지 마라)\n` +
@@ -209,6 +226,8 @@ function structuralGuardOk(fileContent) {
   const checks = [
     fileContent.includes('export function hintSystem(round: 1 | 2, category: string, hintCount: number): string {'),
     fileContent.includes('"banned"'),
+    // avoidFillers는 백엔드가 파싱하진 않지만 효과가 실측으로 확인된 장치라 지우면 안 된다.
+    fileContent.includes('"avoidFillers"'),
     fileContent.includes('"hints"'),
     fileContent.includes('"text"'),
     fileContent.includes('"angle"'),
@@ -269,6 +288,24 @@ async function main() {
     return;
   }
 
+  const bodyBefore = promptBodyLength(currentFile);
+  const bodyAfter = promptBodyLength(parsed.file);
+  if (bodyBefore && (!bodyAfter || bodyAfter > bodyBefore * MAX_BODY_GROWTH)) {
+    console.error(
+      `본문 크기 가드 실패 — 프롬프트 본문이 ${bodyBefore}자 → ${bodyAfter ?? '(추출 실패)'}자로 ` +
+        `${Math.round((MAX_BODY_GROWTH - 1) * 100)}% 넘게 늘었다(게임 매 호출 토큰). PR을 열지 않는다.`,
+    );
+    console.error(`모델이 밝힌 이유: ${parsed.summary}`);
+    process.exitCode = 1;
+    return;
+  }
+  const bodyDelta = bodyBefore && bodyAfter ? Math.round(((bodyAfter - bodyBefore) / bodyBefore) * 100) : null;
+  const bodySizeLine =
+    bodyDelta === null
+      ? ''
+      : `프롬프트 본문(게임 매 호출에 들어가는 부분): ${bodyBefore}자 → ${bodyAfter}자 (${bodyDelta >= 0 ? '+' : ''}${bodyDelta}%)`;
+  if (bodySizeLine) console.log(bodySizeLine);
+
   if (parsed.file.trim() === currentFile.trim()) {
     console.log('LLM이 변경 없음으로 판단했다(또는 내용이 동일하다) — PR 생략.');
     console.log(`이유: ${parsed.summary}`);
@@ -314,6 +351,7 @@ async function main() {
     `\`${PROMPT_FILE}\` 을 다시 쓴 결과다. 자동 생성이지만 **병합은 사람이 한다**(tsc 통과는 확인했지만 ` +
     `실제 난이도 체감은 확인하지 않았다).\n\n` +
     `### 모델이 밝힌 변경 이유\n> ${parsed.summary.replace(/\n/g, '\n> ')}\n\n` +
+    (bodySizeLine ? `### 토큰\n${bodySizeLine}\n\n` : '') +
     `### 반영한 피드백(${usedNumbers.length}건)\n${feedbackLines}\n\n` +
     `### 병합 전 확인할 것\n` +
     `- [ ] \`${PROMPT_FILE}\` diff를 직접 읽고 문구가 합리적인지 확인\n` +
