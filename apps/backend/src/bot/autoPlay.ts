@@ -1,10 +1,9 @@
 /**
  * 자가개선 루프 0단계 — AI가 직접 게임을 플레이해서 피드백을 만들어낸다.
- * (.github/workflows/self-improve-autoplay.yml 이 01~07시 KST 매시를 목표로 이
- *  스크립트를 돌리고, 08시엔 self-improve.yml의 propose.mjs가 그 피드백들을 모아
- *  PR을 낸다 — 2026-09-16 결정. 단, 실제로는 그 워크플로 자체의 주석 참고 —
- *  GitHub가 예약 실행을 몇 시간씩 늦추면서 그 사이 트리거를 버려 하루 2번 정도만
- *  돈다, 2026-09-26 확인)
+ * (.github/workflows/self-improve-autoplay.yml 이 하루 5번, 24시간에 고르게 흩어
+ *  이 스크립트를 2판씩 돌리고, 08시엔 self-improve.yml의 propose.mjs가 그 피드백
+ *  10건을 모아 PR을 낸다 — 2026-09-26 변경. 예전 "01~07시 매시"가 왜 안 됐는지는
+ *  그 워크플로의 cron 주석 참고)
  *
  * 서버가 아직 어디에도 배포돼 있지 않아서(로컬 npm run dev 뿐) HTTP로 게임을 호출할
  * 수가 없다 — 그래서 scripts/spectate.mjs 가 그랬던 것처럼 프로덕션 힌트 생성
@@ -26,8 +25,8 @@
  * 환경변수: BOT_BASE_URL/BOT_API_KEY/BOT_MODEL(힌트 생성 — 추측·소감도 기본은 이걸 쓴다),
  *   GITHUB_FEEDBACK_TOKEN/GITHUB_REPO(createFeedbackIssue 용 — Actions에서는 보통
  *   secrets.GITHUB_TOKEN 과 github.repository 를 그대로 이 이름으로 넘긴다),
- *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2 — 워크플로의 schedule 트리거는
- *   더 큰 기본값을 준다, 아래 GUESSER_OVERRIDE 주석 참고),
+ *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2 — 첫 판 제미나이·둘째 판 Groq,
+ *   아래 GUESSER_OVERRIDE 주석 참고),
  *   AUTOPLAY_GUESSER_BOT_BASE_URL/API_KEY/MODEL(2026-09-17 추가 — 제미나이 추측자
  *   비교 실험. 전용 키가 없으면 SELFIMPROVE_BOT_*(propose.mjs 용)를 재사용한다.
  *   아래 GUESSER_OVERRIDE 참고),
@@ -60,9 +59,9 @@ const NICKNAME = 'AI자동플레이';
 // 사실상 운에 맡겨져 있었다. 그래서 시간 대신 "이 실행의 첫 판"이라는 조건만
 // 남겼다: 예약 실행이 하루 몇 번 도느냐와 무관하게, 실행당 정확히 1판만 제미나이를
 // 쓰므로 예산 계산이 단순해진다 — 실행 횟수 × (판당 콜 2~3개) + propose.mjs 하루
-// 1콜이 제미나이 무료 티어 하루 20건(RPD, 2026-09-17 확인) 밑이면 된다. 실행이
-// 하루 2번이면 4~6콜 + 1콜 ≈ 5~7콜로 여유가 크다 — 실행 횟수가 늘어도 6번까지는
-// 안전하다.
+// 1콜이 제미나이 무료 티어 하루 20건(RPD, 2026-09-17 확인) 밑이면 된다. 지금 스케줄
+// (하루 5번, 2026-09-26)이면 10~15콜 + 1콜 ≈ 11~16콜 — 여유는 4~9콜뿐이라, 실행
+// 횟수를 더 늘리려면 이 계산부터 다시 할 것(503 재시도가 RPD에 잡히는지는 미확인).
 //
 // 전용 시크릿(AUTOPLAY_GUESSER_BOT_*)이 없으면 propose.mjs가 이미 쓰고 있는
 // SELFIMPROVE_BOT_*(제미나이)를 그대로 재사용한다(2026-09-17, 스카이 선택 — 새

@@ -35,16 +35,18 @@ npm run dev:web    # http://localhost:5173 (vite가 /game을 3000번으로 프�
 
 ## 자가개선 루프
 
-1. **수집** — 사람이 결과 화면에서 힌트를 태그하며 남긴 피드백 + AI가 새벽에
-   직접 플레이하며 만든 피드백이 모두 `feedback` 라벨 GitHub Issue로 쌓인다
+1. **수집** — 사람이 결과 화면에서 힌트를 태그하며 남긴 피드백 + AI가
+   하루 5번 직접 플레이하며 만든 피드백이 모두 `feedback` 라벨 GitHub Issue로 쌓인다
    (`apps/backend/src/github/feedbackIssue.ts`).
-2. **AI 자동플레이** — 매일 01~07시(KST) 매시, `apps/backend/src/bot/autoPlay.ts`가
-   서버 없이 한 판을 직접 흉내 내고(단어 뽑기 → 힌트 생성 → LLM이 추측 → 결과
-   소감까지) 피드백 이슈를 만든다. 사람 피드백이 적은 시간대에도 학습 신호가
+2. **AI 자동플레이** — 하루 5번(24시간에 고르게 흩어서) 2판씩,
+   `apps/backend/src/bot/autoPlay.ts`가 서버 없이 게임을 직접 흉내 내고(단어 뽑기
+   → 힌트 생성 → LLM이 추측 → 결과 소감까지) 피드백 이슈를 만든다. 첫 판은
+   제미나이, 둘째 판은 Groq가 추측한다. 사람 피드백이 적어도 학습 신호가
    끊기지 않게 하려는 것.
 3. **제안** — 매일 08시(KST), `scripts/self-improve/gather.mjs`가 그때까지 쌓인
-   피드백 이슈를 전부 모으고, `scripts/self-improve/propose.mjs`가 LLM으로
-   `apps/backend/src/bot/hintPrompt.ts`를 다시 써서 PR을 연다.
+   피드백 이슈를 오래된 순으로 모으고, `scripts/self-improve/propose.mjs`가 그중
+   10건(자동플레이 하루치와 같은 수)으로 LLM에게
+   `apps/backend/src/bot/hintPrompt.ts`를 다시 쓰게 해 PR을 연다.
 4. **병합은 사람이 한다.** PR은 구조 가드(함수 시그니처·JSON 스키마 유지)와
    `tsc --noEmit` 통과를 거쳐야 열리고, 이미 열린 PR이 있으면 새로 열지 않는다.
    자세한 설계는 `docs/자가개선_설계.md` 참고.
