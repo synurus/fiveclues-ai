@@ -24,6 +24,7 @@
 import 'dotenv/config';
 import { hintSystem as hintSystemKo } from './hintPrompt';
 import { hintSystem as hintSystemEn } from './hintPromptEn';
+import { allPoolTerms } from '../routes/wordPool';
 
 // Vercel 등에서 값을 안 채운 환경변수는 undefined가 아니라 빈 문자열로 온다.
 // ??는 ""를 "값 있음"으로 쳐서 기본값으로 안 넘어가므로 ||를 쓴다
@@ -69,18 +70,48 @@ export type GuessJudgement = 'exact' | 'loose' | 'wrong';
 // 취급돼 오답 처리된다(2026-09-17 발견 — 한국어는 대소문자가 없어서 여태 안 드러났다).
 const normalize = (s: string): string => String(s ?? '').toLowerCase().replace(/[\s.,!?"'·]/g, '').trim();
 
+// 포함 관계 판정(loose)의 함정 세 가지를 막는다(2026-09-26 — 풀 전수 검사로 한국어
+// 89쌍·영어 3쌍 발견):
+//  1) 다른 제시어를 댄 추측 — "고래"는 "돌고래"에, "소나무"는 "소"를 품고 있지만
+//     둘 다 풀에 있는 다른 단어다. 추측이 풀의 다른 단어(또는 그 동의어)면 오답.
+//  2) 한 글자 포함 — "배"가 "배드민턴"·"배추"에 들어 있다. 한국어는 짧은 쪽이 두 글자
+//     이상일 때만 loose(경찰/경찰관은 그대로 통과).
+//  3) 영어의 철자 포함 — "an"·"ant"가 "elephant"에 들어 있다. 영어는 문자열이 아니라
+//     단어 단위로 포함을 본다("a dolphin"·"dolphins"는 dolphin으로 통과).
+let poolTerms: Set<string> | null = null;
+const isOtherPoolWord = (g: string): boolean => {
+  poolTerms ??= new Set(allPoolTerms().map(normalize));
+  return poolTerms.has(g);
+};
+const isLatin = (s: string): boolean => /^[\x00-\x7F]+$/.test(s);
+const STOPWORDS = new Set(['a', 'an', 'the']);
+const englishWords = (s: string): string[] =>
+  s
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((w) => w && !STOPWORDS.has(w))
+    .map((w) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w));
+const allIn = (a: string[], b: string[]): boolean => a.length > 0 && a.every((w) => b.includes(w));
+
 /**
  * 정답 판정. LLM을 쓰지 않는다 — 플레이어가 직접 입력하므로 문자열 비교면 된다.
  *   exact  정답과 같거나 accept(동의어)에 있음
- *   loose  한쪽이 다른 쪽을 포함 (경찰관/경찰, 골프/골프공)
+ *   loose  한쪽이 다른 쪽을 포함 (경찰관/경찰, 골프/골프공) — 단, 위 세 가지 함정 제외
  *   wrong  그 외
  */
 export function judgeGuess(word: string, guess: string, accept: string[] = []): GuessJudgement {
   const g = normalize(guess);
   if (!g) return 'wrong';
-  if (g === normalize(word)) return 'exact';
+  const w = normalize(word);
+  if (g === w) return 'exact';
   if (accept.some((a) => normalize(a) === g)) return 'exact';
-  if (g.includes(normalize(word)) || normalize(word).includes(g)) return 'loose';
+  if (isOtherPoolWord(g)) return 'wrong';
+  if (isLatin(word) && isLatin(guess)) {
+    const gw = englishWords(guess);
+    const ww = englishWords(word);
+    return allIn(gw, ww) || allIn(ww, gw) ? 'loose' : 'wrong';
+  }
+  if (Math.min(g.length, w.length) >= 2 && (g.includes(w) || w.includes(g))) return 'loose';
   return 'wrong';
 }
 
