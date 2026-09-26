@@ -14,7 +14,7 @@ on:
         required: false
         default: '2'
       guesser:
-        description: '추측자 강제 지정 — auto(시간대별 자동) / groq(전 판 Groq) / gemini(전 판 제미나이, 시간대 제한 무시)'
+        description: '추측자 강제 지정 — auto(매 실행 첫 판만 자동) / groq(전 판 Groq) / gemini(전 판 제미나이, "첫 판만" 제한 무시)'
         required: false
         default: 'auto'
         type: choice
@@ -23,10 +23,21 @@ on:
           - groq
           - gemini
   schedule:
-    # 01~07시 KST(UTC+9) 매시 = 전날 UTC 16~22시. 정각(0분)이 아니라 7분으로 둔다 —
-    # 매시 정각은 전 세계 예약 워크플로가 몰려서 GitHub이 부하가 높으면 그 실행을
-    # 그냥 건너뛰는(재시도 없음) 시간대라고 공식 문서가 명시한다. 실제로 2026-09-17
-    # 새벽엔 7번 중 2번만 돌았다(04:08, 07:25 KST) — 정각에 걸어둔 탓으로 보여서 옮김.
+    # 01~07시 KST(UTC+9) 매시 = 전날 UTC 16~22시가 목표다(정각이 아니라 7분인 이유는
+    # 아래). 실제로는 이렇게 안 돈다 — 2026-09-18~26 실행 기록(created_at) 26건을
+    # 다 뽑아봤더니 그날 첫 실행이 목표보다 2.5~4시간씩 늦게 도는데(예: 01:07 목표가
+    # 04:37에 실행), 그 사이에 지나간 매시 트리거(02시·03시 등)는 재실행이나 대기
+    # 없이 그냥 버려진다 — 그래서 하루 7번이 아니라 2번(그날의 "이른 실행"과 "늦은
+    # 실행")만 돈다(2026-09-26 확인). GitHub 공식 문서는 "부하가 높으면 예약 실행이
+    # 지연·누락될 수 있다"고만 적어뒀고, 이 레포가 왜 이렇게까지 밀리는지는 GitHub
+    # 내부 사정이라 우리 쪽에서 고칠 방법이 없다 — 그래서 "언제 도느냐"에 의존하던
+    # 로직(제미나이 추측자 시간대 필터)을 없애고 "판 수"로 보정했다(AUTO_PLAY_GAMES
+    # 기본값 참고, autoPlay.ts의 GUESSER_OVERRIDE 주석도).
+    #
+    # 정각(0분)이 아니라 7분인 이유는 남아 있다 — 매시 정각은 전 세계 예약 워크플로가
+    # 몰려서 GitHub이 부하가 높으면 그 실행을 그냥 건너뛰는(재시도 없음) 시간대라고
+    # 공식 문서가 명시한다(2026-09-17 정각에서 옮김). 위에서 보듯 그것만으로는
+    # 부족했지만, 굳이 다시 정각으로 되돌릴 이유도 없다.
     - cron: '7 16-22 * * *'
 
 permissions:
@@ -58,7 +69,11 @@ jobs:
           # 담긴 GITHUB_TOKEN을 그대로 써도 된다 — 같은 레포 안이라 issues: write 로 충분하다.
           GITHUB_FEEDBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPO: ${{ github.repository }}
-          AUTO_PLAY_GAMES: ${{ github.event.inputs.games || '2' }}
+          # 스케줄(cron) 실행엔 github.event.inputs 자체가 없어서 이 기본값(6)이
+          # 쓰인다 — 원래 "7슬롯 × 2판 = 하루 14판" 의도였는데 실제로는 하루 2번만
+          # 도니(위 cron 주석) 6판으로 늘려 총량을 비슷하게 맞췄다(2026-09-26).
+          # 수동 실행(workflow_dispatch)은 입력 필드 자체의 기본값 '2'를 따로 쓴다.
+          AUTO_PLAY_GAMES: ${{ github.event.inputs.games || '6' }}
           # 제미나이 추측자 비교 실험(2026-09-17, apps/backend/src/bot/autoPlay.ts).
           # 전용 시크릿을 안 만들고 self-improve.yml이 쓰는 SELFIMPROVE_BOT_*를 그대로
           # 재사용한다 — 없으면(둘 다 미설정) autoPlay.ts가 알아서 실험을 끈다.

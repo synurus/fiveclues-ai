@@ -1,7 +1,10 @@
 /**
  * 자가개선 루프 0단계 — AI가 직접 게임을 플레이해서 피드백을 만들어낸다.
- * (.github/workflows/self-improve-autoplay.yml 이 01~07시 KST 매시 이 스크립트를 돌리고,
- *  08시엔 self-improve.yml의 propose.mjs가 그 피드백들을 모아 PR을 낸다 — 2026-09-16 결정)
+ * (.github/workflows/self-improve-autoplay.yml 이 01~07시 KST 매시를 목표로 이
+ *  스크립트를 돌리고, 08시엔 self-improve.yml의 propose.mjs가 그 피드백들을 모아
+ *  PR을 낸다 — 2026-09-16 결정. 단, 실제로는 그 워크플로 자체의 주석 참고 —
+ *  GitHub가 예약 실행을 몇 시간씩 늦추면서 그 사이 트리거를 버려 하루 2번 정도만
+ *  돈다, 2026-09-26 확인)
  *
  * 서버가 아직 어디에도 배포돼 있지 않아서(로컬 npm run dev 뿐) HTTP로 게임을 호출할
  * 수가 없다 — 그래서 scripts/spectate.mjs 가 그랬던 것처럼 프로덕션 힌트 생성
@@ -23,14 +26,15 @@
  * 환경변수: BOT_BASE_URL/BOT_API_KEY/BOT_MODEL(힌트 생성 — 추측·소감도 기본은 이걸 쓴다),
  *   GITHUB_FEEDBACK_TOKEN/GITHUB_REPO(createFeedbackIssue 용 — Actions에서는 보통
  *   secrets.GITHUB_TOKEN 과 github.repository 를 그대로 이 이름으로 넘긴다),
- *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2),
- *   AUTOPLAY_GUESSER_BOT_BASE_URL/API_KEY/MODEL·AUTOPLAY_GUESSER_HOURS(2026-09-17
- *   추가 — 제미나이 추측자 비교 실험. 전용 키가 없으면 SELFIMPROVE_BOT_*(propose.mjs
- *   용)를 재사용한다. 아래 GUESSER_HOURS/GUESSER_OVERRIDE 참고),
+ *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2 — 워크플로의 schedule 트리거는
+ *   더 큰 기본값을 준다, 아래 GUESSER_OVERRIDE 주석 참고),
+ *   AUTOPLAY_GUESSER_BOT_BASE_URL/API_KEY/MODEL(2026-09-17 추가 — 제미나이 추측자
+ *   비교 실험. 전용 키가 없으면 SELFIMPROVE_BOT_*(propose.mjs 용)를 재사용한다.
+ *   아래 GUESSER_OVERRIDE 참고),
  *   AUTOPLAY_GUESSER_MODE(2026-09-18 추가 — GitHub Actions에서 수동 실행
- *   (workflow_dispatch)할 때 추측자를 직접 고를 수 있게. 'auto'(기본, 시간대별 자동
- *   전환) | 'groq'(이번 실행은 전 판을 강제로 Groq) | 'gemini'(전 판을 강제로 제미나이 —
- *   시간대·"첫 판만" 제한을 다 무시하니 판 수만큼 제미나이 콜을 쓴다는 점 주의)
+ *   (workflow_dispatch)할 때 추측자를 직접 고를 수 있게. 'auto'(기본, 매 실행 첫
+ *   판만 자동 전환) | 'groq'(이번 실행은 전 판을 강제로 Groq) | 'gemini'(전 판을
+ *   강제로 제미나이 — "첫 판만" 제한을 무시하니 판 수만큼 제미나이 콜을 쓴다는 점 주의)
  *
  *   로컬 테스트: npm run autoplay -w backend
  */
@@ -44,26 +48,26 @@ const HINT_COUNT = 5; // routes/game.ts의 HINT_COUNT와 같은 값이어야 실
 const GAMES = Math.max(1, Number(process.env.AUTO_PLAY_GAMES ?? '2') || 2);
 const NICKNAME = 'AI자동플레이';
 
-// ── 제미나이 추측자 비교(2026-09-17, 2026-09-18에 01~05시로 확장) ──────────
+// ── 제미나이 추측자 비교(2026-09-17, 2026-09-26에 시간대 기반→판 순서 기반으로 변경) ──
 // hintPrompt.ts 자체가 안 좋은 건지, 추측하는 모델(Groq gpt-oss-120b)이 유독
 // 못 맞히는 건지 구분해보려는 실험. 힌트 생성은 항상 BOT_*(Groq) 그대로 두고,
-// GUESSER_HOURS에 든 KST 시각의 "그 실행의 첫 판"만 추측+소감을 이 엔드포인트가
-// 대신 맡는다. 기본 01~05시·판당 1개 = 하루 5판(판당 콜 2~3개, 10~15콜) — 제미나이
-// 무료 티어 하루 20건(RPD, 2026-09-17 확인) 안에서 자가개선 분석(SELFIMPROVE_BOT_*,
-// 제미나이면 하루 1콜)까지 합쳐도 11~16콜로 여유 있게 두려는 계산이다. 시간·판수를
-// 더 늘리려면 그 합이 20을 넘지 않는지 다시 계산해볼 것.
-const GUESSER_HOURS = new Set(
-  (process.env.AUTOPLAY_GUESSER_HOURS || '1,2,3,4,5')
-    .split(',')
-    .map((s) => Number(s.trim()))
-    .filter((n) => !Number.isNaN(n)),
-);
-
+// "이 실행의 첫 판"만 추측+소감을 이 엔드포인트가 대신 맡는다.
+//
+// 원래는 KST 시각대(01~05시)로 제한했었는데, GitHub가 이 워크플로의 예약 실행을
+// 2.5~4시간씩 늦추면서 그 사이 매시 트리거를 버리는 게 확인돼서(2026-09-26,
+// .github/workflows/self-improve-autoplay.yml 상단 주석) "실행이 몇 시에 실제로
+// 도느냐"가 의도와 무관해졌다 — 01시 슬롯이 04시에 실행되는 식이라 시간대 필터가
+// 사실상 운에 맡겨져 있었다. 그래서 시간 대신 "이 실행의 첫 판"이라는 조건만
+// 남겼다: 예약 실행이 하루 몇 번 도느냐와 무관하게, 실행당 정확히 1판만 제미나이를
+// 쓰므로 예산 계산이 단순해진다 — 실행 횟수 × (판당 콜 2~3개) + propose.mjs 하루
+// 1콜이 제미나이 무료 티어 하루 20건(RPD, 2026-09-17 확인) 밑이면 된다. 실행이
+// 하루 2번이면 4~6콜 + 1콜 ≈ 5~7콜로 여유가 크다 — 실행 횟수가 늘어도 6번까지는
+// 안전하다.
+//
 // 전용 시크릿(AUTOPLAY_GUESSER_BOT_*)이 없으면 propose.mjs가 이미 쓰고 있는
 // SELFIMPROVE_BOT_*(제미나이)를 그대로 재사용한다(2026-09-17, 스카이 선택 — 새
 // 키를 따로 안 만들어도 됨). 어느 것도 없으면 실험이 꺼지고 늘 하던 대로 Groq만
-// 추측한다. 같은 키를 나눠 쓰는 거라 propose.mjs의 하루 1콜 + 여기 8~12콜을
-// 합쳐서 제미나이 무료 티어 하루 20건(RPD) 안에 들어오는지가 기준이다.
+// 추측한다.
 const GUESSER_BASE_URL = process.env.AUTOPLAY_GUESSER_BOT_BASE_URL || process.env.SELFIMPROVE_BOT_BASE_URL || '';
 const GUESSER_API_KEY = process.env.AUTOPLAY_GUESSER_BOT_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
 const GUESSER_MODEL = process.env.AUTOPLAY_GUESSER_BOT_MODEL || process.env.SELFIMPROVE_BOT_MODEL || 'gemini-3.8-flash';
@@ -71,8 +75,6 @@ const GUESSER_MODEL = process.env.AUTOPLAY_GUESSER_BOT_MODEL || process.env.SELF
 const GUESSER_OVERRIDE: BotConfig | undefined = GUESSER_API_KEY
   ? { baseUrl: GUESSER_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai', apiKey: GUESSER_API_KEY, model: GUESSER_MODEL }
   : undefined;
-
-const currentKstHour = (): number => (new Date().getUTCHours() + 9) % 24;
 
 // GitHub Actions에서 수동 실행(workflow_dispatch) 시 추측자를 직접 고르는 스위치
 // (2026-09-18). 스케줄(cron) 실행에는 이 값이 안 실려서 항상 'auto'다.
@@ -85,13 +87,13 @@ if (GUESSER_MODE === 'gemini' && !GUESSER_OVERRIDE) {
   console.error('[autoPlay] AUTOPLAY_GUESSER_MODE=gemini 인데 제미나이 키(AUTOPLAY_GUESSER_BOT_API_KEY/SELFIMPROVE_BOT_API_KEY)가 없다 — Groq로 진행한다.');
 }
 
-// index===1(이 실행의 첫 판)이고 지금이 GUESSER_HOURS에 든 시각일 때만 override를 준다
-// — 단, GUESSER_MODE로 수동 강제한 경우엔 시간대·"첫 판만" 제한을 전부 무시한다.
+// index===1(이 실행의 첫 판)일 때만 override를 준다 — 단, GUESSER_MODE로 수동
+// 강제한 경우엔 "첫 판만" 제한을 무시한다.
 function guesserOverrideFor(index: number): BotConfig | undefined {
   if (GUESSER_MODE === 'groq') return undefined;
   if (GUESSER_MODE === 'gemini') return GUESSER_OVERRIDE; // 키가 없으면 위에서 이미 경고했고 undefined라 그냥 Groq.
   if (!GUESSER_OVERRIDE || index !== 1) return undefined;
-  return GUESSER_HOURS.has(currentKstHour()) ? GUESSER_OVERRIDE : undefined;
+  return GUESSER_OVERRIDE;
 }
 
 type Outcome = 'round1' | 'round2' | 'failed';
