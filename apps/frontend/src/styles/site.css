@@ -1,0 +1,142 @@
+/* 콘텐츠 페이지(게임 방법·소개·개인정보처리방침·이용약관·문의)와 홈 화면 아래 소개
+ * 영역·푸터 공용 스타일(2026-09-27, 애드센스 "가치가 별로 없는 콘텐츠" 대응).
+ * 색·글꼴은 tokens.css 변수를 그대로 쓴다 — 콘텐츠 페이지는 tokens.css와 이 파일을
+ * 둘 다 <link>로 불러오고, 홈(index.html)은 main.tsx가 둘 다 import한다. */
+
+/* ── 언어별 블록 — 홈의 소개 영역만 한/영 두 벌을 둔다. html[data-lang]은
+ *    index.html 인라인 스크립트와 WordGuessGame.tsx가 맞춰준다. 기본(스크립트
+ *    전)은 한국어. */
+.only-en { display: none; }
+html[data-lang='en'] .only-en { display: block; }
+html[data-lang='en'] .only-ko { display: none; }
+
+/* ── 상단 바(콘텐츠 페이지 전용) ── */
+.site-header {
+  border-bottom: 1px solid var(--color-line);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+}
+.site-header-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 12px var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.site-logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.site-nav {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.site-nav a { text-decoration: none; color: var(--color-muted); }
+.site-nav a:hover, .site-nav a[aria-current='page'] { color: var(--color-accent); }
+.site-nav .site-play {
+  color: #ffffff;
+  background: var(--color-accent);
+  padding: 4px 12px;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+.site-nav .site-play:hover { color: #ffffff; filter: brightness(1.1); }
+
+/* ── 본문 ── */
+.site-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(var(--space-4) * 2) var(--space-4);
+}
+.site-article {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: calc(var(--space-4) * 1.75);
+  line-height: 1.75;
+}
+.site-article h1 { font-size: 30px; margin-bottom: 6px; }
+.site-article .site-lead { color: var(--color-muted); margin-bottom: calc(var(--space-4) * 1.5); }
+.site-article h2 {
+  font-size: 21px;
+  margin: calc(var(--space-4) * 2) 0 var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+.site-article h2:first-of-type { border-top: 0; padding-top: 0; }
+.site-article h3 { font-size: 17px; margin: calc(var(--space-4) * 1.25) 0 6px; }
+.site-article ul, .site-article ol { margin: 0 0 var(--space-4); padding-left: 1.3em; }
+.site-article li { margin-bottom: 4px; }
+.site-article table { width: 100%; border-collapse: collapse; margin: 0 0 var(--space-4); font-size: 14px; }
+.site-article th, .site-article td { border: 1px solid var(--color-line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.site-article th { background: rgba(37, 99, 235, 0.06); font-weight: 600; }
+.site-note {
+  font-size: 14px;
+  color: var(--color-muted);
+  background: rgba(37, 99, 235, 0.05);
+  border-left: 3px solid var(--color-accent);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 0 0 var(--space-4);
+}
+.site-example {
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin: 0 0 var(--space-4);
+}
+.site-example ol { margin-bottom: 6px; }
+.site-chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0 !important; }
+.site-chips li {
+  margin: 0;
+  font-size: 13px;
+  padding: 3px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: #ffffff;
+}
+.site-meta { font-size: 13px; color: var(--color-muted); margin-top: calc(var(--space-4) * 1.5); }
+
+/* ── 홈 화면 게임 아래 소개 영역 — 첫 화면은 게임(.wg-page, 100vh)이 차지하고,
+ *    스크롤하면 이게 나온다. ── */
+.site-intro {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--space-4) calc(var(--space-4) * 2);
+}
+.site-intro .site-article h2 { font-size: 20px; }
+
+/* ── 푸터(모든 페이지 공통) ── */
+.site-footer {
+  border-top: 1px solid var(--color-line);
+  font-size: 13px;
+  color: var(--color-muted);
+}
+.site-footer-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(var(--space-4) * 1.5) var(--space-4) calc(var(--space-4) * 2);
+}
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: var(--space-2); }
+.site-footer a { color: var(--color-muted); }
+.site-footer a:hover { color: var(--color-accent); }
+.site-footer p { margin: 0 0 4px; }
+
+@media (max-width: 768px) {
+  .site-article { padding: var(--space-4); }
+  /* 좁은 화면에선 칸이 글자 하나 폭까지 줄어 세로로 읽히므로(개인정보처리방침 표),
+     칸에 최소 폭을 주고 표 자체만 가로 스크롤한다 — 페이지는 가로로 안 넘친다. */
+  .site-article table { display: block; overflow-x: auto; }
+  .site-article th, .site-article td { min-width: 130px; }
+  .site-article th:first-child, .site-article td:first-child { min-width: 88px; }
+  .site-article h1 { font-size: 25px; }
+  .site-main { padding-top: var(--space-4); }
+}

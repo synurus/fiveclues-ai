@@ -168,6 +168,23 @@
   호출 하나에 "7분 뒤 재시도"가 나왔다 — 회복이 아주 느리다). 한도 검사가 요청한
   `max_tokens`까지 잡는 것으로 보여서 `callBot`은 Groq(gpt-oss)에 4000 대신
   2000을 요청하고, JSON이 잘리면 그때만 4000으로 한 번 더 부른다(`wordGuessBot.ts`).
+- **콘텐츠 페이지(게임 방법·소개·개인정보처리방침·이용약관·문의)는 React가 아니라
+  정적 HTML이다(2026-09-27, 애드센스 "가치가 별로 없는 콘텐츠" 거절 대응).** 그 전엔
+  사이트 전체가 본문이 빈 SPA 한 장이라 검토 로봇이 읽을 글이 ~15단어뿐이었다.
+  `apps/frontend/*.html`이 Vite 멀티 페이지 입력이고(`vite.config.ts`의
+  `CONTENT_PAGES`), `/about` 같은 확장자 없는 주소는 배포에선 `vercel.json`의
+  페이지별 `rewrites`, 로컬 dev/preview에선 같은 파일의 `cleanUrls()` 플러그인이
+  처리한다. **`vercel.json`의 `cleanUrls: true`는 쓰지 마라** — 모든 `.html`을
+  리다이렉트해서 Search Console 소유권 인증 파일(`public/google56fc12c93ae93bd3.html`,
+  인증 유지를 위해 지우면 안 됨)까지 리다이렉트된다.
+  홈(`index.html`)도 `#root` 아래에 정적 소개 영역(한/영 두 벌, `html[data-lang]`로
+  전환)과 푸터가 있다. 페이지를 추가하면 `CONTENT_PAGES`·`vercel.json` rewrites·
+  `public/sitemap.xml`·각 페이지 푸터 링크를 같이 고칠 것. canonical·sitemap 주소는
+  `fiveclues-ai.vercel.app`으로 박혀 있어서 도메인을 바꾸면 전부 바꿔야 한다.
+  **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`도 같이 고쳐라** —
+  지금은 추측→Groq, 피드백→GitHub 공개 이슈·Gemini(닉네임 제외), 언어 설정→
+  localStorage가 전부라고 적혀 있다. `vite preview`로 보려면 `.claude/launch.json`의
+  `web-preview`(빌드 후).
 - **이 머신엔 `gh` CLI가 설치돼 있지 않다.** GitHub 이슈/PR은 WebFetch로 개별 페이지
   (`/issues/N`, `/pull/N`)와 목록 페이지(`/issues`, `/pulls?state=...`) 둘 다
   문제없이 읽힌다.

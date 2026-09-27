@@ -2,9 +2,16 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="AI가 내놓는 묘사 5개를 보고 제시어를 맞혀보세요. 설치 없이 브라우저에서 바로 시작하는 낱말 맞히기 게임." />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>다섯고개 — AI 묘사 5개로 낱말 맞히기 게임</title>
+    <meta name="description" content="AI가 내놓는 묘사 5개를 보고 제시어를 맞혀보세요. 설치·가입 없이 브라우저에서 바로 시작하는 낱말 맞히기 게임. 플레이어 피드백으로 AI 출제자가 매일 조금씩 나아집니다." />
+    <link rel="canonical" href="https://fiveclues-ai.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="다섯고개" />
+    <meta property="og:title" content="다섯고개 — AI 묘사 5개로 낱말 맞히기 게임" />
+    <meta property="og:description" content="AI가 내놓는 묘사 5개를 보고 제시어를 맞혀보세요. 설치·가입 없이 바로 시작." />
+    <meta property="og:url" content="https://fiveclues-ai.vercel.app/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,7 +26,16 @@
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
     />
-    <title>다섯고개</title>
+    <!-- 게임 아래 소개 영역의 한/영 표시를 첫 페인트 전에 맞춘다(2026-09-27) — 판단
+         규칙은 wordgame/i18n.ts의 detectLang()과 같다(저장값 우선, 없으면 브라우저 언어).
+         이후 언어를 바꾸면 WordGuessGame.tsx가 같은 속성을 갱신한다. -->
+    <script>
+      try {
+        var l = localStorage.getItem('fiveclues-lang');
+        if (l !== 'ko' && l !== 'en') l = (navigator.language || '').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en';
+        document.documentElement.setAttribute('data-lang', l);
+      } catch (e) {}
+    </script>
     <!-- Google AdSense 사이트 소유권 확인용(2026-09-16) — ca-pub-2022315306020371 -->
     <script
       async
@@ -29,6 +45,69 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- 게임 아래 소개 영역(2026-09-27, 애드센스 "가치가 별로 없는 콘텐츠" 대응).
+         React가 그리는 게임과 별개인 정적 HTML이라 자바스크립트 없이도 읽힌다.
+         첫 화면은 게임(.wg-page, 100vh)이 차지하고 스크롤하면 나온다. -->
+    <section class="site-intro" aria-label="다섯고개 소개">
+      <div class="site-article only-ko" lang="ko">
+        <h2>다섯고개는 어떤 게임인가요?</h2>
+        <p>스무고개에서 이름을 따온 낱말 맞히기 게임입니다. AI 출제자가 제시어를 직접 말하지 않고 그 낱말을 가리키는 <strong>묘사 다섯 개</strong>를 내놓으면, 여러분은 그 묘사들을 겹쳐 보며 정답을 추측합니다. 묘사는 판마다 AI가 새로 만들기 때문에 같은 제시어라도 매번 다르게 나옵니다.</p>
+
+        <h2>이렇게 진행돼요</h2>
+        <ol>
+          <li><strong>시작</strong>을 누르면 묘사 다섯 개가 한 줄씩 나타납니다.</li>
+          <li>떠오르는 낱말을 입력해 한 번 추측합니다.</li>
+          <li>틀리면 제시어의 <strong>카테고리가 공개</strong>되고, 조금 더 구체적인 묘사 다섯 개와 함께 한 번 더 기회가 주어집니다.</li>
+          <li>결과 화면에서 결정적이었던 묘사에 👍, 도움이 안 된 묘사에 👎를 남겨 주세요. 이 피드백이 AI 출제자를 더 좋게 만듭니다.</li>
+        </ol>
+
+        <h2>묘사는 일부러 애매하게</h2>
+        <p>AI 출제자는 “각 묘사가 제시어에 대해 사실이면서, 같은 카테고리 안의 다른 것 두세 개에도 들어맞도록” 쓰라는 원칙을 따릅니다. 묘사 하나만으로는 후보가 여럿이지만, 다섯 개를 겹쳐 보면 하나로 좁혀지는 것이 다섯고개의 재미입니다.</p>
+
+        <h2>어떤 제시어가 나오나요?</h2>
+        <p>음식, 동물, 직업, 장소, 탈것, 스포츠, 악기, 주방용품 등 25개 카테고리의 일상어 약 660개가 무작위로 나옵니다. 영어 버전도 즐길 수 있어요.</p>
+
+        <h2>플레이할수록 좋아지는 AI</h2>
+        <p>여러분이 남긴 👍·👎는 매일 한 번 모아서 AI 출제자의 지시문을 고치는 데 쓰입니다. 어떤 묘사가 자꾸 무쓸모로 표시되는지 패턴을 찾아 수정안을 만들고, 운영자가 직접 검토한 뒤에만 반영합니다. 자세한 이야기는 <a href="/about">소개</a> 페이지에서 볼 수 있습니다.</p>
+        <p><a href="/how-to-play">게임 방법 자세히 보기 →</a></p>
+      </div>
+
+      <div class="site-article only-en" lang="en">
+        <h2>What is Five Clues?</h2>
+        <p>Five Clues is a word-guessing game inspired by Twenty Questions. An AI clue-giver writes <strong>five clues</strong> about a secret word without ever saying it, and you piece them together to guess the word. The clues are written fresh by the AI every game, so the same word never comes with the same clues twice.</p>
+
+        <h2>How it works</h2>
+        <ol>
+          <li>Press <strong>Start</strong> and five clues appear one by one.</li>
+          <li>Type your guess — you get one try.</li>
+          <li>Miss it, and the word's <strong>category is revealed</strong> along with five more specific clues for a second try.</li>
+          <li>On the result screen, give 👍 to the clues that cracked it and 👎 to the useless ones. That feedback makes the AI better.</li>
+        </ol>
+
+        <h2>Vague on purpose</h2>
+        <p>The AI follows one rule: every clue must be true of the word, yet also fit two or three other things in the same category. One clue alone leaves several candidates — the fun is in overlapping all five until only one answer is left.</p>
+
+        <h2>An AI that improves as you play</h2>
+        <p>Your 👍 and 👎 are collected once a day to refine the AI's instructions. The system looks for patterns — like which kinds of clues keep getting marked useless — drafts a fix, and a human reviews it before anything changes.</p>
+        <p>More details (in Korean): <a href="/how-to-play">How to play</a> · <a href="/about">About</a></p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <nav aria-label="사이트 정보">
+          <a href="/how-to-play">게임 방법</a>
+          <a href="/about">소개</a>
+          <a href="/privacy">개인정보처리방침</a>
+          <a href="/terms">이용약관</a>
+          <a href="/contact">문의</a>
+          <a href="https://www.youtube.com/@Black_Knight" rel="noopener" target="_blank">YouTube</a>
+        </nav>
+        <p>© 2026 다섯고개 · 운영: 흑기사 Black_Knight · <a href="mailto:synurus@gmail.com">synurus@gmail.com</a></p>
+      </div>
+    </footer>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

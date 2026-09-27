@@ -12,7 +12,7 @@
 // 복수 선택 가능 — 힌트 여러 개가 같이 결정적이었거나(또는 같이 무쓸모였거나) 하는
 // 실제 상황을 하나만 고르라고 강제하면 정보가 사라진다. 한 말풍선이 동시에
 // 결정적이면서 무쓸모일 수는 없게 막는다(토글 시 반대쪽에서 자동으로 뺀다).
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import { NAME_MAX_LENGTH } from './constants';
 import { startGame, submitGuess, submitFeedback, type GuessResponse } from './api';
@@ -79,6 +79,13 @@ export function WordGuessGame() {
     setLang(next);
     saveLang(next);
   };
+
+  // 게임 아래 정적 소개 영역(index.html)의 한/영 블록을 현재 언어에 맞춘다
+  // (site.css의 html[data-lang] 규칙). 첫 페인트는 index.html 인라인 스크립트가 맞춘다.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   // 이번 브라우저 세션에서 이미 나온 단어들 — 반복 출제 방지(2026-09-19, 이슈
   // #99/#104가 같은 날 둘 다 "주전자"였던 것 대응). 페이지를 새로고침하면 초기화된다
