@@ -177,8 +177,9 @@
   처리한다. **`vercel.json`의 `cleanUrls: true`는 쓰지 마라** — 모든 `.html`을
   리다이렉트해서 Search Console 소유권 인증 파일(`public/google56fc12c93ae93bd3.html`,
   인증 유지를 위해 지우면 안 됨)까지 리다이렉트된다.
-  홈(`index.html`)도 `#root` 아래에 정적 소개 영역(한/영 두 벌, `html[data-lang]`로
-  전환)과 푸터가 있다. 페이지를 추가하면 `CONTENT_PAGES`·`vercel.json` rewrites·
+  홈(`index.html`)도 `#root` 아래에 정적 소개 영역(한/영 두 벌, **둘 다 항상 보이고**
+  `html[data-lang]`로 현재 언어만 위로 — 구글 로봇이 영어 브라우저라 한쪽을 숨기면
+  한국어 소개가 숨은 글이 됐다)과 푸터가 있다. 페이지를 추가하면 `CONTENT_PAGES`·`vercel.json` rewrites·
   `public/sitemap.xml`·각 페이지 푸터 링크를 같이 고칠 것. canonical·sitemap 주소는
   `fiveclues-ai.vercel.app`으로 박혀 있어서 도메인을 바꾸면 전부 바꿔야 한다.
   **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`도 같이 고쳐라** —

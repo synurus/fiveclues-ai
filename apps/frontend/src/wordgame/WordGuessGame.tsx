@@ -80,8 +80,9 @@ export function WordGuessGame() {
     saveLang(next);
   };
 
-  // 게임 아래 정적 소개 영역(index.html)의 한/영 블록을 현재 언어에 맞춘다
-  // (site.css의 html[data-lang] 규칙). 첫 페인트는 index.html 인라인 스크립트가 맞춘다.
+  // 게임 아래 정적 소개 영역(index.html)의 한/영 블록 순서를 현재 언어에 맞춘다
+  // (site.css의 html[data-lang] 규칙 — 둘 다 보이고 현재 언어가 위). 첫 페인트는
+  // index.html 인라인 스크립트가 맞춘다.
   useEffect(() => {
     document.documentElement.setAttribute('data-lang', lang);
     document.documentElement.lang = lang;
