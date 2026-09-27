@@ -179,12 +179,20 @@
   인증 유지를 위해 지우면 안 됨)까지 리다이렉트된다.
   홈(`index.html`)도 `#root` 아래에 정적 소개 영역(한/영 두 벌, **둘 다 항상 보이고**
   `html[data-lang]`로 현재 언어만 위로 — 구글 로봇이 영어 브라우저라 한쪽을 숨기면
-  한국어 소개가 숨은 글이 됐다)과 푸터가 있다. 페이지를 추가하면 `CONTENT_PAGES`·`vercel.json` rewrites·
-  `public/sitemap.xml`·각 페이지 푸터 링크를 같이 고칠 것. canonical·sitemap 주소는
+  한국어 소개가 숨은 글이 됐다)과 푸터가 있다. 영어판은 `en/*.html`(5개, hreflang으로
+  한국어판과 짝), 읽을거리(공략·지난 문제 해설·개발 이야기)는 `guides.html`과
+  `guides/*.html`이다. **머리말·상단 바·푸터는 `apps/frontend/partials/*.html`에 한
+  벌만 있고**, 각 페이지의 `<!-- @head-common -->`·`<!-- @header-ko -->` 같은 자리에
+  `vite.config.ts`의 `sitePartials()` 플러그인이 빌드 때 끼워 넣는다(메뉴 링크를 고칠 땐
+  partials만 고치면 됨). 페이지를 추가하면 `CONTENT_PAGES`·`public/sitemap.xml`을
+  같이 고칠 것(`vercel.json` rewrites는 `guides/`·`en/` 아래를 패턴으로 이미 받는다 —
+  루트에 새 페이지를 만들 때만 한 줄 추가). canonical·sitemap 주소는
   `fiveclues-ai.vercel.app`으로 박혀 있어서 도메인을 바꾸면 전부 바꿔야 한다.
-  **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`도 같이 고쳐라** —
-  지금은 추측→Groq, 피드백→GitHub 공개 이슈·Gemini(닉네임 제외), 언어 설정→
-  localStorage가 전부라고 적혀 있다. `vite preview`로 보려면 `.claude/launch.json`의
+  **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`과 `en/privacy.html`을
+  같이 고쳐라** — 지금은 추측→Groq, 피드백→GitHub 공개 이슈·Gemini(닉네임 제외),
+  언어 설정→localStorage가 전부라고 적혀 있다. 읽을거리 글은 실제 이슈 기록·개발
+  이력을 바탕으로 썼다 — 사실과 다른 내용이 섞이지 않게, 수치나 사례를 인용할 땐
+  원본(이슈·커밋)을 확인할 것. `vite preview`로 보려면 `.claude/launch.json`의
   `web-preview`(빌드 후).
 - **이 머신엔 `gh` CLI가 설치돼 있지 않다.** GitHub 이슈/PR은 WebFetch로 개별 페이지
   (`/issues/N`, `/pull/N`)와 목록 페이지(`/issues`, `/pulls?state=...`) 둘 다

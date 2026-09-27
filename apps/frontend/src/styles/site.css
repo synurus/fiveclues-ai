@@ -107,6 +107,18 @@ html[data-lang='en'] .site-intro .only-en { order: -1; }
 }
 .site-meta { font-size: 13px; color: var(--color-muted); margin-top: calc(var(--space-4) * 1.5); }
 
+/* 읽을거리 목록(guides.html) — 글 제목 링크 + 한두 줄 요약. */
+.site-list { list-style: none; padding: 0 !important; }
+.site-list li { margin: 0 0 var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px dashed var(--color-line); }
+.site-list li:last-child { border-bottom: 0; }
+.site-list a { text-decoration: none; }
+.site-list a:hover strong { text-decoration: underline; }
+.site-list p { margin: 4px 0 0; color: var(--color-muted); font-size: 14px; }
+
+/* 읽을거리 글 맨 위 "← 읽을거리" 되돌아가기 링크와 작성 정보. */
+.site-back { display: inline-block; font-size: 14px; margin-bottom: var(--space-2); text-decoration: none; }
+.site-byline { font-size: 13px; color: var(--color-muted); margin: -2px 0 var(--space-4); }
+
 /* ── 홈 화면 게임 아래 소개 영역 — 첫 화면은 게임(.wg-page, 100vh)이 차지하고,
  *    스크롤하면 이게 나온다. ── */
 .site-intro {

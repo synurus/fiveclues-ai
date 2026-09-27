@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Play | Five Clues — Guess the Word from AI Clues</title>
+    <meta name="description" content="Five Clues is a word-guessing game where an AI writes five clues about a secret word. Learn how rounds work, what counts as a correct answer, the 24 categories, and tips for solving." />
+    <link rel="canonical" href="https://fiveclues-ai.vercel.app/en/how-to-play" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Five Clues" />
+    <meta property="og:title" content="How to Play | Five Clues" />
+    <meta property="og:description" content="Guess the word from five AI-written clues — rounds, answer rules, categories and tips." />
+    <meta property="og:url" content="https://fiveclues-ai.vercel.app/en/how-to-play" />
+    <link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/how-to-play" />
+    <link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/how-to-play" />
+    <!-- @head-common -->
+  </head>
+  <body>
+    <!-- @header-en -->
+
+    <main class="site-main">
+      <article class="site-article" lang="en">
+        <h1>How to Play</h1>
+        <p class="site-lead">Five Clues is a word-guessing game. An AI clue-giver describes a secret word in five short clues without ever saying it, and you work out what it is. No sign-up, nothing to install — a game usually takes one to three minutes.</p>
+
+        <h2>How a game goes</h2>
+        <ol>
+          <li><strong>Start</strong> — On the first screen, pick <em>English</em> and press <em>Start</em>. The AI picks a secret word and writes five brand-new clues for it. A nickname is optional; it's only sent if you leave feedback.</li>
+          <li><strong>Round 1</strong> — The five clues appear one at a time. When you've read them, type the word you think it is and press <em>Guess</em>. You get one try.</li>
+          <li><strong>Round 2</strong> — Missed it? The word's <strong>category</strong> is revealed (for example, Animals or Kitchenware) along with five more specific clues. Your round-1 clues and guess stay on screen, so you can look at everything together before your second guess.</li>
+          <li><strong>Result</strong> — Get it in round 1 and you'll see <em>Nailed it!</em>; in round 2, <em>Nice!</em>; miss both and it's <em>So close!</em> with the answer revealed.</li>
+          <li><strong>Feedback (optional)</strong> — On the result screen, tap 👍 on the clues that cracked it and 👎 on the useless ones. You can pick several and add a short comment.</li>
+        </ol>
+        <p>If you keep playing in the same browser tab, the last 30 words won't come up again. Reloading the page resets that list.</p>
+
+        <h2>Why are the clues vague on purpose?</h2>
+        <p>The AI follows one rule: <strong>every clue must be true of the word, but it must also fit two or three other things in the same category.</strong> If one clue gave the answer away, the game would be over instantly; if a clue fit everything in the category, it would tell you nothing.</p>
+        <p>So for “ramen” it won't mention “noodles” or “broth”, and for “airport” it won't mention “baggage claim” — those point straight at the answer. Instead, each clue leaks a trait shared by a few candidates, so the answer only becomes clear <strong>when you overlap all five</strong>.</p>
+
+        <h2>An example game</h2>
+        <p>This is an illustration of how a game flows. Real clues are generated fresh every time, so even the same word gets different clues.</p>
+        <div class="site-example">
+          <p><strong>Round 1 clues</strong></p>
+          <ol>
+            <li>Home is somewhere cold</li>
+            <li>Surprisingly quick in the water</li>
+            <li>Lives in big groups</li>
+            <li>Loves eating fish</li>
+            <li>Always looks cute in photos</li>
+          </ol>
+          <p>→ First guess: “seal” (wrong)</p>
+          <p><strong>Round 2</strong> — category <em>Birds</em> revealed</p>
+          <ol start="6">
+            <li>Sways side to side when it walks</li>
+            <li>Has wings, but the sky? Not really</li>
+            <li>Keeps its egg on its feet</li>
+            <li>Its belly is a different color from its back</li>
+            <li>Sometimes slides across the ice on its belly</li>
+          </ol>
+          <p>→ Second guess: “penguin” (correct)</p>
+        </div>
+        <p>Each round-1 clue also fits a seal, a walrus or a polar bear, so the first guess easily goes wrong. Once the category <em>Birds</em> appears and clue 7 (wings but can't fly) is added, the candidates collapse. A clue like 7 that narrows things down is a <strong>👍 crucial clue</strong>; a clue like 5 that could describe almost anything is a <strong>👎 useless clue</strong>.</p>
+
+        <h2>What counts as correct</h2>
+        <ul>
+          <li><strong>Case, spaces and punctuation are ignored.</strong> “Ice Cream” and “icecream” both match “ice cream”.</li>
+          <li><strong>Plurals and articles are fine.</strong> “dolphins” and “a dolphin” both count for “dolphin”.</li>
+          <li><strong>Common alternative names count.</strong> For example: refrigerator ↔ fridge, sofa ↔ couch, french fries ↔ chips, soccer ↔ football, smartphone ↔ cell phone.</li>
+          <li><strong>A shorter form made of the answer's own words is accepted.</strong> For example, “fries” for “french fries”.</li>
+          <li><strong>Naming a different word from the game is wrong,</strong> even if the letters overlap: “ant” is not “elephant”, and “bee” is not “beetle”.</li>
+        </ul>
+
+        <h2>What words come up?</h2>
+        <p>The English version has about 470 everyday words across 24 categories. Near-identical pairs were trimmed to one (gloves stayed and mittens went; glasses stayed and sunglasses went), so a correct answer never comes down to luck.</p>
+        <ul class="site-chips">
+          <li>Food</li><li>Snacks &amp; Desserts</li><li>Fruits</li><li>Vegetables</li><li>Drinks</li>
+          <li>Animals</li><li>Birds</li><li>Sea Creatures</li><li>Insects &amp; Bugs</li><li>Plants &amp; Flowers</li>
+          <li>Occupations</li><li>Places</li><li>Travel Destinations</li><li>Vehicles</li><li>Sports</li>
+          <li>Musical Instruments</li><li>Nature &amp; Weather</li><li>Kitchenware</li><li>School &amp; Office Supplies</li>
+          <li>Appliances &amp; Electronics</li><li>Furniture</li><li>Household Items</li><li>Clothing &amp; Accessories</li><li>Tools</li>
+        </ul>
+        <p>The game started in Korean (as 다섯고개), and the Korean version has about 660 words in 25 categories.</p>
+
+        <h2>Tips</h2>
+        <ul>
+          <li><strong>Don't lock onto one clue.</strong> Each clue is written to fit several candidates. Look for the one answer that fits all five.</li>
+          <li><strong>Start with the oddest clue.</strong> The clue that rules out the most candidates is usually the one that feels strangest.</li>
+          <li><strong>In round 2, use the category.</strong> Check whether your round-1 idea even belongs to it.</li>
+          <li><strong>Round 2 knows your wrong guess.</strong> The AI avoids clues that would lead back to it and narrows things down a step, so if round 2 feels different, it's steering you away from your first answer.</li>
+          <li><strong>Type a short noun.</strong> “airplane” works; “the thing that flies” doesn't.</li>
+        </ul>
+
+        <h2>Where does feedback go?</h2>
+        <p>Your 👍, 👎 and comments are collected once a day to improve the AI's instructions — for example, if a certain kind of generic clue keeps getting marked useless, the instructions are adjusted to avoid it. A human reviews every change before it goes live. More in <a href="/en/about">About</a>.</p>
+        <p class="site-note">Feedback is stored as public issues in a GitHub repository that anyone can read. Please don't put your real name or contact details in the nickname or comment fields. See the <a href="/en/privacy">Privacy Policy</a> for details.</p>
+
+        <p class="site-meta">Last updated: September 27, 2026</p>
+      </article>
+    </main>
+
+    <!-- @footer-en -->
+  </body>
+</html>

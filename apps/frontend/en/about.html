@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Five Clues — An AI Word Game That Improves From Your Feedback</title>
+    <meta name="description" content="Five Clues is a word-guessing game where an AI writes the clues. Here's how player 👍/👎 feedback makes the AI clue-giver a little better every day, and who made it." />
+    <link rel="canonical" href="https://fiveclues-ai.vercel.app/en/about" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Five Clues" />
+    <meta property="og:title" content="About | Five Clues" />
+    <meta property="og:description" content="An AI word-guessing game that gets a little better every day from player feedback." />
+    <meta property="og:url" content="https://fiveclues-ai.vercel.app/en/about" />
+    <link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/about" />
+    <link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/about" />
+    <!-- @head-common -->
+  </head>
+  <body>
+    <!-- @header-en -->
+
+    <main class="site-main">
+      <article class="site-article" lang="en">
+        <h1>About Five Clues</h1>
+        <p class="site-lead">The Korean name, 다섯고개 (“five hills”), is a play on 스무고개, the Korean name for Twenty Questions. Instead of asking questions, you get five clues from an AI.</p>
+
+        <h2>What kind of game is it?</h2>
+        <p>Five Clues is a word-guessing game you play right in your browser. When a game starts, the AI clue-giver writes five clues that point to a secret word without ever saying it. Miss your first guess and you get the category plus five more clues for a second try. The full rules are in <a href="/en/how-to-play">How to play</a>.</p>
+        <p>The clues aren't pre-written — the AI writes new ones every game. Even if the same word comes up again, the clues will be different, so memorizing answers doesn't help.</p>
+
+        <h2>What makes a good clue</h2>
+        <p>The hardest question in making this game was “how much should a clue give away?” Too much and the first clue ends the game; too little and it's no help at all. So the AI clue-giver works to these standards:</p>
+        <ul>
+          <li><strong>True</strong> — anyone who knows the word should nod along: “yes, that's right.”</li>
+          <li><strong>Not a giveaway</strong> — each clue must also fit two or three other things in the same category. Ingredients or one-of-a-kind features that blurt out the answer are off-limits.</li>
+          <li><strong>Not generic</strong> — lines like “great to share with friends” fit anything in the category, so they carry no information.</li>
+          <li><strong>In plain words</strong> — everyday language, short, like a hint tossed to a friend.</li>
+        </ul>
+        <p>These standards weren't there on day one. They grew out of the feedback process below, and they're still changing.</p>
+
+        <h2>An AI clue-giver that improves as people play</h2>
+        <p>The heart of Five Clues is that <strong>player feedback makes the AI clue-giver better on its own</strong>.</p>
+        <ol>
+          <li><strong>Collect feedback</strong> — After a game, players mark crucial clues with 👍 and useless ones with 👎. Each record is saved in a public GitHub repository.</li>
+          <li><strong>AI plays too</strong> — So improvement doesn't stall on quiet days, an AI plays several games a day and leaves feedback in the same format. In some of those games the guessing AI is a different model from the clue-writing AI, so the two don't share the same blind spots.</li>
+          <li><strong>Draft a fix</strong> — Once a day, another AI looks for patterns in the feedback (“what kind of clue keeps getting marked useless?”) and drafts a change to the clue-giver's instructions (the prompt).</li>
+          <li><strong>Human review</strong> — Nothing is applied automatically. The operator reads each proposed change, throws it away if it looks wrong, and merges it only when it makes sense.</li>
+        </ol>
+        <p>The automation's reach is deliberately narrow: it can only change the wording of the instructions, never the code that runs the game or checks answers. Changes that make the instructions much longer are rejected automatically, because longer instructions make every clue more expensive to generate.</p>
+
+        <h2>Things that actually changed</h2>
+        <ul>
+          <li><strong>“Goes great with…” clues</strong> — In food rounds, lines like “goes well with coffee” kept getting 👎. The AI was told to write down such generic lines first and avoid them — and then it turned out the AI was copying the example sentence into every topic, so the example was replaced with “write your own for this category.”</li>
+          <li><strong>Too careful to say anything</strong> — Telling the AI to ban exactly four defining traits made it pad the list for words with only two or three, which blocked perfectly good clues. Changing it to “up to four” fixed it.</li>
+          <li><strong>Round 2 that didn't narrow down</strong> — In one player's game (the word was “plate”), the round-2 clues drifted into lines that fit any kitchenware (“feels like it needs washing”, “usually sits by the sink”) and got vaguer instead of sharper. Round 2 is now told to narrow each clue to one or two candidates, and in trial games it started producing clues like “you're handed a number ticket” or “machine noise from the kitchen”.</li>
+          <li><strong>Answer checking</strong> — The game used to accept any guess whose letters overlapped the answer, so “ant” counted for “elephant”. Now naming a different word from the game is marked wrong.</li>
+        </ul>
+
+        <h2>Who made it</h2>
+        <p>Five Clues is a personal project designed, built and run by <strong>흑기사 Black_Knight</strong>. You can find more of my work on YouTube.</p>
+        <ul>
+          <li>YouTube: <a href="https://www.youtube.com/@Black_Knight" rel="noopener" target="_blank">youtube.com/@Black_Knight</a></li>
+          <li>Email: <a href="mailto:synurus@gmail.com">synurus@gmail.com</a></li>
+          <li>Source code and feedback history: <a href="https://github.com/synurus/fiveclues-ai" rel="noopener" target="_blank">github.com/synurus/fiveclues-ai</a></li>
+        </ul>
+
+        <h2>Under the hood</h2>
+        <p>The front end is built with React and the server runs as Vercel serverless functions. Clues are written by an open-weight language model (gpt-oss-120b) running on Groq; Google Gemini analyzes feedback to propose improvements and guesses in some of the AI-played games. There's no database for accounts or game history — the state of a game in progress is encrypted and kept in your browser, and the server only checks it.</p>
+        <p>The game runs within free AI usage allowances, so at busy times clues may take longer or a game may briefly fail to start. Thanks for your patience.</p>
+
+        <p class="site-meta">Last updated: September 27, 2026</p>
+      </article>
+    </main>
+
+    <!-- @footer-en -->
+  </body>
+</html>

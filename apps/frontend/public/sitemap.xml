@@ -1,9 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://fiveclues-ai.vercel.app/</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://fiveclues-ai.vercel.app/how-to-play</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://fiveclues-ai.vercel.app/about</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://fiveclues-ai.vercel.app/privacy</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://fiveclues-ai.vercel.app/terms</loc><lastmod>2026-09-27</lastmod></url>
-  <url><loc>https://fiveclues-ai.vercel.app/contact</loc><lastmod>2026-09-27</lastmod></url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/how-to-play</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/how-to-play" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/how-to-play" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/about</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/about" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/privacy</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/privacy" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/terms</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/terms" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/contact</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/contact" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/en/how-to-play</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/how-to-play" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/how-to-play" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/en/about</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/about" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/en/privacy</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/privacy" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/en/terms</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/terms" />
+  </url>
+  <url>
+    <loc>https://fiveclues-ai.vercel.app/en/contact</loc><lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/contact" />
+  </url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides/category-tips</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides/puzzle-review-1</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides/puzzle-review-2</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides/dev-copied-examples</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides/dev-answer-judging</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://fiveclues-ai.vercel.app/guides/dev-free-tier</loc><lastmod>2026-09-27</lastmod></url>
 </urlset>

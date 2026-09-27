@@ -11,24 +11,12 @@
     <meta property="og:title" content="소개 | 다섯고개" />
     <meta property="og:description" content="플레이어 피드백으로 매일 조금씩 나아지는 AI 낱말 맞히기 게임." />
     <meta property="og:url" content="https://fiveclues-ai.vercel.app/about" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="/src/styles/tokens.css" />
-    <link rel="stylesheet" href="/src/styles/site.css" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2022315306020371" crossorigin="anonymous"></script>
+    <link rel="alternate" hreflang="ko" href="https://fiveclues-ai.vercel.app/about" />
+    <link rel="alternate" hreflang="en" href="https://fiveclues-ai.vercel.app/en/about" />
+    <!-- @head-common -->
   </head>
   <body>
-    <header class="site-header">
-      <div class="site-header-inner">
-        <a class="site-logo" href="/">다섯고개</a>
-        <nav class="site-nav" aria-label="주 메뉴">
-          <a href="/how-to-play">게임 방법</a>
-          <a href="/about" aria-current="page">소개</a>
-          <a href="/contact">문의</a>
-          <a class="site-play" href="/">게임하기</a>
-        </nav>
-      </div>
-    </header>
+    <!-- @header-ko -->
 
     <main class="site-main">
       <article class="site-article">
@@ -64,6 +52,7 @@
         <ul>
           <li><strong>“함께 먹으면 좋다” 류의 곁다리 묘사</strong> — 음식 문제에서 “커피와 함께”, “차갑게 두면 좋다” 같은 묘사가 자주 무쓸모로 표시됐습니다. 출제자가 이런 뻔한 표현을 먼저 적어 두고 피하도록 바꿨더니, 이번에는 AI가 예시로 준 문장을 모든 주제에 그대로 베끼는 문제가 드러나 예시 대신 “이 주제에 맞게 직접 적으라”고 다시 고쳤습니다.</li>
           <li><strong>너무 아끼다 아무것도 못 알려주는 문제</strong> — “결정적인 특징 네 개를 금지하라”고 했더니, 결정적인 게 두세 개뿐인 낱말에서도 억지로 네 개를 채우느라 쓸 만한 특징까지 막혀 묘사가 공허해졌습니다. “최대 네 개”로 바꿔 해결했습니다.</li>
+          <li><strong>좁혀지지 않던 2라운드</strong> — 한 플레이어의 “접시” 판에서는 2라운드 묘사가 “물에 씻어야 하는 느낌”, “싱크 옆에 흔히 놓여 있다”처럼 주방용품 어디에나 붙는 말로 흘러 오히려 더 막연해졌습니다. 2라운드에서는 묘사마다 후보를 한두 개로 좁히라고 분명히 적어 두었더니, 시험해 본 판에서 “번호표를 건네는”, “주방에서 나는 기계음” 같은 좁혀지는 묘사가 나오기 시작했습니다.</li>
           <li><strong>헷갈리는 제시어 정리</strong> — “부엉이와 올빼미”, “물개와 바다사자”처럼 묘사로는 구별이 어려운 낱말이 함께 있으면 맞혀도 운처럼 느껴집니다. 비슷한 낱말은 대표 하나만 남기고, 카테고리에 딱 맞지 않는 낱말은 빼서 제시어 목록을 새로 정리했습니다.</li>
           <li><strong>정답 판정 개선</strong> — 예전에는 글자만 겹치면 정답으로 쳐서, 정답이 “돌고래”일 때 “고래”를 적어도 맞은 것으로 처리됐습니다. 지금은 다른 제시어를 말하면 오답으로 판정합니다.</li>
         </ul>
@@ -84,18 +73,6 @@
       </article>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer-inner">
-        <nav aria-label="사이트 정보">
-          <a href="/how-to-play">게임 방법</a>
-          <a href="/about">소개</a>
-          <a href="/privacy">개인정보처리방침</a>
-          <a href="/terms">이용약관</a>
-          <a href="/contact">문의</a>
-          <a href="https://www.youtube.com/@Black_Knight" rel="noopener" target="_blank">YouTube</a>
-        </nav>
-        <p>© 2026 다섯고개 · 운영: 흑기사 Black_Knight · <a href="mailto:synurus@gmail.com">synurus@gmail.com</a></p>
-      </div>
-    </footer>
+    <!-- @footer-ko -->
   </body>
 </html>

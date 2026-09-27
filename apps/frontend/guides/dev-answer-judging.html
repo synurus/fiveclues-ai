@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>“배”라고 적었는데 배드민턴이 정답? — 정답 판정 버그 이야기 | 다섯고개</title>
+    <meta name="description" content="관대하게 만든 다섯고개의 정답 판정이 틀린 답을 맞은 것으로 처리하고 있었습니다. 제시어를 전수 검사해 찾은 92쌍과 새 판정 규칙 이야기." />
+    <link rel="canonical" href="https://fiveclues-ai.vercel.app/guides/dev-answer-judging" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="다섯고개" />
+    <meta property="og:title" content="“배”라고 적었는데 배드민턴이 정답?" />
+    <meta property="og:url" content="https://fiveclues-ai.vercel.app/guides/dev-answer-judging" />
+    <!-- @head-common -->
+  </head>
+  <body>
+    <!-- @header-ko -->
+
+    <main class="site-main">
+      <article class="site-article">
+        <a class="site-back" href="/guides">← 읽을거리</a>
+        <h1>“배”라고 적었는데 배드민턴이 정답?</h1>
+        <p class="site-byline">2026년 9월 27일 · 흑기사 Black_Knight · 개발 이야기</p>
+        <p class="site-lead">낱말 맞히기 게임에서 “정답이냐 아니냐”를 가르는 건 생각보다 까다롭습니다. 너무 엄격하면 맞는 답도 틀렸다고 하고, 너무 관대하면 틀린 답도 맞았다고 합니다. 다섯고개는 관대한 쪽에서 크게 넘어졌습니다.</p>
+
+        <h2>처음의 판정 규칙</h2>
+        <p>처음에는 이렇게 판정했습니다.</p>
+        <ol>
+          <li>입력이 정답과 같으면 정답 (띄어쓰기·대소문자 무시)</li>
+          <li>입력이 미리 등록한 다른 이름(동의어)과 같으면 정답 — 예: 스마트폰과 핸드폰</li>
+          <li><strong>입력과 정답 중 한쪽이 다른 쪽을 품고 있으면 정답</strong> — 예: 정답 “경찰관”에 “경찰”</li>
+        </ol>
+        <p>3번이 문제였습니다. “경찰”과 “경찰관”처럼 사실상 같은 말을 너그럽게 봐주려고 만든 규칙인데, 글자가 겹치기만 하면 무엇이든 통과시키고 있었습니다.</p>
+
+        <h2>발견: 전수 검사로 나온 92쌍</h2>
+        <p>제시어 목록을 새로 정리하면서, 한 제시어가 다른 제시어 안에 통째로 들어 있는 경우를 모두 뽑아 봤습니다. 한국어 제시어에서 89쌍, 영어 제시어에서 3쌍이 나왔습니다. 몇 가지만 보면 이렇습니다.</p>
+        <table>
+          <thead><tr><th>정답</th><th>입력</th><th>예전 판정</th></tr></thead>
+          <tbody>
+            <tr><td>배드민턴</td><td>배</td><td>정답</td></tr>
+            <tr><td>돌고래</td><td>고래</td><td>정답</td></tr>
+            <tr><td>소</td><td>소나무</td><td>정답</td></tr>
+            <tr><td>감자칩</td><td>감자</td><td>정답</td></tr>
+            <tr><td>elephant(코끼리)</td><td>ant(개미)</td><td>정답</td></tr>
+          </tbody>
+        </table>
+        <p>“배”(과일)와 “배드민턴”(스포츠)은 전혀 다른 낱말이고, 둘 다 실제로 출제되는 제시어입니다. 그런데 정답이 배드민턴일 때 “배”라고 적으면 맞은 걸로 처리됐습니다. 게다가 제시어 목록을 정리하면서 배, 소, 감, 무 같은 한 글자 낱말을 새로 넣은 탓에 문제가 더 커졌습니다. 한 글자는 다른 낱말 안에 들어 있기 쉬우니까요. 판정을 고치기 전까지 하루 가까이 이 상태로 운영됐습니다.</p>
+
+        <h2>새 판정 규칙</h2>
+        <p>포함 관계를 너그럽게 봐주는 건 그대로 두되, 세 가지 예외를 두었습니다.</p>
+        <ol>
+          <li><strong>다른 제시어를 말했다면 오답.</strong> 입력이 게임에 있는 다른 제시어(또는 그 동의어)와 같으면, 글자가 겹쳐도 틀린 답입니다. “고래”는 따로 출제되는 제시어라서 “돌고래”의 정답이 될 수 없습니다.</li>
+          <li><strong>한국어는 두 글자 이상 겹쳐야 인정.</strong> 한 글자만 겹치는 건 우연일 가능성이 커서 인정하지 않습니다. “경찰”과 “경찰관”은 여전히 통과합니다.</li>
+          <li><strong>영어는 글자가 아니라 단어 단위로.</strong> “ant”는 “elephant” 안에 글자로는 들어 있지만 단어로는 아닙니다. 대신 “dolphins”(복수형)나 “a dolphin”(관사)은 “dolphin”으로 인정합니다.</li>
+        </ol>
+        <p>규칙을 바꾼 뒤, 모든 제시어 쌍을 서로의 답으로 넣어 보는 검사를 다시 돌렸습니다. 다른 제시어를 말했는데 정답으로 처리되는 경우가 <strong>92쌍에서 0쌍</strong>이 됐고, “경찰→경찰관”, “라떼→카페라떼” 같은 너그러운 판정은 그대로 유지됐습니다.</p>
+
+        <h2>남은 고민</h2>
+        <p>판정 규칙에 정답은 없습니다. “시계”가 “손목시계”의 정답이어야 할까요? 지금은 “시계”가 “벽시계”의 다른 이름으로 등록되어 있어서, 손목시계 문제에 “시계”라고 적으면 오답입니다. 벽시계와 손목시계가 둘 다 출제되는 한, 어느 쪽으로 판정해도 누군가는 억울할 수 있습니다. 이런 사례를 만나면 <a href="/contact">문의</a>로 알려주세요. 동의어 목록을 계속 다듬고 있습니다.</p>
+        <p class="site-note">정답 인정 기준은 <a href="/how-to-play">게임 방법</a>에도 정리해 두었습니다.</p>
+      </article>
+    </main>
+
+    <!-- @footer-ko -->
+  </body>
+</html>

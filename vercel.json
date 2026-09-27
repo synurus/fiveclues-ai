@@ -13,6 +13,9 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/contact", "destination": "/contact.html" }
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/guides", "destination": "/guides.html" },
+    { "source": "/guides/:slug", "destination": "/guides/:slug.html" },
+    { "source": "/en/:slug", "destination": "/en/:slug.html" }
   ]
 }

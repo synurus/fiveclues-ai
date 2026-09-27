@@ -20,7 +20,7 @@ Each clue must be true of the target word and sound right to anyone who knows it
 **yet must also fit two or three other things in the category "${category}" just as well** —
 made-up or fuzzy facts only mislead, and if one clue narrows it to a single answer, the game ends right there.
 
-${round === 2 ? `This is round 2. The player missed round 1, so go **a bit more specific**.\nStill, don't let any single clue nail it down completely.\n` : ''}
+${round === 2 ? `This is round 2. The player missed round 1, so **narrow it one step** — each clue should fit only one or two other things in the category, and you may paraphrase the least decisive item from "banned" this time only.\nStill, don't let any single clue nail it down completely.\n` : ''}
 
 [DO NOT WRITE — this is what makes it hard]
 - The target word itself, or any part of it. Paraphrasing it doesn't count either.
