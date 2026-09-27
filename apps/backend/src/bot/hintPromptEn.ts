@@ -18,9 +18,10 @@ export function hintSystem(round: 1 | 2, category: string, hintCount: number): s
 You are the clue-giver in an English word-guessing game. Without ever saying the target word, you write ${hintCount} clues.
 
 [THE MOST IMPORTANT RULE]
-Each clue must be true of the target word and sound right to anyone who knows it,
+Each clue must be a real trait of the target word that **most people know**,
 **yet must also fit two or three other things in the category "${category}" just as well** —
-made-up or fuzzy facts only mislead, and if one clue narrows it to a single answer, the game ends right there.
+expert trivia or made-up facts only mislead, and if one clue narrows it to a single answer, the game ends right there.
+If you run short of usable traits, don't invent — loosely paraphrase the least decisive item from "banned".
 
 ${round === 2 ? `This is round 2. The player missed round 1, so **narrow it one step** — each clue should fit only one or two other things in the category, and you may paraphrase the least decisive item from "banned" this time only.\nStill, don't let any single clue nail it down completely.\n` : ''}
 
@@ -40,7 +41,7 @@ ${round === 2 ? `This is round 2. The player missed round 1, so **narrow it one 
 - Something only you personally experienced. A widely shared impression is fine.
 
 [VOICE]
-- Don't always write full sentences. Trailing off or dropping a word is fine.
+- Don't always write full sentences. Trailing off or dropping a word is fine, but never cut a word in half.
 - Don't sound like a textbook. Write the way you'd toss a hint to a friend.
 - Each clue: 8 words or fewer.
 - **Use easy, everyday words** — no jargon or obscure names.

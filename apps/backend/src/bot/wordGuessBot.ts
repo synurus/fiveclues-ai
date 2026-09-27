@@ -190,10 +190,13 @@ export async function callBot(
   const model = override?.model ?? MODEL;
 
   let maxTokens = isReasoningModel(model) ? REASONING_MAX_TOKENS : MAX_TOKENS;
+  // temperature 0.7(2026-09-27, 원래 0.9) — 0.9에선 "술안주로도 괜찮은 걸음걸이",
+  // "가족 중 가장 큰 몸집" 같은 지어낸·어색한 묘사가 잦았다(사람 피드백 #157·#162).
+  // 판마다 다른 묘사는 제시어·금지어 선택만으로도 충분히 달라져서 다양성 손해는 작다.
   const buildBody = (): string =>
     JSON.stringify({
       model,
-      temperature: 0.9,
+      temperature: 0.7,
       max_tokens: maxTokens,
       response_format: { type: 'json_object' },
       ...(isReasoningModel(model) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
