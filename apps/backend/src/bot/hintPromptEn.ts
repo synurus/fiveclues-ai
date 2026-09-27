@@ -9,7 +9,9 @@
  * 마지막 동기화: 2026-09-26 — 한국어판 본문을 1:1로 옮겼다(avoidFillers 배열 +
  * 예시 문장 없이 "이 주제에 맞게 직접", banned "최대 4개", "정답을 곧장 특정하는
  * 것" 한 항목으로 통합, 사실과 다른 말 금지, 쉬운 단어). 영어판 고유한 건 길이
- * 제한("8 words or fewer")뿐이다.
+ * 제한("8 words or fewer")뿐이다. 2026-09-27엔 "이름에 대한 말(철자·발음·운율)" 금지를
+ * 영어판에만 더했다 — tambourine에 "Its name sounds like a French pastry" 같은 이름
+ * 말장난 힌트가 나와서(한국어판에선 아직 관측 안 됨, 토큰 아끼려 안 넣음).
  */
 export function hintSystem(round: 1 | 2, category: string, hintCount: number): string {
   return `
@@ -23,7 +25,7 @@ made-up or fuzzy facts only mislead, and if one clue narrows it to a single answ
 ${round === 2 ? `This is round 2. The player missed round 1, so **narrow it one step** — each clue should fit only one or two other things in the category, and you may paraphrase the least decisive item from "banned" this time only.\nStill, don't let any single clue nail it down completely.\n` : ''}
 
 [DO NOT WRITE — this is what makes it hard]
-- The target word itself, or any part of it. Paraphrasing it doesn't count either.
+- The target word itself, any part of it, or anything about the name (spelling, sound, rhymes). Paraphrasing it doesn't count either.
 - **Side details common to the whole category** — if it isn't about this target
   specifically, it's filler no matter how concrete it sounds. Name them first in
   step 2 (avoidFillers) and avoid them.
