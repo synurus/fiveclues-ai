@@ -20,7 +20,8 @@ import { Typewriter } from './Typewriter';
 import { strings, detectLang, saveLang, type Lang } from './i18n';
 import './wordgame.css';
 
-type RoundLog = { hints: string[]; guess: string };
+// model: 그 라운드 묘사를 실제로 만든 모델 — 화면엔 안 보이고 피드백에만 실린다(2026-09-27).
+type RoundLog = { hints: string[]; guess: string; model?: string };
 
 type Stage =
   | { kind: 'nickname' }
@@ -30,6 +31,7 @@ type Stage =
       session: string;
       round: 1 | 2;
       hints: string[];
+      hintModel?: string;
       // 2라운드 진입 시 1라운드 화면이 리셋되면서 방금 본 힌트·오답을 까먹는
       // 문제(2026-09-16)가 있어, round===2일 때만 채워 결과 화면 바로 위에
       // 요약으로 다시 보여준다.
@@ -130,7 +132,7 @@ export function WordGuessGame() {
       setUselessHints(new Set());
       setFeedbackText('');
       setFeedbackStatus('idle');
-      setStage({ kind: 'playing', session: res.session, round: res.round, hints: firstHints });
+      setStage({ kind: 'playing', session: res.session, round: res.round, hints: firstHints, hintModel: res.hintModel });
     } catch (e) {
       setStage({ kind: 'error', message: e instanceof Error ? e.message : String(e) });
     }
@@ -151,13 +153,14 @@ export function WordGuessGame() {
           session: res.session,
           round: res.round,
           hints: round2Hints,
+          hintModel: res.hintModel,
           category: res.category,
-          previous: { hints: stage.hints, guess: attemptedGuess },
+          previous: { hints: stage.hints, guess: attemptedGuess, model: stage.hintModel },
         });
       } else {
         const rounds: RoundLog[] = stage.previous
-          ? [stage.previous, { hints: stage.hints, guess: attemptedGuess }]
-          : [{ hints: stage.hints, guess: attemptedGuess }];
+          ? [stage.previous, { hints: stage.hints, guess: attemptedGuess, model: stage.hintModel }]
+          : [{ hints: stage.hints, guess: attemptedGuess, model: stage.hintModel }];
         setStage({ kind: 'result', outcome: res.result, word: res.word, category: res.category, rounds });
         setSeenWords((prev) => [...prev, res.word].slice(-30));
       }
@@ -178,6 +181,7 @@ export function WordGuessGame() {
         hints: stage.rounds.flatMap((r) => r.hints),
         roundHintCounts: stage.rounds.map((r) => r.hints.length),
         guesses: stage.rounds.map((r) => r.guess),
+        hintModels: stage.rounds.map((r) => r.model ?? ''),
         outcome: stage.outcome,
         keyHintIndexes: [...keyHints].sort((a, b) => a - b),
         uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),

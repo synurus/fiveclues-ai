@@ -44,6 +44,11 @@ export interface FeedbackPayload {
    *  항상 채운다 — "힌트는 괜찮았는데 헛짚었다"와 "힌트 자체가 안 좋았다"를 이슈만
    *  보고도 구분하려는 것. */
   guesses: string[];
+  /** 라운드마다 실제로 묘사를 만든 모델(예: "groq:openai/gpt-oss-120b"), roundHintCounts와
+   *  길이가 같다(2026-09-27 출제 모델 체인 도입). 주력 모델이 한도에 걸려 대체 모델이
+   *  만든 판을 구분하려는 것 — 자가개선이 대체 모델의 실수를 프롬프트 탓으로 오해하지
+   *  않게. 옛 이슈·옛 클라이언트엔 없다. */
+  hintModels?: string[];
 }
 
 // hints를 roundHintCounts 길이대로 잘라 라운드별 배열로 되돌린다. roundHintCounts가
@@ -71,7 +76,8 @@ function buildHintLog(data: FeedbackPayload): string {
       const isLastRound = i === rounds.length - 1;
       const wrong = !(isLastRound && data.outcome !== 'failed');
       const hintLines = hints.map((h) => `- ${h}`).join('\n');
-      return `${hintLines}\n→ 추측 "${guess}" (${wrong ? '오답' : '정답'})`;
+      const model = data.hintModels?.[i];
+      return `${hintLines}\n→ 추측 "${guess}" (${wrong ? '오답' : '정답'})${model ? ` · 출제: ${model}` : ''}`;
     })
     .join('\n\n────────────\n\n');
 }

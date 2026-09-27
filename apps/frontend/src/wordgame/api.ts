@@ -11,6 +11,8 @@ export interface StartResponse {
   session: string;
   round: 1;
   hints: Hint[];
+  /** 이 라운드 묘사를 만든 모델(출제 모델 체인, 2026-09-27) — 피드백에만 싣는다. */
+  hintModel?: string;
 }
 
 // 세션 발급 시 한 번만 넘긴다 — 2라운드부터는 세션 토큰 안의 값을 서버가 그대로
@@ -19,7 +21,7 @@ export type Lang = 'ko' | 'en';
 
 export type GuessResponse =
   | { result: 'round1' | 'round2'; word: string; category: string; verdict: 'exact' | 'loose' }
-  | { result: 'continue'; session: string; round: 2; category: string; hints: Hint[] }
+  | { result: 'continue'; session: string; round: 2; category: string; hints: Hint[]; hintModel?: string }
   | { result: 'failed'; word: string; category: string; verdict: 'wrong' };
 
 // 자가개선 루프(scripts/self-improve/)가 GitHub Issue로 쌓는 피드백.
@@ -30,6 +32,7 @@ export interface FeedbackInput {
   hints: string[]; // 1·2라운드 전부, 순서대로 — keyHintIndexes/uselessHintIndexes가 이 배열의 인덱스다.
   roundHintCounts: number[]; // hints를 라운드별로 다시 자를 때 쓰는 길이들 — 합은 hints.length와 같다.
   guesses: string[]; // 라운드별로 실제 뭐라고 추측했는지, 순서대로.
+  hintModels: string[]; // 라운드별로 묘사를 만든 모델, 순서대로(모르면 빈 문자열).
   outcome: 'round1' | 'round2' | 'failed';
   keyHintIndexes: number[]; // 결정적이었던 힌트(들). 여러 개 태그 가능, 없으면 [].
   uselessHintIndexes: number[]; // 무쓸모였던 힌트(들). 여러 개 태그 가능, 없으면 [].

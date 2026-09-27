@@ -94,7 +94,12 @@ function summarizeForPrompt(items) {
     // 라운드별 실제 추측(오답 경로) — "양갱 → 약과 → 유과"처럼 힌트가 어느 쪽으로
     // 오도했는지를 판당 몇 토큰으로 보여주는 가장 싼 신호라 넣는다(2026-09-26).
     const guesses = Array.isArray(data.guesses) && data.guesses.length ? ` 추측:${data.guesses.join('→')}` : '';
-    return `- #${number} [${data.outcome}] "${data.word}"(${data.category})${guesses} 결정적:${key} 무쓸모:${useless}${comment}`;
+    // 그 판 묘사를 만든 모델(2026-09-27 출제 모델 체인 — 한도에 걸리면 다음 모델로
+    // 넘어가서 판마다 다를 수 있다). 한 모델의 판에서만 보이는 문제는 프롬프트가 아니라
+    // 모델 차이일 수 있어 LLM이 구분할 수 있게 적는다. 옛 이슈엔 없다.
+    const models = [...new Set((data.hintModels ?? []).filter(Boolean).map((m) => m.split(':').pop()))];
+    const modelTag = models.length ? ` 출제:${models.join('/')}` : '';
+    return `- #${number} [${data.outcome}] "${data.word}"(${data.category})${guesses}${modelTag} 결정적:${key} 무쓸모:${useless}${comment}`;
   });
   const tallyLine = `집계: 1라운드에 맞음 ${tally.round1 ?? 0} · 2라운드까지 가서 맞음 ${tally.round2 ?? 0} · 실패(정답 공개) ${tally.failed ?? 0}`;
   return `${tallyLine}\n\n${lines.join('\n')}`;
@@ -183,7 +188,10 @@ function buildSystemPrompt() {
     `8. 프롬프트 본문(return 뒤 템플릿 리터럴)은 게임 매 호출마다 통째로 들어가 무료 티어 하루 토큰을 먹는다. ` +
     `새 규칙은 줄을 덧붙이지 말고 기존 줄을 고쳐 끼워 넣어라 — 본문 글자 수가 지금보다 ` +
     `${Math.round((MAX_BODY_GROWTH - 1) * 100)}% 넘게 늘면 자동 검증에서 버려진다. ` +
-    `맨 위 주석에도 날짜별 변경 이력을 쌓지 마라(이력은 git log에 있다).\n\n` +
+    `맨 위 주석에도 날짜별 변경 이력을 쌓지 마라(이력은 git log에 있다).\n` +
+    `9. 피드백 줄의 "출제:"는 그 판 묘사를 만든 모델이다(여러 모델을 한도 순서대로 쓴다). ` +
+    `한 모델의 판에서만 보이는 문제는 모델 차이일 수 있으니 그것만으로 규칙을 바꾸지 말고, ` +
+    `특정 모델 이름을 프롬프트에 넣지도 마라.\n\n` +
     `[출력 형식 — 이 형식을 벗어나면 자동 파싱이 실패해 PR이 안 열린다]\n` +
     `===SUMMARY===\n(무엇을 왜 바꿨는지 한국어 2~3문장. 안 바꿨으면 "변경 없음"과 이유)\n` +
     `===FILE===\n(hintPrompt.ts 의 완성된 전체 내용. 이 마커 사이엔 파일 내용 말고 아무것도 넣지 마라)\n` +

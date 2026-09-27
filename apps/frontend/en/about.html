@@ -64,7 +64,7 @@
         </ul>
 
         <h2>Under the hood</h2>
-        <p>The front end is built with React and the server runs as Vercel serverless functions. Clues are written by an open-weight language model (gpt-oss-120b) running on Groq; Google Gemini analyzes feedback to propose improvements and guesses in some of the AI-played games. There's no database for accounts or game history — the state of a game in progress is encrypted and kept in your browser, and the server only checks it.</p>
+        <p>The front end is built with React and the server runs as Vercel serverless functions. Clues are mostly written by Google Gemini's lightweight Flash-Lite models; when those hit their usage limit, open-weight models on Groq (gpt-oss-120b and others) take over. The order was set by comparing the models on the same words and ranking them by how accurate and natural their clues were. Google Gemini also analyzes feedback to propose improvements and guesses in some of the AI-played games. There's no database for accounts or game history — the state of a game in progress is encrypted and kept in your browser, and the server only checks it.</p>
         <p>The game runs within free AI usage allowances, so at busy times clues may take longer or a game may briefly fail to start. Thanks for your patience.</p>
 
         <p class="site-meta">Last updated: September 27, 2026</p>

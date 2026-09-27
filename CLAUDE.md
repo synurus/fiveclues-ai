@@ -191,7 +191,7 @@
   루트에 새 페이지를 만들 때만 한 줄 추가). canonical·sitemap 주소는
   `fiveclues-ai.vercel.app`으로 박혀 있어서 도메인을 바꾸면 전부 바꿔야 한다.
   **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`과 `en/privacy.html`을
-  같이 고쳐라** — 지금은 추측→Groq, 피드백→GitHub 공개 이슈·Gemini(닉네임 제외),
+  같이 고쳐라** — 지금은 추측→Gemini(주력)·Groq(EEA 등 지역이거나 대체), 피드백→GitHub 공개 이슈·Gemini(닉네임 제외),
   언어 설정→localStorage가 전부라고 적혀 있다. 읽을거리 글은 실제 이슈 기록·개발
   이력을 바탕으로 썼다 — 사실과 다른 내용이 섞이지 않게, 수치나 사례를 인용할 땐
   원본(이슈·커밋)을 확인할 것. `vite preview`로 보려면 `.claude/launch.json`의
@@ -204,6 +204,21 @@
   열린다 — GitHub 고객지원 삭제 요청 대상. **운영자 실명은 어디에도 쓰지 말 것**(표기는
   흑기사 Black_Knight). 로컬 전용 브랜치 `main-old-team-history`엔 옛 이력이 남아
   있으니 원격에 푸시하지 마라.
+- **묘사는 모델 한 개가 아니라 "출제 모델 체인"이 만든다(2026-09-27, `wordGuessBot.ts`의
+  `HINT_CHAIN`).** 기본 순서는 제미나이 `gemini-3.1-flash-lite` → `gemini-3.5-flash-lite`
+  → Groq `gpt-oss-120b` → `gpt-oss-20b` → `qwen3.8-27b`이고, 앞 모델이 한도(429)·
+  과부하(503)·8초 무응답이면 다음 모델로 넘어간다(한도에 걸린 모델은 인스턴스가 살아
+  있는 동안 잠시 건너뜀). 순서는 같은 프롬프트·같은 문제 단어 6개로 비교해 정했다 —
+  제미나이 flash-lite가 틀린 말이 가장 적고 자연스러웠다. `HINT_MODEL_CHAIN` 환경변수로
+  코드 수정 없이 바꿀 수 있다. **제미나이 키(`GEMINI_API_KEY`, 없으면
+  `SELFIMPROVE_BOT_API_KEY`)가 Vercel에 없으면 제미나이 항목은 조용히 빠진다.**
+  ⚠️ 제미나이 API 무료 할당량은 EEA·스위스·영국 이용자에게 서비스하면 안 돼서(약관),
+  `game.ts`가 Vercel 접속 국가 헤더(`x-vercel-ip-country`)로 그 지역이면 제미나이를 뺀다.
+  `gemini-3.8-flash`는 자가개선 전용(하루 20회)이라 체인에 넣지 않는다. 어떤 모델이
+  묘사를 만들었는지는 응답의 `hintModel` → 피드백의 `hintModels`로 이슈에 남고,
+  `propose.mjs`는 요약 줄에 `출제:모델`을 붙인다(한 모델에서만 보이는 문제를 프롬프트
+  탓으로 착각하지 않게). 체인 순서나 데이터 흐름을 바꾸면 `privacy.html`·
+  `en/privacy.html`·소개 페이지의 "사용한 기술"도 같이 고칠 것.
 - **이 머신엔 `gh` CLI가 설치돼 있지 않다.** GitHub 이슈/PR은 WebFetch로 개별 페이지
   (`/issues/N`, `/pull/N`)와 목록 페이지(`/issues`, `/pulls?state=...`) 둘 다
   문제없이 읽힌다.

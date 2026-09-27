@@ -55,6 +55,16 @@ const toGuessArray = (v: unknown): string[] => (Array.isArray(v) ? v.filter((s):
 // body.exclude — 클라이언트가 이번 세션에서 이미 본 단어들. wordPool.ts의 pickWord 참고.
 const toExcludeArray = toGuessArray;
 
+// EEA(EU 27개국 + 아이슬란드·리히텐슈타인·노르웨이)·스위스·영국 — 제미나이 API 무료
+// 할당량으로는 이 지역 이용자에게 서비스할 수 없다(Gemini API 추가 약관, 2026-09-27
+// 확인). Vercel이 붙여주는 접속 국가 헤더로 판단하고, 그 지역이면 출제 모델 체인에서
+// 제미나이를 뺀다(wordGuessBot.ts의 HINT_CHAIN). 헤더가 없으면(로컬 개발) 제한 없음.
+const RESTRICTED_COUNTRIES = new Set(
+  'AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE IS LI NO CH GB'.split(' '),
+);
+const isRestrictedRegion = (req: Request): boolean =>
+  RESTRICTED_COUNTRIES.has(String(req.headers['x-vercel-ip-country'] ?? '').toUpperCase());
+
 export const gameRouter = Router();
 
 gameRouter.post('/start', async (req: Request, res: Response) => {
@@ -62,7 +72,14 @@ gameRouter.post('/start', async (req: Request, res: Response) => {
     const body = req.body as { lang?: unknown; exclude?: unknown } | undefined;
     const lang = toLang(body?.lang);
     const { word, category, accept } = pickWord(lang, toExcludeArray(body?.exclude));
-    const { hints } = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT, lang });
+    const { hints, model } = await generateHints({
+      word,
+      category,
+      round: 1,
+      hintCount: HINT_COUNT,
+      lang,
+      restrictedRegion: isRestrictedRegion(req),
+    });
 
     const session = encodeSession<SessionPayload>({
       word,
@@ -73,7 +90,9 @@ gameRouter.post('/start', async (req: Request, res: Response) => {
       lang,
     });
 
-    res.json({ session, round: 1, hints: toPlayerHints(hints) });
+    // hintModel: 어떤 모델이 묘사를 만들었는지 — 화면엔 안 보이고, 결과 화면 피드백에
+    // 같이 실려 이슈로 남는다(대체 모델이 만든 묘사인지 자가개선이 구분하려고).
+    res.json({ session, round: 1, hints: toPlayerHints(hints), hintModel: model });
   } catch (e) {
     res.status(502).json({ error: errorMessage(e) });
   }
@@ -110,7 +129,7 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
 
   try {
     const previousHints: Hint[] = payload.round1Hints.map((text) => ({ text, angle: '' }));
-    const { hints: round2Hints } = await generateHints({
+    const { hints: round2Hints, model } = await generateHints({
       word: payload.word,
       category: payload.category,
       round: 2,
@@ -118,6 +137,7 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
       previousHints,
       wrongGuess: guess,
       lang: payload.lang,
+      restrictedRegion: isRestrictedRegion(req),
     });
 
     const nextSession = encodeSession<SessionPayload>({ ...payload, round: 2 });
@@ -130,6 +150,7 @@ gameRouter.post('/guess', async (req: Request, res: Response) => {
       round: 2,
       category: payload.category,
       hints: toPlayerHints(round2Hints),
+      hintModel: model,
     });
   } catch (e) {
     res.status(502).json({ error: errorMessage(e) });
@@ -156,6 +177,7 @@ gameRouter.post('/feedback', async (req: Request, res: Response) => {
       feedbackText: typeof body.feedbackText === 'string' ? body.feedbackText : '',
       nickname: typeof body.nickname === 'string' ? body.nickname : '',
       guesses: toGuessArray(body.guesses),
+      hintModels: toGuessArray(body.hintModels),
       lang: toLang(body.lang),
     });
     res.json({ ok: true, issueNumber });

@@ -180,10 +180,12 @@ async function playOne(index: number, guesser: BotConfig | undefined): Promise<v
   const hintsSoFar: Hint[] = [];
   const guesses: string[] = [];
   const roundHintCounts: number[] = [];
+  const hintModels: string[] = []; // 라운드별로 실제 묘사를 만든 모델(출제 모델 체인, 2026-09-27)
 
   const r1 = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT });
   hintsSoFar.push(...r1.hints);
   roundHintCounts.push(r1.hints.length);
+  hintModels.push(r1.model);
   const guess1 = await guessWord(hintsSoFar, guesser);
   guesses.push(guess1);
   const verdict1 = judgeGuess(word, guess1, accept ?? []);
@@ -202,6 +204,7 @@ async function playOne(index: number, guesser: BotConfig | undefined): Promise<v
     });
     hintsSoFar.push(...r2.hints);
     roundHintCounts.push(r2.hints.length);
+    hintModels.push(r2.model);
     const guess2 = await guessWord(hintsSoFar, guesser);
     guesses.push(guess2);
     const verdict2 = judgeGuess(word, guess2, accept ?? []);
@@ -221,6 +224,7 @@ async function playOne(index: number, guesser: BotConfig | undefined): Promise<v
     category,
     hints: hintsSoFar.map((h) => h.text),
     roundHintCounts,
+    hintModels,
     outcome,
     keyHintIndexes: reflection.keyHintIndexes,
     uselessHintIndexes: reflection.uselessHintIndexes,

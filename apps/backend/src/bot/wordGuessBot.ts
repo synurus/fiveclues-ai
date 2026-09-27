@@ -47,6 +47,9 @@ export interface HintRound {
   /** 이 단어를 들으면 바로 떠오르는 결정적 특징들 — 묘사에서 실제로 제외됐는지 검증용. */
   banned: string[];
   hints: Hint[];
+  /** 실제로 묘사를 만든 모델(예: "groq:openai/gpt-oss-120b") — 앞 모델이 한도에 걸려
+   *  대체 모델이 만들었는지 피드백 이슈에 남기려고(2026-09-27). */
+  model: string;
 }
 
 export interface GenerateHintsInput {
@@ -62,6 +65,9 @@ export interface GenerateHintsInput {
   /** 미지정 시 'ko'(기존 동작 그대로) — autoPlay.ts/spectate.mjs 등 기존 호출부는
    *  안 넘겨도 그대로 한국어로 동작한다(2026-09-17, 영어 버전 추가). */
   lang?: 'ko' | 'en';
+  /** true면 EEA·스위스·영국 이용자 요청이라 제미나이 무료 할당량 모델을 쓰지 않는다
+   *  (아래 HINT_CHAIN 주석 참고). 내부 호출(자동플레이 등)은 안 넘기면 된다. */
+  restrictedRegion?: boolean;
 }
 
 export type GuessJudgement = 'exact' | 'loose' | 'wrong';
@@ -120,6 +126,12 @@ export function judgeGuess(word: string, guess: string, accept: string[] = []): 
 export class LlmError extends Error {
   /** true면 재시도해도 소용없다(키 문제 등) — 호출부가 즉시 포기해야 한다. */
   fatal = false;
+  /** HTTP 상태(시간 초과면 0). generateHints()가 다음 모델로 넘어갈지·얼마나 쉴지 정하는 데 쓴다. */
+  status?: number;
+  /** 하루 한도(TPD·RPD, 제미나이 PerDay 할당량)에 걸린 429 — 한동안 그 모델을 건너뛴다. */
+  dailyQuota = false;
+  /** 서버가 알려준 재시도 대기 시간(ms). */
+  retryAfterMs?: number;
 }
 
 const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
@@ -140,6 +152,12 @@ export interface BotConfig {
   baseUrl: string;
   apiKey: string;
   model: string;
+  /** 요청 본문에 더 실을 모델별 옵션(추론 강도 등). 없으면 gpt-oss면 추론 low, 아니면 없음. */
+  extraBody?: Record<string, unknown>;
+  /** false면 response_format(JSON 모드)을 보내지 않는다 — 지원 안 하는 모델용. 기본 true. */
+  jsonMode?: boolean;
+  /** 요청할 최대 출력 토큰. 없으면 gpt-oss 2000 / 그 외 4000(아래 상수 참고). */
+  maxTokens?: number;
 }
 
 async function listModels(baseUrl: string, apiKey: string): Promise<string> {
@@ -177,7 +195,15 @@ const REASONING_MAX_TOKENS = 2000;
 // 지금까지처럼 짧게 6번.
 export interface CallOptions {
   patient?: boolean;
+  /** 429·503을 기다리지 않고 바로 LlmError로 던진다 — 실제 게임 요청에서 다음 모델로
+   *  넘어가려고(2026-09-27, generateHints()의 모델 체인). 하루 한도가 걸리면 retry-after가
+   *  "7분 뒤" 같은 값이라 기다리는 동안 Vercel 함수가 먼저 끝나 버린다. */
+  failFast?: boolean;
+  /** 요청 하나의 제한 시간(ms). 넘으면 status 0인 LlmError. 없으면 제한 없음. */
+  timeoutMs?: number;
 }
+
+const isDailyQuota = (body: string): boolean => /per day|PerDay|\(TPD\)|\(RPD\)/i.test(body);
 
 export async function callBot(
   system: string,
@@ -189,7 +215,11 @@ export async function callBot(
   const apiKey = override?.apiKey ?? API_KEY;
   const model = override?.model ?? MODEL;
 
-  let maxTokens = isReasoningModel(model) ? REASONING_MAX_TOKENS : MAX_TOKENS;
+  let maxTokens = override?.maxTokens ?? (isReasoningModel(model) ? REASONING_MAX_TOKENS : MAX_TOKENS);
+  // 잘렸을 때 한 번 더 부를 상한 — 모델에 maxTokens를 따로 준 경우(분당 출력 한도가
+  // 작은 모델 등)는 그 값이 상한이라 늘리지 않는다.
+  const maxTokensCap = override?.maxTokens ?? MAX_TOKENS;
+  const extraBody = override?.extraBody ?? (isReasoningModel(model) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {});
   // temperature 0.7(2026-09-27, 원래 0.9) — 0.9에선 "술안주로도 괜찮은 걸음걸이",
   // "가족 중 가장 큰 몸집" 같은 지어낸·어색한 묘사가 잦았다(사람 피드백 #157·#162).
   // 판마다 다른 묘사는 제시어·금지어 선택만으로도 충분히 달라져서 다양성 손해는 작다.
@@ -198,8 +228,8 @@ export async function callBot(
       model,
       temperature: 0.7,
       max_tokens: maxTokens,
-      response_format: { type: 'json_object' },
-      ...(isReasoningModel(model) ? { reasoning_effort: 'low', reasoning_format: 'hidden' } : {}),
+      ...(override?.jsonMode === false ? {} : { response_format: { type: 'json_object' } }),
+      ...extraBody,
       messages: [
         { role: 'system', content: system },
         { role: 'user', content: user },
@@ -207,25 +237,41 @@ export async function callBot(
     });
 
   for (let attempt = 1; ; attempt++) {
-    const res = await fetch(`${baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
-      body: buildBody(),
-    });
+    let res: Response;
+    try {
+      res = await fetch(`${baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
+        body: buildBody(),
+        ...(opts.timeoutMs ? { signal: AbortSignal.timeout(opts.timeoutMs) } : {}),
+      });
+    } catch (e) {
+      const err = new LlmError(`LLM 요청 실패(시간 초과 또는 네트워크, ${model}): ${e instanceof Error ? e.message : String(e)}`);
+      err.status = 0;
+      throw err;
+    }
     if (res.ok) {
       const data = (await res.json()) as {
         choices?: { message?: { content?: string }; finish_reason?: string }[];
       };
       const content = data.choices?.[0]?.message?.content?.trim() ?? '';
       // 추론 도중 예산이 끊기면 에러 대신 빈 내용 + finish_reason "length"로 올 수도 있다.
-      if (!content && data.choices?.[0]?.finish_reason === 'length' && maxTokens < MAX_TOKENS) {
-        maxTokens = MAX_TOKENS;
+      if (!content && data.choices?.[0]?.finish_reason === 'length' && maxTokens < maxTokensCap) {
+        maxTokens = maxTokensCap;
         continue;
       }
       return content;
     }
 
     const text = await res.text();
+
+    if (opts.failFast && (res.status === 429 || res.status === 503)) {
+      const err = new LlmError(`LLM ${res.status}(${model}): ${text.replace(/org_\w+/, 'org_…').slice(0, 300)}`);
+      err.status = res.status;
+      err.dailyQuota = res.status === 429 && isDailyQuota(text);
+      err.retryAfterMs = retryAfterMs(res, text);
+      throw err;
+    }
 
     // 제미나이 503엔 retry-after가 안 실려 와서 5초 고정 대기 6번(~30초)으로는 과부하
     // 시간대(KST 새벽 = 미국 낮)를 못 버텼다(2026-09-26 — 9/24~26 새벽 제미나이 판이
@@ -245,8 +291,8 @@ export async function callBot(
     }
     if (text.includes('json_validate_failed')) {
       // 줄여둔 예산(REASONING_MAX_TOKENS)이 모자랐을 수 있다 — 원래 예산으로 한 번만 더.
-      if (maxTokens < MAX_TOKENS) {
-        maxTokens = MAX_TOKENS;
+      if (maxTokens < maxTokensCap) {
+        maxTokens = maxTokensCap;
         continue;
       }
       throw new Error(
@@ -254,7 +300,8 @@ export async function callBot(
           `max_tokens 를 올리거나 reasoning_effort 를 낮춰볼 것.\n${text.slice(0, 300)}`,
       );
     }
-    const err = new LlmError(`LLM ${res.status}: ${text.slice(0, 300)}`);
+    const err = new LlmError(`LLM ${res.status}(${model}): ${text.slice(0, 300)}`);
+    err.status = res.status;
     if (res.status === 401 || res.status === 403) err.fatal = true;
     throw err;
   }
@@ -324,9 +371,101 @@ function hintUserEn(
   );
 }
 
+// ── 출제 모델 체인 ─────────────────────────────────────────────────────
+// 2026-09-27: 묘사를 한 모델(Groq gpt-oss-120b)에만 맡기니, 그 모델의 하루 토큰
+// 한도(TPD 200,000)가 바닥나면 게임 전체가 멈췄다(2026-09-26에 두 번). 무료 한도는
+// 모델마다 따로 잡히므로(Groq는 모델별, 제미나이는 프로젝트의 모델별), 품질 순으로
+// 여러 모델을 줄 세워 두고 앞 모델이 한도·과부하·시간 초과면 다음 모델로 넘긴다.
+// 순서는 같은 프롬프트·같은 단어로 비교한 결과(사실성·금지어 준수·속도)를 따른다(아래
+// DEFAULT_HINT_CHAIN) —
+// HINT_MODEL_CHAIN 환경변수("groq:모델,gemini:모델,...")로 코드 수정 없이 바꿀 수 있다.
+//
+// ⚠️ 제미나이 API 무료 할당량은 EEA·스위스·영국 이용자에게 서비스하는 데 쓸 수 없다
+// (Gemini API 추가 약관 — 그 지역은 유료 서비스만). 그래서 제미나이 항목엔
+// eeaRestricted를 달고, game.ts가 Vercel의 접속 국가 헤더로 그 지역 요청이면 건너뛴다.
+// 자동플레이·자가개선처럼 이용자에게 서비스하는 게 아닌 내부 호출은 해당 없음.
+const GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/openai';
+// 제미나이 키: 전용 GEMINI_API_KEY가 없으면 자가개선용 SELFIMPROVE_BOT_API_KEY를 재사용.
+// 할당량은 모델별이라 자가개선이 쓰는 gemini-3.8-flash(하루 20회)와 겹치지 않는다 —
+// 그래서 그 모델은 체인에 넣지 않는다.
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
+
+export interface HintProvider extends BotConfig {
+  /** 로그·피드백 이슈에 남길 이름(예: "groq:openai/gpt-oss-120b"). */
+  label: string;
+  /** EEA·스위스·영국 이용자 요청엔 쓰지 않는다(제미나이 무료 할당량 약관). */
+  eeaRestricted: boolean;
+}
+
+// 모델별 요청 옵션. 비교 테스트(2026-09-27)에서 확인한 값:
+//  - gpt-oss: 추론 low(기본 동작, callBot이 알아서 붙인다).
+//  - qwen3.8-27b: 추론을 끄고(none), 분당 출력 1,000토큰 한도라 max_tokens 900.
+//  - 제미나이 flash-lite: 추론 없는 가벼운 모델이라 옵션 없음.
+function toProvider(spec: string): HintProvider | null {
+  const [vendor, ...rest] = spec.trim().split(':');
+  const model = rest.join(':');
+  if (!model) return null;
+  if (vendor === 'groq') {
+    const qwen = /qwen/i.test(model);
+    return {
+      label: `groq:${model}`,
+      baseUrl: BASE_URL,
+      apiKey: API_KEY,
+      model,
+      eeaRestricted: false,
+      ...(qwen ? { extraBody: { reasoning_effort: 'none' }, maxTokens: 900 } : {}),
+    };
+  }
+  if (vendor === 'gemini') {
+    return { label: `gemini:${model}`, baseUrl: GEMINI_BASE_URL, apiKey: GEMINI_API_KEY, model, eeaRestricted: true };
+  }
+  return null;
+}
+
+// 기본 순서 — 2026-09-27 비교 테스트(같은 프롬프트, 문제 단어 6개, 1라운드):
+//  1) gemini-3.1-flash-lite  6/6 성공, 평균 3.5초 — 한국어가 자연스럽고 틀린 말이 거의 없음
+//  2) gemini-3.5-flash-lite  5/6, 2.0초 — 1)과 비슷한 품질. 원래 1순위였는데 테스트에서
+//     한 번 시간 초과, 직후 실제 호출에선 2분 넘게 응답이 없어서 응답이 안정적인 3.1을 앞에 뒀다
+//  3) groq gpt-oss-120b      6/6, 1.1초 — 보통(틀린 말이 섞임). 원래 유일한 출제자였다
+//  4) groq gpt-oss-20b       6/6, 0.7초 — 틀린 말이 많음. 게임이 멈추는 것보단 나은 예비
+//  5) groq qwen3.8-27b       6/6, 0.8초 — 이상한 문장이 많고 분당 출력 1,000토큰 한도
+// 제외: gemini-3.5-flash(품질 최고지만 평균 32초·과부하 잦음), gemini-3.7-flash·
+// gemma-4-31b(과부하·내부 오류로 0/6), gemini-3.8-flash(자가개선 전용, 하루 20회).
+const DEFAULT_HINT_CHAIN = [
+  'gemini:gemini-3.1-flash-lite',
+  'gemini:gemini-3.5-flash-lite',
+  `groq:${MODEL}`,
+  'groq:openai/gpt-oss-20b',
+  'groq:qwen/qwen3.8-27b',
+].join(',');
+
+export const HINT_CHAIN: HintProvider[] = (process.env.HINT_MODEL_CHAIN || DEFAULT_HINT_CHAIN)
+  .split(',')
+  .map(toProvider)
+  .filter((p): p is HintProvider => !!p && !!p.apiKey);
+
+// 한도·과부하에 걸린 모델은 잠시 건너뛴다 — 서버리스라도 같은 인스턴스가 연달아
+// 요청을 받는 동안엔 매번 막힌 모델에 먼저 두드리는 왕복을 아낄 수 있다.
+const cooldownUntil = new Map<string, number>();
+function cooldownFor(e: unknown): number {
+  if (!(e instanceof LlmError)) return 0; // 파싱 실패 등 — 모델 문제라기보다 그 한 번의 답이 이상했던 것
+  if (e.fatal) return 60 * 60_000; // 키 문제
+  if (e.status === 429) return e.dailyQuota ? 30 * 60_000 : Math.min(Math.max(e.retryAfterMs ?? 20_000, 5_000), 120_000);
+  if (e.status === 503 || e.status === 0 || (e.status ?? 0) >= 500) return 60_000;
+  return 0;
+}
+
+// 게임 요청 하나가 모델 체인을 도는 데 쓸 총 시간 — Vercel 함수 제한(vercel.json의
+// maxDuration 60초) 안에서 응답을 돌려줘야 한다. 모델 하나엔 최대 8초 — 체인의 모델들은
+// 보통 1~4초에 답한다(비교 테스트). 제미나이가 가끔 응답 없이 멈춰서(2026-09-27 실측)
+// 오래 기다리지 않고 다음으로 넘긴다.
+const PER_MODEL_TIMEOUT_MS = 8_000;
+const CHAIN_BUDGET_MS = 45_000;
+
 /**
- * 묘사 생성. 라운드당 LLM 호출 1번(기획서 v2 — "봇을 5번 부르지 않는다").
- * round === 2 면 previousHints·wrongGuess 가 필수다.
+ * 묘사 생성. 라운드당 LLM 호출 1번(기획서 v2 — "봇을 5번 부르지 않는다") — 단, 앞
+ * 모델이 한도·과부하·오류면 체인의 다음 모델로 한 번씩 더 부른다.
+ * round === 2 면 previousHints·wrongGuess 가 필요하다.
  */
 export async function generateHints(input: GenerateHintsInput): Promise<HintRound> {
   const { word, category, round, hintCount, previousHints, wrongGuess, lang } = input;
@@ -339,7 +478,30 @@ export async function generateHints(input: GenerateHintsInput): Promise<HintRoun
   const user = isEn
     ? hintUserEn(word, round, hintCount, previousHints, wrongGuess)
     : hintUser(word, round, hintCount, previousHints, wrongGuess);
-  const raw = await callBot(system, user);
+
+  const usable = HINT_CHAIN.filter((p) => !(input.restrictedRegion && p.eeaRestricted));
+  const now = Date.now();
+  // 쉬는 중인 모델은 뒤로 미룬다(아예 빼진 않는다 — 전부 쉬는 중이면 그래도 시도해 본다).
+  const ordered = [...usable.filter((p) => (cooldownUntil.get(p.label) ?? 0) <= now), ...usable.filter((p) => (cooldownUntil.get(p.label) ?? 0) > now)];
+  if (!ordered.length) throw new Error('쓸 수 있는 출제 모델이 없다(API 키 설정을 확인할 것).');
+
+  const started = Date.now();
+  const errors: string[] = [];
+  for (const provider of ordered) {
+    if (errors.length && Date.now() - started > CHAIN_BUDGET_MS) break;
+    try {
+      const raw = await callBot(system, user, provider, { failFast: true, timeoutMs: PER_MODEL_TIMEOUT_MS });
+      return { ...parseHintRound(raw, hintCount), model: provider.label };
+    } catch (e) {
+      const pause = cooldownFor(e);
+      if (pause) cooldownUntil.set(provider.label, Date.now() + pause);
+      errors.push(`${provider.label}: ${e instanceof Error ? e.message.slice(0, 160) : String(e)}`);
+    }
+  }
+  throw new Error(`모든 출제 모델이 실패했다 — ${errors.join(' / ')}`);
+}
+
+function parseHintRound(raw: string, hintCount: number): Omit<HintRound, 'model'> {
   const out = parseJson<{ banned?: unknown; hints?: unknown }>(raw, {});
 
   const hints = out.hints;

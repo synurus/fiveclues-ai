@@ -4,7 +4,8 @@
   "installCommand": "npm ci",
   "functions": {
     "api/index.ts": {
-      "includeFiles": "scripts/words*.json"
+      "includeFiles": "scripts/words*.json",
+      "maxDuration": 60
     }
   },
   "rewrites": [
