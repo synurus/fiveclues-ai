@@ -42,6 +42,7 @@
 import 'dotenv/config';
 import { generateHints, judgeGuess, callBot, parseJson, DEFAULT_MODEL, type Hint, type BotConfig } from './wordGuessBot';
 import { pickWord } from '../routes/wordPool';
+import { PROMPT_VERSION } from './promptVersion';
 import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
 
 const HINT_COUNT = 5; // routes/game.ts의 HINT_COUNT와 같은 값이어야 실제 게임과 동일 조건이 된다.
@@ -235,6 +236,7 @@ async function playOne(index: number, guesser: BotConfig | undefined): Promise<v
     guesses, // 실제로 뭐라고 찍었는지 — 힌트가 나빴는지 AI가 헛짚었는지 이슈만 보고 구분하려는 것.
     lang: 'ko', // 자동플레이는 한국어 게임만 돈다(2026-09-17 영어 버전 추가 — generateHints도 lang 미지정 시 'ko').
     guesserModel,
+    promptVersion: PROMPT_VERSION.ko, // 출제 프롬프트 세대 — scripts/metrics.mjs가 세대별 성적에 쓴다.
   };
   const { issueNumber } = await createFeedbackIssue(payload);
 

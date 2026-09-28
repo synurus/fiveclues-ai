@@ -94,6 +94,16 @@
   해서 백엔드 타입 오류가 배포까지 갈 수 있었다). `propose.mjs`는 구조 가드에 더해 **코드
   가드**(`promptGuard.mjs` — 구문 트리로 hintPrompt.ts가 함수 하나·return 하나이고 템플릿
   `${}` 안엔 round·category·hintCount만 쓰는지)를 통과해야 PR을 연다.
+- **세대별 성적은 `npm run metrics`(`scripts/metrics.mjs`, 2026-09-28, 기획서 v2 §6·§8).**
+  "세대" = 게임에 들어가는 프롬프트 본문의 sha256 앞 8자리(`bot/promptVersion.ts`) — 헤더
+  주석만 고친 커밋은 같은 세대다. 새 이슈엔 `promptVersion`이 기록되고(사람은 세션 토큰에서,
+  자동플레이는 직접), 그 전 이슈는 metrics.mjs가 git 이력의 과거 `hintPrompt.ts`마다 같은
+  해시를 계산해 "이슈 시각에 main에 있던 버전"으로 소급한다(두 계산이 같은지는
+  `promptVersion.test.ts`가 지킨다 — 해시 방식을 바꾸면 둘 다 고칠 것). 사람 피드백엔
+  `playCount`(그 브라우저에서 몇 번째 판, localStorage `fiveclues-plays`)도 실려서 처음
+  3판만 따로 본다. 자가개선 PR 본문에 최근 3세대 표가 붙는다. **읽을 때 주의:** 피드백을
+  남긴 판만 집계되고(선택 편향), AI 추측자는 사람보다 잘 맞혀 절대값이 높으며, 표본이
+  작아 신뢰구간이 넓다 — 구간이 겹치면 "나아졌다"고 하지 말 것.
 - **로컬 API 포트는 `PORT`가 아니라 `API_PORT`(기본 3000)다** — 미리보기 도구가
   `PORT=5173`을 넘겨서 API가 Vite와 같은 포트로 떠 `/game` 프록시가 끊겼었다(2026-09-28).
 - **`scripts/words.json`(한국어)·`scripts/wordsEn.json`(영어, 2026-09-17 영어
@@ -211,7 +221,8 @@
   `fiveclues-ai.vercel.app`으로 박혀 있어서 도메인을 바꾸면 전부 바꿔야 한다.
   **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`과 `en/privacy.html`을
   같이 고쳐라** — 지금은 추측→Gemini(주력)·Groq(EEA 등 지역이거나 대체), 피드백→GitHub 공개 이슈·Gemini(닉네임 제외),
-  언어 설정→localStorage가 전부라고 적혀 있다. 읽을거리 글은 실제 이슈 기록·개발
+  언어 설정·끝낸 판 수→localStorage(판 수는 피드백에 같이 감), 요청 수 제한용 IP→서버 메모리
+  1분이 전부라고 적혀 있다. 읽을거리 글은 실제 이슈 기록·개발
   이력을 바탕으로 썼다 — 사실과 다른 내용이 섞이지 않게, 수치나 사례를 인용할 땐
   원본(이슈·커밋)을 확인할 것. `vite preview`로 보려면 `.claude/launch.json`의
   `web-preview`(빌드 후).

@@ -49,6 +49,12 @@ export interface FeedbackPayload {
    *  만든 판을 구분하려는 것 — 자가개선이 대체 모델의 실수를 프롬프트 탓으로 오해하지
    *  않게. 옛 이슈·옛 클라이언트엔 없다. */
   hintModels?: string[];
+  /** 출제 프롬프트 세대(bot/promptVersion.ts, 2026-09-28) — scripts/metrics.mjs가 세대별
+   *  성적을 낼 때 쓴다. 이 필드가 없는 옛 이슈는 metrics.mjs가 이슈 시각으로 소급한다. */
+  promptVersion?: string;
+  /** 사람 피드백만: 이 브라우저에서 몇 번째로 끝낸 판인지(1부터, 클라이언트가 센 값).
+   *  기획서 v2 §8 — 반복 플레이 학습 효과를 세대 비교에서 떼어 보려고. */
+  playCount?: number;
 }
 
 // hints를 roundHintCounts 길이대로 잘라 라운드별 배열로 되돌린다. roundHintCounts가
@@ -118,6 +124,8 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   const body =
     `${safeMd(data.nickname) || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
     (data.guesserModel ? ` · 추측자: ${data.guesserModel}` : '') +
+    (data.promptVersion ? ` · 프롬프트 ${data.promptVersion}` : '') +
+    (data.playCount ? ` · ${data.playCount}번째 판` : '') +
     `\n\n${buildHintLog(data)}` +
     (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
     (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +

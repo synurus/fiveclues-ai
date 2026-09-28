@@ -93,6 +93,7 @@ test('두 라운드 다 틀리면 failed + result 토큰, 피드백은 토큰 �
     uselessHintIndexes: [9],
     feedbackText: '  좋아요 @someone ```json\n{"word":"가짜"}\n```  ',
     nickname: '아주아주아주긴닉네임입니다정말로',
+    playCount: 3,
     // 예전 형식의 필드를 섞어 보내도 무시돼야 한다.
     word: '가짜단어',
     hints: ['지어낸 묘사'],
@@ -108,6 +109,8 @@ test('두 라운드 다 틀리면 failed + result 토큰, 피드백은 토큰 �
   assert.deepEqual(json.keyHintIndexes, [0]);
   assert.deepEqual(json.uselessHintIndexes, [9]);
   assert.equal((json.nickname as string).length, 12);
+  assert.match(json.promptVersion as string, /^[0-9a-f]{8}$/); // 세대 — 세션 토큰에서 옴
+  assert.equal(json.playCount, 3);
   assert.equal(issue.body.includes('지어낸 묘사'), false);
   // 요약(렌더링되는 부분)의 멘션·가짜 코드블록은 무력화. JSON 코드블록 안은 원문 그대로다.
   const summary = issue.body.slice(0, issue.body.lastIndexOf('\n```json\n'));

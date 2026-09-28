@@ -25,6 +25,7 @@
 
 import { Router, type Request, type Response } from 'express';
 import { generateHints, judgeGuess, type Hint } from '../bot/wordGuessBot';
+import { PROMPT_VERSION } from '../bot/promptVersion';
 import { encodeSession, decodeSession, InvalidSessionError, SessionExpiredError } from './gameToken';
 import { pickWord } from './wordPool';
 import { rateLimit } from './rateLimit';
@@ -54,6 +55,7 @@ interface SessionPayload {
   hints: string[][]; // 라운드별 묘사. 2라운드 생성 시 1라운드 것은 "겹치지 말 것"에 쓴다
   guesses: string[]; // 지난 라운드들의 추측(오답)
   models: string[]; // 라운드별로 묘사를 만든 모델
+  promptVersion: string; // 이 판을 시작할 때의 출제 프롬프트 세대(bot/promptVersion.ts)
 }
 
 /** 판이 끝났을 때 발급하는 result 토큰의 내용 — /feedback이 이것만 믿는다. */
@@ -68,7 +70,14 @@ interface ResultPayload {
   guesses: string[];
   models: string[];
   outcome: Outcome;
+  promptVersion: string;
 }
+
+// 이 브라우저에서 몇 번째로 끝낸 판인지(1부터) — 화면이 localStorage로 세서 보낸다
+// (기획서 v2 §8: 같은 사람이 반복하면 요령이 생겨 정답률이 오르니, 세대 비교는 초행
+// 판만 따로 볼 수 있어야 한다). 클라이언트 값이라 참고용 — 범위만 검사한다.
+const toPlayCount = (v: unknown): number | undefined =>
+  typeof v === 'number' && Number.isInteger(v) && v >= 1 && v <= 100_000 ? v : undefined;
 
 // body.lang이 'en'이 아니면 전부 'ko'로 본다(기존 클라이언트·값 없는 요청과
 // 호환되게, 2026-09-17 영어 버전 추가).
@@ -122,6 +131,7 @@ function finish(res: Response, payload: SessionPayload, guess: string, outcome: 
     guesses: [...payload.guesses, guess],
     models: payload.models,
     outcome,
+    promptVersion: payload.promptVersion,
   });
   res.json({ result: outcome, word: payload.word, category: payload.category, verdict, resultToken });
 }
@@ -152,6 +162,7 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
       hints: [hints.map((h) => h.text)],
       guesses: [],
       models: [model],
+      promptVersion: PROMPT_VERSION[lang],
     });
 
     res.json({ session, round: 1, hints: toPlayerHints(hints) });
@@ -245,6 +256,7 @@ gameRouter.post('/feedback', rateLimit('feedback', 5, 60_000), async (req: Reque
   }
 
   const hints = game.hints.flat();
+  const playCount = toPlayCount(body.playCount);
   try {
     const { issueNumber } = await createFeedbackIssue({
       word: game.word,
@@ -259,6 +271,9 @@ gameRouter.post('/feedback', rateLimit('feedback', 5, 60_000), async (req: Reque
       guesses: game.guesses,
       hintModels: game.models,
       lang: game.lang,
+      // 배포 직전에 시작한 판의 토큰엔 없을 수 있다 — 그땐 metrics.mjs가 이슈 시각으로 세대를 정한다.
+      ...(game.promptVersion ? { promptVersion: game.promptVersion } : {}),
+      ...(playCount ? { playCount } : {}),
     });
     res.json({ ok: true, issueNumber });
   } catch (e) {

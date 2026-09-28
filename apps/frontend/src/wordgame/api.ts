@@ -28,6 +28,7 @@ export type GuessResponse =
 // resultToken 안에 있고, 여기선 플레이어가 결과 화면에서 고른 것만 보낸다.
 export interface FeedbackInput {
   result: string; // GuessResponse의 resultToken
+  playCount: number; // 이 브라우저에서 몇 번째로 끝낸 판인지(playCount.ts). 0이면 서버가 무시.
   keyHintIndexes: number[]; // 결정적이었던 힌트(들) — 1·2라운드를 이어 붙인 순서의 인덱스. 없으면 [].
   uselessHintIndexes: number[]; // 무쓸모였던 힌트(들). 없으면 [].
   feedbackText: string;

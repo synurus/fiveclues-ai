@@ -28,6 +28,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 import { structuralGuardOk, codeGuardProblem } from './promptGuard.mjs';
+import { reportForPr } from '../metrics.mjs';
 
 const DRY = process.env.DRY === '1';
 const REPO = process.env.GITHUB_REPOSITORY ?? '';
@@ -346,6 +347,15 @@ async function main() {
     .slice(0, MAX_FEEDBACK_FOR_PROMPT)
     .map(({ number, data }) => `- #${number} "${data.word}"(${data.category}) · ${data.outcome} · ${data.nickname || '익명'}`)
     .join('\n');
+  // 세대별 성적(scripts/metrics.mjs, 2026-09-28) — "지금 프롬프트가 이전 세대보다 나았나"를
+  // 머지 판단 때 같이 보게. 집계가 실패해도 PR은 연다.
+  let metricsSection = '';
+  try {
+    metricsSection = await reportForPr();
+  } catch (e) {
+    console.error('세대별 성적 집계 실패 — PR 본문에서 뺀다:', e instanceof Error ? e.message : e);
+  }
+
   const prBody =
     `이 PR은 \`scripts/self-improve/propose.mjs\` 가 \`feedback\` 라벨 이슈 ${usedNumbers.length}건을 바탕으로 ` +
     `\`${PROMPT_FILE}\` 을 다시 쓴 결과다. 자동 생성이지만 **병합은 사람이 한다**(tsc 통과는 확인했지만 ` +
@@ -353,6 +363,9 @@ async function main() {
     `### 모델이 밝힌 변경 이유\n> ${parsed.summary.replace(/\n/g, '\n> ')}\n\n` +
     (bodySizeLine ? `### 토큰\n${bodySizeLine}\n\n` : '') +
     `### 반영한 피드백(${usedNumbers.length}건)\n${feedbackLines}\n\n` +
+    (metricsSection
+      ? `<details><summary>지금까지 세대별 성적(최근 3세대, scripts/metrics.mjs)</summary>\n\n${metricsSection}\n\n</details>\n\n`
+      : '') +
     `### 병합 전 확인할 것\n` +
     `- [ ] \`${PROMPT_FILE}\` diff를 직접 읽고 문구가 합리적인지 확인\n` +
     `- [ ] 가능하면 \`node scripts/spectate.mjs\` 로 몇 판 돌려서 체감 난이도 확인\n` +

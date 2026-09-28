@@ -17,6 +17,7 @@ import Button from '../components/Button';
 import { NAME_MAX_LENGTH } from './constants';
 import { startGame, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
+import { recordFinishedGame } from './playCount';
 import { strings, detectLang, saveLang, type Lang } from './i18n';
 import './wordgame.css';
 
@@ -73,6 +74,7 @@ type Stage =
       category: string;
       rounds: RoundLog[];
       resultToken: string; // 피드백을 보낼 때 그대로 돌려준다(판 내용은 서버가 이 토큰에서 읽는다)
+      playCount: number; // 이 브라우저에서 몇 번째로 끝낸 판인지(playCount.ts, 모르면 0)
     }
   | { kind: 'error'; message: string };
 
@@ -205,6 +207,7 @@ export function WordGuessGame() {
           category: res.category,
           rounds,
           resultToken: res.resultToken,
+          playCount: recordFinishedGame(),
         });
         setSeenWords((prev) => [...prev, res.word].slice(-30));
       }
@@ -225,6 +228,7 @@ export function WordGuessGame() {
     try {
       await submitFeedback({
         result: stage.resultToken,
+        playCount: stage.playCount,
         keyHintIndexes: [...keyHints].sort((a, b) => a - b),
         uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),
         feedbackText: feedbackText.trim(),

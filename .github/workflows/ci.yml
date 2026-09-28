@@ -32,8 +32,8 @@ jobs:
       - name: 백엔드 테스트
         run: npm test -w backend
 
-      - name: 자가개선 가드 테스트
-        run: node --test "scripts/self-improve/*.test.mjs"
+      - name: 스크립트 테스트 (자가개선 가드·성적 집계)
+        run: node --test "scripts/*.test.mjs" "scripts/self-improve/*.test.mjs"
 
       - name: 프론트엔드 린트
         run: npm run lint -w frontend
