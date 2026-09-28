@@ -43,13 +43,14 @@ jobs:
     steps:
       # fetch-depth: 0 — gather.mjs가 hintPrompt.ts가 main에 마지막으로 반영된 시각을
       # git log로 읽어서 그 전에 만든 AI 피드백을 걸러낸다(기본값 1이면 이력이 없다).
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      # Node 20은 2026-04에 지원 종료 — package.json engines(>=22)와 로컬 개발(24)에 맞춘다.
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
 
       # 이 레포는 npm 워크스페이스라 package-lock.json 이 루트에만 있다.
       # apps/backend 안에서 npm ci 를 돌리면 lockfile 을 못 찾아 바로 실패한다 —

@@ -1,6 +1,6 @@
 /**
- * 플레이어 피드백을 GitHub Issue로 쌓는다. Supabase가 아직 없어서(2026-09-15) DB
- * 대신 GitHub를 저장소로 쓴다 — 자가개선 워크플로(.github/workflows/self-improve.yml)가
+ * 플레이어 피드백을 GitHub Issue로 쌓는다. 이 프로젝트는 DB를 쓰지 않아서 GitHub를
+ * 저장소로 쓴다 — 자가개선 워크플로(.github/workflows/self-improve.yml)가
  * 'feedback' 라벨이 붙은 이슈를 그대로 읽어서 프롬프트 수정 PR을 낸다.
  *
  * 파일 커밋(Contents API)이 아니라 Issue를 고른 이유: 동시에 여러 명이 피드백을
@@ -39,8 +39,8 @@ export interface FeedbackPayload {
    *  플레이했다는 뜻이라 넣을 모델이 없다. */
   guesserModel?: string;
   /** 실제로 뭐라고 추측했는지, 라운드마다 하나씩 순서대로 — roundHintCounts와 길이가
-   *  같다. 실제 플레이어 피드백(routes/game.ts의 /feedback)도 결과 화면이 라운드별
-   *  추측을 들고 있어서(2026-09-16) 채워 보낸다. AI 자동플레이(bot/autoPlay.ts)도
+   *  같다. 실제 플레이어 피드백(routes/game.ts의 /feedback)은 result 토큰에 담긴
+   *  추측을 그대로 쓴다(2026-09-28). AI 자동플레이(bot/autoPlay.ts)도
    *  항상 채운다 — "힌트는 괜찮았는데 헛짚었다"와 "힌트 자체가 안 좋았다"를 이슈만
    *  보고도 구분하려는 것. */
   guesses: string[];
@@ -75,12 +75,18 @@ function buildHintLog(data: FeedbackPayload): string {
       const guess = data.guesses[i] ?? '(기록 없음)';
       const isLastRound = i === rounds.length - 1;
       const wrong = !(isLastRound && data.outcome !== 'failed');
-      const hintLines = hints.map((h) => `- ${h}`).join('\n');
+      const hintLines = hints.map((h) => `- ${safeMd(h)}`).join('\n');
       const model = data.hintModels?.[i];
-      return `${hintLines}\n→ 추측 "${guess}" (${wrong ? '오답' : '정답'})${model ? ` · 출제: ${model}` : ''}`;
+      return `${hintLines}\n→ 추측 "${safeMd(guess)}" (${wrong ? '오답' : '정답'})${model ? ` · 출제: ${model}` : ''}`;
     })
     .join('\n\n────────────\n\n');
 }
+
+// 이슈 본문 요약(마크다운으로 렌더링되는 부분)에 들어가는 사람 입력을 무해하게 만든다
+// (2026-09-28): "@아이디"가 남의 계정을 호출(멘션)하지 않게 하고, ``` 가 들어가 가짜
+// ```json 블록을 만들지 못하게 한다(gather.mjs는 마지막 json 블록만 읽지만 이중으로 막음).
+// 아래 JSON 코드블록 안엔 원문 그대로 둔다 — 코드블록 안은 렌더링되지 않는다.
+const safeMd = (s: string): string => s.replace(/`{3,}/g, "'''").replace(/@/g, '@​');
 
 function required(name: string, value: string | undefined): string {
   if (!value) throw new Error(`환경변수 ${name} 이(가) 없습니다.`);
@@ -94,7 +100,7 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   // 이슈 목록에서 피드백 코멘트를 바로 볼 수 있게 제목에도 넣는다(2026-09-16) —
   // 개행은 공백으로 뭉개고 40자 넘으면 자른다(제목 줄이 길어지는 걸 막는 용도라
   // GitHub 제목 길이 한도 자체는 훨씬 넉넉하다).
-  const titleComment = data.feedbackText.replace(/\s+/g, ' ').trim();
+  const titleComment = safeMd(data.feedbackText.replace(/\s+/g, ' ').trim());
   const titleCommentPart = titleComment
     ? ` · "${titleComment.length > 40 ? `${titleComment.slice(0, 40)}…` : titleComment}"`
     : '';
@@ -102,24 +108,28 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
   // 이슈 목록만 훑어봐도 이번엔 어떤 AI가 플레이했는지 바로 보이게.
   const guesserTag = data.guesserModel ? ` [🤖${data.guesserModel}]` : '';
   const title = `[feedback]${data.lang === 'en' ? ' [EN]' : ''}${guesserTag} ${data.word} · ${data.outcome}${titleCommentPart}`;
-  const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(Boolean);
-  const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(Boolean);
+  const isText = (t: string | undefined): t is string => !!t;
+  const keyText = data.keyHintIndexes.map((i) => data.hints[i]).filter(isText);
+  const uselessText = data.uselessHintIndexes.map((i) => data.hints[i]).filter(isText);
   // 본문은 사람이 Issues 탭에서 읽을 요약(라운드별 힌트+추측 로그 포함) + self-improve/
   // gather.mjs 가 그대로 파싱하는 JSON 코드블록. JSON 코드블록의 ```json\n...\n``` 형식만
   // 안 바꾸면 되고(gather.mjs 정규식이 그것만 본다), 그 위 요약 텍스트는 자유롭게 바꿔도
   // 된다 — guesses/roundHintCounts는 JSON 쪽에도 그대로 담겨 있다.
   const body =
-    `${data.nickname || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
+    `${safeMd(data.nickname) || '(닉네임 없음)'} · ${data.category} · ${data.outcome}` +
     (data.guesserModel ? ` · 추측자: ${data.guesserModel}` : '') +
     `\n\n${buildHintLog(data)}` +
-    (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${t}"`).join(', ')}` : '') +
-    (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${t}"`).join(', ')}` : '') +
-    (data.feedbackText ? `\n\n> ${data.feedbackText}` : '') +
+    (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
+    (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
+    // 여러 줄 코멘트도 줄마다 인용 표시를 붙여야 전부 인용문으로 보인다.
+    (data.feedbackText ? `\n\n> ${safeMd(data.feedbackText).replace(/\n/g, '\n> ')}` : '') +
     '\n\n```json\n' +
     JSON.stringify(data, null, 2) +
     '\n```';
 
-  const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
+  // GITHUB_API_URL은 테스트에서 가짜 서버로 바꿀 때만 쓴다.
+  const apiBase = process.env.GITHUB_API_URL || 'https://api.github.com';
+  const res = await fetch(`${apiBase}/repos/${repo}/issues`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${token}`,

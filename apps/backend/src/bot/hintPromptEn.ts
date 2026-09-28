@@ -12,6 +12,7 @@
  * 제한("8 words or fewer")뿐이다. 2026-09-27엔 "이름에 대한 말(철자·발음·운율)" 금지를
  * 영어판에만 더했다 — tambourine에 "Its name sounds like a French pastry" 같은 이름
  * 말장난 힌트가 나와서(한국어판에선 아직 관측 안 됨, 토큰 아끼려 안 넣음).
+ * 2026-09-28: 한국어판 avoidFillers 유형에 "휴대"가 들어가 여기도 carrying을 맞췄다.
  */
 export function hintSystem(round: 1 | 2, category: string, hintCount: number): string {
   return `
@@ -50,7 +51,7 @@ ${round === 2 ? `This is round 2. The player missed round 1, so **narrow it one 
 1. First fill "banned": the decisive traits anyone would blurt out instantly,
    up to 4 (only truly decisive ones — don't pad the list).
 2. Fill "avoidFillers" (up to 3): the most generic lines that fit anything in
-   "${category}", **written for this category** (types: pairing/storage/serving /
+   "${category}", **written for this category** (types: pairing/storage/carrying/serving /
    scenery/mood / common prep or process — its feel, smell, sound). Avoid the whole
    type in every hint, not just that line — swapping the partner is still the same type.
 3. Then write "hints". Use nothing from step 1.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 자가개선 루프 2단계 — gather.mjs 가 모은 피드백으로 hintPrompt.ts 를 다시 쓰고
-// PR을 연다. 병합은 사람이 한다("PR 제안형" — 2026-09-15 스카이 선택).
+// PR을 연다. 병합은 사람이 한다("PR 제안형" — 2026-09-15 흑기사 선택).
 //
 // 이 스크립트가 건드리는 파일은 apps/backend/src/bot/hintPrompt.ts 하나뿐이다.
 // wordGuessBot.ts 를 일부러 hintPrompt.ts 로 쪼개둔 이유가 바로 이거다 — 자동화의
@@ -18,7 +18,8 @@
 //      같은 피드백으로 새 PR이 또 생기는 걸 막는 백업 안전장치다. 이슈는
 //      "Closes #N"으로 머지 시에만 닫히므로, 사람이 그 PR을 처리하기 전까지는
 //      재실행해도 항상 여기서 끝난다.
-//   2) 응답에서 뽑은 파일이 구조 가드(함수 시그니처·JSON 스키마 문구)를 통과해야 한다
+//   2) 응답에서 뽑은 파일이 구조 가드(함수 시그니처·JSON 스키마 문구)와 코드 가드(템플릿
+//      안 ${...}엔 round·category·hintCount만 — promptGuard.mjs)를 통과해야 한다
 //   3) apps/backend 에서 tsc --noEmit 이 통과해야 한다 — 실패하면 파일을 되돌리고 끝낸다
 //   4) 그래도 병합은 사람이 한다 — PR만 열고, 피드백 이슈는 "Closes #N"으로 머지 시에만 닫힌다
 //
@@ -26,6 +27,7 @@
 
 import { readFile, writeFile } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
+import { structuralGuardOk, codeGuardProblem } from './promptGuard.mjs';
 
 const DRY = process.env.DRY === '1';
 const REPO = process.env.GITHUB_REPOSITORY ?? '';
@@ -229,23 +231,6 @@ function getOpenSelfImprovePr() {
   }
 }
 
-// 구조 가드 — 모델이 형식은 지켰지만 내용을 이상하게 바꿨을 가능성을 걸러낸다.
-function structuralGuardOk(fileContent) {
-  const checks = [
-    fileContent.includes('export function hintSystem(round: 1 | 2, category: string, hintCount: number): string {'),
-    fileContent.includes('"banned"'),
-    // avoidFillers는 백엔드가 파싱하진 않지만 효과가 실측으로 확인된 장치라 지우면 안 된다.
-    fileContent.includes('"avoidFillers"'),
-    fileContent.includes('"hints"'),
-    fileContent.includes('"text"'),
-    fileContent.includes('"angle"'),
-    !fileContent.includes('\nimport '),
-    fileContent.length > 300,
-    fileContent.length < 8000,
-  ];
-  return checks.every(Boolean);
-}
-
 async function main() {
   if (!DRY) {
     const openPr = getOpenSelfImprovePr();
@@ -292,6 +277,13 @@ async function main() {
 
   if (!structuralGuardOk(parsed.file)) {
     console.error('구조 가드 실패 — 함수 시그니처나 JSON 스키마 키가 바뀌었거나 크기가 비정상이다. PR을 열지 않는다.');
+    process.exitCode = 1;
+    return;
+  }
+
+  const codeProblem = codeGuardProblem(parsed.file);
+  if (codeProblem) {
+    console.error(`코드 가드 실패 — ${codeProblem}. 템플릿 안엔 round·category·hintCount만 쓸 수 있다. PR을 열지 않는다.`);
     process.exitCode = 1;
     return;
   }

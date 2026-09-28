@@ -10,10 +10,6 @@
  * 거부한다. fs 읽기는 컴파일 타임 모듈 추적 대상이 아니라 이 제약에 안 걸린다.
  * Vercel 배포에서 이 파일들을 확실히 함께 묶어주는 건 루트 vercel.json의
  * functions["api/index.ts"].includeFiles 설정이 한다.
- *
- * 단어를 DB(Supabase)로 옮길지는 아직 결정 안 했다 — 그 결정과 무관하게 라우트가
- * 동작하도록 로더만 이 파일에 분리해뒀다. DB로 옮기면 이 파일의 구현만 바꾸면
- * 되고 game.ts는 pickWord() 시그니처를 그대로 쓴다.
  */
 
 import fs from 'node:fs';

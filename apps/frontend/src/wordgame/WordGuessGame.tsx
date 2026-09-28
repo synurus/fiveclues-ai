@@ -12,16 +12,43 @@
 // 복수 선택 가능 — 힌트 여러 개가 같이 결정적이었거나(또는 같이 무쓸모였거나) 하는
 // 실제 상황을 하나만 고르라고 강제하면 정보가 사라진다. 한 말풍선이 동시에
 // 결정적이면서 무쓸모일 수는 없게 막는다(토글 시 반대쪽에서 자동으로 뺀다).
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type KeyboardEvent } from 'react';
 import Button from '../components/Button';
 import { NAME_MAX_LENGTH } from './constants';
-import { startGame, submitGuess, submitFeedback, type GuessResponse } from './api';
+import { startGame, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
 import { strings, detectLang, saveLang, type Lang } from './i18n';
 import './wordgame.css';
 
-// model: 그 라운드 묘사를 실제로 만든 모델 — 화면엔 안 보이고 피드백에만 실린다(2026-09-27).
-type RoundLog = { hints: string[]; guess: string; model?: string };
+type RoundLog = { hints: string[]; guess: string };
+
+// 서버 오류를 화면 언어의 짧은 안내로 바꾼다(2026-09-28) — 예전엔 서버 메시지를 그대로
+// 띄워서 모델 이름·AI 업체 오류가 보이고 영어 화면에도 한국어가 나왔다.
+function errorText(e: unknown, s: (typeof strings)[Lang]): string {
+  if (!(e instanceof ApiError)) return s.errors.generic;
+  switch (e.code) {
+    case 'hint_failed':
+      return s.errors.hint;
+    case 'rate_limited':
+      return s.errors.rateLimited;
+    case 'session_expired':
+    case 'session_invalid':
+      return s.errors.expired;
+    case 'guess_too_long':
+      return s.errors.guessTooLong;
+    case 'network':
+      return s.errors.network;
+    default:
+      return s.errors.generic;
+  }
+}
+
+// 이 추측 입력칸 글자 수 상한 — 서버(game.ts의 MAX_GUESS_LEN)와 같다.
+const GUESS_MAX_LENGTH = 40;
+
+// 한글 등 조합형 입력 중의 엔터는 무시한다(2026-09-28). 맥 크롬 등에선 조합 중 엔터에
+// keydown이 두 번 와서 게임 시작·추측이 두 번 요청됐다(무료 AI 한도 낭비·화면 꼬임).
+const isEnter = (e: KeyboardEvent): boolean => e.key === 'Enter' && !e.nativeEvent.isComposing;
 
 type Stage =
   | { kind: 'nickname' }
@@ -31,7 +58,6 @@ type Stage =
       session: string;
       round: 1 | 2;
       hints: string[];
-      hintModel?: string;
       // 2라운드 진입 시 1라운드 화면이 리셋되면서 방금 본 힌트·오답을 까먹는
       // 문제(2026-09-16)가 있어, round===2일 때만 채워 결과 화면 바로 위에
       // 요약으로 다시 보여준다.
@@ -40,7 +66,14 @@ type Stage =
       // round===2일 때만 채워진다.
       category?: string;
     }
-  | { kind: 'result'; outcome: 'round1' | 'round2' | 'failed'; word: string; category: string; rounds: RoundLog[] }
+  | {
+      kind: 'result';
+      outcome: 'round1' | 'round2' | 'failed';
+      word: string;
+      category: string;
+      rounds: RoundLog[];
+      resultToken: string; // 피드백을 보낼 때 그대로 돌려준다(판 내용은 서버가 이 토큰에서 읽는다)
+    }
   | { kind: 'error'; message: string };
 
 type FeedbackStatus = 'idle' | 'sending' | 'sent' | 'error';
@@ -74,6 +107,9 @@ export function WordGuessGame() {
   const [revealed, setRevealed] = useState(0);
   const [guess, setGuess] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  // 추측 처리 중 오류(주로 2라운드 묘사 생성 실패) — 판을 버리지 않고 이 안내만 띄운다.
+  // 1라운드 세션은 서버에서 그대로 유효해서 같은 추측으로 다시 누르면 이어진다.
+  const [guessError, setGuessError] = useState('');
   const [lang, setLang] = useState<Lang>(detectLang);
   const s = strings[lang];
 
@@ -132,15 +168,17 @@ export function WordGuessGame() {
       setUselessHints(new Set());
       setFeedbackText('');
       setFeedbackStatus('idle');
-      setStage({ kind: 'playing', session: res.session, round: res.round, hints: firstHints, hintModel: res.hintModel });
+      setGuessError('');
+      setStage({ kind: 'playing', session: res.session, round: res.round, hints: firstHints });
     } catch (e) {
-      setStage({ kind: 'error', message: e instanceof Error ? e.message : String(e) });
+      setStage({ kind: 'error', message: errorText(e, s) });
     }
   };
 
   const handleGuess = async () => {
     if (stage.kind !== 'playing' || !guess.trim() || submitting) return;
     setSubmitting(true);
+    setGuessError('');
     const attemptedGuess = guess.trim();
     try {
       const res: GuessResponse = await submitGuess(stage.session, attemptedGuess);
@@ -153,19 +191,29 @@ export function WordGuessGame() {
           session: res.session,
           round: res.round,
           hints: round2Hints,
-          hintModel: res.hintModel,
           category: res.category,
-          previous: { hints: stage.hints, guess: attemptedGuess, model: stage.hintModel },
+          previous: { hints: stage.hints, guess: attemptedGuess },
         });
       } else {
         const rounds: RoundLog[] = stage.previous
-          ? [stage.previous, { hints: stage.hints, guess: attemptedGuess, model: stage.hintModel }]
-          : [{ hints: stage.hints, guess: attemptedGuess, model: stage.hintModel }];
-        setStage({ kind: 'result', outcome: res.result, word: res.word, category: res.category, rounds });
+          ? [stage.previous, { hints: stage.hints, guess: attemptedGuess }]
+          : [{ hints: stage.hints, guess: attemptedGuess }];
+        setStage({
+          kind: 'result',
+          outcome: res.result,
+          word: res.word,
+          category: res.category,
+          rounds,
+          resultToken: res.resultToken,
+        });
         setSeenWords((prev) => [...prev, res.word].slice(-30));
       }
     } catch (e) {
-      setStage({ kind: 'error', message: e instanceof Error ? e.message : String(e) });
+      // 세션이 만료·손상됐으면 이 판은 더 못 이어간다 — 새 게임 안내로. 그 밖(묘사 생성
+      // 실패·요청 제한·네트워크)은 판을 유지하고 다시 누를 수 있게 한다.
+      const expired = e instanceof ApiError && (e.code === 'session_expired' || e.code === 'session_invalid');
+      if (expired) setStage({ kind: 'error', message: errorText(e, s) });
+      else setGuessError(`${errorText(e, s)} ${s.guessRetryHint}`);
     } finally {
       setSubmitting(false);
     }
@@ -176,18 +224,11 @@ export function WordGuessGame() {
     setFeedbackStatus('sending');
     try {
       await submitFeedback({
-        word: stage.word,
-        category: stage.category,
-        hints: stage.rounds.flatMap((r) => r.hints),
-        roundHintCounts: stage.rounds.map((r) => r.hints.length),
-        guesses: stage.rounds.map((r) => r.guess),
-        hintModels: stage.rounds.map((r) => r.model ?? ''),
-        outcome: stage.outcome,
+        result: stage.resultToken,
         keyHintIndexes: [...keyHints].sort((a, b) => a - b),
         uselessHintIndexes: [...uselessHints].sort((a, b) => a - b),
         feedbackText: feedbackText.trim(),
         nickname,
-        lang,
       });
       setFeedbackStatus('sent');
     } catch {
@@ -218,7 +259,7 @@ export function WordGuessGame() {
               maxLength={NAME_MAX_LENGTH}
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleStart()}
+              onKeyDown={(e) => isEnter(e) && handleStart()}
             />
             <Button variant="primary" block onClick={handleStart}>
               {s.start}
@@ -260,10 +301,12 @@ export function WordGuessGame() {
               className="wg-input"
               placeholder={s.guessPlaceholder}
               value={guess}
+              maxLength={GUESS_MAX_LENGTH}
               onChange={(e) => setGuess(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleGuess()}
+              onKeyDown={(e) => isEnter(e) && handleGuess()}
               disabled={submitting}
             />
+            {guessError && <p style={{ color: 'var(--color-danger)' }}>{guessError}</p>}
             <Button variant="primary" block onClick={handleGuess} disabled={submitting || !guess.trim()}>
               {s.guess}
             </Button>

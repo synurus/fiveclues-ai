@@ -74,9 +74,28 @@
   `[5, 5]`)로 다시 잘라 라운드 경계를 알아내고, `guesses`(라운드별 실제
   추측)와 짝지어 GitHub Issue 본문에 "라운드별 힌트 + 그 라운드 추측/정오답"을
   구분선(`────`)으로 나눠 보여준다(`feedbackIssue.ts`의 `buildHintLog`).
-  결과 화면(`WordGuessGame.tsx`)의 `RoundLog[]` 상태를 그대로 펼친 것 —
-  프론트에서 이 필드를 안 보내면 `feedbackIssue.ts`가 한 라운드로 뭉뚱그려
-  방어적으로 처리한다(`splitByRound`).
+  사람 피드백은 이 값들을 **서버가 판 끝에 발급한 result 토큰에서** 채운다(아래 항목).
+  합이 안 맞으면 `feedbackIssue.ts`가 한 라운드로 뭉뚱그려 방어적으로 처리한다(`splitByRound`).
+- **`/game/feedback`은 클라이언트가 보낸 단어·묘사·추측을 믿지 않는다(2026-09-28).**
+  `/guess`가 판이 끝날 때(정답·실패) `resultToken`(세션 토큰과 같은 키로 암호화, `kind:
+  'result'`)을 주고, `/feedback`은 이 토큰 + 태그·코멘트·닉네임만 받는다 — 예전엔 누구나
+  없는 판을 지어내 공개 이슈를 만들 수 있었고 그 내용이 자가개선 AI 프롬프트로 들어갔다.
+  같은 이유로 세션 토큰은 30분·result 토큰은 2시간 뒤 만료(`gameToken.ts`의 `iat`),
+  추측 40자·코멘트 300자·닉네임 12자는 서버에서도 자른다(`game.ts`), IP별 1분 요청 수
+  제한(start 12·guess 30·feedback 5, `rateLimit.ts` — 인스턴스 메모리라 1차 방어일 뿐,
+  더 강하게는 Vercel 방화벽). 오류 응답은 `{ error, code }`이고 모델 이름·AI 업체 오류는
+  서버 로그에만 남긴다 — 화면은 `code`로 언어별 문구를 고른다(`WordGuessGame.tsx`의
+  `errorText`). 2라운드 묘사 생성이 실패하면 1라운드 세션이 살아 있어서 같은 추측으로
+  다시 누르면 이어진다.
+- **테스트·CI(2026-09-28).** `npm test -w backend`(판정·제시어 노출·토큰·게임 API 통합
+  테스트 — 가짜 LLM/GitHub 서버를 띄워 실제 API는 안 부른다), `node --test
+  "scripts/self-improve/*.test.mjs"`(자가개선 가드). `.github/workflows/ci.yml`이 푸시·PR마다
+  이것들 + 백엔드 타입 검사 + 프론트 린트·빌드를 돈다(Vercel 빌드는 프론트 타입 검사만
+  해서 백엔드 타입 오류가 배포까지 갈 수 있었다). `propose.mjs`는 구조 가드에 더해 **코드
+  가드**(`promptGuard.mjs` — 구문 트리로 hintPrompt.ts가 함수 하나·return 하나이고 템플릿
+  `${}` 안엔 round·category·hintCount만 쓰는지)를 통과해야 PR을 연다.
+- **로컬 API 포트는 `PORT`가 아니라 `API_PORT`(기본 3000)다** — 미리보기 도구가
+  `PORT=5173`을 넘겨서 API가 Vite와 같은 포트로 떠 `/game` 프록시가 끊겼었다(2026-09-28).
 - **`scripts/words.json`(한국어)·`scripts/wordsEn.json`(영어, 2026-09-17 영어
   버전 추가로 생김)이 각 언어의 유일한 정본이다.** `apps/backend/src/data/`에
   사본을 두지 마라(2026-09-16 이전엔 둘이 있었고 내용이 갈라질 위험이

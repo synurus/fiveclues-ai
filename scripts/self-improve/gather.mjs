@@ -22,7 +22,8 @@ const TOKEN = process.env.GH_TOKEN;
 const REPO = process.env.GITHUB_REPOSITORY;
 const DRY = process.env.DRY === '1';
 const MAX_ITEMS = 20; // 정렬 후 앞에서 20개만 넘긴다 — 토큰 예산 보호(다음 스텝용)
-const FETCH_LIMIT = 100; // 사람 피드백을 놓치지 않게 넉넉히 가져온 뒤 고른다
+const PER_PAGE = 100; // GitHub API 한 페이지 최대치
+const MAX_PAGES = 10; // 사람 피드백을 놓치지 않게 열린 이슈를 전부(최대 1,000건) 가져온 뒤 고른다
 const PROMPT_FILE = 'apps/backend/src/bot/hintPrompt.ts';
 const AI_NICKNAME = 'AI자동플레이'; // apps/backend/src/bot/autoPlay.ts의 NICKNAME과 같아야 한다
 
@@ -51,18 +52,28 @@ async function listFeedbackIssues() {
     console.error('GH_TOKEN 또는 GITHUB_REPOSITORY 가 없습니다.');
     process.exit(1);
   }
-  const res = await fetch(
-    `https://api.github.com/repos/${REPO}/issues?labels=feedback&state=open&per_page=${FETCH_LIMIT}&sort=created&direction=asc`,
-    { headers: { authorization: `Bearer ${TOKEN}`, accept: 'application/vnd.github+json' } },
-  );
-  if (!res.ok) {
-    throw new Error(`이슈 목록 조회 실패 ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  // 한 번에 100건까지만 오니 페이지를 넘겨 전부 모은다(2026-09-28 — 예전엔 첫 100건만
+  // 읽어서, 열린 피드백이 100건을 넘으면 그 뒤에 온 사람 피드백을 놓칠 수 있었다).
+  const all = [];
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/issues?labels=feedback&state=open&per_page=${PER_PAGE}&page=${page}&sort=created&direction=asc`,
+      { headers: { authorization: `Bearer ${TOKEN}`, accept: 'application/vnd.github+json' } },
+    );
+    if (!res.ok) {
+      throw new Error(`이슈 목록 조회 실패 ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    }
+    const batch = await res.json();
+    all.push(...batch);
+    if (batch.length < PER_PAGE) break;
   }
-  return res.json();
+  return all;
 }
 
+// 본문의 **마지막** json 코드블록만 읽는다(2026-09-28) — feedbackIssue.ts가 JSON 블록을
+// 항상 맨 끝에 붙이므로, 코멘트 안에 누가 가짜 ```json 블록을 적어 넣어도 앞에 있어서 무시된다.
 function parseFeedback(issueBody) {
-  const m = issueBody.match(/```json\n([\s\S]*?)\n```/);
+  const m = [...issueBody.matchAll(/```json\n([\s\S]*?)\n```/g)].pop();
   if (!m) return null;
   try {
     return JSON.parse(m[1]);

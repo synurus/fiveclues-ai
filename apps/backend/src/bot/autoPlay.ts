@@ -5,10 +5,10 @@
  *  10건을 모아 PR을 낸다 — 2026-09-26 변경. 예전 "01~07시 매시"가 왜 안 됐는지는
  *  그 워크플로의 cron 주석 참고)
  *
- * 서버가 아직 어디에도 배포돼 있지 않아서(로컬 npm run dev 뿐) HTTP로 게임을 호출할
- * 수가 없다 — 그래서 scripts/spectate.mjs 가 그랬던 것처럼 프로덕션 힌트 생성
+ * HTTP로 배포된 게임을 부르지 않고, scripts/spectate.mjs 처럼 프로덕션 힌트 생성
  * 로직(generateHints/judgeGuess/pickWord)을 직접 import해서 서버 없이 한 판을
- * 통째로 흉내 낸다.
+ * 통째로 흉내 낸다 — 서버리스 배포에 자기 자신을 HTTP로 부르는 것보다 단순하고,
+ * 게임 API의 요청 횟수 제한(routes/rateLimit.ts)에도 걸리지 않는다.
  *
  * 흐름: 단어 뽑기 → 1라운드 힌트 생성(프로덕션 코드) → 추측자 LLM이 카테고리 없이
  * 힌트만 보고 추측(사람 플레이어와 동일 조건) → 틀리면 2라운드도 같은 방식 → 게임이
@@ -22,7 +22,8 @@
  * 여러 판을 동시에(Promise.all) 돌리지 않고 순서대로 돈다 — Groq 무료 티어 TPM
  * 한도가 게임 본체 트래픽과 공유되므로 굳이 몰아서 부담을 줄 이유가 없다.
  *
- * 환경변수: BOT_BASE_URL/BOT_API_KEY/BOT_MODEL(힌트 생성 — 추측·소감도 기본은 이걸 쓴다),
+ * 환경변수: BOT_BASE_URL/BOT_API_KEY/BOT_MODEL(Groq — 출제 모델 체인의 groq 항목, 추측·소감의
+ *   기본값), 출제 체인의 제미나이 항목은 GEMINI_API_KEY가 없으면 SELFIMPROVE_BOT_API_KEY를 쓴다,
  *   GITHUB_FEEDBACK_TOKEN/GITHUB_REPO(createFeedbackIssue 용 — Actions에서는 보통
  *   secrets.GITHUB_TOKEN 과 github.repository 를 그대로 이 이름으로 넘긴다),
  *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2 — 첫 판 제미나이·둘째 판 Groq,
@@ -50,8 +51,9 @@ const MAX_KEY_HINTS = 2; // 소감에서 "결정적" 태그 최대 개수 — re
 
 // ── 제미나이 추측자 비교(2026-09-17, 2026-09-26에 시간대 기반→판 순서 기반으로 변경) ──
 // hintPrompt.ts 자체가 안 좋은 건지, 추측하는 모델(Groq gpt-oss-120b)이 유독
-// 못 맞히는 건지 구분해보려는 실험. 힌트 생성은 항상 BOT_*(Groq) 그대로 두고,
-// "이 실행의 첫 판"만 추측+소감을 이 엔드포인트가 대신 맡는다.
+// 못 맞히는 건지 구분해보려는 실험. 힌트 생성은 실제 게임과 같은 출제 모델 체인
+// (wordGuessBot.ts의 HINT_CHAIN)이 맡고, "이 실행의 첫 판"만 추측+소감을 이 엔드포인트가
+// 대신 맡는다.
 //
 // 원래는 KST 시각대(01~05시)로 제한했었는데, GitHub가 이 워크플로의 예약 실행을
 // 2.5~4시간씩 늦추면서 그 사이 매시 트리거를 버리는 게 확인돼서(2026-09-26,
@@ -65,7 +67,7 @@ const MAX_KEY_HINTS = 2; // 소감에서 "결정적" 태그 최대 개수 — re
 // 횟수를 더 늘리려면 이 계산부터 다시 할 것(503 재시도가 RPD에 잡히는지는 미확인).
 //
 // 전용 시크릿(AUTOPLAY_GUESSER_BOT_*)이 없으면 propose.mjs가 이미 쓰고 있는
-// SELFIMPROVE_BOT_*(제미나이)를 그대로 재사용한다(2026-09-17, 스카이 선택 — 새
+// SELFIMPROVE_BOT_*(제미나이)를 그대로 재사용한다(2026-09-17, 흑기사 선택 — 새
 // 키를 따로 안 만들어도 됨). 어느 것도 없으면 실험이 꺼지고 늘 하던 대로 Groq만
 // 추측한다.
 const GUESSER_BASE_URL = process.env.AUTOPLAY_GUESSER_BOT_BASE_URL || process.env.SELFIMPROVE_BOT_BASE_URL || '';

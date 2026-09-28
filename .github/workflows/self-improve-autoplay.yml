@@ -57,11 +57,12 @@ jobs:
   play:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      # Node 20은 2026-04에 지원 종료 — package.json engines(>=22)와 로컬 개발(24)에 맞춘다.
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
 
       # 이 레포는 npm 워크스페이스라 package-lock.json 이 루트에만 있다(self-improve.yml
       # 과 같은 이유).

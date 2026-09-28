@@ -28,6 +28,15 @@ export const strings = {
     feedbackSubmit: '피드백 보내기',
     playAgain: '다시하기',
     retry: '다시 시도',
+    errors: {
+      hint: 'AI가 지금 묘사를 만들지 못했어요. 잠시 후 다시 시도해 주세요.',
+      rateLimited: '요청이 너무 잦아요. 1분쯤 뒤에 다시 해 주세요.',
+      expired: '게임 시간이 지났어요. 새 게임을 시작해 주세요.',
+      guessTooLong: '추측이 너무 길어요.',
+      network: '인터넷 연결을 확인해 주세요.',
+      generic: '문제가 생겼어요. 잠시 후 다시 시도해 주세요.',
+    },
+    guessRetryHint: '같은 추측으로 다시 눌러 보세요.',
   },
   en: {
     title: 'Five Clues',
@@ -52,11 +61,20 @@ export const strings = {
     feedbackSubmit: 'Send feedback',
     playAgain: 'Play again',
     retry: 'Retry',
+    errors: {
+      hint: "The AI couldn't write clues right now. Please try again in a moment.",
+      rateLimited: 'Too many requests. Please try again in about a minute.',
+      expired: 'This game has timed out. Please start a new one.',
+      guessTooLong: 'That guess is too long.',
+      network: 'Please check your internet connection.',
+      generic: 'Something went wrong. Please try again in a moment.',
+    },
+    guessRetryHint: 'Press Guess again to retry.',
   },
 } as const;
 
 // 별도 Geo-IP 서비스 없이 브라우저 언어 설정으로 판단한다(navigator.language,
-// 2026-09-17 스카이 선택). 수동으로 한 번 바꾸면 이후엔 그 값을 우선한다.
+// 2026-09-17 흑기사 선택). 수동으로 한 번 바꾸면 이후엔 그 값을 우선한다.
 const STORAGE_KEY = 'fiveclues-lang';
 
 export function detectLang(): Lang {

@@ -14,7 +14,8 @@ import { gameRouter } from './routes/game';
 export const app = express();
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN ?? '*');
+  // ||: 값 없이 등록된 환경변수는 ""로 온다(CLAUDE.md의 ?? 함정).
+  res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') {

@@ -6,4 +6,7 @@ dist/
 # 관전 모드 실행 기록 (scripts/spectate.mjs)
 runs/
 
+# 자가개선 스크립트 중간 결과 (scripts/self-improve/gather.mjs·propose.mjs)
+data/
+
 Claude outputs/

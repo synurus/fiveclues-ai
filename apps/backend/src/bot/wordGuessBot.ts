@@ -17,8 +17,11 @@
  * 못 미쳤다 — LLM 자동추측자가 사람보다 문맥 추론에 훨씬 강해서 생기는 구조적
  * 격차로 판단, 수치 추적은 멈추고 정성 검토로 전환했다(2026-09-15).
  *
- * 환경변수: BOT_BASE_URL, BOT_API_KEY, BOT_MODEL (OpenAI 호환 엔드포인트)
- *   Groq 기본값 사용 시 모델은 openai/gpt-oss-120b.
+ * 환경변수:
+ *   BOT_BASE_URL, BOT_API_KEY, BOT_MODEL — Groq(OpenAI 호환). 기본 모델 openai/gpt-oss-120b.
+ *     출제 체인의 groq 항목과 자동플레이 추측자(기본값)가 쓴다.
+ *   GEMINI_API_KEY(없으면 SELFIMPROVE_BOT_API_KEY) — 출제 체인의 gemini 항목.
+ *   HINT_MODEL_CHAIN — 출제 모델 순서를 코드 수정 없이 바꿀 때(아래 "출제 모델 체인").
  */
 
 import 'dotenv/config';
@@ -286,8 +289,15 @@ export async function callBot(
       await sleep(retryAfterMs(res, text));
       continue;
     }
-    if (res.status === 404 && text.includes('model_not_found')) {
-      throw new Error(`모델 "${model}" 을(를) 이 키로 쓸 수 없다.\n사용 가능한 모델:\n${await listModels(baseUrl, apiKey)}`);
+    // 없는 모델(HINT_MODEL_CHAIN 오타 등)은 다시 불러도 소용없다 — fatal로 던져서
+    // generateHints()가 그 모델을 한 시간 쉬게 한다(2026-09-28, 예전엔 일반 Error라 매 판
+    // 그 모델부터 다시 부르고 모델 목록까지 조회해 매번 느려졌다). 제미나이는 404 본문에
+    // model_not_found 대신 "not found"를 쓴다.
+    if (res.status === 404 && /model_not_found|not found/i.test(text)) {
+      const err = new LlmError(`모델 "${model}" 을(를) 이 키로 쓸 수 없다.\n사용 가능한 모델:\n${await listModels(baseUrl, apiKey)}`);
+      err.status = 404;
+      err.fatal = true;
+      throw err;
     }
     if (text.includes('json_validate_failed')) {
       // 줄여둔 예산(REASONING_MAX_TOKENS)이 모자랐을 수 있다 — 원래 예산으로 한 번만 더.
@@ -508,7 +518,7 @@ export async function generateHints(input: GenerateHintsInput): Promise<HintRoun
 // 묘사에 제시어가 그대로 들어갔는지 — 프롬프트로 금지해도 가끔 샌다(2026-09-28 #185 낚시 →
 // "낚시터에 놓인 작은 의자"). 판정은 judgeGuess와 같은 기준: 한국어는 두 글자 이상만
 // 글자 포함으로("배"는 "배고픈"에 걸리니 제외), 영어는 단어 단위로.
-function leaksWord(hint: string, word: string): boolean {
+export function leaksWord(hint: string, word: string): boolean {
   if (isLatin(word)) return allIn(englishWords(word), englishWords(hint));
   const w = normalize(word);
   return w.length >= 2 && normalize(hint).includes(w);

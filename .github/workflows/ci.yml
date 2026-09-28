@@ -1,0 +1,42 @@
+# 푸시·PR마다 타입 검사·테스트·린트·빌드를 돈다(2026-09-28). Vercel 빌드는 프론트엔드
+# 타입 검사만 해서, 백엔드(api/index.ts가 불러오는 apps/backend) 타입 오류가 있어도
+# 배포까지 갈 수 있었다. 자가개선 PR(self-improve/*)도 여기를 통과해야 머지 판단이 쉽다.
+# 테스트는 가짜 서버만 써서 비밀값(시크릿)이 필요 없다.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: 의존성 설치 (워크스페이스 전체)
+        run: npm ci
+
+      - name: 백엔드 타입 검사
+        run: npx tsc -p apps/backend --noEmit
+
+      - name: 백엔드 테스트
+        run: npm test -w backend
+
+      - name: 자가개선 가드 테스트
+        run: node --test "scripts/self-improve/*.test.mjs"
+
+      - name: 프론트엔드 린트
+        run: npm run lint -w frontend
+
+      - name: 프론트엔드 빌드 (타입 검사 포함)
+        run: npm run build -w frontend
