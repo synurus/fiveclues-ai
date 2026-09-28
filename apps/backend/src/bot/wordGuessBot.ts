@@ -451,7 +451,11 @@ function cooldownFor(e: unknown): number {
   if (!(e instanceof LlmError)) return 0; // 파싱 실패 등 — 모델 문제라기보다 그 한 번의 답이 이상했던 것
   if (e.fatal) return 60 * 60_000; // 키 문제
   if (e.status === 429) return e.dailyQuota ? 30 * 60_000 : Math.min(Math.max(e.retryAfterMs ?? 20_000, 5_000), 120_000);
-  if (e.status === 503 || e.status === 0 || (e.status ?? 0) >= 500) return 60_000;
+  // 503(과부하)은 1초 안에 바로 오니 짧게만 쉰다 — 제미나이 flash-lite가 미국 낮 시간대에
+  // 자주 503을 내는데(2026-09-28), 60초씩 쉬면 그 사이 판이 전부 품질이 낮은 gpt-oss로
+  // 갔다(사람 피드백 #183~#190). 무응답(0)·그 밖의 5xx는 기다린 비용이 커서 60초 그대로.
+  if (e.status === 503) return 10_000;
+  if (e.status === 0 || (e.status ?? 0) >= 500) return 60_000;
   return 0;
 }
 
@@ -491,7 +495,7 @@ export async function generateHints(input: GenerateHintsInput): Promise<HintRoun
     if (errors.length && Date.now() - started > CHAIN_BUDGET_MS) break;
     try {
       const raw = await callBot(system, user, provider, { failFast: true, timeoutMs: PER_MODEL_TIMEOUT_MS });
-      return { ...parseHintRound(raw, hintCount), model: provider.label };
+      return { ...parseHintRound(raw, hintCount, word), model: provider.label };
     } catch (e) {
       const pause = cooldownFor(e);
       if (pause) cooldownUntil.set(provider.label, Date.now() + pause);
@@ -501,7 +505,16 @@ export async function generateHints(input: GenerateHintsInput): Promise<HintRoun
   throw new Error(`모든 출제 모델이 실패했다 — ${errors.join(' / ')}`);
 }
 
-function parseHintRound(raw: string, hintCount: number): Omit<HintRound, 'model'> {
+// 묘사에 제시어가 그대로 들어갔는지 — 프롬프트로 금지해도 가끔 샌다(2026-09-28 #185 낚시 →
+// "낚시터에 놓인 작은 의자"). 판정은 judgeGuess와 같은 기준: 한국어는 두 글자 이상만
+// 글자 포함으로("배"는 "배고픈"에 걸리니 제외), 영어는 단어 단위로.
+function leaksWord(hint: string, word: string): boolean {
+  if (isLatin(word)) return allIn(englishWords(word), englishWords(hint));
+  const w = normalize(word);
+  return w.length >= 2 && normalize(hint).includes(w);
+}
+
+function parseHintRound(raw: string, hintCount: number, word: string): Omit<HintRound, 'model'> {
   const out = parseJson<{ banned?: unknown; hints?: unknown }>(raw, {});
 
   const hints = out.hints;
@@ -517,14 +530,18 @@ function parseHintRound(raw: string, hintCount: number): Omit<HintRound, 'model'
   const cleaned = (hints as { text?: unknown; angle?: unknown }[])
     .map((h) => ({ text: String(h.text ?? '').trim(), angle: String(h.angle ?? '?').slice(0, 20) }))
     .filter((h) => h.text.length > 0);
-  if (cleaned.length < hintCount) {
+  // 제시어가 샌 묘사는 버린다 — 그래서 모자라면 아래 파싱 실패로 체인의 다음 모델이 다시
+  // 만든다(LlmError가 아니라 그 모델을 쉬게 하진 않는다).
+  const safe = cleaned.filter((h) => !leaksWord(h.text, word));
+  if (safe.length < hintCount) {
     throw new Error(
-      `묘사 파싱 실패: ${hintCount}개 요청했는데 유효한 게 ${cleaned.length}개뿐(원본 ${hints.length}개). ` + raw.slice(0, 300),
+      `묘사 파싱 실패: ${hintCount}개 요청했는데 유효한 게 ${safe.length}개뿐(원본 ${hints.length}개, 제시어 노출 ${cleaned.length - safe.length}개). ` +
+        raw.slice(0, 300),
     );
   }
 
   return {
     banned: Array.isArray(out.banned) ? out.banned.map(String) : [],
-    hints: cleaned.slice(0, hintCount),
+    hints: safe.slice(0, hintCount),
   };
 }
