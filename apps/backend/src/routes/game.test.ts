@@ -276,3 +276,16 @@ test('오늘의 문제 — 정해 둔 묘사로 두 라운드, 번호·날짜가
     clearDailyCache();
   }
 });
+
+test('쉬움 모드 — 1라운드부터 카테고리를 주고, 피드백에 easy가 남는다', async () => {
+  resetRateLimits();
+  const start = await post('/game/start', { lang: 'ko', easy: true });
+  assert.equal(typeof start.data.category, 'string');
+  const plain = await post('/game/start', { lang: 'ko' });
+  assert.equal('category' in plain.data, false);
+  const { word } = decode<{ word: string }>(start.data.session as string);
+  const g = await post('/game/guess', { session: start.data.session, guess: word });
+  await post('/game/feedback', { result: g.data.resultToken });
+  const json = JSON.parse([...issues.at(-1)!.body.matchAll(/```json\n([\s\S]*?)\n```/g)].pop()![1]!) as Record<string, unknown>;
+  assert.equal(json.easy, true);
+});

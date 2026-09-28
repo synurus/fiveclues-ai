@@ -175,8 +175,14 @@ export function aggregate(items, timeline, lang = 'ko') {
   const byCategory = new Map();
   const humanEarly = new Map(); // version → stats (사람, 처음 3판 이내)
 
+  let easySkipped = 0;
   for (const { createdAt, data } of items) {
     if ((data.lang ?? 'ko') !== lang || !['round1', 'round2', 'failed'].includes(data.outcome)) continue;
+    // 쉬움 모드(1라운드부터 카테고리 공개)는 1라운드 정답률의 조건이 달라 세대 비교에서 뺀다.
+    if (data.easy) {
+      easySkipped += 1;
+      continue;
+    }
     const version = data.promptVersion || versionAt(timeline, createdAt);
     if (!gens.has(version)) gens.set(version, { firstAt: version === BEFORE ? new Date(0) : createdAt, bySource: new Map() });
     const g = gens.get(version);
@@ -199,17 +205,21 @@ export function aggregate(items, timeline, lang = 'ko') {
     add(byCategory.get(data.category), data);
   }
   const ordered = [...gens.entries()].filter(([, g]) => g.bySource.size).sort((a, b) => a[1].firstAt - b[1].firstAt);
-  return { ordered, byModel, byCategory, humanEarly };
+  return { ordered, byModel, byCategory, humanEarly, easySkipped };
 }
 
 const kst = (d) =>
   d.getTime() === 0 ? '-' : new Date(d.getTime() + 9 * 3600_000).toISOString().slice(0, 16).replace('T', ' ');
 
 /** 사람이 읽을 전체 성적표(마크다운). */
-export function formatReport({ ordered, byModel, byCategory, humanEarly }, { lang = 'ko', generations = Infinity } = {}) {
+export function formatReport({ ordered, byModel, byCategory, humanEarly, easySkipped = 0 }, { lang = 'ko', generations = Infinity } = {}) {
   const shown = ordered.slice(-generations);
   const lines = [`# 출제 프롬프트 세대별 성적 (${lang === 'ko' ? '한국어' : '영어'})`, ''];
-  lines.push('괄호는 95% 신뢰구간. 무쓸모율 = 👎 수 ÷ 보여 준 묘사 수. 피드백을 남긴 판만 집계된다.', '');
+  lines.push(
+    '괄호는 95% 신뢰구간. 무쓸모율 = 👎 수 ÷ 보여 준 묘사 수. 피드백을 남긴 판만 집계된다.' +
+      (easySkipped ? ` 쉬움 모드 판 ${easySkipped}개는 뺐다.` : ''),
+    '',
+  );
   lines.push('| 세대 | 처음 반영(KST) |', '|---|---|');
   for (const [v, g] of shown) lines.push(`| ${v} | ${kst(g.firstAt)} |`);
   for (const src of ['사람', 'AI(제미나이 추측)', 'AI(Groq 추측)']) {

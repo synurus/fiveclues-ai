@@ -20,6 +20,7 @@ import { Typewriter } from './Typewriter';
 import { recordFinishedGame } from './playCount';
 import { localDate, getDaily, saveDaily, solvedStreak, shareText, shareResult, type DailyRecord } from './daily';
 import { strings, detectLang, saveLang, type Lang } from './i18n';
+import { loadEasy, saveEasy } from './easyMode';
 import './wordgame.css';
 
 type RoundLog = { hints: string[]; guess: string };
@@ -71,6 +72,7 @@ type Stage =
       // round===2일 때만 채워진다.
       category?: string;
       daily?: DailyInfo;
+      easy?: boolean; // 쉬움 모드로 시작한 판
     }
   | {
       kind: 'result';
@@ -81,6 +83,7 @@ type Stage =
       resultToken: string; // 피드백을 보낼 때 그대로 돌려준다(판 내용은 서버가 이 토큰에서 읽는다)
       playCount: number; // 이 브라우저에서 몇 번째로 끝낸 판인지(playCount.ts, 모르면 0)
       daily?: DailyInfo;
+      easy?: boolean;
     }
   | { kind: 'error'; message: string };
 
@@ -167,9 +170,11 @@ export function WordGuessGame() {
 
   // 시작 화면 안내(오늘의 문제가 아직 없을 때 등)와 공유 결과 안내.
   const [notice, setNotice] = useState('');
+  // 쉬움 모드(2026-09-29) — 1라운드부터 카테고리 공개. 판을 시작할 때의 값이 그 판 내내 간다.
+  const [easy, setEasy] = useState<boolean>(loadEasy);
   const [shareStatus, setShareStatus] = useState<ShareStatus>('idle');
 
-  const beginPlaying = (session: string, hints: string[], daily?: DailyInfo) => {
+  const beginPlaying = (session: string, hints: string[], daily?: DailyInfo, category?: string) => {
     setRevealed(0);
     setGuess('');
     setKeyHints(new Set());
@@ -179,14 +184,14 @@ export function WordGuessGame() {
     setGuessError('');
     setShareStatus('idle');
     setNotice('');
-    setStage({ kind: 'playing', session, round: 1, hints, ...(daily ? { daily } : {}) });
+    setStage({ kind: 'playing', session, round: 1, hints, ...(daily ? { daily } : {}), ...(category ? { category, easy: true } : {}) });
   };
 
   const handleStart = async () => {
     setStage({ kind: 'loading' });
     try {
-      const res = await startGame(lang, seenWords);
-      beginPlaying(res.session, res.hints.map((h) => h.text));
+      const res = await startGame(lang, seenWords, easy);
+      beginPlaying(res.session, res.hints.map((h) => h.text), undefined, res.category);
     } catch (e) {
       setStage({ kind: 'error', message: errorText(e, s) });
     }
@@ -195,8 +200,8 @@ export function WordGuessGame() {
   const handleStartDaily = async () => {
     setStage({ kind: 'loading' });
     try {
-      const res = await startDaily(lang, localDate());
-      beginPlaying(res.session, res.hints.map((h) => h.text), res.daily);
+      const res = await startDaily(lang, localDate(), easy);
+      beginPlaying(res.session, res.hints.map((h) => h.text), res.daily, res.category);
     } catch (e) {
       // 아직 문제가 없으면 오류 화면 대신 시작 화면에 안내만 — 자유 플레이는 그대로 할 수 있다.
       if (e instanceof ApiError && e.code === 'daily_unavailable') {
@@ -235,12 +240,15 @@ export function WordGuessGame() {
           category: res.category,
           previous: { hints: stage.hints, guess: attemptedGuess },
           ...(stage.daily ? { daily: stage.daily } : {}),
+          ...(stage.easy ? { easy: true } : {}),
         });
       } else {
         const rounds: RoundLog[] = stage.previous
           ? [stage.previous, { hints: stage.hints, guess: attemptedGuess }]
           : [{ hints: stage.hints, guess: attemptedGuess }];
-        if (stage.daily) saveDaily(lang, stage.daily.date, { number: stage.daily.number, outcome: res.result });
+        if (stage.daily) {
+          saveDaily(lang, stage.daily.date, { number: stage.daily.number, outcome: res.result, ...(stage.easy ? { easy: true } : {}) });
+        }
         setStage({
           kind: 'result',
           outcome: res.result,
@@ -250,6 +258,7 @@ export function WordGuessGame() {
           resultToken: res.resultToken,
           playCount: recordFinishedGame(),
           ...(stage.daily ? { daily: stage.daily } : {}),
+          ...(stage.easy ? { easy: true } : {}),
         });
         setSeenWords((prev) => [...prev, res.word].slice(-30));
       }
@@ -321,6 +330,17 @@ export function WordGuessGame() {
             <Button variant="secondary" block onClick={handleStart}>
               {s.freePlay}
             </Button>
+            <label className="wg-easy">
+              <input
+                type="checkbox"
+                checked={easy}
+                onChange={(e) => {
+                  setEasy(e.target.checked);
+                  saveEasy(e.target.checked);
+                }}
+              />
+              {s.easyLabel}
+            </label>
             {notice && <p className="wg-notice">{notice}</p>}
             {shareStatus !== 'idle' && <p className="wg-notice">{s[shareStatus === 'failed' ? 'shareFailed' : shareStatus]}</p>}
           </>
@@ -387,7 +407,13 @@ export function WordGuessGame() {
                 <Button
                   variant="primary"
                   block
-                  onClick={() => stage.daily && handleShare({ number: stage.daily.number, outcome: stage.outcome }, stage.daily.date)}
+                  onClick={() =>
+                    stage.daily &&
+                    handleShare(
+                      { number: stage.daily.number, outcome: stage.outcome, ...(stage.easy ? { easy: true } : {}) },
+                      stage.daily.date,
+                    )
+                  }
                 >
                   {s.share}
                 </Button>
@@ -399,7 +425,11 @@ export function WordGuessGame() {
             )}
 
             {feedbackStatus === 'sent' ? (
-              <p className="wg-feedback-done">{s.feedbackDone}</p>
+              <p className="wg-feedback-done">
+                {s.feedbackDone}
+                <br />
+                <a href="/guides/prompt-history">{s.historyLink}</a>
+              </p>
             ) : (
               <div className="wg-feedback">
                 <p className="wg-feedback-title">

@@ -6,6 +6,7 @@ export type Outcome = 'round1' | 'round2' | 'failed';
 export interface DailyRecord {
   number: number;
   outcome: Outcome;
+  easy?: boolean; // 쉬움 모드로 풀었는지 — 공유 문구에 표시
 }
 
 const STORAGE_KEY = 'fiveclues-daily';
@@ -69,7 +70,7 @@ export function shareText(lang: Lang, record: DailyRecord, streak: number, url: 
     : { round1: 'Got it in round 1', round2: 'Got it in round 2', failed: 'Missed it' }[record.outcome];
   const lines = [
     ko ? `다섯고개 오늘의 문제 #${record.number}` : `Five Clues Daily #${record.number}`,
-    `${GRID[record.outcome]} ${label}`,
+    `${GRID[record.outcome]} ${label}${record.easy ? (ko ? ' · 쉬움 모드' : ' · easy mode') : ''}`,
     ...(streak > 1 ? [ko ? `연속 정답 ${streak}일` : `${streak}-day streak`] : []),
     url,
   ];

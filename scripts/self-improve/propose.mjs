@@ -104,7 +104,9 @@ function summarizeForPrompt(items, currentVersion) {
     const models = [...new Set((data.hintModels ?? []).filter(Boolean).map((m) => m.replace(/^(groq|gemini):/, '')))];
     const modelTag = models.length ? ` 출제:${models.join('/')}` : '';
     // 미리 만든 세트는 만든 때의 프롬프트로 나온 묘사라, 지금 파일과 세대가 다를 수 있다(2026-09-28).
-    const oldTag = data.promptVersion && currentVersion && data.promptVersion !== currentVersion ? ' (이전 프롬프트)' : '';
+    const oldTag =
+      (data.promptVersion && currentVersion && data.promptVersion !== currentVersion ? ' (이전 프롬프트)' : '') +
+      (data.easy ? ' (쉬움)' : '');
     return `- #${number} [${data.outcome}] "${data.word}"(${data.category})${guesses}${modelTag}${oldTag} 결정적:${key} 무쓸모:${useless}${comment}`;
   });
   const tallyLine = `집계: 1라운드에 맞음 ${tally.round1 ?? 0} · 2라운드까지 가서 맞음 ${tally.round2 ?? 0} · 실패(정답 공개) ${tally.failed ?? 0}`;
@@ -198,7 +200,8 @@ function buildSystemPrompt() {
     `9. 피드백 줄의 "출제:"는 그 판 묘사를 만든 모델이다(여러 모델을 한도 순서대로 쓴다). ` +
     `한 모델의 판에서만 보이는 문제는 모델 차이일 수 있으니 그것만으로 규칙을 바꾸지 말고, ` +
     `특정 모델 이름을 프롬프트에 넣지도 마라. "pregen:"은 미리 만들어 둔 묘사이고, ` +
-    `"(이전 프롬프트)"가 붙은 판은 지금 파일이 아니라 예전 버전으로 만든 묘사다 — 지금 파일에서 이미 고쳐진 문제일 수 있다.\n\n` +
+    `"(이전 프롬프트)"가 붙은 판은 지금 파일이 아니라 예전 버전으로 만든 묘사다 — 지금 파일에서 이미 고쳐진 문제일 수 있다. ` +
+    `"(쉬움)"은 1라운드부터 카테고리를 보고 푼 판이라 1라운드에 맞힌 것이 곧 묘사가 쉬웠다는 뜻은 아니다.\n\n` +
     `[출력 형식 — 이 형식을 벗어나면 자동 파싱이 실패해 PR이 안 열린다]\n` +
     `===SUMMARY===\n(무엇을 왜 바꿨는지 한국어 2~3문장. 안 바꿨으면 "변경 없음"과 이유)\n` +
     `===FILE===\n(hintPrompt.ts 의 완성된 전체 내용. 이 마커 사이엔 파일 내용 말고 아무것도 넣지 마라)\n` +

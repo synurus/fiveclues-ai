@@ -21,6 +21,7 @@ const CONTENT_PAGES = [
   'guides/dev-copied-examples',
   'guides/dev-answer-judging',
   'guides/dev-free-tier',
+  'guides/prompt-history',
   'en/how-to-play',
   'en/about',
   'en/privacy',

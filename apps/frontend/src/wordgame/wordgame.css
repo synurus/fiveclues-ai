@@ -291,3 +291,15 @@
   text-align: center;
   margin: var(--space-2) 0 0;
 }
+
+/* 쉬움 모드 켜기(2026-09-29) — 시작 버튼 아래 작은 체크박스. */
+.wg-easy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1, 4px);
+  font-size: var(--text-label);
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+  cursor: pointer;
+}

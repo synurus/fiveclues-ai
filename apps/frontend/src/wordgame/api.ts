@@ -11,6 +11,8 @@ export interface StartResponse {
   session: string;
   round: 1;
   hints: Hint[];
+  /** 쉬움 모드로 시작했을 때만 — 1라운드부터 보여 줄 카테고리. */
+  category?: string;
 }
 
 // 세션 발급 시 한 번만 넘긴다 — 2라운드부터는 세션 토큰 안의 값을 서버가 그대로
@@ -68,8 +70,9 @@ async function postJson<T>(path: string, body?: unknown): Promise<T> {
 // exclude: 이번 브라우저 세션에서 이미 나온 단어들 — 반복 출제 방지(2026-09-19).
 // 서버가 "최근 단어"를 기억할 상태가 없어서(DB 없음, 서버리스) 클라이언트가 들고
 // 다니다 매번 같이 보낸다.
-export function startGame(lang: Lang, exclude: string[] = []): Promise<StartResponse> {
-  return postJson<StartResponse>('/game/start', { lang, exclude });
+// easy: 쉬움 모드(1라운드부터 카테고리 공개, 2026-09-29).
+export function startGame(lang: Lang, exclude: string[] = [], easy = false): Promise<StartResponse> {
+  return postJson<StartResponse>('/game/start', { lang, exclude, easy });
 }
 
 // 오늘의 문제(2026-09-29). date는 이 기기의 날짜 — 서버가 UTC ±1일 안인지 본다.
@@ -77,8 +80,8 @@ export function startGame(lang: Lang, exclude: string[] = []): Promise<StartResp
 export interface DailyStartResponse extends StartResponse {
   daily: { date: string; number: number };
 }
-export function startDaily(lang: Lang, date: string): Promise<DailyStartResponse> {
-  return postJson<DailyStartResponse>('/game/daily/start', { lang, date });
+export function startDaily(lang: Lang, date: string, easy = false): Promise<DailyStartResponse> {
+  return postJson<DailyStartResponse>('/game/daily/start', { lang, date, easy });
 }
 
 export function submitGuess(session: string, guess: string): Promise<GuessResponse> {

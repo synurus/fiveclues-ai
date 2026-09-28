@@ -57,6 +57,8 @@ export interface FeedbackPayload {
   playCount?: number;
   /** 오늘의 문제였으면 그 날짜(YYYY-MM-DD, 2026-09-29~) — 모두 같은 묘사를 푼 판이라 정답률을 깨끗하게 잴 수 있다. */
   daily?: string;
+  /** 쉬움 모드(1라운드부터 카테고리를 보고 푼 판, 2026-09-29) — 정답률 비교에서 따로 본다. */
+  easy?: boolean;
 }
 
 // hints를 roundHintCounts 길이대로 잘라 라운드별 배열로 되돌린다. roundHintCounts가
@@ -129,6 +131,7 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
     (data.promptVersion ? ` · 프롬프트 ${data.promptVersion}` : '') +
     (data.playCount ? ` · ${data.playCount}번째 판` : '') +
     (data.daily ? ` · 오늘의 문제 ${data.daily}` : '') +
+    (data.easy ? ' · 쉬움 모드' : '') +
     `\n\n${buildHintLog(data)}` +
     (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
     (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
