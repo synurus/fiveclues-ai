@@ -22,6 +22,7 @@ export interface DailyPuzzle {
   model: string;
   round1: string[];
   round2: string[];
+  banned?: string[]; // 결과 화면에 보여 줄 "AI가 일부러 말하지 않은 특징"
 }
 
 export type DailyFile = Record<string, DailyPuzzle>; // "YYYY-MM-DD" → 문제
@@ -121,6 +122,7 @@ export function scheduleDaily(
       model: set.model,
       round1: set.round1,
       round2: set.round2,
+      ...(set.banned?.length ? { banned: set.banned } : {}),
     };
     added.push(date);
   }

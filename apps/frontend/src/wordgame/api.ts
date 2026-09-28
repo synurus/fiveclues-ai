@@ -21,10 +21,11 @@ export type Lang = 'ko' | 'en';
 
 // resultToken: 판이 끝났을 때 서버가 주는 암호화된 판 기록 — 피드백은 이걸로만 보낸다
 // (2026-09-28, 서버가 판 내용을 클라이언트 말만 믿지 않게).
+// banned: 출제 AI가 일부러 피한 결정적 특징 — 결과 화면에 공개(2026-09-29). 없을 수도 있다.
 export type GuessResponse =
-  | { result: 'round1' | 'round2'; word: string; category: string; verdict: 'exact' | 'loose'; resultToken: string }
+  | { result: 'round1' | 'round2'; word: string; category: string; verdict: 'exact' | 'loose'; resultToken: string; banned?: string[] }
   | { result: 'continue'; session: string; round: 2; category: string; hints: Hint[] }
-  | { result: 'failed'; word: string; category: string; verdict: 'wrong'; resultToken: string };
+  | { result: 'failed'; word: string; category: string; verdict: 'wrong'; resultToken: string; banned?: string[] };
 
 // 자가개선 루프(scripts/self-improve/)가 GitHub Issue로 쌓는 피드백. 단어·묘사·추측은
 // resultToken 안에 있고, 여기선 플레이어가 결과 화면에서 고른 것만 보낸다.

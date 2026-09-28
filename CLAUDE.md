@@ -16,8 +16,10 @@
 묘사 5개를 더 받고 한 번 더 추측한다. 판이 끝나면 어떤 묘사가 결정적이었고
 어떤 묘사가 무쓸모였는지 직접 태그한다 — 그게 자가개선 루프의 학습 신호다.
 현재 상태·게임 관점 재검토·로드맵은 `docs/게임기획서_v3.md`(2026-09-29), 처음 설계 근거는
-`docs/게임기획서_v2.md`. **v3 §5: 자가개선 PR은 매일 열려도 머지는 지금 세대 판이 충분히 쌓인 뒤
-(대략 주 1회)** — 세대를 너무 자주 바꾸면 측정도 안 되고 묘사 세트도 못 따라온다.
+`docs/게임기획서_v2.md`. **v3 §5 머지 기준: 지금 프롬프트 세대로 쌓인 판(사람+AI, 쉬움 모드 제외)이
+30판 미만이면 `propose.mjs`가 PR을 열지 않는다**(LLM 호출 전에 멈춤 — 3.8-flash 한도도 아낌.
+`SELFIMPROVE_MIN_GEN_GAMES`, 수동 실행 입력 `min_gen_games`, 0이면 끔). 세대를 너무 자주 바꾸면
+측정도 안 되고 묘사 세트도 못 따라온다.
 
 ## 핵심 설계 판단 — 왜 이렇게 됐는가
 
@@ -113,6 +115,15 @@
 - **쉬움 모드(2026-09-29)**: 시작 요청 `easy: true`면 1라운드부터 카테고리를 준다(묘사는 같음).
   세션·결과 토큰·피드백에 `easy`가 실리고, `metrics.mjs`는 세대 비교에서 빼며, `propose.mjs`는
   "(쉬움)"을 붙인다. 설정은 localStorage `fiveclues-easy`.
+- **결과 화면 "AI가 일부러 말하지 않은 것"(2026-09-29, 기획서 v3 제안 B)**: 출제 AI가 먼저 적는
+  `banned`를 `hintSource.ts`의 `cleanBanned()`로 걸러(20자 이하·제시어 제외·최대 4개) 세트·오늘의
+  문제·실시간 생성 모두 세션에 싣고, 판이 끝난 `/guess` 응답의 `banned`로 공개한다. 이전에 만든
+  세트엔 없어서 안 보일 수 있다.
+- **오늘의 문제 검토 이슈(라벨 `daily-review`, `bot/dailyReview.ts`)**: 일정이 새로 잡히면
+  pregen-hints.yml이 문제마다 동의어 후보(flash-lite → 실패 시 Groq)를 받아 표로 정리한 이슈를
+  연다(다른 제시어와 겹치는 후보엔 경고). 운영자는 `words.json` accept를 고치거나, 묘사가 이상하면
+  `scripts/daily/*.json`에서 그 날짜를 지운다(다음 실행 때 다시 채움). 이슈 본문엔 정답이 있다.
+  `gather.mjs`·`metrics.mjs`는 `feedback` 라벨만 읽어 이 이슈와 안 섞인다.
 - **개선 기록 페이지 `/guides/prompt-history`는 자동 생성물이다** — 손으로 고치지 말고
   `scripts/prompt-history.mjs`(생성기)나 `scripts/prompt-history-notes.json`(세대별 쉬운 설명)을
   고칠 것. `prompt-history.yml`이 매일 KST 12:37과 hintPrompt.ts·notes가 바뀔 때 다시 만들어

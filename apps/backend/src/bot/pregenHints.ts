@@ -35,10 +35,11 @@ import { callBot, parseJson, leaksWord, LlmError, type BotConfig } from './wordG
 import { hintSystem as hintSystemKo } from './hintPrompt';
 import { hintSystem as hintSystemEn } from './hintPromptEn';
 import { PROMPT_VERSION } from './promptVersion';
-import { HINT_COUNT } from './hintSource';
+import { HINT_COUNT, cleanBanned } from './hintSource';
 import { hintSetsDir, hintSetsPath, readHintSetFile, type HintSet, type HintSetFile, type Lang } from './hintSets';
 import type { WordEntry } from '../routes/wordPool';
-import { addDays, readDailyFile, scheduleDaily, utcToday, writeDailyFile } from './dailyPuzzle';
+import { addDays, dailyNumber, readDailyFile, scheduleDaily, utcToday, writeDailyFile, type DailyPuzzle } from './dailyPuzzle';
+import { buildReviewItems, openReviewIssue } from './dailyReview';
 
 const MODEL = process.env.PREGEN_MODEL || 'gemini-3.8-flash';
 const API_KEY = process.env.GEMINI_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
@@ -215,13 +216,13 @@ async function budgetedCall(usage: Usage, run: { calls: number; retries503: numb
 // 모델이 단어를 대소문자·띄어쓰기만 바꿔 돌려주는 경우가 있어 정규화해서 찾는다.
 const key = (w: string): string => w.toLowerCase().replace(/\s+/g, '');
 
-/** 모델 응답 → 정규화한 제시어 → 그 제시어의 hints(검증 전). */
-export function parseSets(raw: string): Map<string, unknown> {
+/** 모델 응답 → 정규화한 제시어 → 그 제시어의 hints·banned(검증 전). */
+export function parseSets(raw: string): Map<string, { hints: unknown; banned: unknown }> {
   const out = parseJson<{ sets?: unknown }>(raw, {});
-  const map = new Map<string, unknown>();
+  const map = new Map<string, { hints: unknown; banned: unknown }>();
   if (Array.isArray(out.sets)) {
-    for (const s of out.sets as { word?: unknown; hints?: unknown }[]) {
-      if (typeof s?.word === 'string') map.set(key(s.word), s.hints);
+    for (const s of out.sets as { word?: unknown; hints?: unknown; banned?: unknown }[]) {
+      if (typeof s?.word === 'string') map.set(key(s.word), { hints: s.hints, banned: s.banned });
     }
   }
   return map;
@@ -286,7 +287,7 @@ async function main(): Promise<void> {
       const r1raw = parseSets(await budgetedCall(usage, run, system(lang, 1, category), batchUser(lang, 1, category, words)));
       const round1: Record<string, string[]> = {};
       for (const w of words) {
-        const v = validateRound(r1raw.get(key(w)), w, words);
+        const v = validateRound(r1raw.get(key(w))?.hints, w, words);
         if (v) round1[w] = v;
       }
       const ok1 = Object.keys(round1);
@@ -295,7 +296,7 @@ async function main(): Promise<void> {
       const now = new Date().toISOString();
       const saved: string[] = [];
       for (const w of ok1) {
-        const round2 = validateRound(r2raw.get(key(w)), w, words, round1[w]);
+        const round2 = validateRound(r2raw.get(key(w))?.hints, w, words, round1[w]);
         if (!round2) continue;
         addSet(files[lang], w, {
           id: crypto.randomBytes(4).toString('hex'),
@@ -304,6 +305,7 @@ async function main(): Promise<void> {
           generatedAt: now,
           round1: round1[w]!,
           round2,
+          banned: cleanBanned(r1raw.get(key(w))?.banned, w), // 결과 화면 "AI가 말하지 않은 것"
         });
         saved.push(w);
       }
@@ -323,6 +325,7 @@ async function main(): Promise<void> {
   }
   // 오늘의 문제 일정(bot/dailyPuzzle.ts) — 세트가 생긴 단어로 어제~7일 뒤까지 빈 날짜를 채운다
   // (어제부터인 건 UTC보다 늦은 시간대에선 아직 "어제"가 오늘이라서). 이미 정한 날짜는 안 바꾼다.
+  const toReview: { lang: Lang; date: string; number: number; puzzle: DailyPuzzle }[] = [];
   for (const lang of DRY ? [] : (['ko', 'en'] as const)) {
     const daily = readDailyFile(lang);
     const categoryOf = (word: string): string | undefined => pools[lang].find((w) => w.word === word)?.category;
@@ -330,6 +333,15 @@ async function main(): Promise<void> {
     if (added.length) {
       writeDailyFile(lang, daily);
       console.log(`[pregen] 오늘의 문제(${lang}) 일정 추가: ${added.join(', ')}`);
+      toReview.push(...added.map((date) => ({ lang, date, number: dailyNumber(date), puzzle: daily[date]! })));
+    }
+  }
+  // 새로 잡힌 문제는 동의어 검토 이슈로(bot/dailyReview.ts) — 실패해도 생성 결과엔 영향 없다.
+  if (toReview.length) {
+    try {
+      await openReviewIssue(await buildReviewItems(toReview));
+    } catch (e) {
+      console.error('[daily-review] 실패:', e instanceof Error ? e.message : e);
     }
   }
 

@@ -303,3 +303,16 @@
   margin-top: var(--space-2);
   cursor: pointer;
 }
+
+/* 결과 화면 "AI가 일부러 말하지 않은 것"(2026-09-29) — 정답 바로 아래. */
+.wg-banned {
+  text-align: center;
+  font-size: var(--text-body);
+  margin: calc(var(--space-2) * -1) 0 var(--space-4);
+}
+
+.wg-banned-title {
+  display: block;
+  font-size: var(--text-label);
+  color: var(--color-muted);
+}

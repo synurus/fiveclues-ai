@@ -11,7 +11,7 @@
  *   할당량으로 만든 결과라 실시간 생성 때와 같은 약관 제한을 그대로 적용한다.
  */
 
-import { generateHints, type Hint } from './wordGuessBot';
+import { generateHints, leaksWord, type Hint } from './wordGuessBot';
 import { findHintSet, pickHintSet, type Lang } from './hintSets';
 import { PROMPT_VERSION } from './promptVersion';
 
@@ -24,9 +24,24 @@ export const PREGEN_PREFIX = 'pregen:';
 
 const asHints = (texts: string[]): Hint[] => texts.map((text) => ({ text, angle: '' }));
 
+/**
+ * 출제 AI가 묘사를 쓰기 전에 적는 "누구나 바로 떠올리는 결정적 특징"(banned) — 게임이 끝나면
+ * 결과 화면에 "AI가 일부러 말하지 않은 것"으로 보여 준다(기획서 v3 제안 B, 2026-09-29). 모델이
+ * 제시어 자체를 적거나 문장을 길게 쓰는 경우가 있어 짧은 말만, 최대 4개.
+ */
+export function cleanBanned(raw: unknown, word: string): string[] {
+  if (!Array.isArray(raw)) return [];
+  const out = raw
+    .map((b) => String(b ?? '').trim())
+    .filter((b) => b.length > 0 && b.length <= 20 && !leaksWord(b, word));
+  return [...new Set(out)].slice(0, 4);
+}
+
 export interface Round1 {
   hints: Hint[];
   model: string;
+  /** 결정적 특징(결과 화면 공개용). 없으면 빈 배열. */
+  banned: string[];
   promptVersion: string;
   /** 미리 만든 세트를 썼으면 그 id — 2라운드가 같은 세트의 round2를 찾는 데 쓴다. */
   setId?: string;
@@ -47,7 +62,15 @@ export async function round1Hints(input: {
   const { word, category, lang } = input;
   if (!input.restrictedRegion) {
     const set = pickHintSet(lang, word, PROMPT_VERSION[lang], !input.currentOnly);
-    if (set) return { hints: asHints(set.round1), model: PREGEN_PREFIX + set.model, promptVersion: set.promptVersion, setId: set.id };
+    if (set) {
+      return {
+        hints: asHints(set.round1),
+        model: PREGEN_PREFIX + set.model,
+        banned: set.banned ?? [],
+        promptVersion: set.promptVersion,
+        setId: set.id,
+      };
+    }
   }
   const r = await generateHints({
     word,
@@ -57,7 +80,7 @@ export async function round1Hints(input: {
     lang,
     ...(input.restrictedRegion ? { restrictedRegion: true } : {}),
   });
-  return { hints: r.hints, model: r.model, promptVersion: PROMPT_VERSION[lang] };
+  return { hints: r.hints, model: r.model, banned: cleanBanned(r.banned, word), promptVersion: PROMPT_VERSION[lang] };
 }
 
 export async function round2Hints(input: {

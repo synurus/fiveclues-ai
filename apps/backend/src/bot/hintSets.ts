@@ -22,6 +22,8 @@ export interface HintSet {
   generatedAt: string; // ISO
   round1: string[];
   round2: string[];
+  /** 1라운드를 만들 때 AI가 적은 결정적 특징(결과 화면 공개용, 2026-09-29~). 옛 세트엔 없다. */
+  banned?: string[];
 }
 
 export interface HintSetFile {

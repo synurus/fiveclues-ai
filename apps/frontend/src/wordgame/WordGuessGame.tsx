@@ -84,6 +84,8 @@ type Stage =
       playCount: number; // 이 브라우저에서 몇 번째로 끝낸 판인지(playCount.ts, 모르면 0)
       daily?: DailyInfo;
       easy?: boolean;
+      // 출제 AI가 피한 결정적 특징 — "아, 그래서 그렇게 돌려 말했구나"를 보여 준다(2026-09-29).
+      banned?: string[];
     }
   | { kind: 'error'; message: string };
 
@@ -259,6 +261,7 @@ export function WordGuessGame() {
           playCount: recordFinishedGame(),
           ...(stage.daily ? { daily: stage.daily } : {}),
           ...(stage.easy ? { easy: true } : {}),
+          ...(res.banned?.length ? { banned: res.banned } : {}),
         });
         setSeenWords((prev) => [...prev, res.word].slice(-30));
       }
@@ -397,6 +400,12 @@ export function WordGuessGame() {
           <>
             <p className="wg-result-badge">{s.resultBadge[stage.outcome]}</p>
             <p className="wg-answer">{s.answer(stage.word, stage.category)}</p>
+            {stage.banned && (
+              <p className="wg-banned">
+                <span className="wg-banned-title">{s.bannedTitle}</span>
+                {stage.banned.join(' · ')}
+              </p>
+            )}
 
             {stage.daily && (
               <div className="wg-daily-share">

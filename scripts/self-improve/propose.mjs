@@ -28,7 +28,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 import { structuralGuardOk, codeGuardProblem } from './promptGuard.mjs';
-import { reportForPr, promptVersionOf } from '../metrics.mjs';
+import { reportForPr, promptVersionOf, generationGames, aggregate, fetchFeedbackIssues, promptTimeline } from '../metrics.mjs';
 
 const DRY = process.env.DRY === '1';
 const REPO = process.env.GITHUB_REPOSITORY ?? '';
@@ -49,6 +49,9 @@ const MODEL = process.env.SELFIMPROVE_BOT_MODEL || process.env.BOT_MODEL || 'ope
 
 const PROMPT_FILE = 'apps/backend/src/bot/hintPrompt.ts';
 const FEEDBACK_FILE = 'data/self-improve/feedback.json';
+// 머지 기준 — 지금 세대로 이만큼 판이 쌓여야 다음 수정안을 낸다(기획서 v3 §5). 수동 실행 때
+// 워크플로 입력(min_gen_games)으로 낮출 수 있다(0이면 검사 안 함).
+const MIN_GEN_GAMES = Number(process.env.SELFIMPROVE_MIN_GEN_GAMES || 30);
 const MAX_FEEDBACK_FOR_PROMPT = 10; // gather.mjs 는 최대 20개를 모으지만, 토큰 예산 때문에 여기선 더 줄인다.
 
 // 프롬프트 본문(return 뒤 템플릿 리터럴)의 허용 증가 폭 — 이 부분은 게임 매 호출마다
@@ -255,9 +258,27 @@ async function main() {
   }
 
   const currentFile = await readFile(PROMPT_FILE, 'utf8');
-  const feedbackSummary = summarizeForPrompt(feedback, promptVersionOf(currentFile));
+  const currentVersion = promptVersionOf(currentFile);
+  const feedbackSummary = summarizeForPrompt(feedback, currentVersion);
   const system = buildSystemPrompt();
   const user = buildUserPrompt(currentFile, feedbackSummary);
+
+  // 머지 기준(기획서 v3 §5, 2026-09-29): 지금 세대로 쌓인 판이 MIN_GEN_GAMES 미만이면 PR을
+  // 열지 않는다 — 세대를 너무 자주 바꾸면 좋아졌는지 잴 수 없고, 묘사 세트(약 10일에 한 바퀴)도
+  // 못 따라온다. LLM을 부르기 전에 멈추니 3.8-flash 하루 한도도 아낀다(그 몫은 세트 생성이 쓴다).
+  // 집계가 실패하면 막지 않고 진행한다(fail-open).
+  let genGames = null;
+  if (!DRY) {
+    try {
+      genGames = generationGames(aggregate(await fetchFeedbackIssues(), promptTimeline('ko'), 'ko'), currentVersion);
+    } catch (e) {
+      console.error('세대 판 수 집계 실패 — 머지 기준 검사 없이 진행:', e instanceof Error ? e.message : e);
+    }
+    if (genGames !== null && genGames < MIN_GEN_GAMES) {
+      console.log(`지금 세대(${currentVersion})로 쌓인 판이 ${genGames}판 — ${MIN_GEN_GAMES}판이 될 때까지 PR을 열지 않는다.`);
+      return;
+    }
+  }
 
   let raw;
   if (DRY) {
@@ -370,6 +391,9 @@ async function main() {
     `### 모델이 밝힌 변경 이유\n> ${parsed.summary.replace(/\n/g, '\n> ')}\n\n` +
     (bodySizeLine ? `### 토큰\n${bodySizeLine}\n\n` : '') +
     `### 반영한 피드백(${usedNumbers.length}건)\n${feedbackLines}\n\n` +
+    `### 머지 기준(기획서 v3 §5)\n지금 세대(\`${currentVersion}\`)로 쌓인 판: ${genGames ?? '(집계 실패)'}판 / 기준 ${MIN_GEN_GAMES}판. ` +
+    `머지하면 새 세대가 시작되고, 새 세대 판이 다시 ${MIN_GEN_GAMES}판 쌓일 때까지 다음 수정안은 열리지 않는다. ` +
+    `급하지 않으면 아래 성적표로 지금 세대가 이전보다 나은지 먼저 볼 것.\n\n` +
     (metricsSection
       ? `<details><summary>지금까지 세대별 성적(최근 3세대, scripts/metrics.mjs)</summary>\n\n${metricsSection}\n\n</details>\n\n`
       : '') +

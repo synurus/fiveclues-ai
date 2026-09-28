@@ -35,6 +35,7 @@ on:
 
 permissions:
   contents: write
+  issues: write # 오늘의 문제 동의어 검토 이슈(bot/dailyReview.ts)
 
 # 두 실행이 겹치면 usage.json·세트 파일을 서로 덮어쓴다 — 한 번에 하나씩.
 concurrency:
@@ -60,7 +61,14 @@ jobs:
           # 제미나이 키 — propose.mjs와 같은 키(SELFIMPROVE_BOT_API_KEY)를 쓴다.
           SELFIMPROVE_BOT_API_KEY: ${{ secrets.SELFIMPROVE_BOT_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # 동의어 후보를 제미나이가 못 줄 때 Groq로(bot/dailyReview.ts).
+          BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
+          BOT_BASE_URL: ${{ secrets.BOT_BASE_URL }}
+          BOT_MODEL: ${{ secrets.BOT_MODEL }}
           PREGEN_RUN_CALLS: ${{ github.event.inputs.run_calls || '8' }}
+          # 새 오늘의 문제 검토 이슈를 여는 데 쓴다(feedbackIssue.ts와 같은 이름).
+          GITHUB_FEEDBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
         run: npm run pregen -w backend
 
       # 세트·사용량이 바뀌었으면 main에 바로 커밋한다(데이터 파일만 — 코드·프롬프트는 안 건드림).

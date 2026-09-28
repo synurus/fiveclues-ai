@@ -245,6 +245,12 @@ export function formatReport({ ordered, byModel, byCategory, humanEarly, easySki
   return lines.join('\n');
 }
 
+/** 한 세대로 쌓인 판 수(사람+AI, 쉬움 모드 제외) — propose.mjs의 머지 기준(기획서 v3 §5). */
+export function generationGames(agg, version) {
+  const g = agg.ordered.find(([v]) => v === version)?.[1];
+  return g ? [...g.bySource.values()].reduce((sum, s) => sum + s.n, 0) : 0;
+}
+
 /** 자가개선 PR 본문용 — 최근 3세대만, 짧게. */
 export async function reportForPr() {
   const items = await fetchFeedbackIssues();

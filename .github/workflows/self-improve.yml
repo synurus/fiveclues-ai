@@ -14,6 +14,10 @@ on:
         description: '이 개수 미만이면 PR을 시도하지 않는다'
         required: false
         default: '5'
+      min_gen_games:
+        description: '지금 프롬프트 세대로 이만큼 판이 쌓여야 PR을 연다(기획서 v3 §5). 0이면 검사 안 함'
+        required: false
+        default: '30'
   schedule:
     # 매일 08:00 한국시간(KST, UTC+9) = 전날 23:00 UTC, 하루 한 번(2026-09-16 결정).
     # 원래는 자동플레이가 01~07시 KST에 몰려 있어서 그게 끝난 직후로 잡은 시각이다.
@@ -88,4 +92,5 @@ jobs:
           BOT_BASE_URL: ${{ secrets.BOT_BASE_URL }}
           BOT_API_KEY: ${{ secrets.BOT_API_KEY }}
           BOT_MODEL: ${{ secrets.BOT_MODEL }}
+          SELFIMPROVE_MIN_GEN_GAMES: ${{ github.event.inputs.min_gen_games || '30' }}
         run: node scripts/self-improve/propose.mjs

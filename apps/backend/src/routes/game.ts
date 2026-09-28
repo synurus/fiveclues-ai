@@ -64,6 +64,7 @@ interface SessionPayload {
   setId?: string; // 미리 만든 세트를 썼으면 그 id — 2라운드가 같은 세트의 round2를 쓴다
   daily?: string; // 오늘의 문제면 그 날짜 — 2라운드도 그날 문제의 round2를 쓴다
   easy?: boolean; // 쉬움 모드 — 1라운드부터 카테고리 공개(성적표에선 따로 뺀다)
+  banned?: string[]; // 출제 AI가 일부러 피한 결정적 특징 — 판이 끝나면 결과와 함께 공개(기획서 v3 제안 B)
 }
 
 /** 판이 끝났을 때 발급하는 result 토큰의 내용 — /feedback이 이것만 믿는다. */
@@ -145,7 +146,14 @@ function finish(res: Response, payload: SessionPayload, guess: string, outcome: 
     ...(payload.daily ? { daily: payload.daily } : {}),
     ...(payload.easy ? { easy: true } : {}),
   });
-  res.json({ result: outcome, word: payload.word, category: payload.category, verdict, resultToken });
+  res.json({
+    result: outcome,
+    word: payload.word,
+    category: payload.category,
+    verdict,
+    resultToken,
+    ...(payload.banned?.length ? { banned: payload.banned } : {}),
+  });
 }
 
 export const gameRouter = Router();
@@ -158,7 +166,7 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
   const { word, category, accept } = pickWord(lang, toExcludeArray(body?.exclude));
   try {
     // 미리 만든 세트가 있으면 그걸, 없으면 실시간 생성(bot/hintSource.ts).
-    const { hints, model, promptVersion, setId } = await round1Hints({
+    const { hints, model, promptVersion, setId, banned } = await round1Hints({
       word,
       category,
       lang,
@@ -177,6 +185,7 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
       promptVersion,
       ...(setId ? { setId } : {}),
       ...(easy ? { easy: true } : {}),
+      ...(banned.length ? { banned } : {}),
     });
 
     res.json({ session, round: 1, hints: toPlayerHints(hints), ...(easy ? { category } : {}) });
@@ -211,6 +220,7 @@ gameRouter.post('/daily/start', rateLimit('start', 12, 60_000), async (req: Requ
       : {
           hints: puzzle.round1.map((text) => ({ text, angle: '' })),
           model: PREGEN_PREFIX + puzzle.model,
+          banned: puzzle.banned ?? [],
           promptVersion: puzzle.promptVersion,
         };
 
@@ -226,6 +236,7 @@ gameRouter.post('/daily/start', rateLimit('start', 12, 60_000), async (req: Requ
       promptVersion: r1.promptVersion,
       daily: date,
       ...(easy ? { easy: true } : {}),
+      ...(r1.banned.length ? { banned: r1.banned } : {}),
     });
 
     res.json({

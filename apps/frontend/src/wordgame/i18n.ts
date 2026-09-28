@@ -50,6 +50,7 @@ export const strings = {
     dailyNext: '내일 새 문제가 나와요.',
     easyLabel: '쉬움 모드 — 1라운드부터 카테고리 공개',
     historyLink: '피드백이 어떻게 반영돼 왔는지 보기 →',
+    bannedTitle: 'AI가 일부러 말하지 않은 것',
   },
   en: {
     title: 'Five Clues',
@@ -96,6 +97,7 @@ export const strings = {
     dailyNext: 'A new puzzle comes out tomorrow.',
     easyLabel: 'Easy mode — show the category from round 1',
     historyLink: 'See how feedback has changed the AI (Korean) →',
+    bannedTitle: 'What the AI deliberately left out',
   },
 } as const;
 

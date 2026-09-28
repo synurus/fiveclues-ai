@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validateRound, planNeeds, nextBatch, parseSets, ptDate, MAX_SETS_PER_WORD } from './pregenHints';
 import type { HintSet, HintSetFile } from './hintSets';
+import { cleanBanned } from './hintSource';
 
 const h = (...texts: string[]) => texts.map((text) => ({ text, angle: 'a' }));
 
@@ -46,12 +47,17 @@ test('planNeeds·nextBatch — 없는 단어 먼저, 한국어 먼저, 같은 �
 
 test('parseSets — 제시어 대소문자·띄어쓰기를 무시하고 찾는다', () => {
   const m = parseSets('{"sets":[{"word":"Hot Dog","hints":[1]},{"word":"김 밥","hints":[2]}]}');
-  assert.deepEqual(m.get('hotdog'), [1]);
-  assert.deepEqual(m.get('김밥'), [2]);
+  assert.deepEqual(m.get('hotdog')?.hints, [1]);
+  assert.deepEqual(m.get('김밥')?.hints, [2]);
   assert.equal(parseSets('엉망').size, 0);
 });
 
 test('ptDate — 태평양 시간 날짜(한국 오후 4시 전후로 바뀜, 서머타임)', () => {
   assert.equal(ptDate(new Date('2026-09-28T06:59:00Z')), '2026-09-27'); // KST 15:59
   assert.equal(ptDate(new Date('2026-09-28T07:01:00Z')), '2026-09-28'); // KST 16:01
+});
+
+test('cleanBanned — 짧은 말만, 제시어 자체는 빼고, 최대 4개', () => {
+  assert.deepEqual(cleanBanned(['면', '육수', '냉면', '면', 'x'.repeat(21), '', '겨자', '식초', '얼음'], '냉면'), ['면', '육수', '겨자', '식초']);
+  assert.deepEqual(cleanBanned('면', '냉면'), []);
 });

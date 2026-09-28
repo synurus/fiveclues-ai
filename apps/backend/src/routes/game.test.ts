@@ -199,6 +199,7 @@ test('미리 만든 세트가 있으면 LLM을 안 부르고 그 세트로 두 �
     generatedAt: '2026-09-28T00:00:00Z',
     round1: ['첫째', '둘째', '셋째', '넷째', '다섯째'],
     round2: ['여섯째', '일곱째', '여덟째', '아홉째', '열째'],
+    banned: ['숨긴 특징'],
   });
   fs.writeFileSync(
     path.join(setsDir, 'ko.json'),
@@ -213,6 +214,7 @@ test('미리 만든 세트가 있으면 LLM을 안 부르고 그 세트로 두 �
     assert.deepEqual((g1.data.hints as { text: string }[]).map((h) => h.text), set('').round2);
     const g2 = await post('/game/guess', { session: g1.data.session, guess: '없는단어둘' });
     assert.equal(llmCalls, callsBefore); // LLM 호출 없음
+    assert.deepEqual(g2.data.banned, ['숨긴 특징']); // 판이 끝나면 AI가 피한 특징 공개
 
     await post('/game/feedback', { result: g2.data.resultToken });
     const json = JSON.parse([...issues.at(-1)!.body.matchAll(/```json\n([\s\S]*?)\n```/g)].pop()![1]!) as Record<string, unknown>;
