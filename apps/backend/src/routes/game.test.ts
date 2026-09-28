@@ -5,10 +5,16 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import http from 'node:http';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import type { AddressInfo } from 'node:net';
 
 let failLlm = false;
+let llmCalls = 0;
 const issues: { title: string; body: string }[] = [];
+// 미리 만든 세트 폴더 — 처음엔 비워 둬서 실시간 생성 경로를 보고, 마지막 테스트에서 채운다.
+const setsDir = fs.mkdtempSync(path.join(os.tmpdir(), 'hintsets-'));
 
 const fake = http.createServer((req, res) => {
   let raw = '';
@@ -16,6 +22,7 @@ const fake = http.createServer((req, res) => {
   req.on('end', () => {
     res.setHeader('content-type', 'application/json');
     if (req.url?.endsWith('/chat/completions')) {
+      llmCalls += 1;
       if (failLlm) {
         res.statusCode = 500;
         res.end(JSON.stringify({ error: { message: 'internal detail org_SECRET123' } }));
@@ -53,6 +60,7 @@ before(async () => {
     GITHUB_FEEDBACK_TOKEN: 'test',
     GITHUB_REPO: 'owner/repo',
     GITHUB_API_URL: fakeUrl,
+    HINT_SETS_DIR: setsDir,
   });
   const { app } = require('../app') as typeof import('../app');
   decode = (require('./gameToken') as typeof import('./gameToken')).decodeSession;
@@ -66,10 +74,19 @@ before(async () => {
 after(() => {
   server.close();
   fake.close();
+  fs.rmSync(setsDir, { recursive: true, force: true });
 });
 
-async function post(path: string, body: unknown): Promise<{ status: number; data: Record<string, unknown> }> {
-  const res = await fetch(base + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+async function post(
+  url: string,
+  body: unknown,
+  headers: Record<string, string> = {},
+): Promise<{ status: number; data: Record<string, unknown> }> {
+  const res = await fetch(base + url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', ...headers },
+    body: JSON.stringify(body),
+  });
   return { status: res.status, data: (await res.json()) as Record<string, unknown> };
 }
 
@@ -166,5 +183,47 @@ test('묘사 생성 실패 — 내부 오류 내용은 응답에 안 나간다',
     assert.equal(text.includes('m-ok'), false);
   } finally {
     failLlm = false;
+  }
+});
+
+test('미리 만든 세트가 있으면 LLM을 안 부르고 그 세트로 두 라운드를 진행한다', async () => {
+  resetRateLimits();
+  const { clearHintSetCache } = require('../bot/hintSets') as typeof import('../bot/hintSets');
+  const { allWords } = require('./wordPool') as typeof import('./wordPool');
+  // 모든 한국어 단어에 세트 하나씩(옛 세대 'fixture1') — 어느 단어가 뽑혀도 세트 경로를 탄다.
+  const set = (word: string) => ({
+    id: 'set-' + word,
+    promptVersion: 'fixture1',
+    model: 'test-model',
+    generatedAt: '2026-09-28T00:00:00Z',
+    round1: ['첫째', '둘째', '셋째', '넷째', '다섯째'],
+    round2: ['여섯째', '일곱째', '여덟째', '아홉째', '열째'],
+  });
+  fs.writeFileSync(
+    path.join(setsDir, 'ko.json'),
+    JSON.stringify({ sets: Object.fromEntries(allWords('ko').map((w) => [w.word, [set(w.word)]])) }),
+  );
+  clearHintSetCache();
+  try {
+    const callsBefore = llmCalls;
+    const start = await post('/game/start', { lang: 'ko' });
+    assert.deepEqual((start.data.hints as { text: string }[]).map((h) => h.text), set('').round1);
+    const g1 = await post('/game/guess', { session: start.data.session, guess: '없는단어하나' });
+    assert.deepEqual((g1.data.hints as { text: string }[]).map((h) => h.text), set('').round2);
+    const g2 = await post('/game/guess', { session: g1.data.session, guess: '없는단어둘' });
+    assert.equal(llmCalls, callsBefore); // LLM 호출 없음
+
+    await post('/game/feedback', { result: g2.data.resultToken });
+    const json = JSON.parse([...issues.at(-1)!.body.matchAll(/```json\n([\s\S]*?)\n```/g)].pop()![1]!) as Record<string, unknown>;
+    assert.deepEqual(json.hintModels, ['pregen:test-model', 'pregen:test-model']);
+    assert.equal(json.promptVersion, 'fixture1'); // 지금 세대가 아니라 세트를 만든 세대
+
+    // EEA 등 제한 지역은 세트를 안 쓰고 실시간 생성(제미나이 무료 할당량 약관)
+    const eu = await post('/game/start', { lang: 'ko' }, { 'x-vercel-ip-country': 'DE' });
+    assert.equal((eu.data.hints as { text: string }[])[0]!.text, '묘사 1');
+    assert.equal(llmCalls, callsBefore + 1);
+  } finally {
+    fs.rmSync(path.join(setsDir, 'ko.json'));
+    clearHintSetCache();
   }
 });

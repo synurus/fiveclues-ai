@@ -24,15 +24,14 @@
  */
 
 import { Router, type Request, type Response } from 'express';
-import { generateHints, judgeGuess, type Hint } from '../bot/wordGuessBot';
-import { PROMPT_VERSION } from '../bot/promptVersion';
+import { judgeGuess, type Hint } from '../bot/wordGuessBot';
+import { round1Hints, round2Hints } from '../bot/hintSource';
 import { encodeSession, decodeSession, InvalidSessionError, SessionExpiredError } from './gameToken';
 import { pickWord } from './wordPool';
 import { rateLimit } from './rateLimit';
 import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
 
-// 기획서 v2: "묘사 횟수(5회냐 4회냐)는 밸런스 보고 정할 것 — 미정". 5로 시작한다.
-const HINT_COUNT = 5;
+// 라운드당 묘사 개수(5)는 bot/hintSource.ts의 HINT_COUNT가 정한다.
 
 // 입력 길이 상한 — 추측은 2라운드 프롬프트에 그대로 들어가서(wrongGuess) 길면 토큰을
 // 먹고, 코멘트·닉네임은 공개 이슈에 그대로 실린다. 화면 쪽 제한(maxLength)과 맞춘다.
@@ -55,7 +54,8 @@ interface SessionPayload {
   hints: string[][]; // 라운드별 묘사. 2라운드 생성 시 1라운드 것은 "겹치지 말 것"에 쓴다
   guesses: string[]; // 지난 라운드들의 추측(오답)
   models: string[]; // 라운드별로 묘사를 만든 모델
-  promptVersion: string; // 이 판을 시작할 때의 출제 프롬프트 세대(bot/promptVersion.ts)
+  promptVersion: string; // 이 판 묘사의 출제 프롬프트 세대(미리 만든 세트면 그 세트를 만든 세대)
+  setId?: string; // 미리 만든 세트를 썼으면 그 id — 2라운드가 같은 세트의 round2를 쓴다
 }
 
 /** 판이 끝났을 때 발급하는 result 토큰의 내용 — /feedback이 이것만 믿는다. */
@@ -144,11 +144,10 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
   const lang = toLang(body?.lang);
   const { word, category, accept } = pickWord(lang, toExcludeArray(body?.exclude));
   try {
-    const { hints, model } = await generateHints({
+    // 미리 만든 세트가 있으면 그걸, 없으면 실시간 생성(bot/hintSource.ts).
+    const { hints, model, promptVersion, setId } = await round1Hints({
       word,
       category,
-      round: 1,
-      hintCount: HINT_COUNT,
       lang,
       restrictedRegion: isRestrictedRegion(req),
     });
@@ -162,7 +161,8 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
       hints: [hints.map((h) => h.text)],
       guesses: [],
       models: [model],
-      promptVersion: PROMPT_VERSION[lang],
+      promptVersion,
+      ...(setId ? { setId } : {}),
     });
 
     res.json({ session, round: 1, hints: toPlayerHints(hints) });
@@ -204,21 +204,20 @@ gameRouter.post('/guess', rateLimit('guess', 30, 60_000), async (req: Request, r
 
   try {
     const previousHints: Hint[] = (payload.hints[0] ?? []).map((text) => ({ text, angle: '' }));
-    const { hints: round2Hints, model } = await generateHints({
+    const { hints: r2, model } = await round2Hints({
       word: payload.word,
       category: payload.category,
-      round: 2,
-      hintCount: HINT_COUNT,
-      previousHints,
-      wrongGuess: guess,
       lang: payload.lang,
       restrictedRegion: isRestrictedRegion(req),
+      ...(payload.setId ? { setId: payload.setId } : {}),
+      previousHints,
+      wrongGuess: guess,
     });
 
     const nextSession = encodeSession<SessionPayload>({
       ...payload,
       round: 2,
-      hints: [...payload.hints, round2Hints.map((h) => h.text)],
+      hints: [...payload.hints, r2.map((h) => h.text)],
       guesses: [...payload.guesses, guess],
       models: [...payload.models, model],
     });
@@ -230,7 +229,7 @@ gameRouter.post('/guess', rateLimit('guess', 30, 60_000), async (req: Request, r
       session: nextSession,
       round: 2,
       category: payload.category,
-      hints: toPlayerHints(round2Hints),
+      hints: toPlayerHints(r2),
     });
   } catch (e) {
     // 1라운드 세션은 그대로 유효하다 — 화면은 같은 추측으로 다시 시도할 수 있다.

@@ -1,0 +1,80 @@
+# 묘사 세트 사전 생성 — gemini-3.8-flash로 단어마다 1·2라운드 묘사를 미리 만들어
+# scripts/hintsets/{ko,en}.json에 커밋한다(apps/backend/src/bot/pregenHints.ts, 2026-09-28).
+# 게임은 세트가 있으면 그걸 먼저 쓴다(bot/hintSource.ts).
+#
+# ── 하루 예산(gemini-3.8-flash 무료: 하루 20회, 태평양 시간 자정 = KST 16시(서머타임) 초기화) ──
+#   사전 생성   최대 16회/PT하루 (pregenHints.ts의 PREGEN_DAILY_CALLS, usage.json에 기록)
+#   자가개선    1회/일 + 503 재시도 (self-improve.yml → propose.mjs, KST 08시 목표)
+#   남는 몫     약 3회 — propose 재시도 여유
+# 자동플레이 추측자는 gemini-3.5-flash(별도 한도)라 여기와 안 겹친다.
+#
+# ── 시각 ──
+# 하루 3번, 한 번에 최대 8회(묶음 4개 = 약 32단어). 하루 16회는 보통 앞의 두 번으로 채워지고,
+# 세 번째는 GitHub가 예약 실행을 버리거나(자동플레이에서 실측, self-improve-autoplay.yml 주석)
+# 503으로 못 쓴 몫을 메우는 예비다 — usage.json이 하루 합을 막으니 세 번 다 돌아도 안 넘친다.
+# KST 16~22시(= 미국 밤)로 모은 이유: 2026-09-28 KST 23시(미국 아침)엔 3.8-flash가 몇 분씩
+# 503(과부하)만 냈다. 예약이 몇 시간 밀려도 대부분 미국 밤~새벽 안에 든다.
+#   UTC 07:43 = KST 16:43 (PT 자정 직후)
+#   UTC 10:19 = KST 19:19
+#   UTC 12:53 = KST 21:53 (예비)
+name: Pregenerate Hint Sets
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_calls:
+        description: '이번 실행 최대 호출 수(짝수 — 묶음 하나가 2회). 하루 합은 PREGEN_DAILY_CALLS가 따로 막는다'
+        required: false
+        default: '8'
+  schedule:
+    - cron: '43 7 * * *'
+    - cron: '19 10 * * *'
+    - cron: '53 12 * * *'
+
+permissions:
+  contents: write
+
+# 두 실행이 겹치면 usage.json·세트 파일을 서로 덮어쓴다 — 한 번에 하나씩.
+concurrency:
+  group: pregen-hints
+  cancel-in-progress: false
+
+jobs:
+  pregen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: 의존성 설치 (워크스페이스 전체)
+        run: npm ci
+
+      - name: 묘사 세트 생성
+        env:
+          # 제미나이 키 — propose.mjs와 같은 키(SELFIMPROVE_BOT_API_KEY)를 쓴다.
+          SELFIMPROVE_BOT_API_KEY: ${{ secrets.SELFIMPROVE_BOT_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PREGEN_RUN_CALLS: ${{ github.event.inputs.run_calls || '8' }}
+        run: npm run pregen -w backend
+
+      # 세트·사용량이 바뀌었으면 main에 바로 커밋한다(데이터 파일만 — 코드·프롬프트는 안 건드림).
+      # 그 사이 main이 앞서갔으면 rebase 후 다시 민다.
+      - name: 커밋·푸시
+        run: |
+          git config user.name "hint-pregen-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add scripts/hintsets
+          if git diff --cached --quiet; then
+            echo "바뀐 것 없음"
+            exit 0
+          fi
+          git commit -m "data: 묘사 세트 사전 생성 (자동, pregen-hints.yml)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1

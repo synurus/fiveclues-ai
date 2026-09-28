@@ -28,7 +28,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 import { structuralGuardOk, codeGuardProblem } from './promptGuard.mjs';
-import { reportForPr } from '../metrics.mjs';
+import { reportForPr, promptVersionOf } from '../metrics.mjs';
 
 const DRY = process.env.DRY === '1';
 const REPO = process.env.GITHUB_REPOSITORY ?? '';
@@ -87,7 +87,7 @@ function hintTexts(hints, indexes) {
   return texts.length ? texts.map((t) => `"${t}"`).join(', ') : '없음';
 }
 
-function summarizeForPrompt(items) {
+function summarizeForPrompt(items, currentVersion) {
   const tally = { round1: 0, round2: 0, failed: 0 };
   const lines = items.slice(0, MAX_FEEDBACK_FOR_PROMPT).map(({ number, data }) => {
     tally[data.outcome] = (tally[data.outcome] ?? 0) + 1;
@@ -100,9 +100,12 @@ function summarizeForPrompt(items) {
     // 그 판 묘사를 만든 모델(2026-09-27 출제 모델 체인 — 한도에 걸리면 다음 모델로
     // 넘어가서 판마다 다를 수 있다). 한 모델의 판에서만 보이는 문제는 프롬프트가 아니라
     // 모델 차이일 수 있어 LLM이 구분할 수 있게 적는다. 옛 이슈엔 없다.
-    const models = [...new Set((data.hintModels ?? []).filter(Boolean).map((m) => m.split(':').pop()))];
+    // "pregen:"(미리 만든 세트)은 남긴다 — 그 판 묘사는 지금이 아니라 세트를 만들 때의 프롬프트로 나왔다.
+    const models = [...new Set((data.hintModels ?? []).filter(Boolean).map((m) => m.replace(/^(groq|gemini):/, '')))];
     const modelTag = models.length ? ` 출제:${models.join('/')}` : '';
-    return `- #${number} [${data.outcome}] "${data.word}"(${data.category})${guesses}${modelTag} 결정적:${key} 무쓸모:${useless}${comment}`;
+    // 미리 만든 세트는 만든 때의 프롬프트로 나온 묘사라, 지금 파일과 세대가 다를 수 있다(2026-09-28).
+    const oldTag = data.promptVersion && currentVersion && data.promptVersion !== currentVersion ? ' (이전 프롬프트)' : '';
+    return `- #${number} [${data.outcome}] "${data.word}"(${data.category})${guesses}${modelTag}${oldTag} 결정적:${key} 무쓸모:${useless}${comment}`;
   });
   const tallyLine = `집계: 1라운드에 맞음 ${tally.round1 ?? 0} · 2라운드까지 가서 맞음 ${tally.round2 ?? 0} · 실패(정답 공개) ${tally.failed ?? 0}`;
   return `${tallyLine}\n\n${lines.join('\n')}`;
@@ -194,7 +197,8 @@ function buildSystemPrompt() {
     `맨 위 주석에도 날짜별 변경 이력을 쌓지 마라(이력은 git log에 있다).\n` +
     `9. 피드백 줄의 "출제:"는 그 판 묘사를 만든 모델이다(여러 모델을 한도 순서대로 쓴다). ` +
     `한 모델의 판에서만 보이는 문제는 모델 차이일 수 있으니 그것만으로 규칙을 바꾸지 말고, ` +
-    `특정 모델 이름을 프롬프트에 넣지도 마라.\n\n` +
+    `특정 모델 이름을 프롬프트에 넣지도 마라. "pregen:"은 미리 만들어 둔 묘사이고, ` +
+    `"(이전 프롬프트)"가 붙은 판은 지금 파일이 아니라 예전 버전으로 만든 묘사다 — 지금 파일에서 이미 고쳐진 문제일 수 있다.\n\n` +
     `[출력 형식 — 이 형식을 벗어나면 자동 파싱이 실패해 PR이 안 열린다]\n` +
     `===SUMMARY===\n(무엇을 왜 바꿨는지 한국어 2~3문장. 안 바꿨으면 "변경 없음"과 이유)\n` +
     `===FILE===\n(hintPrompt.ts 의 완성된 전체 내용. 이 마커 사이엔 파일 내용 말고 아무것도 넣지 마라)\n` +
@@ -248,7 +252,7 @@ async function main() {
   }
 
   const currentFile = await readFile(PROMPT_FILE, 'utf8');
-  const feedbackSummary = summarizeForPrompt(feedback);
+  const feedbackSummary = summarizeForPrompt(feedback, promptVersionOf(currentFile));
   const system = buildSystemPrompt();
   const user = buildUserPrompt(currentFile, feedbackSummary);
 

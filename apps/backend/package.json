@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "node --require ts-node/register/transpile-only --test \"src/**/*.test.ts\"",
-    "autoplay": "ts-node --transpileOnly src/bot/autoPlay.ts"
+    "autoplay": "ts-node --transpileOnly src/bot/autoPlay.ts",
+    "pregen": "ts-node --transpileOnly src/bot/pregenHints.ts"
   },
   "keywords": [],
   "author": "",

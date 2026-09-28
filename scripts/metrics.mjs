@@ -190,7 +190,8 @@ export function aggregate(items, timeline, lang = 'ko') {
     }
     const model = data.hintModels?.[0];
     if (model) {
-      const key = `${version} · ${model.split(':').pop()}`;
+      // "groq:"/"gemini:"만 떼고 "pregen:"(미리 만든 세트)은 남긴다 — 실시간 생성과 구분해 보려고.
+      const key = `${version} · ${model.replace(/^(groq|gemini):/, '')}`;
       if (!byModel.has(key)) byModel.set(key, { version, stats: emptyStats() });
       add(byModel.get(key).stats, data);
     }

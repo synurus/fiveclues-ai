@@ -16,7 +16,9 @@
 //   DRY=1 node scripts/self-improve/gather.mjs   네트워크 없이 배선만 확인
 
 import { writeFile, mkdir, appendFile } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { promptVersionOf } from '../metrics.mjs';
 
 const TOKEN = process.env.GH_TOKEN;
 const REPO = process.env.GITHUB_REPOSITORY;
@@ -97,14 +99,14 @@ function promptChangedAt() {
   }
 }
 
-async function closeStale(number, since) {
+async function closeStale(number, reason) {
   const headers = { authorization: `Bearer ${TOKEN}`, accept: 'application/vnd.github+json' };
   const base = `https://api.github.com/repos/${REPO}/issues/${number}`;
   await fetch(`${base}/comments`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      body: `hintPrompt.ts가 이 피드백 이후에 바뀌어서(${since.toISOString()} main 반영) 이전 프롬프트 기준 신호로 보고 반영하지 않고 닫습니다 — scripts/self-improve/gather.mjs`,
+      body: `${reason} 이전 프롬프트 기준 신호로 보고 반영하지 않고 닫습니다 — scripts/self-improve/gather.mjs`,
     }),
   });
   const res = await fetch(base, { method: 'PATCH', headers, body: JSON.stringify({ state: 'closed', state_reason: 'not_planned' }) });
@@ -120,10 +122,27 @@ const parsed = issues
   // 한국어로 본다 — ?? 'ko' 가 그 하위호환이다.
   .filter((x) => (x.data.lang ?? 'ko') === 'ko');
 
+// AI 피드백이 옛 프롬프트 신호인지: 이슈에 세대(promptVersion, 2026-09-28~)가 있으면 지금
+// hintPrompt.ts의 세대와 비교하고, 없으면(옛 이슈) 예전처럼 시각으로 본다. 세대로 비교해야
+// 하는 이유: 게임은 미리 만든 묘사 세트(bot/hintSets.ts)를 쓰는데, 세트는 만든 때의 프롬프트로
+// 나온 것이라 "프롬프트가 바뀐 뒤에 만든 이슈"여도 옛 프롬프트 묘사일 수 있다.
 const since = promptChangedAt();
+let currentVersion = null;
+try {
+  currentVersion = promptVersionOf(readFileSync(PROMPT_FILE, 'utf8'));
+} catch (e) {
+  console.error('지금 프롬프트 세대 계산 실패 — 시각으로만 거른다:', e instanceof Error ? e.message : e);
+}
 const isAi = (x) => x.data.nickname === AI_NICKNAME;
-const stale = since ? parsed.filter((x) => isAi(x) && x.createdAt < since) : [];
-for (const x of stale) await closeStale(x.number, since);
+const staleReason = (x) => {
+  if (!isAi(x)) return null;
+  if (x.data.promptVersion && currentVersion) {
+    return x.data.promptVersion !== currentVersion ? `이 판 묘사는 프롬프트 세대 ${x.data.promptVersion}(지금은 ${currentVersion})로 만든 것이라` : null;
+  }
+  return since && x.createdAt < since ? `hintPrompt.ts가 이 피드백 이후에 바뀌어서(${since.toISOString()} main 반영)` : null;
+};
+const stale = parsed.filter((x) => staleReason(x));
+for (const x of stale) await closeStale(x.number, staleReason(x));
 if (stale.length) console.log(`이전 프롬프트 기준 AI 피드백 ${stale.length}건 닫음: ${stale.map((x) => '#' + x.number).join(' ')}`);
 
 const fresh = parsed.filter((x) => !stale.includes(x));

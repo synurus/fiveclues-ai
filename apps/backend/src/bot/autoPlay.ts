@@ -29,8 +29,8 @@
  *   AUTO_PLAY_GAMES(1회 실행에 플레이할 판 수, 기본 2 — 첫 판 제미나이·둘째 판 Groq,
  *   아래 GUESSER_OVERRIDE 주석 참고),
  *   AUTOPLAY_GUESSER_BOT_BASE_URL/API_KEY/MODEL(2026-09-17 추가 — 제미나이 추측자
- *   비교 실험. 전용 키가 없으면 SELFIMPROVE_BOT_*(propose.mjs 용)를 재사용한다.
- *   아래 GUESSER_OVERRIDE 참고),
+ *   비교 실험. 주소·키가 없으면 SELFIMPROVE_BOT_*(propose.mjs 용)를 재사용하고, 모델은
+ *   기본 gemini-3.5-flash. 아래 GUESSER_OVERRIDE 참고),
  *   AUTOPLAY_GUESSER_MODE(2026-09-18 추가 — GitHub Actions에서 수동 실행
  *   (workflow_dispatch)할 때 추측자를 직접 고를 수 있게. 'auto'(기본, 매 실행 첫
  *   판만 자동 전환) | 'groq'(이번 실행은 전 판을 강제로 Groq) | 'gemini'(전 판을
@@ -40,12 +40,13 @@
  */
 
 import 'dotenv/config';
-import { generateHints, judgeGuess, callBot, parseJson, DEFAULT_MODEL, type Hint, type BotConfig } from './wordGuessBot';
-import { pickWord } from '../routes/wordPool';
+import { judgeGuess, callBot, parseJson, DEFAULT_MODEL, type Hint, type BotConfig } from './wordGuessBot';
+import { round1Hints, round2Hints } from './hintSource';
+import { wordsWithVersion } from './hintSets';
 import { PROMPT_VERSION } from './promptVersion';
+import { pickWord, allWords, type WordEntry } from '../routes/wordPool';
 import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
 
-const HINT_COUNT = 5; // routes/game.ts의 HINT_COUNT와 같은 값이어야 실제 게임과 동일 조건이 된다.
 const GAMES = Math.max(1, Number(process.env.AUTO_PLAY_GAMES ?? '2') || 2);
 const NICKNAME = 'AI자동플레이';
 const MAX_KEY_HINTS = 2; // 소감에서 "결정적" 태그 최대 개수 — reflectFeedback() 주석 참고
@@ -62,18 +63,22 @@ const MAX_KEY_HINTS = 2; // 소감에서 "결정적" 태그 최대 개수 — re
 // 도느냐"가 의도와 무관해졌다 — 01시 슬롯이 04시에 실행되는 식이라 시간대 필터가
 // 사실상 운에 맡겨져 있었다. 그래서 시간 대신 "이 실행의 첫 판"이라는 조건만
 // 남겼다: 예약 실행이 하루 몇 번 도느냐와 무관하게, 실행당 정확히 1판만 제미나이를
-// 쓰므로 예산 계산이 단순해진다 — 실행 횟수 × (판당 콜 2~3개) + propose.mjs 하루
-// 1콜이 제미나이 무료 티어 하루 20건(RPD, 2026-09-17 확인) 밑이면 된다. 지금 스케줄
-// (하루 5번, 2026-09-26)이면 10~15콜 + 1콜 ≈ 11~16콜 — 여유는 4~9콜뿐이라, 실행
-// 횟수를 더 늘리려면 이 계산부터 다시 할 것(503 재시도가 RPD에 잡히는지는 미확인).
+// 쓰므로 예산 계산이 단순해진다 — 실행 횟수 × 판당 콜 2~3개가 그 모델의 제미나이 무료
+// 하루 한도(RPD 20) 밑이면 된다. 지금 스케줄(하루 5번)이면 10~15콜.
+//
+// 추측 모델은 gemini-3.5-flash(2026-09-28 변경, 원래 3.8-flash). 3.8-flash는 하루 20회를
+// 자가개선 분석(propose.mjs)과 묘사 세트 사전 생성(pregenHints.ts)에 몰아 쓰기로 해서 여기서
+// 뺐다 — 무료 한도는 모델별이라 3.5-flash는 따로 20회다. 그래서 SELFIMPROVE_BOT_MODEL
+// (propose.mjs의 3.8-flash)은 더 이상 이어받지 않는다. 3.5-flash는 느리고(평균 30초대)
+// 503이 잦지만 배치라 patient 재시도(callBot)로 기다린다.
 //
 // 전용 시크릿(AUTOPLAY_GUESSER_BOT_*)이 없으면 propose.mjs가 이미 쓰고 있는
-// SELFIMPROVE_BOT_*(제미나이)를 그대로 재사용한다(2026-09-17, 흑기사 선택 — 새
+// SELFIMPROVE_BOT_*(제미나이)의 주소·키를 재사용한다(2026-09-17, 흑기사 선택 — 새
 // 키를 따로 안 만들어도 됨). 어느 것도 없으면 실험이 꺼지고 늘 하던 대로 Groq만
 // 추측한다.
 const GUESSER_BASE_URL = process.env.AUTOPLAY_GUESSER_BOT_BASE_URL || process.env.SELFIMPROVE_BOT_BASE_URL || '';
 const GUESSER_API_KEY = process.env.AUTOPLAY_GUESSER_BOT_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
-const GUESSER_MODEL = process.env.AUTOPLAY_GUESSER_BOT_MODEL || process.env.SELFIMPROVE_BOT_MODEL || 'gemini-3.8-flash';
+const GUESSER_MODEL = process.env.AUTOPLAY_GUESSER_BOT_MODEL || 'gemini-3.5-flash';
 
 const GUESSER_OVERRIDE: BotConfig | undefined = GUESSER_API_KEY
   ? { baseUrl: GUESSER_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai', apiKey: GUESSER_API_KEY, model: GUESSER_MODEL }
@@ -178,14 +183,24 @@ async function reflectFeedback(
   };
 }
 
+// 지금 프롬프트 세대로 미리 만든 세트가 있는 단어 중에서 고른다(2026-09-28) — 그래야 실제
+// 게임과 같은 품질의 묘사로 "지금 프롬프트"를 평가한다. 그런 단어가 아직 없으면(프롬프트가
+// 막 바뀌었을 때) 아무 단어나 뽑아 실시간 생성으로 플레이한다.
+function pickAutoPlayWord(): WordEntry {
+  const fresh = new Set(wordsWithVersion('ko', PROMPT_VERSION.ko));
+  const pool = allWords('ko').filter((w) => fresh.has(w.word));
+  return pool.length ? pool[Math.floor(Math.random() * pool.length)]! : pickWord();
+}
+
 async function playOne(index: number, guesser: BotConfig | undefined): Promise<void> {
-  const { word, category, accept } = pickWord();
+  const { word, category, accept } = pickAutoPlayWord();
   const hintsSoFar: Hint[] = [];
   const guesses: string[] = [];
   const roundHintCounts: number[] = [];
   const hintModels: string[] = []; // 라운드별로 실제 묘사를 만든 모델(출제 모델 체인, 2026-09-27)
 
-  const r1 = await generateHints({ word, category, round: 1, hintCount: HINT_COUNT });
+  // 실제 게임과 같은 경로(미리 만든 세트 → 없으면 실시간 생성, bot/hintSource.ts).
+  const r1 = await round1Hints({ word, category, lang: 'ko', currentOnly: true });
   hintsSoFar.push(...r1.hints);
   roundHintCounts.push(r1.hints.length);
   hintModels.push(r1.model);
@@ -197,11 +212,11 @@ async function playOne(index: number, guesser: BotConfig | undefined): Promise<v
   if (verdict1 === 'exact' || verdict1 === 'loose') {
     outcome = 'round1';
   } else {
-    const r2 = await generateHints({
+    const r2 = await round2Hints({
       word,
       category,
-      round: 2,
-      hintCount: HINT_COUNT,
+      lang: 'ko',
+      ...(r1.setId ? { setId: r1.setId } : {}),
       previousHints: r1.hints,
       wrongGuess: guess1,
     });
@@ -236,7 +251,7 @@ async function playOne(index: number, guesser: BotConfig | undefined): Promise<v
     guesses, // 실제로 뭐라고 찍었는지 — 힌트가 나빴는지 AI가 헛짚었는지 이슈만 보고 구분하려는 것.
     lang: 'ko', // 자동플레이는 한국어 게임만 돈다(2026-09-17 영어 버전 추가 — generateHints도 lang 미지정 시 'ko').
     guesserModel,
-    promptVersion: PROMPT_VERSION.ko, // 출제 프롬프트 세대 — scripts/metrics.mjs가 세대별 성적에 쓴다.
+    promptVersion: r1.promptVersion, // 묘사의 출제 프롬프트 세대(세트면 그 세트를 만든 세대) — metrics.mjs용
   };
   const { issueNumber } = await createFeedbackIssue(payload);
 
