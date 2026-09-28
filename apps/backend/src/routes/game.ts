@@ -13,6 +13,8 @@
  *     - 2라운드에서도 틀리면: 실패 + 정답 공개 + result 토큰
  *   POST /game/feedback → result 토큰 + 결과 화면에서 고른 결정적/무쓸모 힌트(복수
  *     선택 가능) + 코멘트를 GitHub Issue로 쌓는다(자가개선 루프 입력)
+ *   POST /game/daily/start → 오늘의 문제(bot/dailyPuzzle.ts) — 날짜마다 모두 같은 제시어·
+ *     묘사. 이후 /guess·/feedback은 자유 플레이와 같다(세션에 daily 날짜가 실려 있다).
  *
  * result 토큰(2026-09-28): 예전엔 /feedback이 단어·묘사·추측을 클라이언트가 보낸 그대로
  * 믿어서, 누구나 없는 판을 지어내 이슈를 만들 수 있었다 — 그 내용은 자가개선 AI 프롬프트에
@@ -27,7 +29,9 @@ import { Router, type Request, type Response } from 'express';
 import { judgeGuess, type Hint } from '../bot/wordGuessBot';
 import { round1Hints, round2Hints } from '../bot/hintSource';
 import { encodeSession, decodeSession, InvalidSessionError, SessionExpiredError } from './gameToken';
-import { pickWord } from './wordPool';
+import { pickWord, findWord } from './wordPool';
+import { acceptableDate, dailyFor } from '../bot/dailyPuzzle';
+import { PREGEN_PREFIX } from '../bot/hintSource';
 import { rateLimit } from './rateLimit';
 import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
 
@@ -56,6 +60,7 @@ interface SessionPayload {
   models: string[]; // 라운드별로 묘사를 만든 모델
   promptVersion: string; // 이 판 묘사의 출제 프롬프트 세대(미리 만든 세트면 그 세트를 만든 세대)
   setId?: string; // 미리 만든 세트를 썼으면 그 id — 2라운드가 같은 세트의 round2를 쓴다
+  daily?: string; // 오늘의 문제면 그 날짜 — 2라운드도 그날 문제의 round2를 쓴다
 }
 
 /** 판이 끝났을 때 발급하는 result 토큰의 내용 — /feedback이 이것만 믿는다. */
@@ -71,6 +76,7 @@ interface ResultPayload {
   models: string[];
   outcome: Outcome;
   promptVersion: string;
+  daily?: string;
 }
 
 // 이 브라우저에서 몇 번째로 끝낸 판인지(1부터) — 화면이 localStorage로 세서 보낸다
@@ -132,6 +138,7 @@ function finish(res: Response, payload: SessionPayload, guess: string, outcome: 
     models: payload.models,
     outcome,
     promptVersion: payload.promptVersion,
+    ...(payload.daily ? { daily: payload.daily } : {}),
   });
   res.json({ result: outcome, word: payload.word, category: payload.category, verdict, resultToken });
 }
@@ -171,6 +178,53 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
   }
 });
 
+// 오늘의 문제. body.date는 이용자 기기의 날짜(YYYY-MM-DD) — 자정이 각자 시간대에 맞게
+// 넘어가게(Wordle처럼). UTC 오늘 ±1일 밖이면 거부. 그날 문제가 아직 없으면 404.
+gameRouter.post('/daily/start', rateLimit('start', 12, 60_000), async (req: Request, res: Response) => {
+  const body = req.body as { lang?: unknown; date?: unknown } | undefined;
+  const lang = toLang(body?.lang);
+  const date = acceptableDate(body?.date);
+  if (!date) {
+    res.status(400).json({ error: '날짜가 올바르지 않습니다.', code: 'bad_date' });
+    return;
+  }
+  const daily = dailyFor(lang, date);
+  if (!daily) {
+    res.status(404).json({ error: '오늘의 문제가 아직 준비되지 않았습니다.', code: 'daily_unavailable' });
+    return;
+  }
+  const { puzzle, number } = daily;
+  try {
+    // 제한 지역(EEA·스위스·영국)은 같은 제시어로 묘사만 실시간 생성 — 미리 만든 묘사는
+    // 제미나이 무료 할당량으로 만든 것이라(bot/hintSource.ts 주석).
+    const restricted = isRestrictedRegion(req);
+    const r1 = restricted
+      ? await round1Hints({ word: puzzle.word, category: puzzle.category, lang, restrictedRegion: true })
+      : {
+          hints: puzzle.round1.map((text) => ({ text, angle: '' })),
+          model: PREGEN_PREFIX + puzzle.model,
+          promptVersion: puzzle.promptVersion,
+        };
+
+    const session = encodeSession<SessionPayload>({
+      word: puzzle.word,
+      category: puzzle.category,
+      accept: findWord(lang, puzzle.word)?.accept ?? [],
+      round: 1,
+      lang,
+      hints: [r1.hints.map((h) => h.text)],
+      guesses: [],
+      models: [r1.model],
+      promptVersion: r1.promptVersion,
+      daily: date,
+    });
+
+    res.json({ session, round: 1, hints: toPlayerHints(r1.hints), daily: { date, number } });
+  } catch (e) {
+    hintFailed(res, e);
+  }
+});
+
 gameRouter.post('/guess', rateLimit('guess', 30, 60_000), async (req: Request, res: Response) => {
   const { session } = req.body as { session?: unknown };
   const guess = cleanText((req.body as { guess?: unknown }).guess, Infinity);
@@ -204,15 +258,21 @@ gameRouter.post('/guess', rateLimit('guess', 30, 60_000), async (req: Request, r
 
   try {
     const previousHints: Hint[] = (payload.hints[0] ?? []).map((text) => ({ text, angle: '' }));
-    const { hints: r2, model } = await round2Hints({
-      word: payload.word,
-      category: payload.category,
-      lang: payload.lang,
-      restrictedRegion: isRestrictedRegion(req),
-      ...(payload.setId ? { setId: payload.setId } : {}),
-      previousHints,
-      wrongGuess: guess,
-    });
+    const restricted = isRestrictedRegion(req);
+    // 오늘의 문제는 그날 정해 둔 2라운드를 쓴다(제한 지역은 1라운드처럼 실시간 생성).
+    const daily = payload.daily && !restricted ? dailyFor(payload.lang, payload.daily) : null;
+    const { hints: r2, model } =
+      daily && daily.puzzle.word === payload.word
+        ? { hints: daily.puzzle.round2.map((text) => ({ text, angle: '' })), model: PREGEN_PREFIX + daily.puzzle.model }
+        : await round2Hints({
+            word: payload.word,
+            category: payload.category,
+            lang: payload.lang,
+            restrictedRegion: restricted,
+            ...(payload.setId ? { setId: payload.setId } : {}),
+            previousHints,
+            wrongGuess: guess,
+          });
 
     const nextSession = encodeSession<SessionPayload>({
       ...payload,
@@ -272,6 +332,7 @@ gameRouter.post('/feedback', rateLimit('feedback', 5, 60_000), async (req: Reque
       lang: game.lang,
       // 배포 직전에 시작한 판의 토큰엔 없을 수 있다 — 그땐 metrics.mjs가 이슈 시각으로 세대를 정한다.
       ...(game.promptVersion ? { promptVersion: game.promptVersion } : {}),
+      ...(game.daily ? { daily: game.daily } : {}),
       ...(playCount ? { playCount } : {}),
     });
     res.json({ ok: true, issueNumber });

@@ -35,6 +35,11 @@ export function allPoolTerms(): string[] {
   return [...POOL_KO, ...POOL_EN].flatMap((w) => [w.word, ...(w.accept ?? [])]);
 }
 
+/** 풀에서 제시어 하나를 찾는다(오늘의 문제가 동의어 accept를 풀에서 다시 읽으려고). */
+export function findWord(lang: Lang, word: string): WordEntry | undefined {
+  return (lang === 'en' ? POOL_EN : POOL_KO).find((w) => w.word === word);
+}
+
 /** 한 언어의 단어 풀 전체(복사본). */
 export function allWords(lang: Lang = 'ko'): WordEntry[] {
   return [...(lang === 'en' ? POOL_EN : POOL_KO)];

@@ -1,6 +1,8 @@
 # 묘사 세트 사전 생성 — gemini-3.8-flash로 단어마다 1·2라운드 묘사를 미리 만들어
 # scripts/hintsets/{ko,en}.json에 커밋한다(apps/backend/src/bot/pregenHints.ts, 2026-09-28).
-# 게임은 세트가 있으면 그걸 먼저 쓴다(bot/hintSource.ts).
+# 게임은 세트가 있으면 그걸 먼저 쓴다(bot/hintSource.ts). 실행 끝에 오늘의 문제 일정
+# (scripts/daily/{ko,en}.json, bot/dailyPuzzle.ts)도 7일 앞까지 채워 같이 커밋한다 — 예산이
+# 바닥나 생성을 건너뛴 실행에서도 일정은 채운다.
 #
 # ── 하루 예산(gemini-3.8-flash 무료: 하루 20회, 태평양 시간 자정 = KST 16시(서머타임) 초기화) ──
 #   사전 생성   최대 16회/PT하루 (pregenHints.ts의 PREGEN_DAILY_CALLS, usage.json에 기록)
@@ -67,7 +69,7 @@ jobs:
         run: |
           git config user.name "hint-pregen-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add scripts/hintsets
+          git add scripts/hintsets scripts/daily
           if git diff --cached --quiet; then
             echo "바뀐 것 없음"
             exit 0

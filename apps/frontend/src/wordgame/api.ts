@@ -72,6 +72,15 @@ export function startGame(lang: Lang, exclude: string[] = []): Promise<StartResp
   return postJson<StartResponse>('/game/start', { lang, exclude });
 }
 
+// 오늘의 문제(2026-09-29). date는 이 기기의 날짜 — 서버가 UTC ±1일 안인지 본다.
+// 그날 문제가 없으면 ApiError(code 'daily_unavailable').
+export interface DailyStartResponse extends StartResponse {
+  daily: { date: string; number: number };
+}
+export function startDaily(lang: Lang, date: string): Promise<DailyStartResponse> {
+  return postJson<DailyStartResponse>('/game/daily/start', { lang, date });
+}
+
 export function submitGuess(session: string, guess: string): Promise<GuessResponse> {
   return postJson<GuessResponse>('/game/guess', { session, guess });
 }

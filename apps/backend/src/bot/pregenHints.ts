@@ -38,6 +38,7 @@ import { PROMPT_VERSION } from './promptVersion';
 import { HINT_COUNT } from './hintSource';
 import { hintSetsDir, hintSetsPath, readHintSetFile, type HintSet, type HintSetFile, type Lang } from './hintSets';
 import type { WordEntry } from '../routes/wordPool';
+import { addDays, readDailyFile, scheduleDaily, utcToday, writeDailyFile } from './dailyPuzzle';
 
 const MODEL = process.env.PREGEN_MODEL || 'gemini-3.8-flash';
 const API_KEY = process.env.GEMINI_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
@@ -320,6 +321,18 @@ async function main(): Promise<void> {
       if (failures >= 2) break; // 연속 실패면 모델 쪽 문제 — 예산을 더 태우지 않는다
     }
   }
+  // 오늘의 문제 일정(bot/dailyPuzzle.ts) — 세트가 생긴 단어로 어제~7일 뒤까지 빈 날짜를 채운다
+  // (어제부터인 건 UTC보다 늦은 시간대에선 아직 "어제"가 오늘이라서). 이미 정한 날짜는 안 바꾼다.
+  for (const lang of DRY ? [] : (['ko', 'en'] as const)) {
+    const daily = readDailyFile(lang);
+    const categoryOf = (word: string): string | undefined => pools[lang].find((w) => w.word === word)?.category;
+    const added = scheduleDaily(daily, files[lang], categoryOf, PROMPT_VERSION[lang], addDays(utcToday(), -1), 9);
+    if (added.length) {
+      writeDailyFile(lang, daily);
+      console.log(`[pregen] 오늘의 문제(${lang}) 일정 추가: ${added.join(', ')}`);
+    }
+  }
+
   const covered = (lang: Lang): number => pools[lang].filter((w) => files[lang].sets[w.word]?.length).length;
   console.log(
     `[pregen] 끝 — PT 하루 사용 ${usage.calls}/${DAILY_CALLS}, 이번 실행 ${run.calls}회. ` +

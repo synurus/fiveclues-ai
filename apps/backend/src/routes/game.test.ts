@@ -61,6 +61,7 @@ before(async () => {
     GITHUB_REPO: 'owner/repo',
     GITHUB_API_URL: fakeUrl,
     HINT_SETS_DIR: setsDir,
+    DAILY_DIR: setsDir,
   });
   const { app } = require('../app') as typeof import('../app');
   decode = (require('./gameToken') as typeof import('./gameToken')).decodeSession;
@@ -225,5 +226,53 @@ test('미리 만든 세트가 있으면 LLM을 안 부르고 그 세트로 두 �
   } finally {
     fs.rmSync(path.join(setsDir, 'ko.json'));
     clearHintSetCache();
+  }
+});
+
+test('오늘의 문제 — 정해 둔 묘사로 두 라운드, 번호·날짜가 피드백까지 간다', async () => {
+  resetRateLimits();
+  const { clearDailyCache, dailyNumber, addDays, DAILY_EPOCH } = require('../bot/dailyPuzzle') as typeof import('../bot/dailyPuzzle');
+  // 1번 문제 날짜 전이면 내일(±1일 허용 범위) — 테스트가 실행 날짜에 따라 갈리지 않게.
+  const utc = new Date().toISOString().slice(0, 10);
+  const today = utc < DAILY_EPOCH ? addDays(utc, 1) : utc;
+  const none = await post('/game/daily/start', { lang: 'ko', date: today });
+  assert.equal(none.status, 404);
+  assert.equal(none.data.code, 'daily_unavailable');
+  assert.equal((await post('/game/daily/start', { lang: 'ko', date: '1999-01-01' })).data.code, 'bad_date');
+
+  fs.writeFileSync(
+    path.join(setsDir, 'ko.json'),
+    JSON.stringify({
+      [today]: {
+        word: '경찰관',
+        category: '직업',
+        promptVersion: 'daily1',
+        model: 'test-model',
+        round1: ['하나', '둘', '셋', '넷', '다섯'],
+        round2: ['여섯', '일곱', '여덟', '아홉', '열'],
+      },
+    }),
+  );
+  clearDailyCache();
+  try {
+    const callsBefore = llmCalls;
+    const start = await post('/game/daily/start', { lang: 'ko', date: today });
+    assert.equal(start.status, 200);
+    assert.deepEqual(start.data.daily, { date: today, number: dailyNumber(today) });
+    assert.deepEqual((start.data.hints as { text: string }[]).map((h) => h.text), ['하나', '둘', '셋', '넷', '다섯']);
+    const g1 = await post('/game/guess', { session: start.data.session, guess: '소방관' });
+    assert.deepEqual((g1.data.hints as { text: string }[]).map((h) => h.text), ['여섯', '일곱', '여덟', '아홉', '열']);
+    // 풀의 동의어(accept)도 정답 — "경찰"은 경찰관의 accept
+    const g2 = await post('/game/guess', { session: g1.data.session, guess: '경찰' });
+    assert.equal(g2.data.result, 'round2');
+    assert.equal(llmCalls, callsBefore);
+
+    await post('/game/feedback', { result: g2.data.resultToken });
+    const json = JSON.parse([...issues.at(-1)!.body.matchAll(/```json\n([\s\S]*?)\n```/g)].pop()![1]!) as Record<string, unknown>;
+    assert.equal(json.daily, today);
+    assert.equal(json.promptVersion, 'daily1');
+  } finally {
+    fs.rmSync(path.join(setsDir, 'ko.json'));
+    clearDailyCache();
   }
 });

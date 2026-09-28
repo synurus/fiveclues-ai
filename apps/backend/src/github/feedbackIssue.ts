@@ -55,6 +55,8 @@ export interface FeedbackPayload {
   /** 사람 피드백만: 이 브라우저에서 몇 번째로 끝낸 판인지(1부터, 클라이언트가 센 값).
    *  기획서 v2 §8 — 반복 플레이 학습 효과를 세대 비교에서 떼어 보려고. */
   playCount?: number;
+  /** 오늘의 문제였으면 그 날짜(YYYY-MM-DD, 2026-09-29~) — 모두 같은 묘사를 푼 판이라 정답률을 깨끗하게 잴 수 있다. */
+  daily?: string;
 }
 
 // hints를 roundHintCounts 길이대로 잘라 라운드별 배열로 되돌린다. roundHintCounts가
@@ -126,6 +128,7 @@ export async function createFeedbackIssue(data: FeedbackPayload): Promise<{ issu
     (data.guesserModel ? ` · 추측자: ${data.guesserModel}` : '') +
     (data.promptVersion ? ` · 프롬프트 ${data.promptVersion}` : '') +
     (data.playCount ? ` · ${data.playCount}번째 판` : '') +
+    (data.daily ? ` · 오늘의 문제 ${data.daily}` : '') +
     `\n\n${buildHintLog(data)}` +
     (keyText.length ? `\n\n결정적: ${keyText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
     (uselessText.length ? `\n무쓸모: ${uselessText.map((t) => `"${safeMd(t)}"`).join(', ')}` : '') +
