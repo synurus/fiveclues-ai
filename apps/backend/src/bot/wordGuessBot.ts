@@ -450,9 +450,14 @@ function toProvider(spec: string): HintProvider | null {
 //  5) groq qwen3.8-27b       6/6, 0.8초 — 이상한 문장이 많고 분당 출력 1,000토큰 한도
 // 제외: gemini-3.5-flash(품질 최고지만 평균 32초·과부하 잦음), gemini-3.7-flash·
 // gemma-4-31b(과부하·내부 오류로 0/6), gemini-3.8-flash(자가개선 전용, 하루 20회).
+// 2026-09-30 3.5를 다시 1순위로: 3.1은 구형(deprecated, artificialanalysis.ai)이고 503이 잦아졌다. 3.5는
+// 지능 지수 22 vs 16, 실측 2.0초 vs 3.5초, 이날 시험 약 25회 무실패(멈추면 PER_MODEL_TIMEOUT_MS 뒤 3.1로).
+// "3.5 묘사가 더 쉽다"는 사람 판 1R 56% vs 40%(각 ~10판)였지만, 같은 10단어를 두 모델로 쓰고 추측
+// 봇에 맞혀 보니 둘 다 7/10 — 차이가 표본 오차 안이다. 보완 지시문 세 가지는 효과가 없어 안 넣었다
+// (CLAUDE.md). 이슈의 hintModels로 계속 볼 것.
 const DEFAULT_HINT_CHAIN = [
-  'gemini:gemini-3.1-flash-lite',
   'gemini:gemini-3.5-flash-lite',
+  'gemini:gemini-3.1-flash-lite',
   `groq:${MODEL}`,
   'groq:openai/gpt-oss-20b',
   'groq:qwen/qwen3.8-27b',
