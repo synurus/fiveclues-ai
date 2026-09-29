@@ -18,7 +18,7 @@ import { NAME_MAX_LENGTH } from './constants';
 import { startGame, startDaily, listDaily, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
 import { recordFinishedGame } from './playCount';
-import { recordGame } from './history';
+import { recentWords, recordGame } from './history';
 import { ArchiveView } from './ArchiveView';
 import { StatsView } from './StatsView';
 import { localDate, getDaily, saveDaily, solvedStreak, shareText, shareResult, type DailyRecord } from './daily';
@@ -145,12 +145,6 @@ export function WordGuessGame() {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // 이번 브라우저 세션에서 이미 나온 단어들 — 반복 출제 방지(2026-09-19, 이슈
-  // #99/#104가 같은 날 둘 다 "주전자"였던 것 대응). 페이지를 새로고침하면 초기화된다
-  // — 그 이상 오래 들고 있을 이유가 없다(서버도 DB도 상태를 안 갖는 구조에 맞춤).
-  // 최근 30개만 유지 — 영어판처럼 풀이 작을 때 무한정 쌓이면 오히려 뽑을 게 없어진다.
-  const [seenWords, setSeenWords] = useState<string[]>([]);
-
   const [keyHints, setKeyHints] = useState<Set<number>>(new Set());
   const [uselessHints, setUselessHints] = useState<Set<number>>(new Set());
   const [feedbackText, setFeedbackText] = useState('');
@@ -209,7 +203,8 @@ export function WordGuessGame() {
   const handleStart = async () => {
     setStage({ kind: 'loading' });
     try {
-      const res = await startGame(lang, seenWords, easy);
+      // 반복 출제 방지 — 이 브라우저의 내 기록에서 최근 제시어(history.ts recentWords). 새로고침해도 유지된다.
+      const res = await startGame(lang, recentWords(lang), easy);
       beginPlaying(res.session, res.hints.map((h) => h.text), undefined, res.category);
     } catch (e) {
       setStage({ kind: 'error', message: errorText(e, s) });
@@ -279,6 +274,7 @@ export function WordGuessGame() {
           category: res.category,
           ...(stage.easy ? { easy: true } : {}),
           ...(stage.daily ? { number: stage.daily.number } : {}),
+          word: res.word,
         });
         setStage({
           kind: 'result',
@@ -292,7 +288,6 @@ export function WordGuessGame() {
           ...(stage.easy ? { easy: true } : {}),
           ...(res.banned?.length ? { banned: res.banned } : {}),
         });
-        setSeenWords((prev) => [...prev, res.word].slice(-30));
       }
     } catch (e) {
       // 세션이 만료·손상됐으면 이 판은 더 못 이어간다 — 새 게임 안내로. 그 밖(묘사 생성

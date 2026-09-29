@@ -14,6 +14,7 @@ export interface GameRecord {
   category: string;
   easy?: boolean;
   number?: number; // 오늘의 문제·지난 문제 번호
+  word?: string; // 제시어 — 반복 출제 방지용(recentWords). 2026-09-29 이전 기록엔 없다.
 }
 
 const STORAGE_KEY = 'fiveclues-history';
@@ -38,6 +39,21 @@ export function recordGame(record: GameRecord): void {
 
 export function loadHistory(lang: Lang): GameRecord[] {
   return load().filter((r) => r.lang === lang);
+}
+
+// 반복 출제 방지(2026-09-29) — 새 판을 시작할 때 서버에 "이건 빼 줘"로 넘기는 최근 제시어. 예전엔 화면
+// 메모리에만 들고 있어서 새로고침하면 초기화됐다(이슈 #93 "방금 같은 제시어를 풀어서 쉽게 맞혔다").
+// 최근 것부터, 중복 없이 — 서버(game.ts toExcludeArray)가 앞에서 100개만 받는다. 영어 풀(474개)도
+// 100개를 빼면 충분히 남고, 풀을 다 덮으면 서버가 무시하고 전체에서 뽑는다(wordPool.ts pickWord).
+export const RECENT_WORDS = 100;
+
+export function recentWords(lang: Lang, max = RECENT_WORDS): string[] {
+  const out: string[] = [];
+  for (const r of loadHistory(lang).reverse()) {
+    if (r.word && !out.includes(r.word)) out.push(r.word);
+    if (out.length >= max) break;
+  }
+  return out;
 }
 
 /** 오늘의 문제·지난 문제 번호 → 가장 최근 결과(지난 문제 목록에 표시). */

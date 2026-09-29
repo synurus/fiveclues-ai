@@ -107,7 +107,7 @@ const toIndexArray = (v: unknown, length: number): number[] =>
     ? [...new Set(v.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 0 && n < length))]
     : [];
 
-// body.exclude — 클라이언트가 이번 세션에서 이미 본 단어들. wordPool.ts의 pickWord 참고.
+// body.exclude — 클라이언트가 최근에 본 단어들(내 기록 최근 100개, 최근 것부터). wordPool.ts의 pickWord 참고.
 const toExcludeArray = (v: unknown): string[] =>
   Array.isArray(v) ? v.filter((s): s is string => typeof s === 'string').slice(0, 100) : [];
 

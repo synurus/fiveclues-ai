@@ -68,7 +68,7 @@ async function postJson<T>(path: string, body?: unknown): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-// exclude: 이번 브라우저 세션에서 이미 나온 단어들 — 반복 출제 방지(2026-09-19).
+// exclude: 이 브라우저에서 최근에 나온 단어들(history.ts recentWords) — 반복 출제 방지(2026-09-19).
 // 서버가 "최근 단어"를 기억할 상태가 없어서(DB 없음, 서버리스) 클라이언트가 들고
 // 다니다 매번 같이 보낸다.
 // easy: 쉬움 모드(1라운드부터 카테고리 공개, 2026-09-29).
