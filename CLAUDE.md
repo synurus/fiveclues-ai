@@ -310,4 +310,13 @@
   `en/privacy.html`·소개 페이지의 "사용한 기술"도 같이 고칠 것.
 - **이 머신엔 `gh` CLI가 설치돼 있지 않다.** GitHub 이슈/PR은 WebFetch로 개별 페이지
   (`/issues/N`, `/pull/N`)와 목록 페이지(`/issues`, `/pulls?state=...`) 둘 다
-  문제없이 읽힌다.
+  문제없이 읽힌다(공개 API `api.github.com/repos/synurus/fiveclues-ai/...`도 인증 없이 읽힘).
+  **워크플로 수동 실행**은 `apps/backend/.env`의 `GITHUB_ACTIONS_TOKEN`(로컬 전용 fine-grained,
+  Actions 읽기·쓰기만, 2026-09-29 발급)으로 `POST /actions/workflows/<파일>/dispatches`
+  (`{"ref":"main","inputs":{...}}`, 성공 204). 값은 절대 출력하지 말 것.
+- **운영자가 혼자 운영할 때 보는 문서는 `docs/운영가이드.md`**(2026-09-29) — 수동 실행·검토 이슈·
+  자가개선 PR 판단·토큰 만료·장애 대응. 운영 절차를 바꾸면 여기도 고칠 것.
+- **Pregenerate Hint Sets 예약 실행은 등록(9/28) 뒤 2026-09-29 밤까지 한 번도 안 돌았다**(수동
+  실행은 정상). 오늘의 문제 일정은 이 워크플로가 돌 때만 채워지니, 계속 안 돌면 일정이 끊긴다.
+- **반복 출제 방지는 브라우저의 내 기록(`history.ts`의 `recentWords`, 최근 100개)에서 온다**
+  (2026-09-29 — 예전 세션 메모리 30개는 새로고침하면 초기화됐다). 이 변경 전 기록엔 제시어가 없다.
