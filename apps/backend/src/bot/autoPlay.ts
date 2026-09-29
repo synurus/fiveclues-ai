@@ -39,7 +39,7 @@
  *   로컬 테스트: npm run autoplay -w backend
  */
 
-import 'dotenv/config';
+import '../env';
 import { judgeGuess, callBot, parseJson, DEFAULT_MODEL, type Hint, type BotConfig } from './wordGuessBot';
 import { round1Hints, round2Hints } from './hintSource';
 import { wordsWithVersion } from './hintSets';

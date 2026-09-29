@@ -17,7 +17,7 @@
   `git pull --rebase` 후 다시 푸시(자동화 봇이 데이터 파일을 수시로 커밋한다).
   **하지 않는 것:** 강제 푸시, PR 병합(자가개선 PR 포함 — 병합은 운영자가 한다), 로컬 전용 브랜치
   `main-old-team-history` 푸시.
-- **비밀값은 출력·커밋하지 않는다.** `.env`, `apps/backend/.env`(깃에 안 올라감)의 값을 화면에 찍지
+- **비밀값은 출력·커밋하지 않는다.** 저장소 맨 위 `.env`(깃에 안 올라감, 2026-09-30부터 이 파일 하나 — `apps/backend/src/env.ts`가 읽는다)의 값을 화면에 찍지
   말고, 키 이름만 다룬다. 저장소 밖 키 메모 파일도 열지 않는다.
 - **출제 지시문(`apps/backend/src/bot/hintPrompt.ts`, `hintPromptEn.ts`)을 고칠 때**
   - 토큰 사용량을 실측해 수정 전후를 절대 수치와 %로 보고한다(`max_tokens` 5짜리 호출 1번씩이면 충분).
@@ -41,6 +41,6 @@ npm run lint -w frontend && npm run build -w frontend
 ## GitHub
 - 이 PC엔 `gh` CLI가 없다. 이슈·PR·실행 기록은 공개 API(`https://api.github.com/repos/synurus/fiveclues-ai/...`)로
   인증 없이 읽는다.
-- 워크플로 수동 실행은 `apps/backend/.env`의 `GITHUB_ACTIONS_TOKEN`(Actions 읽기·쓰기만 있는 로컬 전용
+- 워크플로 수동 실행은 맨 위 `.env`의 `GITHUB_ACTIONS_TOKEN`(Actions 읽기·쓰기만 있는 로컬 전용
   토큰)으로 `POST /repos/synurus/fiveclues-ai/actions/workflows/<파일명>/dispatches`
   (`{"ref":"main","inputs":{...}}`, 성공하면 204). 또는 운영자가 Actions 화면의 Run workflow 버튼으로.

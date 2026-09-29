@@ -322,7 +322,7 @@
 - **이 머신엔 `gh` CLI가 설치돼 있지 않다.** GitHub 이슈/PR은 WebFetch로 개별 페이지
   (`/issues/N`, `/pull/N`)와 목록 페이지(`/issues`, `/pulls?state=...`) 둘 다
   문제없이 읽힌다(공개 API `api.github.com/repos/synurus/fiveclues-ai/...`도 인증 없이 읽힘).
-  **워크플로 수동 실행**은 `apps/backend/.env`의 `GITHUB_ACTIONS_TOKEN`(로컬 전용 fine-grained,
+  **워크플로 수동 실행**은 저장소 맨 위 `.env`의 `GITHUB_ACTIONS_TOKEN`(로컬 전용 fine-grained,
   Actions 읽기·쓰기만, 2026-09-29 발급)으로 `POST /actions/workflows/<파일>/dispatches`
   (`{"ref":"main","inputs":{...}}`, 성공 204). 값은 절대 출력하지 말 것.
 - **운영자가 혼자 운영할 때 보는 문서는 `docs/운영가이드.md`**(2026-09-29) — 수동 실행·검토 이슈·

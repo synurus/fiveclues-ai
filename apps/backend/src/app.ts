@@ -7,7 +7,7 @@
  * 하나를 더 끌어올 이유가 없어서다.
  */
 
-import 'dotenv/config';
+import './env';
 import express, { type NextFunction, type Request, type Response } from 'express';
 import { gameRouter } from './routes/game';
 

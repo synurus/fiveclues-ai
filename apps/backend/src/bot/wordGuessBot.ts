@@ -24,7 +24,7 @@
  *   HINT_MODEL_CHAIN — 출제 모델 순서를 코드 수정 없이 바꿀 때(아래 "출제 모델 체인").
  */
 
-import 'dotenv/config';
+import '../env';
 import { hintSystem as hintSystemKo } from './hintPrompt';
 import { hintSystem as hintSystemEn } from './hintPromptEn';
 import { allPoolTerms } from '../routes/wordPool';

@@ -24,7 +24,7 @@ function loadKey(): Buffer {
   if (!secret) {
     throw new Error(
       '환경변수 GAME_TOKEN_SECRET 이(가) 없습니다.\n' +
-        '  openssl rand -base64 32   로 만든 값을 apps/backend/.env 에 넣으세요.',
+        '  openssl rand -base64 32   로 만든 값을 저장소 맨 위 .env 에 넣으세요.',
     );
   }
   const key = Buffer.from(secret, 'base64');

@@ -35,7 +35,7 @@
  * 같은 문장이면 그 단어는 버리고 다음 실행에 다시 만든다.
  */
 
-import 'dotenv/config';
+import '../env';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
