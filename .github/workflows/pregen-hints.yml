@@ -20,6 +20,11 @@
 #   UTC 07:43 = KST 16:43 (PT 자정 직후)
 #   UTC 10:19 = KST 19:19
 #   UTC 12:53 = KST 21:53 (예비)
+# ── 예비 트리거(2026-09-29) ── 위 예약 실행이 등록(9/28) 뒤 하루 넘게 한 번도 안 돌았다(수동 실행은
+# 정상). 오늘의 문제 일정은 이 워크플로가 돌 때만 채워지므로, 하루 5번 꾸준히 도는 자동플레이가
+# 끝날 때마다 이어서도 돈다(workflow_run). 하루 합은 usage.json이 막아서 늘어난 실행 수만큼 호출이
+# 늘지는 않는다 — 예산이 찬 뒤의 실행은 일정만 채우고 끝난다. 미국 낮에 걸리면 3.8-flash가 503일
+# 가능성이 높지만, 그땐 대체 모델로 넘어간다.
 name: Pregenerate Hint Sets
 
 on:
@@ -33,6 +38,9 @@ on:
     - cron: '43 7 * * *'
     - cron: '19 10 * * *'
     - cron: '53 12 * * *'
+  workflow_run:
+    workflows: ['Self-Improve Auto-Play']
+    types: [completed]
 
 permissions:
   contents: write
