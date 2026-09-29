@@ -39,7 +39,7 @@ ${round === 2 ? `This is round 2. The player missed round 1, so **narrow it one 
   texture, taste, feel — broad uses, common hand motions) are fine; only ban what
   narrows it to one answer by itself. (A fried shrimp's golden color or plump shape is fine.)
 - Category or definition. The category name ("${category}") and its synonyms.
-- Something only you personally experienced. A widely shared impression is fine.
+- Something only you personally experienced. A widely shared impression is fine, but an association that alone brings the answer to mind (at the movies → popcorn) is a decisive trait — put it in banned.
 
 [VOICE]
 - Don't always write full sentences. Trailing off or dropping a word is fine, but never cut a word in half.
