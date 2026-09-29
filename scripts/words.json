@@ -39,30 +39,50 @@
   },
   {
     "word": "김치찌개",
-    "category": "음식"
+    "category": "음식",
+    "accept": [
+      "김치찌게"
+    ]
   },
   {
     "word": "된장찌개",
-    "category": "음식"
+    "category": "음식",
+    "accept": [
+      "된장찌게",
+      "토장찌개",
+      "된장뚝배기"
+    ]
   },
   {
     "word": "부대찌개",
-    "category": "음식"
+    "category": "음식",
+    "accept": [
+      "부대찌게",
+      "존슨탕"
+    ]
   },
   {
     "word": "짜장면",
     "category": "음식",
     "accept": [
-      "자장면"
+      "자장면",
+      "자장"
     ]
   },
   {
     "word": "짬뽕",
-    "category": "음식"
+    "category": "음식",
+    "accept": [
+      "초마면"
+    ]
   },
   {
     "word": "탕수육",
-    "category": "음식"
+    "category": "음식",
+    "accept": [
+      "탕수고기",
+      "탕추러우"
+    ]
   },
   {
     "word": "마라탕",
