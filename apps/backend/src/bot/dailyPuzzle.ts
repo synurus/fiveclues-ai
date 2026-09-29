@@ -73,13 +73,34 @@ export function acceptableDate(date: unknown, now = new Date()): string | null {
   return diff >= -1 && diff <= 1 ? date : null;
 }
 
-export function dailyFor(lang: Lang, date: string): { puzzle: DailyPuzzle; number: number } | null {
+/**
+ * 지난 문제(아카이브, 2026-09-29) — 1번 문제 날짜부터 "세계 어딘가에서 오늘일 수 있는 마지막 날"
+ * (UTC 내일)까지만 받는다. 그 뒤(아직 아무도 못 푼 날)는 거부해 미리 풀 수 없게 한다.
+ */
+export function archiveDate(date: unknown, now = new Date()): string | null {
+  if (!isDate(date)) return null;
+  return dailyNumber(date) >= 1 && toDay(date) <= toDay(utcToday(now)) + 1 ? date : null;
+}
+
+function loaded(lang: Lang): DailyFile {
   let file = cache.get(lang);
   if (!file) {
     file = readDailyFile(lang);
     cache.set(lang, file);
   }
-  const puzzle = file[date];
+  return file;
+}
+
+/** 풀 수 있는 문제 목록(날짜·번호만, 최신 먼저) — 정답은 안 담는다. 화면이 자기 날짜보다 앞선 것만 보여 준다. */
+export function listDaily(lang: Lang, now = new Date()): { date: string; number: number }[] {
+  return Object.keys(loaded(lang))
+    .filter((d) => archiveDate(d, now))
+    .sort((a, b) => b.localeCompare(a))
+    .map((date) => ({ date, number: dailyNumber(date) }));
+}
+
+export function dailyFor(lang: Lang, date: string): { puzzle: DailyPuzzle; number: number } | null {
+  const puzzle = loaded(lang)[date];
   return puzzle && dailyNumber(date) >= 1 ? { puzzle, number: dailyNumber(date) } : null;
 }
 

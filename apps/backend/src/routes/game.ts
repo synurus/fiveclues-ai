@@ -15,6 +15,8 @@
  *     선택 가능) + 코멘트를 GitHub Issue로 쌓는다(자가개선 루프 입력)
  *   POST /game/daily/start → 오늘의 문제(bot/dailyPuzzle.ts) — 날짜마다 모두 같은 제시어·
  *     묘사. 이후 /guess·/feedback은 자유 플레이와 같다(세션에 daily 날짜가 실려 있다).
+ *   POST /game/daily/list → 지난 문제 목록(날짜·번호). /daily/start에 archive: true를 주면 지난
+ *     날짜도 받는다(연속 정답 같은 기록은 화면이 따로 다룬다).
  *   두 시작 요청 다 body.easy === true면 쉬움 모드(2026-09-29): 1라운드부터 카테고리를
  *     응답에 같이 준다. 묘사는 똑같다 — 성적표(metrics.mjs)에선 쉬움 모드 판을 따로 뺀다.
  *
@@ -32,7 +34,7 @@ import { judgeGuess, type Hint } from '../bot/wordGuessBot';
 import { round1Hints, round2Hints } from '../bot/hintSource';
 import { encodeSession, decodeSession, InvalidSessionError, SessionExpiredError } from './gameToken';
 import { pickWord, findWord } from './wordPool';
-import { acceptableDate, dailyFor } from '../bot/dailyPuzzle';
+import { acceptableDate, archiveDate, dailyFor, listDaily } from '../bot/dailyPuzzle';
 import { PREGEN_PREFIX } from '../bot/hintSource';
 import { rateLimit } from './rateLimit';
 import { createFeedbackIssue, type FeedbackPayload } from '../github/feedbackIssue';
@@ -196,11 +198,18 @@ gameRouter.post('/start', rateLimit('start', 12, 60_000), async (req: Request, r
 
 // 오늘의 문제. body.date는 이용자 기기의 날짜(YYYY-MM-DD) — 자정이 각자 시간대에 맞게
 // 넘어가게(Wordle처럼). UTC 오늘 ±1일 밖이면 거부. 그날 문제가 아직 없으면 404.
+// 지난 문제 목록 — 날짜·번호만(정답 없음). 화면은 자기 날짜보다 앞선 것만 보여 준다.
+gameRouter.post('/daily/list', rateLimit('list', 30, 60_000), (req: Request, res: Response) => {
+  const lang = toLang((req.body as { lang?: unknown } | undefined)?.lang);
+  res.json({ puzzles: listDaily(lang) });
+});
+
 gameRouter.post('/daily/start', rateLimit('start', 12, 60_000), async (req: Request, res: Response) => {
-  const body = req.body as { lang?: unknown; date?: unknown; easy?: unknown } | undefined;
+  const body = req.body as { lang?: unknown; date?: unknown; easy?: unknown; archive?: unknown } | undefined;
   const easy = body?.easy === true;
   const lang = toLang(body?.lang);
-  const date = acceptableDate(body?.date);
+  // archive: 지난 문제 다시 풀기(2026-09-29) — 1번 문제부터 UTC 내일까지의 날짜를 받는다.
+  const date = body?.archive === true ? archiveDate(body?.date) : acceptableDate(body?.date);
   if (!date) {
     res.status(400).json({ error: '날짜가 올바르지 않습니다.', code: 'bad_date' });
     return;

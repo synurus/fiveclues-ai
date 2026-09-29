@@ -81,8 +81,14 @@ export function startGame(lang: Lang, exclude: string[] = [], easy = false): Pro
 export interface DailyStartResponse extends StartResponse {
   daily: { date: string; number: number };
 }
-export function startDaily(lang: Lang, date: string, easy = false): Promise<DailyStartResponse> {
-  return postJson<DailyStartResponse>('/game/daily/start', { lang, date, easy });
+// archive: 지난 문제 다시 풀기(2026-09-29) — 서버가 1번 문제부터 UTC 내일까지의 날짜를 받는다.
+export function startDaily(lang: Lang, date: string, easy = false, archive = false): Promise<DailyStartResponse> {
+  return postJson<DailyStartResponse>('/game/daily/start', { lang, date, easy, archive });
+}
+
+/** 지난 문제 목록(날짜·번호만, 최신 먼저). 화면이 자기 날짜보다 앞선 것만 보여 준다. */
+export function listDaily(lang: Lang): Promise<{ puzzles: { date: string; number: number }[] }> {
+  return postJson('/game/daily/list', { lang });
 }
 
 export function submitGuess(session: string, guess: string): Promise<GuessResponse> {

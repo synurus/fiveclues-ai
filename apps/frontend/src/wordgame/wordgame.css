@@ -316,3 +316,89 @@
   font-size: var(--text-label);
   color: var(--color-muted);
 }
+
+/* 시작 화면의 "지난 문제 | 내 기록" 링크(2026-09-29). */
+.wg-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.wg-links button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: var(--text-label);
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+/* 지난 문제 목록 */
+.wg-archive {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2) 0;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.wg-archive button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  font: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.wg-archive-num {
+  font-weight: 700;
+  min-width: 3em;
+}
+
+.wg-archive-date {
+  flex: 1;
+  color: var(--color-muted);
+}
+
+.wg-archive-state {
+  color: var(--color-accent);
+  font-size: var(--text-label);
+}
+
+/* 내 기록 */
+.wg-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-4);
+  text-align: center;
+}
+
+.wg-stats strong {
+  display: block;
+  font-size: 24px;
+}
+
+.wg-stats span {
+  font-size: var(--text-label);
+  color: var(--color-muted);
+}
+
+.wg-stats-line {
+  font-size: var(--text-label);
+  margin: 0 0 var(--space-2);
+}
+
+.wg-stats-recent {
+  letter-spacing: 2px;
+}

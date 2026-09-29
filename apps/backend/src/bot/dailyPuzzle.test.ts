@@ -1,6 +1,20 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { acceptableDate, addDays, dailyNumber, scheduleDaily, DAILY_EPOCH, type DailyFile } from './dailyPuzzle';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {
+  acceptableDate,
+  addDays,
+  archiveDate,
+  clearDailyCache,
+  dailyNumber,
+  dailyPath,
+  listDaily,
+  scheduleDaily,
+  DAILY_EPOCH,
+  type DailyFile,
+} from './dailyPuzzle';
 import type { HintSetFile } from './hintSets';
 
 const set = (v: string, at = '2026-09-28T00:00:00Z') => ({
@@ -41,4 +55,27 @@ test('scheduleDaily — 1번 문제 이전 날짜는 채우지 않는다', () =>
   const file: DailyFile = {};
   const added = scheduleDaily(file, { sets: { 가: [set('cur')] } }, () => 'C', 'cur', addDays(DAILY_EPOCH, -2), 3, () => 0);
   assert.deepEqual(added, [DAILY_EPOCH]);
+});
+
+test('archiveDate·listDaily — 1번 문제부터 UTC 내일까지만, 목록엔 날짜·번호만', () => {
+  const now = new Date('2026-10-05T12:00:00Z');
+  assert.equal(archiveDate('2026-09-29', now), '2026-09-29');
+  assert.equal(archiveDate('2026-10-06', now), '2026-10-06');
+  assert.equal(archiveDate('2026-10-07', now), null);
+  assert.equal(archiveDate('2026-09-28', now), null); // 1번 문제 전
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'daily-'));
+  process.env.DAILY_DIR = dir;
+  const p = { word: 'w', category: 'c', promptVersion: 'v', model: 'm', round1: [], round2: [] };
+  fs.writeFileSync(dailyPath('ko'), JSON.stringify({ '2026-09-30': p, '2026-10-06': p, '2026-10-09': p }));
+  clearDailyCache();
+  try {
+    assert.deepEqual(listDaily('ko', now), [
+      { date: '2026-10-06', number: 8 },
+      { date: '2026-09-30', number: 2 },
+    ]);
+  } finally {
+    delete process.env.DAILY_DIR;
+    clearDailyCache();
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });

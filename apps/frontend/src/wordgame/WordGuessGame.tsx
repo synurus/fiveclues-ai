@@ -18,6 +18,9 @@ import { NAME_MAX_LENGTH } from './constants';
 import { startGame, startDaily, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
 import { recordFinishedGame } from './playCount';
+import { recordGame } from './history';
+import { ArchiveView } from './ArchiveView';
+import { StatsView } from './StatsView';
 import { localDate, getDaily, saveDaily, solvedStreak, shareText, shareResult, type DailyRecord } from './daily';
 import { strings, detectLang, saveLang, type Lang } from './i18n';
 import { loadEasy, saveEasy } from './easyMode';
@@ -25,7 +28,8 @@ import './wordgame.css';
 
 type RoundLog = { hints: string[]; guess: string };
 // 오늘의 문제(2026-09-29)면 채워진다 — 날짜는 이 기기의 날짜, 번호는 서버가 준 것.
-type DailyInfo = { date: string; number: number };
+// archive: 지난 문제로 푸는 판 — 연속 정답(fiveclues-daily)엔 안 남긴다.
+type DailyInfo = { date: string; number: number; archive?: boolean };
 type ShareStatus = 'idle' | 'shared' | 'copied' | 'failed';
 
 // 서버 오류를 화면 언어의 짧은 안내로 바꾼다(2026-09-28) — 예전엔 서버 메시지를 그대로
@@ -58,6 +62,8 @@ const isEnter = (e: KeyboardEvent): boolean => e.key === 'Enter' && !e.nativeEve
 
 type Stage =
   | { kind: 'nickname' }
+  | { kind: 'archive' } // 지난 문제 목록(ArchiveView)
+  | { kind: 'stats' } // 내 기록(StatsView)
   | { kind: 'loading' }
   | {
       kind: 'playing';
@@ -199,11 +205,12 @@ export function WordGuessGame() {
     }
   };
 
-  const handleStartDaily = async () => {
+  // date를 주면 지난 문제(아카이브), 안 주면 오늘의 문제.
+  const handleStartDaily = async (past?: { date: string }) => {
     setStage({ kind: 'loading' });
     try {
-      const res = await startDaily(lang, localDate(), easy);
-      beginPlaying(res.session, res.hints.map((h) => h.text), res.daily, res.category);
+      const res = await startDaily(lang, past?.date ?? localDate(), easy, !!past);
+      beginPlaying(res.session, res.hints.map((h) => h.text), past ? { ...res.daily, archive: true } : res.daily, res.category);
     } catch (e) {
       // 아직 문제가 없으면 오류 화면 대신 시작 화면에 안내만 — 자유 플레이는 그대로 할 수 있다.
       if (e instanceof ApiError && e.code === 'daily_unavailable') {
@@ -216,7 +223,8 @@ export function WordGuessGame() {
   };
 
   const handleShare = async (record: DailyRecord, date: string) => {
-    const status = await shareResult(shareText(lang, record, solvedStreak(lang, date), `${location.origin}/`));
+    const streak = record.archive ? 0 : solvedStreak(lang, date);
+    const status = await shareResult(shareText(lang, record, streak, `${location.origin}/`));
     setShareStatus(status);
   };
 
@@ -248,9 +256,19 @@ export function WordGuessGame() {
         const rounds: RoundLog[] = stage.previous
           ? [stage.previous, { hints: stage.hints, guess: attemptedGuess }]
           : [{ hints: stage.hints, guess: attemptedGuess }];
-        if (stage.daily) {
+        if (stage.daily && !stage.daily.archive) {
           saveDaily(lang, stage.daily.date, { number: stage.daily.number, outcome: res.result, ...(stage.easy ? { easy: true } : {}) });
         }
+        // 내 기록(history.ts) — 모든 판을 남긴다.
+        recordGame({
+          date: localDate(),
+          lang,
+          mode: stage.daily ? (stage.daily.archive ? 'archive' : 'daily') : 'free',
+          outcome: res.result,
+          category: res.category,
+          ...(stage.easy ? { easy: true } : {}),
+          ...(stage.daily ? { number: stage.daily.number } : {}),
+        });
         setStage({
           kind: 'result',
           outcome: res.result,
@@ -326,7 +344,7 @@ export function WordGuessGame() {
                 {s.dailyShareDone(todayRecord.number)}
               </Button>
             ) : (
-              <Button variant="primary" block onClick={handleStartDaily}>
+              <Button variant="primary" block onClick={() => handleStartDaily()}>
                 {s.dailyStart}
               </Button>
             )}
@@ -344,12 +362,28 @@ export function WordGuessGame() {
               />
               {s.easyLabel}
             </label>
+            {/* 지난 문제·내 기록(2026-09-29) */}
+            <div className="wg-links">
+              <button type="button" onClick={() => setStage({ kind: 'archive' })}>
+                {s.archive}
+              </button>
+              <span className="wg-lang-sep">|</span>
+              <button type="button" onClick={() => setStage({ kind: 'stats' })}>
+                {s.stats}
+              </button>
+            </div>
             {notice && <p className="wg-notice">{notice}</p>}
             {shareStatus !== 'idle' && <p className="wg-notice">{s[shareStatus === 'failed' ? 'shareFailed' : shareStatus]}</p>}
           </>
         )}
 
         {stage.kind === 'loading' && <p className="text-muted">{s.loading}</p>}
+
+        {stage.kind === 'archive' && (
+          <ArchiveView lang={lang} onPlay={(p) => handleStartDaily(p)} onBack={() => setStage({ kind: 'nickname' })} />
+        )}
+
+        {stage.kind === 'stats' && <StatsView lang={lang} onBack={() => setStage({ kind: 'nickname' })} />}
 
         {stage.kind === 'playing' && (
           <>
@@ -366,7 +400,11 @@ export function WordGuessGame() {
                 </p>
               </div>
             )}
-            {stage.daily && <p className="wg-daily-title">{s.dailyTitle(stage.daily.number)}</p>}
+            {stage.daily && (
+              <p className="wg-daily-title">
+                {stage.daily.archive ? s.archiveTitle(stage.daily.number) : s.dailyTitle(stage.daily.number)}
+              </p>
+            )}
             <p className="wg-round">
               {s.round(stage.round)}
               {stage.category && <span className="wg-category">{s.category(stage.category)}</span>}
@@ -409,8 +447,10 @@ export function WordGuessGame() {
 
             {stage.daily && (
               <div className="wg-daily-share">
-                <p className="wg-daily-title">{s.dailyTitle(stage.daily.number)}</p>
-                {solvedStreak(lang, stage.daily.date) > 1 && (
+                <p className="wg-daily-title">
+                  {stage.daily.archive ? s.archiveTitle(stage.daily.number) : s.dailyTitle(stage.daily.number)}
+                </p>
+                {!stage.daily.archive && solvedStreak(lang, stage.daily.date) > 1 && (
                   <p className="wg-streak">{s.streak(solvedStreak(lang, stage.daily.date))}</p>
                 )}
                 <Button
@@ -419,7 +459,12 @@ export function WordGuessGame() {
                   onClick={() =>
                     stage.daily &&
                     handleShare(
-                      { number: stage.daily.number, outcome: stage.outcome, ...(stage.easy ? { easy: true } : {}) },
+                      {
+                        number: stage.daily.number,
+                        outcome: stage.outcome,
+                        ...(stage.easy ? { easy: true } : {}),
+                        ...(stage.daily.archive ? { archive: true } : {}),
+                      },
                       stage.daily.date,
                     )
                   }
@@ -429,7 +474,7 @@ export function WordGuessGame() {
                 {shareStatus !== 'idle' && (
                   <p className="wg-notice">{s[shareStatus === 'failed' ? 'shareFailed' : shareStatus]}</p>
                 )}
-                <p className="wg-notice">{s.dailyNext}</p>
+                {!stage.daily.archive && <p className="wg-notice">{s.dailyNext}</p>}
               </div>
             )}
 

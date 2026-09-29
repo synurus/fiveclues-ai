@@ -291,3 +291,26 @@ test('쉬움 모드 — 1라운드부터 카테고리를 주고, 피드백에 ea
   const json = JSON.parse([...issues.at(-1)!.body.matchAll(/```json\n([\s\S]*?)\n```/g)].pop()![1]!) as Record<string, unknown>;
   assert.equal(json.easy, true);
 });
+
+test('지난 문제 — 목록엔 날짜·번호만, archive면 지난 날짜로 시작', async () => {
+  resetRateLimits();
+  const { clearDailyCache, addDays, DAILY_EPOCH } = require('../bot/dailyPuzzle') as typeof import('../bot/dailyPuzzle');
+  const utc = new Date().toISOString().slice(0, 10);
+  const day = utc < DAILY_EPOCH ? addDays(utc, 1) : utc;
+  const puzzle = { word: '경찰관', category: '직업', promptVersion: 'd', model: 'm', round1: ['1', '2', '3', '4', '5'], round2: ['6', '7', '8', '9', '10'] };
+  fs.writeFileSync(path.join(setsDir, 'ko.json'), JSON.stringify({ [day]: puzzle, [addDays(day, 5)]: puzzle }));
+  clearDailyCache();
+  try {
+    const list = await post('/game/daily/list', { lang: 'ko' });
+    assert.deepEqual(list.data.puzzles, [{ date: day, number: (list.data.puzzles as { number: number }[])[0]!.number }]);
+    assert.equal(JSON.stringify(list.data).includes('경찰관'), false); // 정답은 목록에 없다
+    const a = await post('/game/daily/start', { lang: 'ko', date: day, archive: true });
+    assert.equal(a.status, 200);
+    assert.equal((a.data.daily as { date: string }).date, day);
+    const future = await post('/game/daily/start', { lang: 'ko', date: addDays(day, 5), archive: true });
+    assert.equal(future.data.code, 'bad_date'); // 아직 아무도 못 푼 날은 안 된다
+  } finally {
+    fs.rmSync(path.join(setsDir, 'ko.json'));
+    clearDailyCache();
+  }
+});

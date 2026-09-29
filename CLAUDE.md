@@ -139,6 +139,12 @@
   연속 정답은 브라우저 localStorage(`fiveclues-daily`)에만 있고, 피드백엔 `daily` 날짜가
   실린다. ⚠️ 일정·세트 파일이 공개 저장소에 있어서 마음먹으면 정답을 볼 수 있다(순위표가
   없어 감수). 세트가 하나도 없으면 일정이 비어 "아직 준비되지 않았어요"가 뜬다.
+- **지난 문제·내 기록(2026-09-29).** `POST /game/daily/list`는 날짜·번호만(정답 없음), `/daily/start`에
+  `archive: true`면 1번 문제부터 UTC 내일까지의 날짜를 받는다(`dailyPuzzle.ts`의 `archiveDate`). 화면은 자기
+  날짜보다 앞선 것만 목록에 보이고(`ArchiveView.tsx`), **지난 문제 결과는 연속 정답 기록(`fiveclues-daily`)에
+  안 남긴다** — 빈 날을 나중에 채워 연속 기록을 늘리지 못하게. 모든 판은 `history.ts`(localStorage
+  `fiveclues-history`, 최근 500판)에 남고 `StatsView.tsx`가 통계를 낸다(서버로 안 보냄). 문제별 정적 해설
+  페이지는 일부러 안 만들었다 — 찍어낸 비슷한 페이지가 많으면 애드센스 "가치 낮은 콘텐츠" 위험.
 - **세대별 성적은 `npm run metrics`(`scripts/metrics.mjs`, 2026-09-28, 기획서 v2 §6·§8).**
   "세대" = 게임에 들어가는 프롬프트 본문의 sha256 앞 8자리(`bot/promptVersion.ts`) — 헤더
   주석만 고친 커밋은 같은 세대다. 새 이슈엔 `promptVersion`이 기록되고(사람은 세션 토큰에서,
@@ -266,7 +272,7 @@
   `fiveclues-ai.vercel.app`으로 박혀 있어서 도메인을 바꾸면 전부 바꿔야 한다.
   **데이터 흐름(무엇을 어디로 보내는지)을 바꾸면 `privacy.html`과 `en/privacy.html`을
   같이 고쳐라** — 지금은 추측→Gemini(주력)·Groq(EEA 등 지역이거나 대체), 피드백→GitHub 공개 이슈·Gemini(닉네임 제외),
-  언어 설정·끝낸 판 수→localStorage(판 수는 피드백에 같이 감), 요청 수 제한용 IP→서버 메모리
+  언어 설정·끝낸 판 수·오늘의 문제 기록·쉬움 모드·내 기록→localStorage(판 수만 피드백에 같이 감), 요청 수 제한용 IP→서버 메모리
   1분이 전부라고 적혀 있다. 읽을거리 글은 실제 이슈 기록·개발
   이력을 바탕으로 썼다 — 사실과 다른 내용이 섞이지 않게, 수치나 사례를 인용할 땐
   원본(이슈·커밋)을 확인할 것. `vite preview`로 보려면 `.claude/launch.json`의

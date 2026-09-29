@@ -7,6 +7,7 @@ export interface DailyRecord {
   number: number;
   outcome: Outcome;
   easy?: boolean; // 쉬움 모드로 풀었는지 — 공유 문구에 표시
+  archive?: boolean; // 지난 문제로 푼 것 — 공유 문구에만 쓰고 저장하지 않는다
 }
 
 const STORAGE_KEY = 'fiveclues-daily';
@@ -60,6 +61,23 @@ export function solvedStreak(lang: Lang, today: string): number {
   }
 }
 
+/** 이 브라우저에서 오늘의 문제를 푼 날 수와, 맞힌 날이 가장 길게 이어진 기록. */
+export function dailySummary(lang: Lang): { days: number; best: number } {
+  const entries = Object.entries(load())
+    .filter(([k]) => k.startsWith(`${lang}:`))
+    .map(([k, r]) => [k.slice(lang.length + 1), r] as const)
+    .sort(([a], [b]) => a.localeCompare(b));
+  let best = 0;
+  let run = 0;
+  let prev = '';
+  for (const [date, r] of entries) {
+    run = r.outcome === 'failed' ? 0 : prev && prevDate(date) === prev ? run + 1 : 1;
+    best = Math.max(best, run);
+    prev = r.outcome === 'failed' ? '' : date;
+  }
+  return { days: entries.length, best };
+}
+
 const GRID: Record<Outcome, string> = { round1: '🟩', round2: '🟥🟩', failed: '🟥🟥' };
 
 /** Wordle식 공유 문구 — 정답은 안 들어간다. */
@@ -69,7 +87,13 @@ export function shareText(lang: Lang, record: DailyRecord, streak: number, url: 
     ? { round1: '1라운드에 맞힘', round2: '2라운드에 맞힘', failed: '못 맞힘' }[record.outcome]
     : { round1: 'Got it in round 1', round2: 'Got it in round 2', failed: 'Missed it' }[record.outcome];
   const lines = [
-    ko ? `다섯고개 오늘의 문제 #${record.number}` : `Five Clues Daily #${record.number}`,
+    record.archive
+      ? ko
+        ? `다섯고개 지난 문제 #${record.number}`
+        : `Five Clues Daily #${record.number} (archive)`
+      : ko
+        ? `다섯고개 오늘의 문제 #${record.number}`
+        : `Five Clues Daily #${record.number}`,
     `${GRID[record.outcome]} ${label}${record.easy ? (ko ? ' · 쉬움 모드' : ' · easy mode') : ''}`,
     ...(streak > 1 ? [ko ? `연속 정답 ${streak}일` : `${streak}-day streak`] : []),
     url,
