@@ -414,3 +414,14 @@
   margin: var(--space-2) 0 0;
   text-align: center;
 }
+
+/* 화면이 바뀔 때 스크롤로 옮겨 오는 자리(WordGuessGame.tsx의 screenKey 효과) — 화면 끝에 딱 붙지 않게. */
+.wg-round-anchor {
+  scroll-margin-top: 12px;
+}
+
+/* 브라우저의 스크롤 고정(scroll anchoring) 끄기 — 묘사가 타이핑되며 카드가 길어질 때, 카드 아래 소개 글을
+   제자리에 두려고 페이지를 저절로 내려서 새 묘사가 화면 위로 밀려 올라갔다(2026-09-29). */
+html {
+  overflow-anchor: none;
+}

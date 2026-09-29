@@ -12,7 +12,7 @@
 // 복수 선택 가능 — 힌트 여러 개가 같이 결정적이었거나(또는 같이 무쓸모였거나) 하는
 // 실제 상황을 하나만 고르라고 강제하면 정보가 사라진다. 한 말풍선이 동시에
 // 결정적이면서 무쓸모일 수는 없게 막는다(토글 시 반대쪽에서 자동으로 뺀다).
-import { useEffect, useState, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import Button from '../components/Button';
 import { NAME_MAX_LENGTH } from './constants';
 import { startGame, startDaily, listDaily, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
@@ -200,6 +200,24 @@ export function WordGuessGame() {
     setStage({ kind: 'playing', session, round: 1, hints, ...(daily ? { daily } : {}), ...(category ? { category, easy: true } : {}) });
   };
 
+  // 화면이 바뀔 때(새 판·2라운드·결과·로딩) 봐야 할 곳이 화면 밖이면 스크롤을 옮긴다(2026-09-29).
+  // 아래쪽 버튼(다시하기·추측하기)을 누르면 카드 아래 소개 글 때문에 페이지가 짧아지지 않아 스크롤이
+  // 그대로 남고, 새 묘사가 화면 위로 가려져 있었다. 2라운드는 1라운드 요약 아래 새 묘사가 시작되는
+  // 곳(roundRef), 나머지는 게임 영역(.wg-page) 맨 위 — 카드는 화면 세로 가운데 정렬이라 묘사가 타이핑되며
+  // 길어지면 윗부분이 위로 올라가서, 카드가 아니라 화면 높이짜리 영역 맨 위를 기준으로 삼는다.
+  // 이미 화면 위쪽 절반에 보이면 건드리지 않는다.
+  const pageRef = useRef<HTMLDivElement>(null);
+  const roundRef = useRef<HTMLDivElement>(null);
+  const screenKey = stage.kind === 'playing' ? `playing-${stage.round}-${stage.session}` : stage.kind;
+  const scrollTarget = stage.kind === 'playing' && stage.round === 2 ? 'round' : 'page';
+  useEffect(() => {
+    const el = scrollTarget === 'round' ? roundRef.current : pageRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top;
+    // 즉시 이동 — smooth는 묘사가 타이핑되며 화면이 바뀌는 중엔 끊기거나 아예 안 움직이는 경우가 있었다.
+    if (top < 0 || top > window.innerHeight / 2) el.scrollIntoView({ block: 'start' });
+  }, [screenKey, scrollTarget]);
+
   const handleStart = async () => {
     setStage({ kind: 'loading' });
     try {
@@ -319,7 +337,7 @@ export function WordGuessGame() {
   };
 
   return (
-    <div className="wg-page">
+    <div className="wg-page" ref={pageRef}>
       <div className="wg-card">
         <h1 className="wg-title">{s.title}</h1>
 
@@ -412,6 +430,7 @@ export function WordGuessGame() {
                 </p>
               </div>
             )}
+            <div ref={roundRef} className="wg-round-anchor" />
             {stage.daily && (
               <p className="wg-daily-title">
                 {stage.daily.archive ? s.archiveTitle(stage.daily.number) : s.dailyTitle(stage.daily.number)}
