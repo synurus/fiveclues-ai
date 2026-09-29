@@ -162,10 +162,10 @@ export function validateRound(raw: unknown, word: string, others: string[], prev
 
 // ── 프롬프트(여러 단어 묶음) ───────────────────────────────────────────
 
-const system = (lang: Lang, round: 1 | 2, category: string): string =>
+export const system = (lang: Lang, round: 1 | 2, category: string): string =>
   (lang === 'en' ? hintSystemEn : hintSystemKo)(round, category, HINT_COUNT);
 
-function batchUser(lang: Lang, round: 1 | 2, category: string, words: string[], round1?: Record<string, string[]>): string {
+export function batchUser(lang: Lang, round: 1 | 2, category: string, words: string[], round1?: Record<string, string[]>): string {
   if (lang === 'en') {
     const head =
       round === 1
@@ -301,6 +301,39 @@ export function parseSets(raw: string): Map<string, { hints: unknown; banned: un
   return map;
 }
 
+/**
+ * 한 라운드를 부르고 검증한다. 통과한 단어가 하나도 없으면 한 번만 다시 부른다 — 2026-09-29 첫 실행에서
+ * 4묶음 중 3묶음이 "전부 불합격"이었는데, 같은 묶음을 다시 부르면 8/8 통과해서 가끔 응답이 비거나 깨져
+ * 오는 것으로 보인다. 원인을 확인할 수 있게 그때의 응답 앞부분을 로그에 남긴다.
+ * others: 제시어 노출 검사에 쓸 묶음 전체 단어(다른 제시어가 묘사에 섞이면 버린다).
+ */
+async function callRound(
+  usage: Usage,
+  run: Run,
+  lang: Lang,
+  round: 1 | 2,
+  category: string,
+  words: string[],
+  others: string[],
+  round1?: Record<string, string[]>,
+): Promise<{ model: string; parsed: Map<string, { hints: unknown; banned: unknown }>; ok: Record<string, string[]> }> {
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const r = await budgetedCall(usage, run, system(lang, round, category), batchUser(lang, round, category, words, round1));
+    const parsed = parseSets(r.raw);
+    const ok: Record<string, string[]> = {};
+    for (const w of words) {
+      const v = validateRound(parsed.get(key(w))?.hints, w, others, round1?.[w]);
+      if (v) ok[w] = v;
+    }
+    if (Object.keys(ok).length) return { model: r.model, parsed, ok };
+    console.log(
+      `[pregen] ${round}라운드 전부 불합격(${attempt}번째) — 응답 ${r.raw.length}자, 파싱 ${parsed.size}단어: ` +
+        r.raw.slice(0, 200).replace(/\s+/g, ' '),
+    );
+  }
+  throw new Error(`${round}라운드 결과를 하나도 못 썼다`);
+}
+
 function addSet(file: HintSetFile, word: string, set: HintSet): void {
   const sets = [...(file.sets[word] ?? []), set];
   // 넘치면 옛 세대 → 오래된 순으로 뺀다
@@ -360,23 +393,16 @@ async function main(): Promise<void> {
     }
     words.forEach((w) => done.add(`${lang}:${w}`));
     try {
-      const r1 = await budgetedCall(usage, run, system(lang, 1, category), batchUser(lang, 1, category, words));
-      const r1raw = parseSets(r1.raw);
-      const round1: Record<string, string[]> = {};
-      for (const w of words) {
-        const v = validateRound(r1raw.get(key(w))?.hints, w, words);
-        if (v) round1[w] = v;
-      }
+      const r1 = await callRound(usage, run, lang, 1, category, words, words);
+      const round1 = r1.ok;
       const ok1 = Object.keys(round1);
-      if (!ok1.length) throw new Error('1라운드 결과를 하나도 못 썼다');
-      const r2 = await budgetedCall(usage, run, system(lang, 2, category), batchUser(lang, 2, category, ok1, round1));
-      const r2raw = parseSets(r2.raw);
+      const r2 = await callRound(usage, run, lang, 2, category, ok1, words, round1);
       // 라운드 사이에 대체 모델로 넘어갔으면 둘 다 남긴다.
       const model = r1.model === r2.model ? r1.model : `${r1.model}/${r2.model}`;
       const now = new Date().toISOString();
       const saved: string[] = [];
       for (const w of ok1) {
-        const round2 = validateRound(r2raw.get(key(w))?.hints, w, words, round1[w]);
+        const round2 = r2.ok[w];
         if (!round2) continue;
         addSet(files[lang], w, {
           id: crypto.randomBytes(4).toString('hex'),
@@ -385,7 +411,7 @@ async function main(): Promise<void> {
           generatedAt: now,
           round1: round1[w]!,
           round2,
-          banned: cleanBanned(r1raw.get(key(w))?.banned, w), // 결과 화면 "AI가 말하지 않은 것"
+          banned: cleanBanned(r1.parsed.get(key(w))?.banned, w), // 결과 화면 "AI가 말하지 않은 것"
         });
         saved.push(w);
       }
