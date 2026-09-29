@@ -175,12 +175,18 @@ function batchUser(lang: Lang, round: 1 | 2, category: string, words: string[], 
 
 class BudgetExhausted extends Error {}
 
-// 503(과부하, "high demand")은 처리 전에 거절된 요청이라 예산에서 도로 뺀다 — 대신 한 번
-// 실행에서 503 재시도는 MAX_503_RETRIES회까지만(혹시 한도에 잡히더라도 피해를 묶어 두려고).
+// 503(과부하, "high demand")도 **하루 한도에 잡는다**(2026-09-29). 처음엔 처리 전 거절이라
+// 예산에서 도로 뺐는데, 3.8-flash가 몇 분씩 503만 내는 동안 재시도를 이어 가다 성공 0회로 하루
+// 한도(429)에 닿았다 — 503 시도가 구글 쪽 RPD에 잡힌 것으로 보인다(같은 날 자동플레이 추측도
+// 3.8-flash를 쓰고 있어서 완전히 확정은 아님). 그래서 503은 한 실행에 MAX_503_RETRIES번만
+// 기다려 보고, 그래도 과부하면 이번 실행을 접는다(다음 묶음으로 넘어가 봐야 같은 모델이라 예산만
+// 탄다) — 하루 3번 실행이 각자 다시 시도한다.
 // 2026-09-28 실측: 미국 아침(KST 23시 전후)엔 3.8-flash가 요청 즉시 503을 냈다 — 그래서
-// 워크플로를 미국 밤(PT 자정 직후 = KST 16~22시)에 돌린다.
-const MAX_503_RETRIES = 8;
-const BACKOFF_MS = [30_000, 60_000, 120_000, 120_000];
+// 워크플로를 미국 밤(PT 자정 직후 = KST 16~22시)에 돌린다(2026-09-29 KST 14시에도 503이었다).
+const MAX_503_RETRIES = 2;
+const BACKOFF_MS = [60_000, 120_000];
+
+class ModelBusy extends Error {}
 
 let lastCallAt = 0;
 async function budgetedCall(usage: Usage, run: { calls: number; retries503: number }, sys: string, user: string): Promise<string> {
@@ -201,10 +207,7 @@ async function budgetedCall(usage: Usage, run: { calls: number; retries503: numb
         throw new BudgetExhausted('하루 한도(429)');
       }
       if (!(e instanceof LlmError && e.status === 503)) throw e;
-      usage.calls -= 1;
-      run.calls -= 1;
-      writeUsage(usage);
-      if (run.retries503 >= MAX_503_RETRIES || attempt >= BACKOFF_MS.length) throw e;
+      if (run.retries503 >= MAX_503_RETRIES || attempt >= BACKOFF_MS.length) throw new ModelBusy(`${MODEL} 과부하(503)`);
       run.retries503 += 1;
       const ms = BACKOFF_MS[attempt]!;
       console.log(`[pregen] 503(과부하) — ${ms / 1000}초 뒤 재시도 (이번 실행 503 재시도 ${run.retries503}/${MAX_503_RETRIES})`);
@@ -314,7 +317,7 @@ async function main(): Promise<void> {
       console.log(`[pregen] ${lang} "${category}" 저장 ${saved.length}/${words.length}${dropped.length ? ` (버림: ${dropped.join(', ')})` : ''}`);
       failures = 0;
     } catch (e) {
-      if (e instanceof BudgetExhausted) {
+      if (e instanceof BudgetExhausted || e instanceof ModelBusy) {
         console.log(`[pregen] ${e.message} — 멈춤`);
         break;
       }
