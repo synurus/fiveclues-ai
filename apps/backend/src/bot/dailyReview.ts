@@ -29,7 +29,8 @@ const norm = (s: string): string => s.toLowerCase().replace(/[\s.,!?"'·-]/g, ''
 const LITE: BotConfig = {
   baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
   apiKey: process.env.GEMINI_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '',
-  model: process.env.DAILY_REVIEW_MODEL || 'gemini-3.1-flash-lite',
+  // 2026-09-30 3.1-flash-lite(구형) → 3.5: 같은 지시로 5단어 비교 — 후보 품질 비슷, 더 빠름.
+  model: process.env.DAILY_REVIEW_MODEL || 'gemini-3.5-flash-lite',
 };
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));

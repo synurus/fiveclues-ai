@@ -15,8 +15,8 @@
  *
  * ── 대체 모델(2026-09-29) ──
  * 3.8-flash가 과부하(503이 이어짐)이거나 그날 몫을 다 썼으면, 그 실행의 나머지는 대체 모델
- * (PREGEN_FALLBACK_MODEL, 기본 gemini-3.1-flash-lite — 실시간 출제의 주력이라 품질이 검증됐고
- * 하루 500회라 넉넉하다)로 만든다. 3.8-flash가 이틀 연속(미국 아침·밤 모두) 몇 분씩 503만 내서
+ * (PREGEN_FALLBACK_MODEL, 기본 gemini-3.5-flash-lite — 실시간 출제의 주력이고 하루 500회라 넉넉하다.
+ * 원래 3.1-flash-lite였는데 구형(deprecated)이라 2026-09-30에 바꿈 — 같은 묶음 형식 시험에서 4/4 통과)로 만든다. 3.8-flash가 이틀 연속(미국 아침·밤 모두) 몇 분씩 503만 내서
  * 세트가 하나도 안 생겼기 때문. 대체 모델 예산은 따로 센다(PT 하루 PREGEN_FALLBACK_DAILY_CALLS
  * 기본 48회, 한 실행 PREGEN_FALLBACK_RUN_CALLS 기본 16회 — 나머지 한도는 실시간 출제 몫).
  * 세트엔 실제로 만든 모델 이름이 남는다(성적표·피드백에서 갈린다).
@@ -80,7 +80,7 @@ const PRIMARY: Provider = {
   usageKey: 'calls',
 };
 const FALLBACK: Provider = {
-  bot: gemini(process.env.PREGEN_FALLBACK_MODEL || 'gemini-3.1-flash-lite'),
+  bot: gemini(process.env.PREGEN_FALLBACK_MODEL || 'gemini-3.5-flash-lite'),
   dailyCap: Number(process.env.PREGEN_FALLBACK_DAILY_CALLS || 48),
   runCap: Number(process.env.PREGEN_FALLBACK_RUN_CALLS || 16),
   usageKey: 'fallbackCalls',
