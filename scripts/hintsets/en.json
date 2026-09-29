@@ -1,5 +1,33 @@
 {
  "sets": {
+  "ant": [
+   {
+    "id": "f66b2544",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:22:26.941Z",
+    "round1": [
+     "Frequently seen exploring flat paved surfaces.",
+     "Often spotted working throughout the day.",
+     "Moves along the ground in search of bits.",
+     "Commonly found near outdoor stone walkways.",
+     "Stays busy during the warm dry weather."
+    ],
+    "round2": [
+     "Follows invisible chemical trails to find home.",
+     "Strong enough to lift heavy crumbs.",
+     "Uses antennae to touch and recognize others.",
+     "Lives in complex tunnels beneath the soil.",
+     "Works together to defend the nest."
+    ],
+    "banned": [
+     "colony",
+     "picnic",
+     "carrying food",
+     "queen"
+    ]
+   }
+  ],
   "apple": [
    {
     "id": "e0ed89b7",
@@ -53,6 +81,34 @@
      "long",
      "curved",
      "peel"
+    ]
+   }
+  ],
+  "butterfly": [
+   {
+    "id": "471830b9",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:22:26.941Z",
+    "round1": [
+     "Often seen resting on sunny garden leaves.",
+     "Has a thin, stick-like body structure.",
+     "Active during the brightest parts of day.",
+     "Moves quietly without making any loud noise.",
+     "Found in many parks and grassy fields."
+    ],
+    "round2": [
+     "Patterned texture on its flat upper surfaces.",
+     "Often mimics dead leaves when folded shut.",
+     "Uses warmth to start its morning flight.",
+     "Tastes sugary liquid with its feet.",
+     "Found in large groups during migration."
+    ],
+    "banned": [
+     "colorful wings",
+     "caterpillar stage",
+     "nectar",
+     "metamorphosis"
     ]
    }
   ],
@@ -220,6 +276,34 @@
     ]
    }
   ],
+  "dragonfly": [
+   {
+    "id": "819904b1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:22:26.941Z",
+    "round1": [
+     "Visible hanging out near grassy shorelines.",
+     "Stays active when the sun is out.",
+     "Lands on reeds or tall thin stalks.",
+     "Possesses a very lightweight physical form.",
+     "Found hovering above still outdoor surfaces."
+    ],
+    "round2": [
+     "Two pairs of wings beat independently.",
+     "Large eyes cover most of its head.",
+     "Spends its early life underwater.",
+     "Can fly backward and hover perfectly still.",
+     "Often perches on twigs facing the sun."
+    ],
+    "banned": [
+     "transparent wings",
+     "long thin body",
+     "water",
+     "predatory"
+    ]
+   }
+  ],
   "eagle": [
    {
     "id": "9c8d5a0f",
@@ -271,6 +355,34 @@
      "freezer",
      "scoop",
      "cone"
+    ]
+   }
+  ],
+  "ladybug": [
+   {
+    "id": "e0394f01",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:22:26.941Z",
+    "round1": [
+     "Often found sitting on green garden stems.",
+     "Moves at a slow, steady walking pace.",
+     "Commonly spotted in home vegetable gardens.",
+     "Can be seen during warm summer months.",
+     "Often rests on the undersides of leaves."
+    ],
+    "round2": [
+     "Releases a bitter scent when feeling threatened.",
+     "Hibernates in large clusters inside logs.",
+     "Warms its dome-shaped back in the sun.",
+     "Drops to the ground when startled.",
+     "Often hibernates through the coldest winter months."
+    ],
+    "banned": [
+     "red with black spots",
+     "aphids",
+     "round shape",
+     "lucky"
     ]
    }
   ],
