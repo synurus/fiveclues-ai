@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { validateRound, planNeeds, nextBatch, parseSets, ptDate, MAX_SETS_PER_WORD } from './pregenHints';
+import { validateRound, planNeeds, nextBatch, parseSets, ptDate, similarity, leaksPart, MAX_SETS_PER_WORD } from './pregenHints';
 import type { HintSet, HintSetFile } from './hintSets';
 import { cleanBanned } from './hintSource';
 
@@ -60,4 +60,23 @@ test('ptDate — 태평양 시간 날짜(한국 오후 4시 전후로 바뀜, �
 test('cleanBanned — 짧은 말만, 제시어 자체는 빼고, 최대 4개', () => {
   assert.deepEqual(cleanBanned(['면', '육수', '냉면', '면', 'x'.repeat(21), '', '겨자', '식초', '얼음'], '냉면'), ['면', '육수', '겨자', '식초']);
   assert.deepEqual(cleanBanned('면', '냉면'), []);
+});
+
+test('similarity·validateRound — 2라운드가 1라운드를 말만 바꿔 쓰면 버린다', () => {
+  assert.ok(similarity('여러 층을 한입에 베어 무는 맛', '여러 층을 한꺼번에 베어 무는 맛') > 0.6);
+  assert.ok(similarity('혀가 얼얼해지는 독특한 자극', '바삭함 뒤에 오는 부드러운 속살') < 0.1);
+  const r1 = ['여러 층을 한입에 베어 무는 맛', '바쁜 시간에 간편히 먹는 한 끼', '손에 묻히지 않고 먹는 방식', '고기와 채소', '익숙함'];
+  const reworded = h('여러 층을 한꺼번에 베어 무는 맛', '바쁜 시간에 간편히 채우는 끼니', '둥근 빵 사이에 끼운', '감자튀김과 짝꿍', '가게 앞 커다란 간판', '종이에 싸서 건네받는');
+  assert.equal(validateRound(reworded, '햄버거', ['햄버거'], r1), null); // 새 정보는 4개뿐
+  assert.deepEqual(validateRound([...reworded, ...h('한 손으로 쥐는 크기')], '햄버거', ['햄버거'], r1), [
+    '둥근 빵 사이에 끼운', '감자튀김과 짝꿍', '가게 앞 커다란 간판', '종이에 싸서 건네받는', '한 손으로 쥐는 크기',
+  ]);
+});
+
+test('leaksPart — 세 글자 이상 한국어 제시어의 앞쪽 절반이 들어간 묘사', () => {
+  assert.equal(leaksPart('미군 부대 근처에서 유래된 이름', '부대찌개'), true);
+  assert.equal(leaksPart('투명한 소스 속 목이버섯', '탕수육'), false);
+  assert.equal(leaksPart('탕수 소스를 부어', '탕수육'), true);
+  assert.equal(leaksPart('배가 고플 때', '배'), false); // 짧은 제시어는 안 봄
+  assert.equal(leaksPart('A burger bun', 'hamburger'), false); // 영어는 안 봄
 });

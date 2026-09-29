@@ -149,14 +149,47 @@ export function nextBatch(needs: Need[], size: number): Need[] {
 
 // ── 검증 ──────────────────────────────────────────────────────────────
 
-/** 모델이 낸 한 단어의 묘사 목록을 검사해 HINT_COUNT개를 돌려준다. 못 쓰면 null. */
+/**
+ * 두 문장이 글자 단위로 얼마나 겹치는지(두 글자씩 자른 조각의 Dice 계수, 0~1). 2라운드가 1라운드를 말만
+ * 바꿔 다시 쓴 것을 거르는 데 쓴다(2026-09-29 — 첫 오늘의 문제 8일치의 2라운드가 전부 "여러 층을 한입에
+ * 베어 무는 맛" → "여러 층을 한꺼번에 베어 무는 맛" 식이었다. 그런 쌍은 0.5~0.9, 서로 다른 묘사는 0~0.3).
+ * 단어를 통째로 바꾼 바꿔 말하기는 못 잡는다 — 그건 2라운드 요청문(batchUser)이 막는다.
+ */
+export function similarity(a: string, b: string): number {
+  const grams = (s: string): Set<string> => {
+    const n = s.replace(/[\s.,!?·]/g, '').toLowerCase();
+    const out = new Set<string>();
+    for (let i = 0; i < n.length - 1; i++) out.add(n.slice(i, i + 2));
+    return out;
+  };
+  const A = grams(a);
+  const B = grams(b);
+  if (!A.size || !B.size) return 0;
+  let common = 0;
+  for (const g of A) if (B.has(g)) common++;
+  return (2 * common) / (A.size + B.size);
+}
+const MAX_SIMILARITY_TO_PREVIOUS = 0.45;
+
+/**
+ * 한국어 세 글자 이상 제시어의 앞쪽 절반이 묘사에 들어갔는지 — 출제 규칙("제시어 일부 글자도 금지")을
+ * 코드로도 지킨다(2026-09-29, 부대찌개 2라운드 "미군 부대 근처에서 유래된 이름"). 제시어 전체만 보는
+ * leaksWord로는 못 잡는다. 영어는 단어 단위 검사(leaksWord)로 충분해서 안 본다.
+ */
+export function leaksPart(hint: string, word: string): boolean {
+  if (/^[\x00-\x7F]+$/.test(word) || word.length < 3) return false;
+  return hint.replace(/\s/g, '').includes(word.slice(0, Math.ceil(word.length / 2)));
+}
+
+/** 모델이 낸 한 단어의 묘사 목록을 검사해 HINT_COUNT개를 돌려준다. 못 쓰면 null.
+ *  previous(1라운드)가 있으면 그걸 말만 바꿔 쓴 묘사(similarity ≥ 0.45)도 버린다. */
 export function validateRound(raw: unknown, word: string, others: string[], previous: string[] = []): string[] | null {
   if (!Array.isArray(raw)) return null;
   const texts = raw
     .map((h) => String((h as { text?: unknown })?.text ?? h ?? '').trim())
     .filter((t) => t.length > 0 && t.length <= MAX_HINT_LEN)
-    .filter((t) => !leaksWord(t, word) && !others.some((o) => o !== word && leaksWord(t, o)))
-    .filter((t) => !previous.includes(t));
+    .filter((t) => !leaksWord(t, word) && !leaksPart(t, word) && !others.some((o) => o !== word && leaksWord(t, o)))
+    .filter((t) => !previous.some((p) => similarity(t, p) >= MAX_SIMILARITY_TO_PREVIOUS));
   return texts.length >= HINT_COUNT ? texts.slice(0, HINT_COUNT) : null;
 }
 
@@ -172,7 +205,8 @@ export function batchUser(lang: Lang, round: 1 | 2, category: string, words: str
         ? `There are ${words.length} target words, all in the category "${category}": ${words.join(', ')}\n\n`
         : `There are ${words.length} target words in the category "${category}". The player missed each in round 1 ` +
           `(their guess is unknown — don't aim at any particular wrong answer, just narrow the range). ` +
-          `Round-1 clues for each (don't repeat these):\n\n` +
+          `Do NOT reword round-1 clues — every round-2 clue must add something round 1 didn't say ` +
+          `(looks, ingredients or parts, how it's used, where you find it...). Round-1 clues for each (don't repeat these):\n\n` +
           words.map((w) => `[${w}]\n${(round1?.[w] ?? []).map((t) => `- ${t}`).join('\n')}`).join('\n\n') +
           '\n\n';
     return (
@@ -187,7 +221,9 @@ export function batchUser(lang: Lang, round: 1 | 2, category: string, words: str
     round === 1
       ? `제시어 ${words.length}개 — 주제는 모두 "${category}"다: ${words.join(', ')}\n\n`
       : `제시어 ${words.length}개 — 주제 "${category}". 플레이어가 각 제시어를 1라운드에서 못 맞혔다(무엇을 ` +
-        `추측했는지는 모른다 — 특정 오답을 겨냥하지 말고 범위만 좁혀라). 제시어별 1라운드 묘사(겹치지 말 것):\n\n` +
+        `추측했는지는 모른다 — 특정 오답을 겨냥하지 말고 범위만 좁혀라). 1라운드 묘사를 말만 바꿔 다시 쓰지 마라 — ` +
+        `2라운드 묘사마다 1라운드에 없던 새 정보(생김새·재료나 부품·먹거나 쓰는 법·파는 곳 같은)를 담아라. ` +
+        `제시어별 1라운드 묘사(겹치지 말 것):\n\n` +
         words.map((w) => `[${w}]\n${(round1?.[w] ?? []).map((t) => `- ${t}`).join('\n')}`).join('\n\n') +
         '\n\n';
   return (
