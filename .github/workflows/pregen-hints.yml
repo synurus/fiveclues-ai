@@ -6,6 +6,7 @@
 #
 # ── 하루 예산(gemini-3.8-flash 무료: 하루 20회, 태평양 시간 자정 = KST 16시(서머타임) 초기화) ──
 #   사전 생성   최대 16회/PT하루 (pregenHints.ts의 PREGEN_DAILY_CALLS, usage.json에 기록 — 503 시도도 셈)
+#   ※ 3.8-flash가 과부하·한도면 그 실행 나머지는 gemini-3.1-flash-lite(별도 한도 500회 중 하루 48회)로
 #   자가개선    1회/일 + 503 재시도 (self-improve.yml → propose.mjs, KST 08시 목표)
 #   남는 몫     약 3회 — propose 재시도 여유
 # 자동플레이 추측자는 gemini-3.5-flash(별도 한도)라 여기와 안 겹친다.

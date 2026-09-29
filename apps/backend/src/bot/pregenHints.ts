@@ -11,7 +11,15 @@
  * 사전 생성은 PT 하루 최대 PREGEN_DAILY_CALLS(기본 16)회 — 4회를 남긴다. 호출 횟수는
  * scripts/hintsets/usage.json에 PT 날짜별로 적어 커밋한다(예약 실행이 몇 시간씩 밀리거나
  * 겹쳐도 하루 합이 넘지 않게). 실패한 시도(503 등)도 한도에 잡힐 수 있어 1회로 센다.
- * 하루 한도 429가 오면 그날 몫을 다 쓴 것으로 적고 멈춘다.
+ * 하루 한도 429가 오면 그날 몫을 다 쓴 것으로 적는다.
+ *
+ * ── 대체 모델(2026-09-29) ──
+ * 3.8-flash가 과부하(503이 이어짐)이거나 그날 몫을 다 썼으면, 그 실행의 나머지는 대체 모델
+ * (PREGEN_FALLBACK_MODEL, 기본 gemini-3.1-flash-lite — 실시간 출제의 주력이라 품질이 검증됐고
+ * 하루 500회라 넉넉하다)로 만든다. 3.8-flash가 이틀 연속(미국 아침·밤 모두) 몇 분씩 503만 내서
+ * 세트가 하나도 안 생겼기 때문. 대체 모델 예산은 따로 센다(PT 하루 PREGEN_FALLBACK_DAILY_CALLS
+ * 기본 48회, 한 실행 PREGEN_FALLBACK_RUN_CALLS 기본 16회 — 나머지 한도는 실시간 출제 몫).
+ * 세트엔 실제로 만든 모델 이름이 남는다(성적표·피드백에서 갈린다).
  *
  * ── 한 번에 여러 단어 ──
  * 호출 한 번에 같은 카테고리 단어 PREGEN_BATCH(기본 8)개를 묶는다 — 출제 프롬프트가
@@ -41,21 +49,38 @@ import type { WordEntry } from '../routes/wordPool';
 import { addDays, dailyNumber, readDailyFile, scheduleDaily, utcToday, writeDailyFile, type DailyPuzzle } from './dailyPuzzle';
 import { buildReviewItems, openReviewIssue } from './dailyReview';
 
-const MODEL = process.env.PREGEN_MODEL || 'gemini-3.8-flash';
 const API_KEY = process.env.GEMINI_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
-const DAILY_CALLS = Number(process.env.PREGEN_DAILY_CALLS || 16);
-const RUN_CALLS = Number(process.env.PREGEN_RUN_CALLS || 8);
 const BATCH = Number(process.env.PREGEN_BATCH || 8);
 export const MAX_SETS_PER_WORD = 2;
 const MAX_HINT_LEN = 60; // 프롬프트는 30자 이내(영어는 8단어)를 요구 — 넉넉히 두고 이상치만 거른다
 const MIN_CALL_GAP_MS = 13_000; // RPM 5
 const DRY = process.env.PREGEN_DRY === '1';
 
-const BOT: BotConfig = {
+const gemini = (model: string): BotConfig => ({
   baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
   apiKey: API_KEY,
-  model: MODEL,
+  model,
   maxTokens: 24_000, // 8단어 × (금지어·필러·묘사) + 모델의 생각 토큰
+});
+
+interface Provider {
+  bot: BotConfig;
+  dailyCap: number; // PT 하루
+  runCap: number; // 한 실행
+  usageKey: 'calls' | 'fallbackCalls';
+}
+
+const PRIMARY: Provider = {
+  bot: gemini(process.env.PREGEN_MODEL || 'gemini-3.8-flash'),
+  dailyCap: Number(process.env.PREGEN_DAILY_CALLS || 16),
+  runCap: Number(process.env.PREGEN_RUN_CALLS || 8),
+  usageKey: 'calls',
+};
+const FALLBACK: Provider = {
+  bot: gemini(process.env.PREGEN_FALLBACK_MODEL || 'gemini-3.1-flash-lite'),
+  dailyCap: Number(process.env.PREGEN_FALLBACK_DAILY_CALLS || 48),
+  runCap: Number(process.env.PREGEN_FALLBACK_RUN_CALLS || 16),
+  usageKey: 'fallbackCalls',
 };
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -64,7 +89,8 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 interface Usage {
   date: string; // PT 기준 YYYY-MM-DD
-  calls: number;
+  calls: number; // 주 모델(3.8-flash)
+  fallbackCalls: number; // 대체 모델
 }
 const usagePath = (): string => path.join(hintSetsDir(), 'usage.json');
 
@@ -75,10 +101,12 @@ export function ptDate(now = new Date()): string {
 function readUsage(): Usage {
   const today = ptDate();
   try {
-    const u = JSON.parse(fs.readFileSync(usagePath(), 'utf8')) as Usage;
-    return u.date === today ? u : { date: today, calls: 0 };
+    const u = JSON.parse(fs.readFileSync(usagePath(), 'utf8')) as Partial<Usage>;
+    return u.date === today
+      ? { date: today, calls: u.calls ?? 0, fallbackCalls: u.fallbackCalls ?? 0 }
+      : { date: today, calls: 0, fallbackCalls: 0 };
   } catch {
-    return { date: today, calls: 0 };
+    return { date: today, calls: 0, fallbackCalls: 0 };
   }
 }
 
@@ -179,8 +207,8 @@ class BudgetExhausted extends Error {}
 // 예산에서 도로 뺐는데, 3.8-flash가 몇 분씩 503만 내는 동안 재시도를 이어 가다 성공 0회로 하루
 // 한도(429)에 닿았다 — 503 시도가 구글 쪽 RPD에 잡힌 것으로 보인다(같은 날 자동플레이 추측도
 // 3.8-flash를 쓰고 있어서 완전히 확정은 아님). 그래서 503은 한 실행에 MAX_503_RETRIES번만
-// 기다려 보고, 그래도 과부하면 이번 실행을 접는다(다음 묶음으로 넘어가 봐야 같은 모델이라 예산만
-// 탄다) — 하루 3번 실행이 각자 다시 시도한다.
+// 기다려 보고, 그래도 과부하면 주 모델은 대체 모델로 넘어가고(아래 switchToFallback), 대체 모델까지
+// 과부하면 이번 실행을 접는다 — 하루 3번 실행이 각자 다시 시도한다.
 // 2026-09-28 실측: 미국 아침(KST 23시 전후)엔 3.8-flash가 요청 즉시 503을 냈다 — 그래서
 // 워크플로를 미국 밤(PT 자정 직후 = KST 16~22시)에 돌린다(2026-09-29 KST 14시에도 503이었다).
 const MAX_503_RETRIES = 2;
@@ -188,29 +216,71 @@ const BACKOFF_MS = [60_000, 120_000];
 
 class ModelBusy extends Error {}
 
+interface Run {
+  current: Provider;
+  used: Map<Provider, number>;
+  retries503: number;
+}
+
+const runUsed = (run: Run, p: Provider): number => run.used.get(p) ?? 0;
+const hasBudget = (usage: Usage, run: Run, p: Provider, need = 1): boolean =>
+  usage[p.usageKey] + need <= p.dailyCap && runUsed(run, p) + need <= p.runCap;
+
+/** 이번 실행이 쓸 수 있는 모델로 need회 더 부를 수 있는지(묶음 하나 = 2회). */
+function canAfford(usage: Usage, run: Run, need: number): boolean {
+  return hasBudget(usage, run, run.current, need) || (run.current === PRIMARY && hasBudget(usage, run, FALLBACK, need));
+}
+
+function switchToFallback(run: Run, why: string): void {
+  console.log(`[pregen] ${PRIMARY.bot.model} ${why} — 이번 실행 나머지는 대체 모델 ${FALLBACK.bot.model}로`);
+  run.current = FALLBACK;
+  run.retries503 = 0;
+}
+
 let lastCallAt = 0;
-async function budgetedCall(usage: Usage, run: { calls: number; retries503: number }, sys: string, user: string): Promise<string> {
+/** 한 번 부르고 { raw, model }. 주 모델이 안 되면 대체 모델로 넘어간다. */
+async function budgetedCall(usage: Usage, run: Run, sys: string, user: string): Promise<{ raw: string; model: string }> {
   for (let attempt = 0; ; attempt++) {
-    if (usage.calls >= DAILY_CALLS || run.calls >= RUN_CALLS) throw new BudgetExhausted('예산 소진');
+    const p = run.current;
+    if (!hasBudget(usage, run, p)) {
+      if (p === PRIMARY && hasBudget(usage, run, FALLBACK)) {
+        switchToFallback(run, '예산 소진');
+        attempt = -1;
+        continue;
+      }
+      throw new BudgetExhausted('예산 소진');
+    }
     const wait = lastCallAt + MIN_CALL_GAP_MS - Date.now();
     if (wait > 0) await sleep(wait);
-    usage.calls += 1;
-    run.calls += 1;
+    usage[p.usageKey] += 1;
+    run.used.set(p, runUsed(run, p) + 1);
     writeUsage(usage);
     lastCallAt = Date.now();
     try {
-      return await callBot(sys, user, BOT, { failFast: true, timeoutMs: 240_000 });
+      return { raw: await callBot(sys, user, p.bot, { failFast: true, timeoutMs: 240_000 }), model: p.bot.model };
     } catch (e) {
       if (e instanceof LlmError && e.status === 429 && e.dailyQuota) {
-        usage.calls = DAILY_CALLS; // 그날 몫은 끝 — 다음 실행도 PT 날짜가 바뀔 때까지 쉰다
+        usage[p.usageKey] = p.dailyCap; // 그 모델의 그날 몫은 끝 — 다음 실행도 PT 날짜가 바뀔 때까지 쉰다
         writeUsage(usage);
-        throw new BudgetExhausted('하루 한도(429)');
+        if (p === PRIMARY) {
+          switchToFallback(run, '하루 한도(429)');
+          attempt = -1;
+          continue;
+        }
+        throw new BudgetExhausted(`${p.bot.model} 하루 한도(429)`);
       }
       if (!(e instanceof LlmError && e.status === 503)) throw e;
-      if (run.retries503 >= MAX_503_RETRIES || attempt >= BACKOFF_MS.length) throw new ModelBusy(`${MODEL} 과부하(503)`);
+      if (run.retries503 >= MAX_503_RETRIES || attempt >= BACKOFF_MS.length) {
+        if (p === PRIMARY) {
+          switchToFallback(run, '과부하(503)');
+          attempt = -1;
+          continue;
+        }
+        throw new ModelBusy(`${p.bot.model} 과부하(503)`);
+      }
       run.retries503 += 1;
       const ms = BACKOFF_MS[attempt]!;
-      console.log(`[pregen] 503(과부하) — ${ms / 1000}초 뒤 재시도 (이번 실행 503 재시도 ${run.retries503}/${MAX_503_RETRIES})`);
+      console.log(`[pregen] ${p.bot.model} 503(과부하) — ${ms / 1000}초 뒤 재시도 (${run.retries503}/${MAX_503_RETRIES})`);
       await sleep(ms);
     }
   }
@@ -263,8 +333,11 @@ async function main(): Promise<void> {
   const pools = { ko: loadPool('ko'), en: loadPool('en') };
   const files = { ko: readHintSetFile('ko'), en: readHintSetFile('en') };
   const usage = readUsage();
-  const run = { calls: 0, retries503: 0 };
-  console.log(`[pregen] ${MODEL} · PT ${usage.date} 사용 ${usage.calls}/${DAILY_CALLS} · 이번 실행 최대 ${RUN_CALLS}회 · 묶음 ${BATCH}단어`);
+  const run: Run = { current: PRIMARY, used: new Map(), retries503: 0 };
+  console.log(
+    `[pregen] PT ${usage.date} · ${PRIMARY.bot.model} ${usage.calls}/${PRIMARY.dailyCap}(실행당 ${PRIMARY.runCap}) · ` +
+      `대체 ${FALLBACK.bot.model} ${usage.fallbackCalls}/${FALLBACK.dailyCap}(실행당 ${FALLBACK.runCap}) · 묶음 ${BATCH}단어`,
+  );
 
   let failures = 0;
   const done = new Set<string>(); // 이번 실행에서 이미 시도한 단어(실패 포함) — 같은 단어만 반복하지 않게
@@ -281,13 +354,14 @@ async function main(): Promise<void> {
       console.log(`[pregen] (DRY) 다음 묶음: ${lang} "${category}" 단계${tier} — ${words.join(', ')}`);
       break;
     }
-    if (DAILY_CALLS - usage.calls < 2 || RUN_CALLS - run.calls < 2) {
-      console.log(`[pregen] 예산이 묶음 하나(2회)에 모자란다 — 멈춤 (PT 하루 ${usage.calls}/${DAILY_CALLS}, 이번 실행 ${run.calls}/${RUN_CALLS})`);
+    if (!canAfford(usage, run, 2)) {
+      console.log('[pregen] 예산이 묶음 하나(2회)에 모자란다 — 멈춤');
       break;
     }
     words.forEach((w) => done.add(`${lang}:${w}`));
     try {
-      const r1raw = parseSets(await budgetedCall(usage, run, system(lang, 1, category), batchUser(lang, 1, category, words)));
+      const r1 = await budgetedCall(usage, run, system(lang, 1, category), batchUser(lang, 1, category, words));
+      const r1raw = parseSets(r1.raw);
       const round1: Record<string, string[]> = {};
       for (const w of words) {
         const v = validateRound(r1raw.get(key(w))?.hints, w, words);
@@ -295,7 +369,10 @@ async function main(): Promise<void> {
       }
       const ok1 = Object.keys(round1);
       if (!ok1.length) throw new Error('1라운드 결과를 하나도 못 썼다');
-      const r2raw = parseSets(await budgetedCall(usage, run, system(lang, 2, category), batchUser(lang, 2, category, ok1, round1)));
+      const r2 = await budgetedCall(usage, run, system(lang, 2, category), batchUser(lang, 2, category, ok1, round1));
+      const r2raw = parseSets(r2.raw);
+      // 라운드 사이에 대체 모델로 넘어갔으면 둘 다 남긴다.
+      const model = r1.model === r2.model ? r1.model : `${r1.model}/${r2.model}`;
       const now = new Date().toISOString();
       const saved: string[] = [];
       for (const w of ok1) {
@@ -304,7 +381,7 @@ async function main(): Promise<void> {
         addSet(files[lang], w, {
           id: crypto.randomBytes(4).toString('hex'),
           promptVersion: PROMPT_VERSION[lang],
-          model: MODEL,
+          model,
           generatedAt: now,
           round1: round1[w]!,
           round2,
@@ -350,7 +427,8 @@ async function main(): Promise<void> {
 
   const covered = (lang: Lang): number => pools[lang].filter((w) => files[lang].sets[w.word]?.length).length;
   console.log(
-    `[pregen] 끝 — PT 하루 사용 ${usage.calls}/${DAILY_CALLS}, 이번 실행 ${run.calls}회. ` +
+    `[pregen] 끝 — PT 하루 사용 주 ${usage.calls}/${PRIMARY.dailyCap}·대체 ${usage.fallbackCalls}/${FALLBACK.dailyCap}, ` +
+      `이번 실행 주 ${runUsed(run, PRIMARY)}회·대체 ${runUsed(run, FALLBACK)}회. ` +
       `세트 있는 단어: 한국어 ${covered('ko')}/${pools.ko.length}, 영어 ${covered('en')}/${pools.en.length}`,
   );
 }
