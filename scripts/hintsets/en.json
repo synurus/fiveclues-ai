@@ -84,6 +84,33 @@
     ]
    }
   ],
+  "cat": [
+   {
+    "id": "fc60ea04",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:01:53.488Z",
+    "round1": [
+     "Spends many hours napping in sunlight.",
+     "Moves very quietly across the floor.",
+     "Enjoys sitting on high shelves.",
+     "Often plays with small dangling strings.",
+     "Very particular about keeping clean."
+    ],
+    "round2": [
+     "Uses sharp claws to mark wooden surfaces.",
+     "Eyes glow brightly in the dark.",
+     "Fits into very small, tight boxes.",
+     "Often kneads soft blankets with paws.",
+     "Prefers to land on its feet."
+    ],
+    "banned": [
+     "meow",
+     "purr",
+     "nine lives"
+    ]
+   }
+  ],
   "chocolate": [
    {
     "id": "72607b62",
@@ -108,6 +135,34 @@
      "cocoa",
      "bar",
      "cacao"
+    ]
+   }
+  ],
+  "coffee": [
+   {
+    "id": "2ba81395",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:01:25.823Z",
+    "round1": [
+     "Often dark and earthy in profile.",
+     "Commonly prepared with a filter.",
+     "Pairs well with a pastry.",
+     "Grown in tropical climates.",
+     "Poured from a glass pot."
+    ],
+    "round2": [
+     "Leaves a lingering scent in the air.",
+     "Often ordered with a specific syrup flavor.",
+     "Requires a machine for high pressure extraction.",
+     "Commonly seen in a paper to-go cup.",
+     "The grounds are discarded after use."
+    ],
+    "banned": [
+     "caffeine",
+     "beans",
+     "morning",
+     "bitter"
     ]
    }
   ],
@@ -138,6 +193,60 @@
     ]
    }
   ],
+  "dog": [
+   {
+    "id": "d72cd2ad",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:01:53.488Z",
+    "round1": [
+     "Enjoys chasing moving objects outside.",
+     "Needs to be taken out daily.",
+     "Often sleeps on a soft mat.",
+     "Comes when called by a human.",
+     "Likes to chew on various items."
+    ],
+    "round2": [
+     "Often wears a metal identification tag.",
+     "Relies on a keen sense of smell.",
+     "Responds well to simple hand signals.",
+     "Frequently wags tail when feeling happy.",
+     "Often kept behind a fenced backyard."
+    ],
+    "banned": [
+     "barking",
+     "loyal",
+     "pet"
+    ]
+   }
+  ],
+  "eagle": [
+   {
+    "id": "9c8d5a0f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:02:20.101Z",
+    "round1": [
+     "Often seen perched on high branches.",
+     "Known for having very sharp eyesight.",
+     "Strong grip used to catch prey.",
+     "Builds massive nests in tall trees.",
+     "Dominates the landscape from above."
+    ],
+    "round2": [
+     "Glides without flapping much at all.",
+     "Found near large lakes or rivers.",
+     "Often builds homes in the same spot.",
+     "Usually hunts during the bright day.",
+     "Can carry heavy things while flying."
+    ],
+    "banned": [
+     "bald head",
+     "national symbol",
+     "white tail"
+    ]
+   }
+  ],
   "ice cream": [
    {
     "id": "7ecf61d1",
@@ -162,6 +271,89 @@
      "freezer",
      "scoop",
      "cone"
+    ]
+   }
+  ],
+  "lion": [
+   {
+    "id": "f6cb3f10",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:01:53.488Z",
+    "round1": [
+     "Spends most of the day lounging.",
+     "Lives in a very hot climate.",
+     "Often hunts during the cooler evening.",
+     "Has very powerful legs for running.",
+     "Often seen resting in tall grass."
+    ],
+    "round2": [
+     "Males have a thick, heavy neck coat.",
+     "Often found living in large social groups.",
+     "Vocalizations carry across wide open plains.",
+     "Powerful build designed for short, fast rushes.",
+     "Commonly depicted in ancient stone carvings."
+    ],
+    "banned": [
+     "mane",
+     "king of the jungle",
+     "roar"
+    ]
+   }
+  ],
+  "milk": [
+   {
+    "id": "f760726b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:01:25.823Z",
+    "round1": [
+     "Often splashed into breakfast cereal.",
+     "Essential for baking many cakes.",
+     "Found in the refrigerated aisle.",
+     "Often comes in a paper carton.",
+     "Has a subtle, mild sweetness."
+    ],
+    "round2": [
+     "Often sold in a plastic gallon jug.",
+     "Goes bad if left out too long.",
+     "A key component in creamy soups.",
+     "Froths well for fancy drink toppings.",
+     "Must be kept cold to stay fresh."
+    ],
+    "banned": [
+     "cow",
+     "dairy",
+     "calcium",
+     "white"
+    ]
+   }
+  ],
+  "octopus": [
+   {
+    "id": "5f412645",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:04:10.099Z",
+    "round1": [
+     "Often hides in small crevices.",
+     "Soft body can squeeze through gaps.",
+     "Very curious about nearby things.",
+     "Moves by crawling on the bottom.",
+     "Usually active at night."
+    ],
+    "round2": [
+     "Uses suction cups to grip onto rocks.",
+     "Can change its skin texture to match sand.",
+     "Moves with a fluid, liquid-like grace.",
+     "Often found living in discarded shells.",
+     "Has a large, bulbous head structure."
+    ],
+    "banned": [
+     "eight arms",
+     "ink",
+     "suction cups",
+     "camouflage"
     ]
    }
   ],
@@ -193,6 +385,33 @@
     ]
    }
   ],
+  "owl": [
+   {
+    "id": "5a86c7cc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:02:20.101Z",
+    "round1": [
+     "Hunts silently under the moonlight.",
+     "Large eyes fixed in their sockets.",
+     "Soft feathers allow for quiet movement.",
+     "Often found resting in hollow trees.",
+     "Hears tiny sounds from far away."
+    ],
+    "round2": [
+     "Stays hidden well during the day.",
+     "Makes a low hooting sound.",
+     "Lives in holes found in old trunks.",
+     "Has very thick, fluffy downy coats.",
+     "Eyes are positioned right on the front."
+    ],
+    "banned": [
+     "rotates head",
+     "wise",
+     "nocturnal"
+    ]
+   }
+  ],
   "pancake": [
    {
     "id": "b30d584e",
@@ -218,6 +437,60 @@
      "fluffy",
      "breakfast",
      "flat"
+    ]
+   }
+  ],
+  "parrot": [
+   {
+    "id": "77b0be32",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:02:20.101Z",
+    "round1": [
+     "Uses feet to hold food items.",
+     "Commonly lives in tropical forest canopies.",
+     "Often seen in pairs or flocks.",
+     "Cracks open hard nuts with ease.",
+     "Highly active and very energetic creatures."
+    ],
+    "round2": [
+     "Has a very strong, curved beak.",
+     "Often climbs using its bill.",
+     "Found in warm, humid forest regions.",
+     "Likes to eat sweet, fleshy fruits.",
+     "Very social and loud during mornings."
+    ],
+    "banned": [
+     "talks",
+     "mimics",
+     "colorful"
+    ]
+   }
+  ],
+  "penguin": [
+   {
+    "id": "a12bbe36",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:02:20.101Z",
+    "round1": [
+     "Spends much time diving for food.",
+     "Has dense feathers for cold weather.",
+     "Very graceful once inside the ocean.",
+     "Stays close to others for warmth.",
+     "Uses wings like paddles underwater."
+    ],
+    "round2": [
+     "Lives in huge groups on ice.",
+     "Slides on belly across frozen surfaces.",
+     "Body shape helps it swim fast.",
+     "Comes ashore to raise their young.",
+     "Found mostly in the deep south."
+    ],
+    "banned": [
+     "tuxedo look",
+     "ice",
+     "cannot fly"
     ]
    }
   ],
@@ -332,6 +605,34 @@
     ]
    }
   ],
+  "shark": [
+   {
+    "id": "87b8270e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:04:10.099Z",
+    "round1": [
+     "Constant motion while in the water.",
+     "Usually hunts alone.",
+     "Sensitive to vibrations in the water.",
+     "Patrols reefs and open seas.",
+     "Has a streamlined body shape."
+    ],
+    "round2": [
+     "Skin feels like coarse sandpaper to touch.",
+     "Needs to keep moving to push water.",
+     "Has multiple rows of replaceable chompers.",
+     "Found patrolling both shallow and deep zones.",
+     "Senses tiny electrical pulses from living prey."
+    ],
+    "banned": [
+     "gills",
+     "teeth",
+     "dorsal fin",
+     "predator"
+    ]
+   }
+  ],
   "strawberry": [
    {
     "id": "7f668e8f",
@@ -384,6 +685,32 @@
      "seaweed",
      "soy sauce",
      "chopsticks"
+    ]
+   }
+  ],
+  "tiger": [
+   {
+    "id": "b54019c1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T13:01:53.488Z",
+    "round1": [
+     "Prefers to be alone most times.",
+     "Enjoys spending time near water.",
+     "Moves with a very slow, steady gait.",
+     "Hunts mostly under the cover of dark.",
+     "Very muscular build for its size."
+    ],
+    "round2": [
+     "Pattern helps it hide in brush.",
+     "Very large paws leave deep prints.",
+     "Often stalks prey from behind cover.",
+     "Territory covers vast forest areas.",
+     "Excellent swimmer in deep forest pools."
+    ],
+    "banned": [
+     "stripes",
+     "orange and black"
     ]
    }
   ],
