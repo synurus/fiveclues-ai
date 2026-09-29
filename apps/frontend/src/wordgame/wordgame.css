@@ -402,3 +402,15 @@
 .wg-stats-recent {
   letter-spacing: 2px;
 }
+
+/* 오늘의 문제가 아직 없을 때 버튼 바로 아래 안내(2026-09-29) — 작은 회색 글씨로는 못 보고 지나쳤다. */
+.wg-notice-box {
+  font-size: var(--text-label);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  margin: var(--space-2) 0 0;
+  text-align: center;
+}

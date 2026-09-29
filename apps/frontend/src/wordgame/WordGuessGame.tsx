@@ -15,7 +15,7 @@
 import { useEffect, useState, type KeyboardEvent } from 'react';
 import Button from '../components/Button';
 import { NAME_MAX_LENGTH } from './constants';
-import { startGame, startDaily, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
+import { startGame, startDaily, listDaily, submitGuess, submitFeedback, ApiError, type GuessResponse } from './api';
 import { Typewriter } from './Typewriter';
 import { recordFinishedGame } from './playCount';
 import { recordGame } from './history';
@@ -176,8 +176,20 @@ export function WordGuessGame() {
     setKeyHints((prev) => (prev.has(i) ? new Set([...prev].filter((x) => x !== i)) : prev));
   };
 
-  // 시작 화면 안내(오늘의 문제가 아직 없을 때 등)와 공유 결과 안내.
-  const [notice, setNotice] = useState('');
+  // 공유 결과 안내.
+  // 오늘의 문제가 이 기기 날짜로 준비돼 있는지 — 시작 화면에서 미리 확인한다(2026-09-29). 예전엔 없을 때
+  // 눌러 보고서야 알았고, 로딩 뒤 시작 화면으로 돌아오면서 안내가 맨 아래 작은 글씨라 "눌러도 되돌아온다"로
+  // 보였다. null = 아직 모름(확인 실패 포함 — 그땐 누를 수 있게 둔다).
+  const [dailyReady, setDailyReady] = useState<boolean | null>(null);
+  useEffect(() => {
+    let alive = true;
+    listDaily(lang)
+      .then((res) => alive && setDailyReady(res.puzzles.some((p) => p.date === localDate())))
+      .catch(() => alive && setDailyReady(null));
+    return () => {
+      alive = false;
+    };
+  }, [lang]);
   // 쉬움 모드(2026-09-29) — 1라운드부터 카테고리 공개. 판을 시작할 때의 값이 그 판 내내 간다.
   const [easy, setEasy] = useState<boolean>(loadEasy);
   const [shareStatus, setShareStatus] = useState<ShareStatus>('idle');
@@ -191,7 +203,6 @@ export function WordGuessGame() {
     setFeedbackStatus('idle');
     setGuessError('');
     setShareStatus('idle');
-    setNotice('');
     setStage({ kind: 'playing', session, round: 1, hints, ...(daily ? { daily } : {}), ...(category ? { category, easy: true } : {}) });
   };
 
@@ -214,7 +225,7 @@ export function WordGuessGame() {
     } catch (e) {
       // 아직 문제가 없으면 오류 화면 대신 시작 화면에 안내만 — 자유 플레이는 그대로 할 수 있다.
       if (e instanceof ApiError && e.code === 'daily_unavailable') {
-        setNotice(s.dailyUnavailable);
+        setDailyReady(false);
         setStage({ kind: 'nickname' });
       } else {
         setStage({ kind: 'error', message: errorText(e, s) });
@@ -335,7 +346,7 @@ export function WordGuessGame() {
               maxLength={NAME_MAX_LENGTH}
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              onKeyDown={(e) => isEnter(e) && (todayRecord ? handleStart() : handleStartDaily())}
+              onKeyDown={(e) => isEnter(e) && (todayRecord || dailyReady === false ? handleStart() : handleStartDaily())}
             />
             {/* 오늘의 문제가 먼저(2026-09-29). 오늘 이미 풀었으면 그 자리에서 결과를 공유한다
                 — 하루 한 번만 풀게 하는 건 이 브라우저 기록(daily.ts) 기준이다. */}
@@ -343,6 +354,13 @@ export function WordGuessGame() {
               <Button variant="primary" block onClick={() => handleShare(todayRecord, today)}>
                 {s.dailyShareDone(todayRecord.number)}
               </Button>
+            ) : dailyReady === false ? (
+              <>
+                <Button variant="primary" block disabled>
+                  {s.dailyNotReady}
+                </Button>
+                <p className="wg-notice-box">{s.dailyUnavailable}</p>
+              </>
             ) : (
               <Button variant="primary" block onClick={() => handleStartDaily()}>
                 {s.dailyStart}
@@ -372,7 +390,6 @@ export function WordGuessGame() {
                 {s.stats}
               </button>
             </div>
-            {notice && <p className="wg-notice">{notice}</p>}
             {shareStatus !== 'idle' && <p className="wg-notice">{s[shareStatus === 'failed' ? 'shareFailed' : shareStatus]}</p>}
           </>
         )}
