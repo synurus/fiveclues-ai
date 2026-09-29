@@ -99,7 +99,16 @@ const englishWords = (s: string): string[] =>
     .toLowerCase()
     .split(/[^a-z0-9]+/)
     .filter((w) => w && !STOPWORDS.has(w))
-    .map((w) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w));
+    .map(singular);
+
+// 영어 복수형을 단수로(추측·제시어 양쪽에 똑같이 적용). 예전엔 끝의 s만 떼서 "tomatoes"가 "tomatoe"가
+// 되어 tomato 정답으로 인정되지 않았다(2026-09-29). -ies→y(berries), -oes·-ches·-shes·-xes→es 떼기,
+// 그 밖엔 s 떼기(-ss는 그대로). -oes는 다섯 글자 넘을 때만(shoes·toes를 sho·to로 만들지 않게).
+function singular(w: string): string {
+  if (w.length > 4 && w.endsWith('ies')) return w.slice(0, -3) + 'y';
+  if ((w.length > 5 && w.endsWith('oes')) || (w.length > 4 && /(ches|shes|xes)$/.test(w))) return w.slice(0, -2);
+  return w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w;
+}
 const allIn = (a: string[], b: string[]): boolean => a.length > 0 && a.every((w) => b.includes(w));
 
 /**

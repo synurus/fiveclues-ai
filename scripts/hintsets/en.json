@@ -1,0 +1,447 @@
+{
+ "sets": {
+  "apple": [
+   {
+    "id": "e0ed89b7",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:44:53.706Z",
+    "round1": [
+     "Often found in a school lunchbox.",
+     "Can be baked into a warm dessert.",
+     "Grows on trees in an orchard.",
+     "Usually has a thin, shiny skin.",
+     "Sweet and juicy when bitten into."
+    ],
+    "round2": [
+     "Popular choice for teacher gifts.",
+     "Often sliced into thin wedges.",
+     "Available in many tart varieties.",
+     "Can be turned into a clear drink.",
+     "Stays firm for a long time."
+    ],
+    "banned": [
+     "red",
+     "round",
+     "crunchy",
+     "core"
+    ]
+   }
+  ],
+  "banana": [
+   {
+    "id": "3737a85d",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:44:53.706Z",
+    "round1": [
+     "Comes in a protective natural wrapper.",
+     "Grows in large hanging bunches.",
+     "Soft texture when fully ripe.",
+     "Often mashed for baking bread.",
+     "Easy to grab for a quick snack."
+    ],
+    "round2": [
+     "Starts green before changing shade.",
+     "Has a creamy, smooth consistency.",
+     "Commonly sliced over morning cereal.",
+     "Grows in humid, warm climates.",
+     "Rich in potassium for energy."
+    ],
+    "banned": [
+     "yellow",
+     "long",
+     "curved",
+     "peel"
+    ]
+   }
+  ],
+  "carrot": [
+   {
+    "id": "6ebd6e54",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:45:45.104Z",
+    "round1": [
+     "Firm and crunchy when raw.",
+     "Grows deep underground.",
+     "Stays good in the fridge for weeks.",
+     "Commonly sliced into small rounds.",
+     "Has a slightly sweet natural flavor."
+    ],
+    "round2": [
+     "Often found in a plastic bag.",
+     "Adds a bright pop to stews.",
+     "Can be grated into long thin shreds.",
+     "Usually sold with the leafy top removed.",
+     "Provides a satisfying snap when bitten."
+    ],
+    "banned": [
+     "orange",
+     "long and thin",
+     "rabbits eat them",
+     "pointed end"
+    ]
+   }
+  ],
+  "chocolate": [
+   {
+    "id": "72607b62",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:43:48.451Z",
+    "round1": [
+     "Softens quickly in your palm.",
+     "Comes in dark or milky shades.",
+     "Often used as a gift.",
+     "Has a rich, lingering taste.",
+     "Found in many baked goods."
+    ],
+    "round2": [
+     "Breaks into smaller, distinct squares.",
+     "Leaves a smooth film on your tongue.",
+     "Sold in many different sizes.",
+     "Stains fingers if held too long.",
+     "Hard solid at room temperature."
+    ],
+    "banned": [
+     "cocoa",
+     "bar",
+     "cacao"
+    ]
+   }
+  ],
+  "cookie": [
+   {
+    "id": "9b460d46",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:43:48.451Z",
+    "round1": [
+     "Usually round and flat shaped.",
+     "Can be soft or quite crunchy.",
+     "Easy to grab and eat quickly.",
+     "Often kept in a jar.",
+     "Perfect for a small midday snack."
+    ],
+    "round2": [
+     "Often contains small, solid chunks inside.",
+     "Slightly crumbly when you bite down.",
+     "Usually has a toasted, golden-brown edge.",
+     "Sold in packs of several pieces.",
+     "Surface is often uneven and bumpy."
+    ],
+    "banned": [
+     "baking",
+     "dough",
+     "oven"
+    ]
+   }
+  ],
+  "ice cream": [
+   {
+    "id": "7ecf61d1",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:43:48.451Z",
+    "round1": [
+     "Must be kept below freezing point.",
+     "Has a smooth, creamy mouthfeel.",
+     "Starts melting if left out too long.",
+     "Commonly comes in many different flavors.",
+     "Often served at birthday parties."
+    ],
+    "round2": [
+     "Sticky residue left on your hands.",
+     "Hardens again if put back in cold.",
+     "Often found in large, round tubs.",
+     "Can be piled into multiple layers.",
+     "Usually colorful and visually bright."
+    ],
+    "banned": [
+     "freezer",
+     "scoop",
+     "cone"
+    ]
+   }
+  ],
+  "onion": [
+   {
+    "id": "2a70a0c9",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:45:45.104Z",
+    "round1": [
+     "Has a papery outer covering.",
+     "Grows just below the soil surface.",
+     "Becomes sweet when cooked slowly.",
+     "Very pungent when sliced fresh.",
+     "Round shape that rolls easily."
+    ],
+    "round2": [
+     "Often hung in a mesh netting.",
+     "Firm to the touch before cutting.",
+     "Gets translucent as it wilts down.",
+     "Usually sold in large bulk nets.",
+     "Found in almost every savory kitchen."
+    ],
+    "banned": [
+     "makes you cry",
+     "layers",
+     "strong smell",
+     "white or purple"
+    ]
+   }
+  ],
+  "pancake": [
+   {
+    "id": "b30d584e",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:40:58.256Z",
+    "round1": [
+     "Stacked high on a plate",
+     "Often made from a simple liquid batter",
+     "Usually prepared right at home",
+     "Best when topped with melted butter",
+     "Can be eaten with various fruit"
+    ],
+    "round2": [
+     "Bubbles form on top before flipping.",
+     "Spongey feel when you press it down.",
+     "Often browned with a flat surface.",
+     "Soaks up liquid like a dry sponge.",
+     "Soft enough to fold over easily."
+    ],
+    "banned": [
+     "maple syrup",
+     "fluffy",
+     "breakfast",
+     "flat"
+    ]
+   }
+  ],
+  "pizza": [
+   {
+    "id": "1d562eda",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:40:58.256Z",
+    "round1": [
+     "Often ordered for a group party",
+     "Commonly found at a late night snack",
+     "Features a circular shape before cutting",
+     "Can be topped with many different items",
+     "Cooked inside a very high heat oven"
+    ],
+    "round2": [
+     "Stretchy strings pull away when biting.",
+     "Often comes in a square cardboard box.",
+     "Edges puff up and turn golden brown.",
+     "Commonly sliced into equal wedges.",
+     "Greasy residue left on your fingertips."
+    ],
+    "banned": [
+     "cheese",
+     "pepperoni",
+     "crust",
+     "triangle slices"
+    ]
+   }
+  ],
+  "popcorn": [
+   {
+    "id": "3409766d",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:43:48.451Z",
+    "round1": [
+     "Expands rapidly when heated up.",
+     "Light and airy in texture.",
+     "Often found at large outdoor events.",
+     "Leaves behind a crunchy remnant.",
+     "Best enjoyed while still quite warm."
+    ],
+    "round2": [
+     "Makes a loud popping noise when ready.",
+     "Stays fresh for a very short time.",
+     "Small pieces are jagged and uneven.",
+     "Often sold in very large containers.",
+     "Usually eaten plain or with light seasoning."
+    ],
+    "banned": [
+     "kernels",
+     "cinema",
+     "butter"
+    ]
+   }
+  ],
+  "potato": [
+   {
+    "id": "f5d4fee1",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:45:45.104Z",
+    "round1": [
+     "Very starchy and filling.",
+     "Stores well in a dark pantry.",
+     "Often baked until the middle is soft.",
+     "Dull surface texture.",
+     "Comes in many different sizes."
+    ],
+    "round2": [
+     "Keeps well in a dry, cool bin.",
+     "Can be roasted until the edges crisp.",
+     "Forms a fluffy interior when steamed.",
+     "Often used to thicken a hearty soup.",
+     "Has a somewhat dusty, earthy exterior."
+    ],
+    "banned": [
+     "mashed",
+     "french fries",
+     "brown skin",
+     "eyes"
+    ]
+   }
+  ],
+  "sandwich": [
+   {
+    "id": "5b68bc61",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:40:58.256Z",
+    "round1": [
+     "Often sliced diagonally across the middle",
+     "Commonly includes a spread of condiments",
+     "Found in almost every cafeteria",
+     "Can be pressed until very crispy",
+     "Usually held firmly with both hands"
+    ],
+    "round2": [
+     "Two outer pieces acting like a book.",
+     "Often includes a leaf of crunchy green.",
+     "Commonly packed in a plastic baggie.",
+     "Layers visible from the side view.",
+     "Keeps your palms clean while eating."
+    ],
+    "banned": [
+     "bread",
+     "lunch",
+     "two slices",
+     "filling"
+    ]
+   }
+  ],
+  "strawberry": [
+   {
+    "id": "7f668e8f",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:44:53.706Z",
+    "round1": [
+     "Often dipped in melted chocolate.",
+     "Commonly used to top off desserts.",
+     "Soft and delicate to the touch.",
+     "Grows low to the garden soil.",
+     "Available in abundance during spring."
+    ],
+    "round2": [
+     "Tiny yellow dots cover the skin.",
+     "Often made into a spreadable jam.",
+     "Frequently paired with whipped cream.",
+     "Has a distinct, fragrant scent.",
+     "Often found in a carton."
+    ],
+    "banned": [
+     "red",
+     "green leaves",
+     "triangular"
+    ]
+   }
+  ],
+  "sushi": [
+   {
+    "id": "cc878701",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:40:58.256Z",
+    "round1": [
+     "Usually served in small uniform pieces",
+     "Found on a menu at many restaurants",
+     "Often comes with a spicy green paste",
+     "Requires great skill to prepare well",
+     "Often enjoyed with a light clear soup"
+    ],
+    "round2": [
+     "Usually dipped into a dark salty liquid.",
+     "Wrapped tightly into a neat cylinder.",
+     "Often presented on a wooden board.",
+     "A tiny dab adds a sharp bite.",
+     "Firm grains held together by stickiness."
+    ],
+    "banned": [
+     "raw fish",
+     "seaweed",
+     "soy sauce",
+     "chopsticks"
+    ]
+   }
+  ],
+  "tomato": [
+   {
+    "id": "acb90509",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:45:45.104Z",
+    "round1": [
+     "Very soft when fully ripe.",
+     "Grows on a tall, leafy vine.",
+     "High water content inside.",
+     "Has a thin, delicate skin.",
+     "Best served at room temperature."
+    ],
+    "round2": [
+     "Often sold in cardboard cartons.",
+     "Has a glossy, smooth outer shell.",
+     "Releases juice when pressed down.",
+     "Grows in heavy clusters on a stem.",
+     "Tastes best during the summer months."
+    ],
+    "banned": [
+     "red",
+     "seeds inside",
+     "ketchup",
+     "juice"
+    ]
+   }
+  ],
+  "watermelon": [
+   {
+    "id": "07345897",
+    "promptVersion": "4f00f424",
+    "model": "gemini-3.1-flash-lite",
+    "generatedAt": "2026-09-29T05:44:53.706Z",
+    "round1": [
+     "Mostly made of water.",
+     "Popular at summer outdoor picnics.",
+     "Heavy enough to require two hands.",
+     "Refreshing on a very hot day.",
+     "Grows on vines along the ground."
+    ],
+    "round2": [
+     "Often served in triangular slices.",
+     "Usually eaten outside to avoid mess.",
+     "Has a very thick, tough outer shell.",
+     "Can be cubed for a fruit salad.",
+     "Requires a sharp knife to open."
+    ],
+    "banned": [
+     "green skin",
+     "red inside",
+     "black seeds",
+     "large"
+    ]
+   }
+  ]
+ }
+}

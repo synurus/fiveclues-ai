@@ -51,6 +51,9 @@ import { buildReviewItems, openReviewIssue } from './dailyReview';
 
 const API_KEY = process.env.GEMINI_API_KEY || process.env.SELFIMPROVE_BOT_API_KEY || '';
 const BATCH = Number(process.env.PREGEN_BATCH || 8);
+// 대체 모델(flash-lite)은 한 번에 적게 — 8단어를 묶었더니 묘사가 막연해지고 2라운드가 1라운드를 말만
+// 바꿔 썼다(2026-09-29). 한 단어씩 부르면 훨씬 나았다.
+const FALLBACK_BATCH = Number(process.env.PREGEN_FALLBACK_BATCH || 4);
 export const MAX_SETS_PER_WORD = 2;
 const MAX_HINT_LEN = 60; // 프롬프트는 30자 이내(영어는 8단어)를 요구 — 넉넉히 두고 이상치만 거른다
 const MIN_CALL_GAP_MS = 13_000; // RPM 5
@@ -125,8 +128,17 @@ interface Need {
   oldest: string; // 같은 단계 안에서 오래된 것부터
 }
 
+/**
+ * 한 언어에 세트가 있는 단어가 이보다 적으면 그 언어를 먼저 만든다(2026-09-29) — 오늘의 문제는 세트가
+ * 있는 단어로만 낼 수 있고 90일 동안 같은 단어를 안 내서, 30단어면 한 달치 일정이 된다. 예전엔 한국어를
+ * 다 채울 때까지(약 10일) 영어 세트가 하나도 없어 영어 오늘의 문제가 안 열렸다.
+ */
+export const MIN_WORDS_PER_LANG = 30;
+
 export function planNeeds(pools: Record<Lang, WordEntry[]>, files: Record<Lang, HintSetFile>, versions: Record<Lang, string>): Need[] {
   const needs: Need[] = [];
+  const covered = { ko: 0, en: 0 };
+  const catCovered = new Map<string, number>(); // "언어:카테고리" → 세트 있는 단어 수
   for (const lang of ['ko', 'en'] as const) {
     for (const { word, category } of pools[lang]) {
       const sets = files[lang].sets[word] ?? [];
@@ -134,10 +146,25 @@ export function planNeeds(pools: Record<Lang, WordEntry[]>, files: Record<Lang, 
       const oldest = sets.map((s) => s.generatedAt).sort()[0] ?? '';
       const tier = sets.length === 0 ? 0 : current.length === 0 ? 1 : current.length < MAX_SETS_PER_WORD ? 2 : 3;
       needs.push({ lang, word, category, tier, oldest });
+      if (sets.length) {
+        covered[lang] += 1;
+        catCovered.set(`${lang}:${category}`, (catCovered.get(`${lang}:${category}`) ?? 0) + 1);
+      }
     }
   }
-  // 단계 → 언어(한국어 먼저) → 오래된 순
-  return needs.sort((a, b) => a.tier - b.tier || (a.lang === b.lang ? 0 : a.lang === 'ko' ? -1 : 1) || a.oldest.localeCompare(b.oldest));
+  // 세트가 모자란 언어가 먼저(둘 다 모자라면 더 적은 쪽), 그다음은 한국어 먼저
+  const starved = (l: Lang): boolean => covered[l] < MIN_WORDS_PER_LANG;
+  const langOrder = (a: Lang, b: Lang): number => {
+    if (a === b) return 0;
+    if (starved(a) !== starved(b)) return starved(a) ? -1 : 1;
+    if (starved(a) && covered[a] !== covered[b]) return covered[a] - covered[b];
+    return a === 'ko' ? -1 : 1;
+  };
+  // 같은 언어·단계 안에선 세트가 적은 카테고리부터 — 오늘의 문제가 한 카테고리(처음엔 음식)에 몰리지 않게
+  const catRank = (n: Need): number => catCovered.get(`${n.lang}:${n.category}`) ?? 0;
+  return needs.sort(
+    (a, b) => a.tier - b.tier || langOrder(a.lang, b.lang) || catRank(a) - catRank(b) || a.oldest.localeCompare(b.oldest),
+  );
 }
 
 /** 맨 앞 단어의 언어·카테고리로 같은 단계의 단어를 최대 size개 묶는다. */
@@ -403,16 +430,18 @@ async function main(): Promise<void> {
   const files = { ko: readHintSetFile('ko'), en: readHintSetFile('en') };
   const usage = readUsage();
   const run: Run = { current: PRIMARY, used: new Map(), retries503: 0 };
+  // 주 모델 예산이 이미 바닥났으면 처음부터 대체 모델(작은 묶음)로.
+  if (!hasBudget(usage, run, PRIMARY, 2) && hasBudget(usage, run, FALLBACK, 2)) run.current = FALLBACK;
   console.log(
     `[pregen] PT ${usage.date} · ${PRIMARY.bot.model} ${usage.calls}/${PRIMARY.dailyCap}(실행당 ${PRIMARY.runCap}) · ` +
-      `대체 ${FALLBACK.bot.model} ${usage.fallbackCalls}/${FALLBACK.dailyCap}(실행당 ${FALLBACK.runCap}) · 묶음 ${BATCH}단어`,
+      `대체 ${FALLBACK.bot.model} ${usage.fallbackCalls}/${FALLBACK.dailyCap}(실행당 ${FALLBACK.runCap}) · 묶음 ${BATCH}단어(대체 ${FALLBACK_BATCH})`,
   );
 
   let failures = 0;
   const done = new Set<string>(); // 이번 실행에서 이미 시도한 단어(실패 포함) — 같은 단어만 반복하지 않게
   for (;;) {
     const needs = planNeeds(pools, files, PROMPT_VERSION).filter((n) => !done.has(`${n.lang}:${n.word}`));
-    const batch = nextBatch(needs, BATCH);
+    const batch = nextBatch(needs, run.current === FALLBACK ? FALLBACK_BATCH : BATCH);
     if (!batch.length) {
       console.log('[pregen] 만들 것이 없다.');
       break;

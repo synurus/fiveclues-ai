@@ -13,7 +13,12 @@
   },
   {
     "word": "sandwich",
-    "category": "Food"
+    "category": "Food",
+    "accept": [
+      "sub",
+      "sarnie",
+      "butty"
+    ]
   },
   {
     "word": "dumpling",
@@ -98,7 +103,10 @@
   },
   {
     "word": "popcorn",
-    "category": "Snacks & Desserts"
+    "category": "Snacks & Desserts",
+    "accept": [
+      "kettle corn"
+    ]
   },
   {
     "word": "ice cream",
@@ -240,7 +248,11 @@
   },
   {
     "word": "potato",
-    "category": "Vegetables"
+    "category": "Vegetables",
+    "accept": [
+      "spud",
+      "tater"
+    ]
   },
   {
     "word": "tomato",

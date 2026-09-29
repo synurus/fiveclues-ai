@@ -26,6 +26,13 @@ test('judgeGuess — 영어는 단어 단위', () => {
   assert.equal(judgeGuess('dolphin', 'Dolphins'), 'loose');
   assert.equal(judgeGuess('dolphin', 'a dolphin'), 'loose');
   assert.equal(judgeGuess('Tambourine', 'tambourine'), 'exact');
+  // 복수형(2026-09-29 — tomatoes가 오답이던 버그)
+  assert.equal(judgeGuess('tomato', 'tomatoes'), 'loose');
+  assert.equal(judgeGuess('potato', 'Potatoes'), 'loose');
+  assert.equal(judgeGuess('blueberry', 'blueberries'), 'loose');
+  assert.equal(judgeGuess('sandwich', 'sandwiches'), 'loose');
+  assert.equal(judgeGuess('glasses', 'glasses'), 'exact');
+  assert.equal(judgeGuess('elephant', 'ants'), 'wrong');
 });
 
 test('leaksWord — 제시어가 묘사에 그대로 들어갔는지', () => {

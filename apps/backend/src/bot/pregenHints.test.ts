@@ -17,7 +17,7 @@ test('validateRound — 개수·길이·제시어 노출·다른 제시어·1라
   assert.deepEqual(validateRound([...mixed, ...h('다섯')], '낚시', ['낚시', '김밥'], ['이미 나옴']), ['하나', '둘', '셋', '넷', '다섯']);
 });
 
-test('planNeeds·nextBatch — 없는 단어 먼저, 한국어 먼저, 같은 카테고리끼리', () => {
+test('planNeeds·nextBatch — 없는 단어 먼저, 세트가 적은 언어 먼저, 같은 카테고리끼리', () => {
   const set = (v: string, at: string): HintSet => ({ id: at, promptVersion: v, model: 'm', generatedAt: at, round1: [], round2: [] });
   const pools = {
     ko: [
@@ -33,13 +33,14 @@ test('planNeeds·nextBatch — 없는 단어 먼저, 한국어 먼저, 같은 �
     en: { sets: {} },
   };
   const needs = planNeeds(pools, files, { ko: 'cur', en: 'cur' });
-  // 단계0(세트 없음): 다·라(한국어) → x(영어), 단계1(지금 세대 없음): 가, 단계2(개수 모자람): 나
+  // 단계0(세트 없음): x(영어 — 세트 0개라 한국어(2개)보다 먼저) → 다(세트 없는 카테고리 B) → 라(A),
+  // 단계1(지금 세대 없음): 가, 단계2(개수 모자람): 나
   assert.deepEqual(
     needs.map((n) => `${n.word}${n.tier}`),
-    ['다0', '라0', 'x0', '가1', '나2'],
+    ['x0', '다0', '라0', '가1', '나2'],
   );
   assert.deepEqual(
-    nextBatch(needs, 8).map((n) => n.word),
+    nextBatch(needs.slice(1), 8).map((n) => n.word),
     ['다'], // 맨 앞 단어(다)의 카테고리 B·단계0만
   );
   assert.equal(MAX_SETS_PER_WORD, 2);
@@ -79,4 +80,23 @@ test('leaksPart — 세 글자 이상 한국어 제시어의 앞쪽 절반이 �
   assert.equal(leaksPart('탕수 소스를 부어', '탕수육'), true);
   assert.equal(leaksPart('배가 고플 때', '배'), false); // 짧은 제시어는 안 봄
   assert.equal(leaksPart('A burger bun', 'hamburger'), false); // 영어는 안 봄
+});
+
+test('planNeeds — 세트가 30단어 미만인 언어가 먼저, 같은 단계에선 세트 적은 카테고리부터', () => {
+  const set = (at: string): HintSet => ({ id: at, promptVersion: 'cur', model: 'm', generatedAt: at, round1: [], round2: [] });
+  const koPool = Array.from({ length: 40 }, (_, i) => ({ word: `k${i}`, category: i < 35 ? 'A' : 'B' }));
+  const koSets: HintSetFile = { sets: Object.fromEntries(koPool.slice(0, 32).map((w) => [w.word, [set('2026-09-01')]])) };
+  const enPool = [{ word: 'x', category: 'Food' }, { word: 'y', category: 'Food' }, { word: 'z', category: 'Birds' }];
+  const enSets: HintSetFile = { sets: { x: [set('2026-09-01')] } };
+  const needs = planNeeds({ ko: koPool, en: enPool }, { ko: koSets, en: enSets }, { ko: 'cur', en: 'cur' });
+  // 한국어는 32단어라 충분 → 영어(1단어)가 먼저. 영어 안에선 세트 0개인 Birds가 Food보다 먼저
+  assert.deepEqual(needs.slice(0, 3).map((n) => n.word), ['z', 'y', 'k35']);
+});
+
+test('planNeeds — 두 언어 다 모자라면 세트가 더 적은 언어부터', () => {
+  const set = (at: string): HintSet => ({ id: at, promptVersion: 'cur', model: 'm', generatedAt: at, round1: [], round2: [] });
+  const ko = [{ word: 'k1', category: 'A' }, { word: 'k2', category: 'A' }];
+  const en = [{ word: 'e1', category: 'A' }];
+  const needs = planNeeds({ ko, en }, { ko: { sets: { k1: [set('2026-09-01')] } }, en: { sets: {} } }, { ko: 'cur', en: 'cur' });
+  assert.equal(needs[0]!.word, 'e1'); // 영어 0 < 한국어 1
 });

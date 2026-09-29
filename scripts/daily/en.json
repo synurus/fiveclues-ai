@@ -1,0 +1,208 @@
+{
+ "2026-09-29": {
+  "word": "cookie",
+  "category": "Snacks & Desserts",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Usually round and flat shaped.",
+   "Can be soft or quite crunchy.",
+   "Easy to grab and eat quickly.",
+   "Often kept in a jar.",
+   "Perfect for a small midday snack."
+  ],
+  "round2": [
+   "Often contains small, solid chunks inside.",
+   "Slightly crumbly when you bite down.",
+   "Usually has a toasted, golden-brown edge.",
+   "Sold in packs of several pieces.",
+   "Surface is often uneven and bumpy."
+  ],
+  "banned": [
+   "baking",
+   "dough",
+   "oven"
+  ]
+ },
+ "2026-09-30": {
+  "word": "pizza",
+  "category": "Food",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often ordered for a group party",
+   "Commonly found at a late night snack",
+   "Features a circular shape before cutting",
+   "Can be topped with many different items",
+   "Cooked inside a very high heat oven"
+  ],
+  "round2": [
+   "Stretchy strings pull away when biting.",
+   "Often comes in a square cardboard box.",
+   "Edges puff up and turn golden brown.",
+   "Commonly sliced into equal wedges.",
+   "Greasy residue left on your fingertips."
+  ],
+  "banned": [
+   "cheese",
+   "pepperoni",
+   "crust",
+   "triangle slices"
+  ]
+ },
+ "2026-10-01": {
+  "word": "onion",
+  "category": "Vegetables",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Has a papery outer covering.",
+   "Grows just below the soil surface.",
+   "Becomes sweet when cooked slowly.",
+   "Very pungent when sliced fresh.",
+   "Round shape that rolls easily."
+  ],
+  "round2": [
+   "Often hung in a mesh netting.",
+   "Firm to the touch before cutting.",
+   "Gets translucent as it wilts down.",
+   "Usually sold in large bulk nets.",
+   "Found in almost every savory kitchen."
+  ],
+  "banned": [
+   "makes you cry",
+   "layers",
+   "strong smell",
+   "white or purple"
+  ]
+ },
+ "2026-10-02": {
+  "word": "banana",
+  "category": "Fruits",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Comes in a protective natural wrapper.",
+   "Grows in large hanging bunches.",
+   "Soft texture when fully ripe.",
+   "Often mashed for baking bread.",
+   "Easy to grab for a quick snack."
+  ],
+  "round2": [
+   "Starts green before changing shade.",
+   "Has a creamy, smooth consistency.",
+   "Commonly sliced over morning cereal.",
+   "Grows in humid, warm climates.",
+   "Rich in potassium for energy."
+  ],
+  "banned": [
+   "yellow",
+   "long",
+   "curved",
+   "peel"
+  ]
+ },
+ "2026-10-03": {
+  "word": "popcorn",
+  "category": "Snacks & Desserts",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Expands rapidly when heated up.",
+   "Light and airy in texture.",
+   "Often found at large outdoor events.",
+   "Leaves behind a crunchy remnant.",
+   "Best enjoyed while still quite warm."
+  ],
+  "round2": [
+   "Makes a loud popping noise when ready.",
+   "Stays fresh for a very short time.",
+   "Small pieces are jagged and uneven.",
+   "Often sold in very large containers.",
+   "Usually eaten plain or with light seasoning."
+  ],
+  "banned": [
+   "kernels",
+   "cinema",
+   "butter"
+  ]
+ },
+ "2026-10-04": {
+  "word": "sandwich",
+  "category": "Food",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often sliced diagonally across the middle",
+   "Commonly includes a spread of condiments",
+   "Found in almost every cafeteria",
+   "Can be pressed until very crispy",
+   "Usually held firmly with both hands"
+  ],
+  "round2": [
+   "Two outer pieces acting like a book.",
+   "Often includes a leaf of crunchy green.",
+   "Commonly packed in a plastic baggie.",
+   "Layers visible from the side view.",
+   "Keeps your palms clean while eating."
+  ],
+  "banned": [
+   "bread",
+   "lunch",
+   "two slices",
+   "filling"
+  ]
+ },
+ "2026-10-05": {
+  "word": "watermelon",
+  "category": "Fruits",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Mostly made of water.",
+   "Popular at summer outdoor picnics.",
+   "Heavy enough to require two hands.",
+   "Refreshing on a very hot day.",
+   "Grows on vines along the ground."
+  ],
+  "round2": [
+   "Often served in triangular slices.",
+   "Usually eaten outside to avoid mess.",
+   "Has a very thick, tough outer shell.",
+   "Can be cubed for a fruit salad.",
+   "Requires a sharp knife to open."
+  ],
+  "banned": [
+   "green skin",
+   "red inside",
+   "black seeds",
+   "large"
+  ]
+ },
+ "2026-10-06": {
+  "word": "tomato",
+  "category": "Vegetables",
+  "promptVersion": "4f00f424",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Very soft when fully ripe.",
+   "Grows on a tall, leafy vine.",
+   "High water content inside.",
+   "Has a thin, delicate skin.",
+   "Best served at room temperature."
+  ],
+  "round2": [
+   "Often sold in cardboard cartons.",
+   "Has a glossy, smooth outer shell.",
+   "Releases juice when pressed down.",
+   "Grows in heavy clusters on a stem.",
+   "Tastes best during the summer months."
+  ],
+  "banned": [
+   "red",
+   "seeds inside",
+   "ketchup",
+   "juice"
+  ]
+ }
+}
