@@ -204,5 +204,31 @@
    "ketchup",
    "juice"
   ]
+ },
+ "2026-10-07": {
+  "word": "dragonfly",
+  "category": "Insects & Bugs",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Visible hanging out near grassy shorelines.",
+   "Stays active when the sun is out.",
+   "Lands on reeds or tall thin stalks.",
+   "Possesses a very lightweight physical form.",
+   "Found hovering above still outdoor surfaces."
+  ],
+  "round2": [
+   "Two pairs of wings beat independently.",
+   "Large eyes cover most of its head.",
+   "Spends its early life underwater.",
+   "Can fly backward and hover perfectly still.",
+   "Often perches on twigs facing the sun."
+  ],
+  "banned": [
+   "transparent wings",
+   "long thin body",
+   "water",
+   "predatory"
+  ]
  }
 }
