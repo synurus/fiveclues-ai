@@ -230,5 +230,31 @@
    "water",
    "predatory"
   ]
+ },
+ "2026-10-08": {
+  "word": "milk",
+  "category": "Drinks",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often splashed into breakfast cereal.",
+   "Essential for baking many cakes.",
+   "Found in the refrigerated aisle.",
+   "Often comes in a paper carton.",
+   "Has a subtle, mild sweetness."
+  ],
+  "round2": [
+   "Often sold in a plastic gallon jug.",
+   "Goes bad if left out too long.",
+   "A key component in creamy soups.",
+   "Froths well for fancy drink toppings.",
+   "Must be kept cold to stay fresh."
+  ],
+  "banned": [
+   "cow",
+   "dairy",
+   "calcium",
+   "white"
+  ]
  }
 }
