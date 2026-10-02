@@ -256,5 +256,31 @@
    "calcium",
    "white"
   ]
+ },
+ "2026-10-09": {
+  "word": "coffee",
+  "category": "Drinks",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often dark and earthy in profile.",
+   "Commonly prepared with a filter.",
+   "Pairs well with a pastry.",
+   "Grown in tropical climates.",
+   "Poured from a glass pot."
+  ],
+  "round2": [
+   "Leaves a lingering scent in the air.",
+   "Often ordered with a specific syrup flavor.",
+   "Requires a machine for high pressure extraction.",
+   "Commonly seen in a paper to-go cup.",
+   "The grounds are discarded after use."
+  ],
+  "banned": [
+   "caffeine",
+   "beans",
+   "morning",
+   "bitter"
+  ]
  }
 }
