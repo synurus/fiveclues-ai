@@ -282,5 +282,31 @@
    "morning",
    "bitter"
   ]
+ },
+ "2026-10-10": {
+  "word": "octopus",
+  "category": "Sea Creatures",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often hides in small crevices.",
+   "Soft body can squeeze through gaps.",
+   "Very curious about nearby things.",
+   "Moves by crawling on the bottom.",
+   "Usually active at night."
+  ],
+  "round2": [
+   "Uses suction cups to grip onto rocks.",
+   "Can change its skin texture to match sand.",
+   "Moves with a fluid, liquid-like grace.",
+   "Often found living in discarded shells.",
+   "Has a large, bulbous head structure."
+  ],
+  "banned": [
+   "eight arms",
+   "ink",
+   "suction cups",
+   "camouflage"
+  ]
  }
 }
