@@ -308,5 +308,31 @@
    "suction cups",
    "camouflage"
   ]
+ },
+ "2026-10-11": {
+  "word": "ladybug",
+  "category": "Insects & Bugs",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often found sitting on green garden stems.",
+   "Moves at a slow, steady walking pace.",
+   "Commonly spotted in home vegetable gardens.",
+   "Can be seen during warm summer months.",
+   "Often rests on the undersides of leaves."
+  ],
+  "round2": [
+   "Releases a bitter scent when feeling threatened.",
+   "Hibernates in large clusters inside logs.",
+   "Warms its dome-shaped back in the sun.",
+   "Drops to the ground when startled.",
+   "Often hibernates through the coldest winter months."
+  ],
+  "banned": [
+   "red with black spots",
+   "aphids",
+   "round shape",
+   "lucky"
+  ]
  }
 }
