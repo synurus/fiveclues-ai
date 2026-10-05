@@ -334,5 +334,30 @@
    "round shape",
    "lucky"
   ]
+ },
+ "2026-10-12": {
+  "word": "penguin",
+  "category": "Birds",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Spends much time diving for food.",
+   "Has dense feathers for cold weather.",
+   "Very graceful once inside the ocean.",
+   "Stays close to others for warmth.",
+   "Uses wings like paddles underwater."
+  ],
+  "round2": [
+   "Lives in huge groups on ice.",
+   "Slides on belly across frozen surfaces.",
+   "Body shape helps it swim fast.",
+   "Comes ashore to raise their young.",
+   "Found mostly in the deep south."
+  ],
+  "banned": [
+   "tuxedo look",
+   "ice",
+   "cannot fly"
+  ]
  }
 }
