@@ -359,5 +359,30 @@
    "ice",
    "cannot fly"
   ]
+ },
+ "2026-10-13": {
+  "word": "eagle",
+  "category": "Birds",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Often seen perched on high branches.",
+   "Known for having very sharp eyesight.",
+   "Strong grip used to catch prey.",
+   "Builds massive nests in tall trees.",
+   "Dominates the landscape from above."
+  ],
+  "round2": [
+   "Glides without flapping much at all.",
+   "Found near large lakes or rivers.",
+   "Often builds homes in the same spot.",
+   "Usually hunts during the bright day.",
+   "Can carry heavy things while flying."
+  ],
+  "banned": [
+   "bald head",
+   "national symbol",
+   "white tail"
+  ]
  }
 }
