@@ -196,6 +196,34 @@
     ]
    }
   ],
+  "bookshelf": [
+   {
+    "id": "e1d02146",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:06.806Z",
+    "round1": [
+     "Stacked with colorful paper blocks.",
+     "Lined up in the study.",
+     "Filled with heavy knowledge.",
+     "Reaching high up needs a stool.",
+     "Organized by tall vertical rows."
+    ],
+    "round2": [
+     "Shadows hide the dark corners.",
+     "Fingerprints show on the polish.",
+     "Tilts slightly on uneven floors.",
+     "Cold metal brackets underneath.",
+     "Echoes in an empty room."
+    ],
+    "banned": [
+     "store books",
+     "rows of shelves",
+     "reading room",
+     "paperbacks"
+    ]
+   }
+  ],
   "butterfly": [
    {
     "id": "471830b9",
@@ -417,6 +445,34 @@
     ]
    }
   ],
+  "dishwasher": [
+   {
+    "id": "f7d73e5d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:31:16.251Z",
+    "round1": [
+     "Runs a hot cycle.",
+     "Contains pull out racks.",
+     "Opens with a latch handle.",
+     "Saves time after dinner.",
+     "Connects to under sink plumbing."
+    ],
+    "round2": [
+     "Has a spray arm.",
+     "Holds a rinse aid cap.",
+     "Has a filter at the bottom.",
+     "Features a rubber seal.",
+     "Gets very hot inside."
+    ],
+    "banned": [
+     "washes dishes",
+     "plates and cups",
+     "soap pods",
+     "kitchen"
+    ]
+   }
+  ],
   "dog": [
    {
     "id": "d72cd2ad",
@@ -469,6 +525,62 @@
      "long thin body",
      "water",
      "predatory"
+    ]
+   }
+  ],
+  "dresser": [
+   {
+    "id": "73938d47",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:06.806Z",
+    "round1": [
+     "Handles slide out smoothly.",
+     "Perfume bottles sit on top.",
+     "Keeps garments neatly folded inside.",
+     "Sits low against the plaster.",
+     "Morning routine starts right here."
+    ],
+    "round2": [
+     "Rattles when doors slam shut.",
+     "Scratches easily on the corners.",
+     "Glossy finish reflects light.",
+     "Wobbles on thick carpet edges.",
+     "Smells like old polish."
+    ],
+    "banned": [
+     "pull out drawers",
+     "socks and underwear",
+     "bedroom furniture",
+     "mirror on top"
+    ]
+   }
+  ],
+  "drill": [
+   {
+    "id": "19d7ad4f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:50.533Z",
+    "round1": [
+     "Powered by rechargeable battery packs.",
+     "Squeezed with your index finger.",
+     "Sitting inside molded plastic cases.",
+     "Found on nearly every shelf.",
+     "Bought at local home centers."
+    ],
+    "round2": [
+     "Grabbed by a contoured plastic handle.",
+     "Resting on makeshift sawhorses.",
+     "Bought inside bulky cardboard boxes.",
+     "Set down on dusty floors.",
+     "Fitted with a built-in light."
+    ],
+    "banned": [
+     "hole",
+     "bit",
+     "cordless",
+     "battery"
     ]
    }
   ],
@@ -527,6 +639,34 @@
     ]
    }
   ],
+  "gloves": [
+   {
+    "id": "7622122a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:24.291Z",
+    "round1": [
+     "Peeled off slowly",
+     "Tucked into pockets",
+     "Stretched before wearing",
+     "Left behind sometimes",
+     "Pulled on tight"
+    ],
+    "round2": [
+     "Clamped with plastic clips.",
+     "Worn to shovel snow.",
+     "Dropped in slush.",
+     "Tight around the knuckles.",
+     "Mismatched pairs in spring."
+    ],
+    "banned": [
+     "hands",
+     "fingers",
+     "mittens",
+     "pair"
+    ]
+   }
+  ],
   "guitar": [
    {
     "id": "98501633",
@@ -552,6 +692,62 @@
      "pick",
      "six strings",
      "strap"
+    ]
+   }
+  ],
+  "hammer": [
+   {
+    "id": "238193da",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:50.533Z",
+    "round1": [
+     "Kept in a heavy metal box.",
+     "Built with a rubberized grip.",
+     "Swung with one hand usually.",
+     "Found near every workbench.",
+     "Often bought at hardware stores."
+    ],
+    "round2": [
+     "Picked up by a flared wooden handle.",
+     "Lying on cluttered basement floors.",
+     "Bought individually wrapped in thin cardboard.",
+     "Dropped onto concrete surfaces.",
+     "Painted with bright safety yellow."
+    ],
+    "banned": [
+     "nails",
+     "claw",
+     "hit",
+     "handle"
+    ]
+   }
+  ],
+  "hat": [
+   {
+    "id": "ba32ad36",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:24.291Z",
+    "round1": [
+     "Sits up high",
+     "Pushed down when windy",
+     "Stored on a shelf",
+     "Often has a logo",
+     "Shared in group photos"
+    ],
+    "round2": [
+     "Leaves lines on your forehead.",
+     "Flung in the air at graduation.",
+     "Hung by the door.",
+     "Catches falling rain drops.",
+     "Turned around backward."
+    ],
+    "banned": [
+     "covers head",
+     "brim",
+     "visor",
+     "baseball cap"
     ]
    }
   ],
@@ -718,6 +914,34 @@
      "mane",
      "king of the jungle",
      "roar"
+    ]
+   }
+  ],
+  "microwave": [
+   {
+    "id": "08b7be9c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:31:16.251Z",
+    "round1": [
+     "Features a digital clock display.",
+     "Has a number keypad.",
+     "Beeps when finished.",
+     "Has a glass window.",
+     "Gets greasy over time."
+    ],
+    "round2": [
+     "Has a push button latch.",
+     "Contains a light bulb inside.",
+     "Has a ventilation grate.",
+     "Uses a roller ring underneath.",
+     "Sits on a countertop."
+    ],
+    "banned": [
+     "heats food fast",
+     "turntable",
+     "popcorn button",
+     "kitchen"
     ]
    }
   ],
@@ -998,6 +1222,33 @@
     ]
    }
   ],
+  "pillow": [
+   {
+    "id": "249f2d79",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:57.836Z",
+    "round1": [
+     "Often gets squeezed.",
+     "Covered in a case.",
+     "Plumped up daily.",
+     "Rest your head here.",
+     "Found on couches too."
+    ],
+    "round2": [
+     "Flattened over time.",
+     "Often gets punched back into shape.",
+     "Slips inside a cotton sleeve.",
+     "Propped up while reading.",
+     "Decorated with small buttons sometimes."
+    ],
+    "banned": [
+     "sleep on it",
+     "feather filling",
+     "bed accessory"
+    ]
+   }
+  ],
   "pilot": [
    {
     "id": "b21b9a64",
@@ -1165,6 +1416,34 @@
     ]
    }
   ],
+  "refrigerator": [
+   {
+    "id": "18884501",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:31:16.251Z",
+    "round1": [
+     "Requires regular cleaning inside.",
+     "Often magnets stick to the front.",
+     "Has shelves built in.",
+     "Stays running all day and night.",
+     "Comes in white or stainless steel."
+    ],
+    "round2": [
+     "Has a rubber seal.",
+     "Needs a water line hooked up.",
+     "Has leveling feet.",
+     "Contains a crisper drawer.",
+     "Has a temperature dial inside."
+    ],
+    "banned": [
+     "keeps food cold",
+     "has a door",
+     "freezer",
+     "kitchen"
+    ]
+   }
+  ],
   "ruler": [
    {
     "id": "cc92fa6d",
@@ -1218,6 +1497,62 @@
      "lunch",
      "two slices",
      "filling"
+    ]
+   }
+  ],
+  "saw": [
+   {
+    "id": "0c03cb21",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:50.533Z",
+    "round1": [
+     "Picked up by a loop handle.",
+     "Found hanging on pegboards.",
+     "Pushed back and forth repeatedly.",
+     "Purchased in paper sleeves.",
+     "Made with shiny grey metal."
+    ],
+    "round2": [
+     "Held by a contoured molded grip.",
+     "Leaning near dusty lumber stacks.",
+     "Bought with a plastic blade guard.",
+     "Wiped clean with oily rags.",
+     "Stained with dark tree resin."
+    ],
+    "banned": [
+     "wood",
+     "teeth",
+     "blade",
+     "cut"
+    ]
+   }
+  ],
+  "scarf": [
+   {
+    "id": "d3e5fc2a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:24.291Z",
+    "round1": [
+     "Draped loosely",
+     "Blows in the breeze",
+     "Pushed inside a coat",
+     "Fringed at the ends",
+     "Stored in a drawer"
+    ],
+    "round2": [
+     "Tangled in bicycle spokes.",
+     "Knotted at the chest.",
+     "Drags on the ground.",
+     "Shared with a friend.",
+     "Smells like mothballs."
+    ],
+    "banned": [
+     "neck",
+     "wraps around",
+     "wool",
+     "winter wear"
     ]
    }
   ],
@@ -1416,6 +1751,62 @@
     ]
    }
   ],
+  "T-shirt": [
+   {
+    "id": "ac3ecaf6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:33:24.291Z",
+    "round1": [
+     "Pulled over head",
+     "Has a neck opening",
+     "Printed on front",
+     "Worn all summer",
+     "Shrinks in dryer"
+    ],
+    "round2": [
+     "Stained with mustard.",
+     "Rolled up for sleep.",
+     "Soaked through at the gym.",
+     "Creased from the drawer.",
+     "Outgrown by teenagers."
+    ],
+    "banned": [
+     "cotton",
+     "short sleeves",
+     "chest",
+     "shirt"
+    ]
+   }
+  ],
+  "table": [
+   {
+    "id": "7474b7c3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:06.806Z",
+    "round1": [
+     "Often placed right in the center.",
+     "Objects get stacked on top.",
+     "Gets covered with a cloth sometimes.",
+     "People gather around to talk.",
+     "Needs a wipe after messy tasks."
+    ],
+    "round2": [
+     "Supports heavy dinner plates easily.",
+     "Smooth flat surface for writing.",
+     "Corners poke out sharply.",
+     "Glides across wooden floors clumsily.",
+     "Shadows stretch underneath it."
+    ],
+    "banned": [
+     "four legs",
+     "flat surface",
+     "eating meals",
+     "chairs around it"
+    ]
+   }
+  ],
   "taxi": [
    {
     "id": "434124e0",
@@ -1470,6 +1861,34 @@
     ]
    }
   ],
+  "toaster": [
+   {
+    "id": "f9ad2e55",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:31:16.251Z",
+    "round1": [
+     "Has a crumb tray underneath.",
+     "Features a browning dial.",
+     "Lightweight metal casing.",
+     "Gets warm on the sides.",
+     "Usually has two or four openings."
+    ],
+    "round2": [
+     "Has a push down lever.",
+     "Contains glowing wires inside.",
+     "Has a cancel button.",
+     "Sits on rubber feet.",
+     "Has a metal outer shell."
+    ],
+    "banned": [
+     "makes toast",
+     "bread slots",
+     "pop up lever",
+     "kitchen"
+    ]
+   }
+  ],
   "tomato": [
    {
     "id": "acb90509",
@@ -1495,6 +1914,60 @@
      "seeds inside",
      "ketchup",
      "juice"
+    ]
+   }
+  ],
+  "toothpaste": [
+   {
+    "id": "bfc5f26a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:57.836Z",
+    "round1": [
+     "Squeezed from the end.",
+     "Kept on the counter.",
+     "Leaves a fresh taste.",
+     "Cap often gets lost.",
+     "Comes in a box."
+    ],
+    "round2": [
+     "Stripes running down the paste.",
+     "Rolled up from the bottom.",
+     "Small twist-off top.",
+     "Leaves a mess in the basin.",
+     "Stands upright on its cap."
+    ],
+    "banned": [
+     "mint flavor",
+     "squeeze tube",
+     "paste"
+    ]
+   }
+  ],
+  "towel": [
+   {
+    "id": "50d30090",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:57.836Z",
+    "round1": [
+     "Folded neatly on shelves.",
+     "Wrapped around hair.",
+     "Taken to the pool.",
+     "Soaks up water fast.",
+     "Hung by the sink."
+    ],
+    "round2": [
+     "Loop on the tag for hooks.",
+     "Roughed up by heavy washing.",
+     "Draped over a shoulder.",
+     "Woven with raised loops.",
+     "Twisted tightly to wring out."
+    ],
+    "banned": [
+     "dries your body",
+     "bath accessory",
+     "hangs on a rack"
     ]
    }
   ],
@@ -1607,6 +2080,34 @@
      "spike",
      "court",
      "kneepads"
+    ]
+   }
+  ],
+  "wardrobe": [
+   {
+    "id": "715faea6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:32:06.806Z",
+    "round1": [
+     "Tucked away in the bedroom.",
+     "Hinges squeak when opened.",
+     "Holds a tall vertical frame.",
+     "Packed full of fabric items.",
+     "Takes up a corner completely."
+    ],
+    "round2": [
+     "Smells like cedar wood inside.",
+     "Metal knobs cold to touch.",
+     "Shadows hide the dark interior.",
+     "Dust settles on the roof.",
+     "Creaks when leaning against it."
+    ],
+    "banned": [
+     "hang clothes",
+     "closet",
+     "doors open",
+     "mirrored front"
     ]
    }
   ],
