@@ -417,6 +417,61 @@
     ]
    }
   ],
+  "daisy": [
+   {
+    "id": "ab83b731",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Commonly woven into childhood wreaths",
+     "Has a simple button-like middle",
+     "White rays surround a golden eye",
+     "Often found growing in open grass",
+     "Classic childhood wildflower choice"
+    ],
+    "round2": [
+     "Thin stems sway easily",
+     "Flat heads catch the sun",
+     "Narrow petals crowd around",
+     "Bumpy centers feel firm",
+     "Small leaves line the base"
+    ],
+    "banned": [
+     "white petals",
+     "yellow center",
+     "pluck the petals",
+     "simple look"
+    ]
+   }
+  ],
+  "dandelion": [
+   {
+    "id": "8cce03f2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Turns into a white puffball",
+     "Bright yellow heads turn into seeds",
+     "Children love blowing away the seeds",
+     "Considered a stubborn backyard weed",
+     "Spreads seeds easily in the wind"
+    ],
+    "round2": [
+     "Hollow stems ooze white milk",
+     "Jagged leaves hug the dirt",
+     "Spiky green parts back petals",
+     "Grey fuzz coats drying heads",
+     "Tiny seeds hide underneath"
+    ],
+    "banned": [
+     "yellow weed",
+     "blow the seeds",
+     "make a wish"
+    ]
+   }
+  ],
   "dentist": [
    {
     "id": "bbb4e4c3",
@@ -806,6 +861,34 @@
     ]
    }
   ],
+  "iceberg": [
+   {
+    "id": "537a5d64",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:18.914Z",
+    "round1": [
+     "mostly underwater",
+     "drifts with currents",
+     "shines in sunlight",
+     "white and blue",
+     "slowly melts"
+    ],
+    "round2": [
+     "glides along the water",
+     "biggest part stays hidden",
+     "glistens in clear weather",
+     "shrinks in warm water",
+     "piece breaks off eventually"
+    ],
+    "banned": [
+     "titanic",
+     "ocean",
+     "glacier",
+     "floating ice"
+    ]
+   }
+  ],
   "kettle": [
    {
     "id": "ec5942bc",
@@ -862,6 +945,34 @@
     ]
    }
   ],
+  "lavender": [
+   {
+    "id": "4331b22d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Small purple spikes on woody stems",
+     "Known for a relaxing herbal aroma",
+     "Often used in calming sleep products",
+     "Grown in neat purple rows",
+     "Dried sprigs keep closets smelling fresh"
+    ],
+    "round2": [
+     "Woody base gets quite hard",
+     "Tiny gray-green leaves feel thin",
+     "Bumpy stalks hold tiny buds",
+     "Tight clusters line the top",
+     "Dried stems snap very easily"
+    ],
+    "banned": [
+     "purple color",
+     "calming scent",
+     "essential oil",
+     "provence fields"
+    ]
+   }
+  ],
   "librarian": [
    {
     "id": "a6939822",
@@ -890,6 +1001,34 @@
     ]
    }
   ],
+  "lily": [
+   {
+    "id": "b8cfba83",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Grows from underground bulbs",
+     "Large trumpet-shaped blossoms open wide",
+     "Often featured in seasonal holiday displays",
+     "Produces prominent pollen-bearing anthers",
+     "Popular choice for elegant floral arrangements"
+    ],
+    "round2": [
+     "Long stems need strong support",
+     "Curved petals flare far back",
+     "Speckled spots dot the skin",
+     "Narrow leaves grow spaced out",
+     "Heavy heads droop downward"
+    ],
+    "banned": [
+     "large trumpet blooms",
+     "funeral flower",
+     "fragrant scent",
+     "stamen with pollen"
+    ]
+   }
+  ],
   "lion": [
    {
     "id": "f6cb3f10",
@@ -914,6 +1053,62 @@
      "mane",
      "king of the jungle",
      "roar"
+    ]
+   }
+  ],
+  "London": [
+   {
+    "id": "df37ef42",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:45.652Z",
+    "round1": [
+     "Huge wheel for views",
+     "Lots of red buses",
+     "Famous winding river",
+     "Very busy underground trains",
+     "Historic royal palaces"
+    ],
+    "round2": [
+     "Rows of white townhouses with columns",
+     "Black iron fences around parks",
+     "Tall stone columns at traffic circles",
+     "Red telephone boxes on corners",
+     "Brick pubs with wooden signs"
+    ],
+    "banned": [
+     "Big Ben",
+     "Tower Bridge",
+     "British Museum",
+     "Double decker bus"
+    ]
+   }
+  ],
+  "lotus": [
+   {
+    "id": "93723416",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Rises above murky pond water",
+     "Paddy leaves float flat on the surface",
+     "Symbol of purity in Eastern religions",
+     "Opens large blossoms during daylight",
+     "Roots anchor deep in swampy mud"
+    ],
+    "round2": [
+     "Round leaves repel water drops",
+     "Rubbery stems stretch up high",
+     "Soft pink petals feel smooth",
+     "Faded pods look like spouts",
+     "Thick roots creep underwater"
+    ],
+    "banned": [
+     "grows in water",
+     "muddy pond",
+     "floating leaves",
+     "sacred symbol"
     ]
    }
   ],
@@ -970,6 +1165,33 @@
      "dairy",
      "calcium",
      "white"
+    ]
+   }
+  ],
+  "New York": [
+   {
+    "id": "a08bded4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:45.652Z",
+    "round1": [
+     "Big island with lots of bridges",
+     "Famous tall viewing towers",
+     "Huge public green space",
+     "Bright neon billboard lights",
+     "Very busy yellow cabs"
+    ],
+    "round2": [
+     "Steam rising from street grates",
+     "Metal fire escapes on brick walls",
+     "Numbered streets crossing in a grid",
+     "Green iron park benches everywhere",
+     "Scaffolding tunnels over crowded sidewalks"
+    ],
+    "banned": [
+     "Statue of Liberty",
+     "Central Park",
+     "Broadway"
     ]
    }
   ],
@@ -1081,6 +1303,34 @@
      "fluffy",
      "breakfast",
      "flat"
+    ]
+   }
+  ],
+  "Paris": [
+   {
+    "id": "89a47953",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:45.652Z",
+    "round1": [
+     "Lots of bridges over water",
+     "Famous tall metal landmark",
+     "Very busy shopping streets",
+     "Crowded subway trains daily",
+     "Big open public squares"
+    ],
+    "round2": [
+     "Rows of trees lining wide avenues",
+     "Ornate stone balconies on old apartments",
+     "Glass pyramids in open courtyards",
+     "Green metal park chairs everywhere",
+     "Pointed church spires on the skyline"
+    ],
+    "banned": [
+     "Eiffel Tower",
+     "Louvre",
+     "Croissant",
+     "Baguette"
     ]
    }
   ],
@@ -1416,6 +1666,34 @@
     ]
    }
   ],
+  "rainbow": [
+   {
+    "id": "c49c9f01",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:18.914Z",
+    "round1": [
+     "appears after rain",
+     "seen from afar",
+     "fades slowly",
+     "bright daylight feature",
+     "stops people in tracks"
+    ],
+    "round2": [
+     "shows up when clouds break",
+     "high up in the air",
+     "hard to touch directly",
+     "gets weaker over time",
+     "catches people by surprise"
+    ],
+    "banned": [
+     "prism",
+     "seven colors",
+     "pot of gold",
+     "sky arc"
+    ]
+   }
+  ],
   "refrigerator": [
    {
     "id": "18884501",
@@ -1441,6 +1719,34 @@
      "has a door",
      "freezer",
      "kitchen"
+    ]
+   }
+  ],
+  "rose": [
+   {
+    "id": "d5f24570",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Comes with protective prickles on stems",
+     "Popular gift for romantic occasions",
+     "Has tightly layered petals",
+     "Often featured in wedding arrangements",
+     "Grows well in backyard gardens"
+    ],
+    "round2": [
+     "Woody stems get quite thick",
+     "Thorns grip onto passing cloth",
+     "Buds look tightly rolled up",
+     "Dark green leaves have edges",
+     "Fallen petals dry up fast"
+    ],
+    "banned": [
+     "sharp thorns",
+     "sweet fragrance",
+     "valentine bouquet",
+     "red color"
     ]
    }
   ],
@@ -1723,6 +2029,34 @@
     ]
    }
   ],
+  "sunflower": [
+   {
+    "id": "b046a0d4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Turns to face the daytime sky",
+     "Popular subject for famous oil paintings",
+     "Commonly planted in warm summer fields",
+     "Has a bright head of face-like petals",
+     "Stands taller than most garden weeds"
+    ],
+    "round2": [
+     "Heavy head nods in breezes",
+     "Big brown center looks textured",
+     "Rough green leaves feel scratchy",
+     "Thick stalks feel like wood",
+     "Golden petals drop when dry"
+    ],
+    "banned": [
+     "yellow petals",
+     "tall stem",
+     "edible seeds",
+     "brown center disc"
+    ]
+   }
+  ],
   "sushi": [
    {
     "id": "cc878701",
@@ -1889,6 +2223,33 @@
     ]
    }
   ],
+  "Tokyo": [
+   {
+    "id": "fe97ca60",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:45.652Z",
+    "round1": [
+     "Famous busy crosswalk area",
+     "Very tall observation tower",
+     "Huge train system daily",
+     "Bright neon sign displays",
+     "Traditional market stalls"
+    ],
+    "round2": [
+     "Vending machines on every narrow alley",
+     "Tangled utility wires overhead",
+     "Small concrete buildings stacked tightly",
+     "Paper lanterns hanging outside doorways",
+     "Covered shopping arcades with roofs"
+    ],
+    "banned": [
+     "Mount Fuji",
+     "Senso-ji",
+     "Shibuya Crossing"
+    ]
+   }
+  ],
   "tomato": [
    {
     "id": "acb90509",
@@ -1999,6 +2360,34 @@
     ]
    }
   ],
+  "tulip": [
+   {
+    "id": "5d1ff0fa",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:10:54.664Z",
+    "round1": [
+     "Sprouts early after winter ends",
+     "Cup-like blooms on a single green stem",
+     "Grown from underground storage units",
+     "Mass plantings create bright spring rows",
+     "Popular bulb from the Netherlands"
+    ],
+    "round2": [
+     "Smooth leaves wrap the stem",
+     "Stiff stems stand up straight",
+     "Shiny petals catch morning dew",
+     "Closed buds look like teardrops",
+     "Fading petals drop off cleanly"
+    ],
+    "banned": [
+     "bulb underground",
+     "cup shape",
+     "spring bloom",
+     "dutch fields"
+    ]
+   }
+  ],
   "ukulele": [
    {
     "id": "61575362",
@@ -2055,6 +2444,34 @@
     ]
    }
   ],
+  "volcano": [
+   {
+    "id": "5db41aad",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:18.914Z",
+    "round1": [
+     "mountainside feature",
+     "very hot inside",
+     "smoke on top",
+     "takes centuries to change",
+     "forms new land"
+    ],
+    "round2": [
+     "stands tall on the land",
+     "glows in the dark",
+     "ground feels restless",
+     "shapes the local dirt",
+     "takes forever to settle"
+    ],
+    "banned": [
+     "lava",
+     "eruption",
+     "magma",
+     "crater"
+    ]
+   }
+  ],
   "volleyball": [
    {
     "id": "3145dcdd",
@@ -2108,6 +2525,34 @@
      "closet",
      "doors open",
      "mirrored front"
+    ]
+   }
+  ],
+  "waterfall": [
+   {
+    "id": "07fe3847",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T19:11:18.914Z",
+    "round1": [
+     "follows gravity",
+     "smooth stone underneath",
+     "loud from nearby",
+     "flows downhill",
+     "attracts tourists"
+    ],
+    "round2": [
+     "drops from up high",
+     "keeps moving all day",
+     "cools the air around",
+     "carves the ground below",
+     "draws a crowd to look"
+    ],
+    "banned": [
+     "cliff",
+     "river",
+     "drop",
+     "splash"
     ]
    }
   ],
