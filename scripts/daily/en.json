@@ -384,5 +384,31 @@
    "national symbol",
    "white tail"
   ]
+ },
+ "2026-10-14": {
+  "word": "shark",
+  "category": "Sea Creatures",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.1-flash-lite",
+  "round1": [
+   "Constant motion while in the water.",
+   "Usually hunts alone.",
+   "Sensitive to vibrations in the water.",
+   "Patrols reefs and open seas.",
+   "Has a streamlined body shape."
+  ],
+  "round2": [
+   "Skin feels like coarse sandpaper to touch.",
+   "Needs to keep moving to push water.",
+   "Has multiple rows of replaceable chompers.",
+   "Found patrolling both shallow and deep zones.",
+   "Senses tiny electrical pulses from living prey."
+  ],
+  "banned": [
+   "gills",
+   "teeth",
+   "dorsal fin",
+   "predator"
+  ]
  }
 }
