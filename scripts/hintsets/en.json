@@ -1,5 +1,61 @@
 {
  "sets": {
+  "airplane": [
+   {
+    "id": "672558cd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:53.529Z",
+    "round1": [
+     "Climbs above the clouds",
+     "Boards through a long tube",
+     "Requires a safety briefing",
+     "Stored in a massive hangar",
+     "Crosses entire oceans easily"
+    ],
+    "round2": [
+     "has a pointed front nose",
+     "features small round windows",
+     "racks luggage overhead",
+     "requires a wide paved strip",
+     "sports a tail fin"
+    ],
+    "banned": [
+     "wings",
+     "jet",
+     "pilot",
+     "runway"
+    ]
+   }
+  ],
+  "airport": [
+   {
+    "id": "ae6bdc41",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:02.221Z",
+    "round1": [
+     "Long security lines move slowly.",
+     "Rolling bags click on tile.",
+     "Schedules flashing on overhead boards.",
+     "Expensive snacks at every gate.",
+     "Big windows facing the tarmac."
+    ],
+    "round2": [
+     "Plastic bins stacked near belts.",
+     "Rows of padded metal chairs.",
+     "Small paper cups by water fountains.",
+     "Tall glass panes facing runways.",
+     "Bright carpet patterns under foot."
+    ],
+    "banned": [
+     "airplanes",
+     "flights",
+     "pilots",
+     "runway"
+    ]
+   }
+  ],
   "ant": [
    {
     "id": "f66b2544",
@@ -56,6 +112,34 @@
     ]
    }
   ],
+  "astronaut": [
+   {
+    "id": "81fe4b0b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Travels far from home.",
+     "Undergoes intense physical training.",
+     "Puts on specialized gear.",
+     "Conducts scientific tests.",
+     "Feeds from special packets."
+    ],
+    "round2": [
+     "leaves our planet behind",
+     "wears a heavy helmet",
+     "eats unusual packaged meals",
+     "trains in deep pools",
+     "deals with complicated machinery"
+    ],
+    "banned": [
+     "rocket",
+     "space",
+     "moon",
+     "NASA"
+    ]
+   }
+  ],
   "banana": [
    {
     "id": "3737a85d",
@@ -81,6 +165,34 @@
      "long",
      "curved",
      "peel"
+    ]
+   }
+  ],
+  "baseball": [
+   {
+    "id": "8bdca8ab",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:18:36.652Z",
+    "round1": [
+     "Played outdoors on dirt and grass.",
+     "Split into nine innings.",
+     "Mostly standing still until action starts.",
+     "Wearing caps and button jerseys.",
+     "Crossing bases to earn points."
+    ],
+    "round2": [
+     "Involves wearing a heavy leather glove.",
+     "Players wait patiently in the dugout.",
+     "Pitcher throws from a raised mound.",
+     "Spectators catch foul balls in stands.",
+     "Manager wears the exact same uniform."
+    ],
+    "banned": [
+     "bat",
+     "home plate",
+     "pitcher",
+     "diamond"
     ]
    }
   ],
@@ -167,6 +279,34 @@
     ]
    }
   ],
+  "chef": [
+   {
+    "id": "f43bad25",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Leads a busy crew.",
+     "Creates orders for customers.",
+     "Relies on sharp senses.",
+     "Wears a white jacket.",
+     "Stands near hot equipment."
+    ],
+    "round2": [
+     "tastes creations before serving",
+     "wears checkered pants",
+     "handles sharp steel blades",
+     "works over open flames",
+     "gives commands to helpers"
+    ],
+    "banned": [
+     "knife",
+     "kitchen",
+     "restaurant",
+     "hat"
+    ]
+   }
+  ],
   "chocolate": [
    {
     "id": "72607b62",
@@ -246,6 +386,34 @@
      "baking",
      "dough",
      "oven"
+    ]
+   }
+  ],
+  "dentist": [
+   {
+    "id": "bbb4e4c3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Wears latex gloves all day.",
+     "Operates small handheld metal tools.",
+     "Asks people to open wide.",
+     "Keeps scheduled morning appointments.",
+     "Takes clean white coats home."
+    ],
+    "round2": [
+     "shines bright lights down",
+     "counts twenty visible parts",
+     "makes people rinse out",
+     "wears a face shield",
+     "reclines chairs back flat"
+    ],
+    "banned": [
+     "teeth",
+     "drill",
+     "cavity",
+     "floss"
     ]
    }
   ],
@@ -331,6 +499,90 @@
     ]
    }
   ],
+  "firefighter": [
+   {
+    "id": "5503a7f0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Wears heavy gear on duty.",
+     "Responds when emergency calls come.",
+     "Works shifts around the clock.",
+     "Public servant seen in towns.",
+     "Job requires physical endurance."
+    ],
+    "round2": [
+     "rides in very big vehicles",
+     "uses loud blaring sirens",
+     "holds heavy water sprayers",
+     "wears thick protective coats",
+     "rushes into dangerous spots"
+    ],
+    "banned": [
+     "hose",
+     "ladder",
+     "fire truck",
+     "smoke"
+    ]
+   }
+  ],
+  "guitar": [
+   {
+    "id": "98501633",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:19:30.579Z",
+    "round1": [
+     "Held across the lap.",
+     "Plucked with fingers.",
+     "Has a wooden body.",
+     "Played around a campfire.",
+     "Slung over one shoulder."
+    ],
+    "round2": [
+     "Fitted with six steel or nylon strings.",
+     "Held steady against your upper body.",
+     "Strapped across your chest while standing.",
+     "Strummed with a tiny plastic triangle.",
+     "Neck features metal strips across wood."
+    ],
+    "banned": [
+     "frets",
+     "pick",
+     "six strings",
+     "strap"
+    ]
+   }
+  ],
+  "hospital": [
+   {
+    "id": "cc89ac8c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:02.221Z",
+    "round1": [
+     "Beeping monitors keep you awake.",
+     "People wear pale green scrubs.",
+     "Small beds on rolling wheels.",
+     "Bright lights shining overhead.",
+     "Long corridors with shiny floors."
+    ],
+    "round2": [
+     "White paper rolls on examination tables.",
+     "Bottles of hand sanitizer everywhere.",
+     "Plastic cups with crushed ice.",
+     "Magazines stacked on low tables.",
+     "Glass jars filled with cotton balls."
+    ],
+    "banned": [
+     "doctors",
+     "nurses",
+     "patients",
+     "surgery"
+    ]
+   }
+  ],
   "ice cream": [
    {
     "id": "7ecf61d1",
@@ -355,6 +607,34 @@
      "freezer",
      "scoop",
      "cone"
+    ]
+   }
+  ],
+  "kettle": [
+   {
+    "id": "ec5942bc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:20:29.009Z",
+    "round1": [
+     "Sits waiting near a power outlet.",
+     "Lifted up by a curved grip.",
+     "Fills up under the faucet.",
+     "Makes a loud noise when ready.",
+     "Pours a thin steady stream."
+    ],
+    "round2": [
+     "Metal body gets very hot outside.",
+     "Small lid pops off the top.",
+     "Sits centered on a heating ring.",
+     "Handle stays cool enough to touch.",
+     "Makes morning tea much easier."
+    ],
+    "banned": [
+     "making tea",
+     "boiling water",
+     "whistling sound",
+     "spout"
     ]
    }
   ],
@@ -383,6 +663,34 @@
      "aphids",
      "round shape",
      "lucky"
+    ]
+   }
+  ],
+  "librarian": [
+   {
+    "id": "a6939822",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Organizes items by code.",
+     "Works in a quiet room.",
+     "Answers customer reference questions.",
+     "Uses a stamp and pad.",
+     "Walks down long quiet hallways."
+    ],
+    "round2": [
+     "glues loose paper pages",
+     "walks past tall wooden shelves",
+     "holds small barcode scanners",
+     "wears reading glasses down",
+     "files small colored cards"
+    ],
+    "banned": [
+     "books",
+     "shush",
+     "library",
+     "shelves"
     ]
    }
   ],
@@ -579,6 +887,62 @@
     ]
    }
   ],
+  "pen": [
+   {
+    "id": "3a01a23b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:20:12.848Z",
+    "round1": [
+     "Leaves dark marks on paper.",
+     "Held in your hand.",
+     "Rolls off the table.",
+     "Found in backpacks.",
+     "Used for signing forms."
+    ],
+    "round2": [
+     "Contains a tiny rolling ball.",
+     "Leaves stains on clothes.",
+     "Comes with a pocket clip.",
+     "Press the top to write.",
+     "Sits in counter cups."
+    ],
+    "banned": [
+     "ink",
+     "cap",
+     "refill",
+     "nib"
+    ]
+   }
+  ],
+  "pencil": [
+   {
+    "id": "cc5a7b3f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:20:12.848Z",
+    "round1": [
+     "Leaves grey marks on paper.",
+     "Held in your hand.",
+     "Rolls off the table.",
+     "Found in backpacks.",
+     "Used during tests."
+    ],
+    "round2": [
+     "Yellow hexagonal shape.",
+     "Leaves shavings behind.",
+     "Smells like cedar wood.",
+     "Has a tiny metal band.",
+     "Kept in desk drawers."
+    ],
+    "banned": [
+     "graphite",
+     "wood",
+     "eraser top",
+     "sharpen"
+    ]
+   }
+  ],
   "penguin": [
    {
     "id": "a12bbe36",
@@ -603,6 +967,62 @@
      "tuxedo look",
      "ice",
      "cannot fly"
+    ]
+   }
+  ],
+  "photographer": [
+   {
+    "id": "c589c093",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Adjusts focus before clicking.",
+     "Wears a strap around the neck.",
+     "Works at special public events.",
+     "Edits results on a screen.",
+     "Carries a heavy padded bag."
+    ],
+    "round2": [
+     "carries many glass lenses",
+     "stands behind tripod legs",
+     "wipes glass filters clean",
+     "directs people where to stand",
+     "turns small camera dials"
+    ],
+    "banned": [
+     "camera",
+     "picture",
+     "lens",
+     "flash"
+    ]
+   }
+  ],
+  "pilot": [
+   {
+    "id": "b21b9a64",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Wears a structured hat.",
+     "Checks dials before moving.",
+     "Speaks clearly into a mic.",
+     "Pulls levers to steer.",
+     "Travels across multiple time zones."
+    ],
+    "round2": [
+     "turns many small switches",
+     "wears dark sunglasses",
+     "looks out large windshields",
+     "walks through busy terminals",
+     "references folded paper maps"
+    ],
+    "banned": [
+     "airplane",
+     "cockpit",
+     "flight",
+     "wings"
     ]
    }
   ],
@@ -634,6 +1054,34 @@
     ]
    }
   ],
+  "plumber": [
+   {
+    "id": "e6e599f6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:16:37.353Z",
+    "round1": [
+     "Carries a heavy metal toolbox.",
+     "Wears durable denim jeans.",
+     "Works in cramped floor spaces.",
+     "Turns off the main valve.",
+     "Responds to emergency calls."
+    ],
+    "round2": [
+     "gets dirty knees often",
+     "carries a propane torch",
+     "wipes greasy hands down",
+     "cuts thick PVC tubing",
+     "turns rusted metal nuts"
+    ],
+    "banned": [
+     "pipes",
+     "wrench",
+     "toilet",
+     "drain"
+    ]
+   }
+  ],
   "popcorn": [
    {
     "id": "3409766d",
@@ -658,6 +1106,34 @@
      "kernels",
      "cinema",
      "butter"
+    ]
+   }
+  ],
+  "pot": [
+   {
+    "id": "a854f75d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:20:29.009Z",
+    "round1": [
+     "Sits heavy on a flat burner.",
+     "Holds enough liquid for a crowd.",
+     "Warms up slowly over time.",
+     "Gets scrubbed with a rough sponge.",
+     "Lives inside a deep bottom cabinet."
+    ],
+    "round2": [
+     "Deep walls keep splashes completely inside.",
+     "Takes a long time to cool down.",
+     "Two side grips for lifting safely.",
+     "Made of shiny metal or dark enamel.",
+     "Stirring a thick stew inside it."
+    ],
+    "banned": [
+     "boiling water",
+     "making soup",
+     "lid",
+     "handles"
     ]
    }
   ],
@@ -689,6 +1165,34 @@
     ]
    }
   ],
+  "ruler": [
+   {
+    "id": "cc92fa6d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:20:12.848Z",
+    "round1": [
+     "Guides marks on paper.",
+     "Held in your hand.",
+     "Slides across the table.",
+     "Found in backpacks.",
+     "Used during math class."
+    ],
+    "round2": [
+     "Has a tiny hanging hole.",
+     "Snaps if bent too far.",
+     "Measures twelve inches long.",
+     "Tucked inside notebook coils.",
+     "Pressed flat against paper."
+    ],
+    "banned": [
+     "inches",
+     "centimeters",
+     "measure",
+     "straight edge"
+    ]
+   }
+  ],
   "sandwich": [
    {
     "id": "5b68bc61",
@@ -714,6 +1218,34 @@
      "lunch",
      "two slices",
      "filling"
+    ]
+   }
+  ],
+  "school": [
+   {
+    "id": "f49ea15d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:02.221Z",
+    "round1": [
+     "Lots of bells ringing inside.",
+     "You go here every weekday morning.",
+     "Stuffed with heavy backpacks.",
+     "Long hallways with lockers.",
+     "Parking lots get jammed at three."
+    ],
+    "round2": [
+     "Rows of desks face a board.",
+     "Children eat packed lunches outside.",
+     "Metal fences wrap the yard.",
+     "Big grassy fields for running.",
+     "Packs of colored pencils inside."
+    ],
+    "banned": [
+     "children",
+     "learning",
+     "teachers",
+     "classrooms"
     ]
    }
   ],
@@ -745,6 +1277,62 @@
     ]
    }
   ],
+  "soccer": [
+   {
+    "id": "63c6ec4c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:18:36.652Z",
+    "round1": [
+     "Played on a large grassy field.",
+     "Two halves make a full match.",
+     "Involves running most of the time.",
+     "Wearing shorts and tall socks.",
+     "Teams try to score points."
+    ],
+    "round2": [
+     "Uses a large rectangular goal frame.",
+     "Involves continuous pacing for long durations.",
+     "Clock keeps counting upwards without stops.",
+     "Players trade shirts after the final whistle.",
+     "Fans chant loudly from the bleachers."
+    ],
+    "banned": [
+     "goal",
+     "net",
+     "cleats",
+     "pitch"
+    ]
+   }
+  ],
+  "spatula": [
+   {
+    "id": "c7727b7f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:20:29.009Z",
+    "round1": [
+     "Has a wide flat working end.",
+     "Slides easily beneath warm food.",
+     "Lives crowded in a ceramic crock.",
+     "Gets tossed into the dishwasher basket.",
+     "Dangled from a small wall hook."
+    ],
+    "round2": [
+     "Thin edge scrapes bowls clean.",
+     "Long stick-like handle.",
+     "Bends slightly under light pressure.",
+     "Bright colorful rubber head.",
+     "Small hole at the top end."
+    ],
+    "banned": [
+     "flipping pancakes",
+     "scraping bowls",
+     "flexible rubber",
+     "flipping burgers"
+    ]
+   }
+  ],
   "strawberry": [
    {
     "id": "7f668e8f",
@@ -769,6 +1357,34 @@
      "red",
      "green leaves",
      "triangular"
+    ]
+   }
+  ],
+  "subway": [
+   {
+    "id": "a4f490d7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:53.529Z",
+    "round1": [
+     "Rides below city streets",
+     "Packed during morning rush",
+     "Uses a swipe card",
+     "Stops every few blocks",
+     "Runs on electric power"
+    ],
+    "round2": [
+     "enters a deep concrete tube",
+     "powered by overhead wires or rails",
+     "features sliding metal doors",
+     "follows a numbered transit line",
+     "arrives every few minutes"
+    ],
+    "banned": [
+     "underground",
+     "tunnel",
+     "station tokens",
+     "third rail"
     ]
    }
   ],
@@ -797,6 +1413,34 @@
      "seaweed",
      "soy sauce",
      "chopsticks"
+    ]
+   }
+  ],
+  "taxi": [
+   {
+    "id": "434124e0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:53.529Z",
+    "round1": [
+     "Hailed from a busy curb",
+     "Found waiting outside hotels",
+     "Paid at the end",
+     "Driven by working pros",
+     "Often stuck in rush hour"
+    ],
+    "round2": [
+     "features a folding rear door",
+     "often has a plastic shield inside",
+     "carries a small dome light",
+     "requires a special city permit",
+     "seats up to five adults"
+    ],
+    "banned": [
+     "yellow",
+     "meter",
+     "cab",
+     "roof light"
     ]
    }
   ],
@@ -851,6 +1495,118 @@
      "seeds inside",
      "ketchup",
      "juice"
+    ]
+   }
+  ],
+  "train": [
+   {
+    "id": "6cc10077",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:17:53.529Z",
+    "round1": [
+     "Connected series of long sections",
+     "Departs from a grand station",
+     "Crosses the open countryside",
+     "Rattles along a fixed path",
+     "Keeps to a strict timetable"
+    ],
+    "round2": [
+     "has heavy steel wheels",
+     "features an engine up front",
+     "pulls a line of heavy units",
+     "runs on dual parallel bars",
+     "needs a long braking distance"
+    ],
+    "banned": [
+     "tracks",
+     "rails",
+     "locomotive",
+     "conductor"
+    ]
+   }
+  ],
+  "ukulele": [
+   {
+    "id": "61575362",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:19:30.579Z",
+    "round1": [
+     "Held across the lap.",
+     "Plucked with fingers.",
+     "Has a wooden body.",
+     "Light to carry around.",
+     "Sounds very bright."
+    ],
+    "round2": [
+     "Fitted with four soft nylon strings.",
+     "Dangling easily from a thin neck strap.",
+     "Strummed gently using a bare thumb.",
+     "Neck features metal strips across wood.",
+     "Tucked away inside a nylon sleeve."
+    ],
+    "banned": [
+     "four nylon strings",
+     "hawaiian",
+     "small size",
+     "luau"
+    ]
+   }
+  ],
+  "violin": [
+   {
+    "id": "86ebcc1a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:19:30.579Z",
+    "round1": [
+     "Held up near the chin.",
+     "Drawn with horsehair.",
+     "Can sound quite screechy.",
+     "Has a wooden body.",
+     "Tucked against the collarbone."
+    ],
+    "round2": [
+     "Fitted with four thin metal strings.",
+     "Pressed tightly under a padded shoulder support.",
+     "Finished with a shiny amber varnish.",
+     "Has a tiny soundpost hidden inside.",
+     "Comes with a rigid rectangular case."
+    ],
+    "banned": [
+     "chin rest",
+     "bow",
+     "four strings",
+     "orchestra front row"
+    ]
+   }
+  ],
+  "volleyball": [
+   {
+    "id": "3145dcdd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-07T17:18:36.652Z",
+    "round1": [
+     "Played indoors or on the beach.",
+     "Played in short winning sets.",
+     "Jumping up into the air.",
+     "Athletes wearing short spandex.",
+     "Keeping the object off the ground."
+    ],
+    "round2": [
+     "Played across a divided court boundary.",
+     "Athletes dive onto the floor surface.",
+     "Team members rotate positions constantly.",
+     "Players communicate loudly before every hit.",
+     "Net stretches tight across the middle."
+    ],
+    "banned": [
+     "net",
+     "spike",
+     "court",
+     "kneepads"
     ]
    }
   ],
