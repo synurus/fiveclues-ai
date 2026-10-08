@@ -308,6 +308,34 @@
     ]
    }
   ],
+  "bell pepper": [
+   {
+    "id": "22f645ef",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:30:29.453Z",
+    "round1": [
+     "Glossy skin on the outside.",
+     "Chop into pieces for fajitas.",
+     "Sweet taste when eaten raw.",
+     "Stem sits on top.",
+     "Seeds cluster around the core."
+    ],
+    "round2": [
+     "Charred on outdoor grill grates.",
+     "Square shape with four lobes.",
+     "Diced small for omelets.",
+     "White ribs hold flat seeds.",
+     "Red turns sweeter than green."
+    ],
+    "banned": [
+     "stuffed",
+     "hollow inside",
+     "capsicum",
+     "red green yellow"
+    ]
+   }
+  ],
   "blanket": [
    {
     "id": "de15f3ef",
@@ -361,6 +389,34 @@
      "rows of shelves",
      "reading room",
      "paperbacks"
+    ]
+   }
+  ],
+  "broccoli": [
+   {
+    "id": "b5f968bd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:30:29.453Z",
+    "round1": [
+     "Green color dominates the top part.",
+     "Cut into bite-sized pieces before cooking.",
+     "Commonly found in stir-fry meals.",
+     "Tends to soak up butter easily.",
+     "Boiled until tender in salted water."
+    ],
+    "round2": [
+     "Tossed in creamy ranch dip.",
+     "Roasted until the edges char.",
+     "Clusters look like mini clouds.",
+     "Added to heavy beef dinners.",
+     "Tough stem chopped away."
+    ],
+    "banned": [
+     "little trees",
+     "stalk",
+     "florets",
+     "steamed side dish"
     ]
    }
   ],
@@ -752,6 +808,34 @@
     ]
    }
   ],
+  "cucumber": [
+   {
+    "id": "15702f49",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:30:29.453Z",
+    "round1": [
+     "Long cylindrical shape.",
+     "Green skin with bumpy texture.",
+     "Often put into fresh salads.",
+     "Crisp crunch when bitten raw.",
+     "Peeled before making certain dishes."
+    ],
+    "round2": [
+     "Blended into cold yogurt soup.",
+     "Stacked high on deli sandwiches.",
+     "Pale center filled with seeds.",
+     "Cool feeling on your tongue.",
+     "Stripped with a metal tool."
+    ],
+    "banned": [
+     "pickles",
+     "seeds",
+     "watery",
+     "slices on eyes"
+    ]
+   }
+  ],
   "daisy": [
    {
     "id": "ab83b731",
@@ -1135,6 +1219,34 @@
      "ladder",
      "fire truck",
      "smoke"
+    ]
+   }
+  ],
+  "garlic": [
+   {
+    "id": "3b094a5e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:30:29.453Z",
+    "round1": [
+     "Often comes in a bulb shape.",
+     "Used in pasta sauces worldwide.",
+     "Crushed with the flat of a knife.",
+     "Sold whole at the grocery store.",
+     "Grows underground in clusters."
+    ],
+    "round2": [
+     "Rubbed on warm toasted bread.",
+     "Found in Italian and Asian dishes.",
+     "Roasted until soft and spreadable.",
+     "Tiny white or purple sections.",
+     "Adds deep flavor to soups."
+    ],
+    "banned": [
+     "cloves",
+     "vampires",
+     "papery skin",
+     "breath"
     ]
    }
   ],
@@ -1918,6 +2030,34 @@
     ]
    }
   ],
+  "mushroom": [
+   {
+    "id": "bee4882c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:30:29.453Z",
+    "round1": [
+     "Grows in dark damp areas.",
+     "Sponge-like texture when touched.",
+     "Sautéed in butter and oil.",
+     "Added to savory meat dishes.",
+     "White or brown coloring on top."
+    ],
+    "round2": [
+     "Stuffed with rich cream cheese.",
+     "Shrinks down while being fried.",
+     "Fleshy bite in rich stews.",
+     "Tiny gills underneath the cap.",
+     "Sliced thick for steak toppings."
+    ],
+    "banned": [
+     "fungus",
+     "caps",
+     "stems",
+     "spores"
+    ]
+   }
+  ],
   "New York": [
    {
     "id": "a08bded4",
@@ -2633,6 +2773,34 @@
      "gelatin",
      "chocolate flavor",
      "spoon"
+    ]
+   }
+  ],
+  "pumpkin": [
+   {
+    "id": "a9e7e57d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:30:29.453Z",
+    "round1": [
+     "Round and orange exterior.",
+     "Grows heavy on vine patches.",
+     "Roasted seeds inside the middle.",
+     "Baked into sweet dessert treats.",
+     "Thick outer shell protects the inside."
+    ],
+    "round2": [
+     "Warm orange flesh inside.",
+     "Cooked down into thick puree.",
+     "Ribbed lines along the outside.",
+     "Flat stems attached firmly.",
+     "Salted seeds toasted for snacks."
+    ],
+    "banned": [
+     "jack-o'-lantern",
+     "carved face",
+     "halloween",
+     "pie"
     ]
    }
   ],
