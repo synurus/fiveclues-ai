@@ -308,6 +308,34 @@
     ]
    }
   ],
+  "blanket": [
+   {
+    "id": "de15f3ef",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:28.953Z",
+    "round1": [
+     "Draped over the couch arm.",
+     "Folded at the foot side.",
+     "Wrapped around shivering shoulders.",
+     "Tossed in the dryer.",
+     "Has stitched edges."
+    ],
+    "round2": [
+     "Tucked under the mattress edge",
+     "Drawn up to your chin",
+     "Fringes hang off the side",
+     "Piled high on a chair",
+     "Pattern printed one side"
+    ],
+    "banned": [
+     "fabric",
+     "warmth",
+     "bed",
+     "cotton"
+    ]
+   }
+  ],
   "bookshelf": [
    {
     "id": "e1d02146",
@@ -336,6 +364,33 @@
     ]
    }
   ],
+  "brownie": [
+   {
+    "id": "0f23bf82",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:03:35.836Z",
+    "round1": [
+     "Rich cocoa taste",
+     "Dense heavy bite",
+     "Dark crust top",
+     "Cold glass of milk",
+     "Baked sheet cut"
+    ],
+    "round2": [
+     "Sticky fingers after eating.",
+     "Cracked dry top.",
+     "Cut with a knife.",
+     "Heavy on the plate.",
+     "Melts in the mouth."
+    ],
+    "banned": [
+     "square cut",
+     "fudge center",
+     "nuts inside"
+    ]
+   }
+  ],
   "butterfly": [
    {
     "id": "471830b9",
@@ -361,6 +416,62 @@
      "caterpillar stage",
      "nectar",
      "metamorphosis"
+    ]
+   }
+  ],
+  "can opener": [
+   {
+    "id": "9add3eac",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:03.115Z",
+    "round1": [
+     "Squeezed to lock on.",
+     "Small handheld device.",
+     "Twisted in a circle.",
+     "Stored in a utensil drawer.",
+     "Has a rotating wheel."
+    ],
+    "round2": [
+     "Has a plastic knob.",
+     "Opens with tension.",
+     "Swings open wide.",
+     "Has shiny steel teeth.",
+     "Sits near the spices."
+    ],
+    "banned": [
+     "tin",
+     "lid",
+     "metal cans",
+     "crank"
+    ]
+   }
+  ],
+  "candle": [
+   {
+    "id": "116ea82c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:28.953Z",
+    "round1": [
+     "Melts down as time passes.",
+     "Lit during special dinners.",
+     "Comes in glass jars.",
+     "Blow it out before bed.",
+     "Shortens every single time."
+    ],
+    "round2": [
+     "Leaves a ring of liquid top",
+     "Snuffed out with a metal cap",
+     "Scent lingers in the room",
+     "Sits on a little saucer",
+     "Trimming the black string"
+    ],
+    "banned": [
+     "wax",
+     "wick",
+     "fire",
+     "flame"
     ]
    }
   ],
@@ -527,6 +638,34 @@
      "beans",
      "morning",
      "bitter"
+    ]
+   }
+  ],
+  "colander": [
+   {
+    "id": "f62a6a32",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:03.115Z",
+    "round1": [
+     "Lifted with side handles.",
+     "Sits inside the sink.",
+     "Has an open top.",
+     "Made of plastic or metal.",
+     "Stacked in the pantry."
+    ],
+    "round2": [
+     "Rests on small feet.",
+     "Shiny steel finish.",
+     "Holds a large amount.",
+     "Water pours through.",
+     "Hung on a hook."
+    ],
+    "banned": [
+     "pasta",
+     "drain",
+     "strain",
+     "holes"
     ]
    }
   ],
@@ -834,6 +973,33 @@
     ]
    }
   ],
+  "dumpling": [
+   {
+    "id": "86f19f2e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:43.343Z",
+    "round1": [
+     "Often comes in a steaming bamboo basket.",
+     "Requires a quick dip before eating.",
+     "Comes in large batches for sharing.",
+     "Found at cozy weekend street markets.",
+     "Pleated edges sealed by hand."
+    ],
+    "round2": [
+     "Smooth top surface",
+     "Glossy finish when hot",
+     "Soft give when pressed",
+     "Bitten in half first",
+     "Juicy center pocket"
+    ],
+    "banned": [
+     "steamed",
+     "wrapper",
+     "filling"
+    ]
+   }
+  ],
   "eagle": [
    {
     "id": "9c8d5a0f",
@@ -944,6 +1110,34 @@
     ]
    }
   ],
+  "grater": [
+   {
+    "id": "b2602458",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:03.115Z",
+    "round1": [
+     "Rests flat or stands tall.",
+     "Rough surface.",
+     "Handled with a firm grip.",
+     "Stored in lower cabinets.",
+     "Rinsed under running water."
+    ],
+    "round2": [
+     "Has a handle on top.",
+     "Creates fine flakes.",
+     "Pushed downward.",
+     "Sits on a plate.",
+     "Has multiple sides."
+    ],
+    "banned": [
+     "cheese",
+     "shred",
+     "sharp holes",
+     "zest"
+    ]
+   }
+  ],
   "guitar": [
    {
     "id": "98501633",
@@ -969,6 +1163,33 @@
      "pick",
      "six strings",
      "strap"
+    ]
+   }
+  ],
+  "hamburger": [
+   {
+    "id": "c2ec5b28",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:43.343Z",
+    "round1": [
+     "Topped with melted yellow cheese.",
+     "Held firmly with both hands to eat.",
+     "Always served alongside salted fries.",
+     "Cooked over an outdoor backyard grill.",
+     "Stacked tall with crisp green leaves."
+    ],
+    "round2": [
+     "Warm soft top",
+     "Shiny golden crust",
+     "Thick middle layer",
+     "Slight squash when bitten",
+     "Juice running down fingers"
+    ],
+    "banned": [
+     "bun",
+     "beef patty",
+     "fast food"
     ]
    }
   ],
@@ -1191,6 +1412,34 @@
      "boiling water",
      "whistling sound",
      "spout"
+    ]
+   }
+  ],
+  "ladder": [
+   {
+    "id": "9443a4ae",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:27.582Z",
+    "round1": [
+     "Requires balance while moving upward.",
+     "Made from lightweight aluminum or wood.",
+     "Tall enough to reach second-story windows.",
+     "Folds flat for easier transportation.",
+     "Must be set on level ground."
+    ],
+    "round2": [
+     "Parallel side rails hold flat steps.",
+     "Features a dull brushed metallic surface.",
+     "Stored leaning against a shed wall.",
+     "Stepped on carefully during upward movement.",
+     "Often kept near high outdoor walls."
+    ],
+    "banned": [
+     "climbs high",
+     "reaches roofs",
+     "extension steps",
+     "rungs"
     ]
    }
   ],
@@ -1498,6 +1747,34 @@
      "dairy",
      "calcium",
      "white"
+    ]
+   }
+  ],
+  "mirror": [
+   {
+    "id": "07f84a7c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:28.953Z",
+    "round1": [
+     "Wipe away smudges with spray.",
+     "Found above the bathroom sink.",
+     "Flips left and right.",
+     "Check your hair before leaving.",
+     "Mounted flat against drywall."
+    ],
+    "round2": [
+     "Edges held by metal clips",
+     "Dust settles on the top edge",
+     "Cold to the bare touch",
+     "Hangs by a wire cord",
+     "Corner chipped from a bump"
+    ],
+    "banned": [
+     "glass",
+     "reflection",
+     "silver",
+     "frame"
     ]
    }
   ],
@@ -1998,6 +2275,34 @@
     ]
    }
   ],
+  "pliers": [
+   {
+    "id": "42b596c5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:27.582Z",
+    "round1": [
+     "Operated with a squeezing hand motion.",
+     "Features rubber grips on the handles.",
+     "Kept handy in a household junk drawer.",
+     "Uses a pivot point to multiply force.",
+     "Available with curved or straight tips."
+    ],
+    "round2": [
+     "Crossed metal arms form the body.",
+     "Features a dark rust-resistant coating.",
+     "Stored upright in a wire basket.",
+     "Pinched tightly around small protruding objects.",
+     "Often found near electrical workbench areas."
+    ],
+    "banned": [
+     "cuts wire",
+     "grips small objects",
+     "needle nose",
+     "jaw hinge"
+    ]
+   }
+  ],
   "plumber": [
    {
     "id": "e6e599f6",
@@ -2109,6 +2414,60 @@
     ]
    }
   ],
+  "pretzel": [
+   {
+    "id": "8b104b39",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:03:35.836Z",
+    "round1": [
+     "Baked brown crust",
+     "Crunchy bite sound",
+     "Mall food court smell",
+     "Dipped in warm cheese",
+     "Made from dough rope"
+    ],
+    "round2": [
+     "Leaves salt on your fingers.",
+     "Golden brown surface.",
+     "Bought at sports games.",
+     "Chewy inside part.",
+     "Shaped like loops."
+    ],
+    "banned": [
+     "twisted knot shape",
+     "coarse salt",
+     "mustard dip"
+    ]
+   }
+  ],
+  "pudding": [
+   {
+    "id": "4b3a1833",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:03:35.836Z",
+    "round1": [
+     "Soft texture in the mouth",
+     "Served chilled in cups",
+     "Quick mix packet",
+     "Smooth surface sheen",
+     "Kids love this"
+    ],
+    "round2": [
+     "Wobbles slightly on the plate.",
+     "Sticks to the utensil.",
+     "Eaten after dinner.",
+     "Comes in small plastic cups.",
+     "Sweet vanilla flavor."
+    ],
+    "banned": [
+     "gelatin",
+     "chocolate flavor",
+     "spoon"
+    ]
+   }
+  ],
   "rainbow": [
    {
     "id": "c49c9f01",
@@ -2162,6 +2521,34 @@
      "has a door",
      "freezer",
      "kitchen"
+    ]
+   }
+  ],
+  "rolling pin": [
+   {
+    "id": "f4a6b082",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:03.115Z",
+    "round1": [
+     "Requires both hands to operate.",
+     "Smooth wooden exterior.",
+     "Pushed back and forth.",
+     "Found near the flour.",
+     "Kept in a drawer."
+    ],
+    "round2": [
+     "Requires a sturdy tabletop.",
+     "Often made from maple.",
+     "Has rounded ends.",
+     "Takes up long space.",
+     "Rolled over pastry sheets."
+    ],
+    "banned": [
+     "dough",
+     "flatten",
+     "bakery",
+     "cylindrical"
     ]
    }
   ],
@@ -2360,6 +2747,34 @@
     ]
    }
   ],
+  "screwdriver": [
+   {
+    "id": "fd123d11",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:27.582Z",
+    "round1": [
+     "Requires a firm grip to spin properly.",
+     "Often found sitting in a kitchen drawer.",
+     "Has a handle made of hard plastic.",
+     "Needs an operator to apply downward force.",
+     "Comes in various lengths and thicknesses."
+    ],
+    "round2": [
+     "Ends in a flat metallic tip.",
+     "Usually has a brightly colored grip.",
+     "Stored upright in a heavy cup.",
+     "Pushed firmly into tiny slot openings.",
+     "Often kept inside a small pouch."
+    ],
+    "banned": [
+     "turns screws",
+     "phillips head",
+     "flathead",
+     "metal shaft"
+    ]
+   }
+  ],
   "shark": [
    {
     "id": "87b8270e",
@@ -2469,6 +2884,33 @@
      "net",
      "cleats",
      "pitch"
+    ]
+   }
+  ],
+  "spaghetti": [
+   {
+    "id": "f5fb3b1a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:43.343Z",
+    "round1": [
+     "Twirls neatly around a metal fork.",
+     "Topped with a thick red tomato sauce.",
+     "Dusted lightly with grated white cheese.",
+     "Slurped loudly during family dinner.",
+     "Long strands tangled together."
+    ],
+    "round2": [
+     "Shiny oily coating",
+     "Slippery soft strands",
+     "Steaming hot mound",
+     "Twisted against ceramic",
+     "Heavy rich weight"
+    ],
+    "banned": [
+     "pasta",
+     "noodles",
+     "meatballs"
     ]
    }
   ],
@@ -2691,6 +3133,33 @@
      "flat surface",
      "eating meals",
      "chairs around it"
+    ]
+   }
+  ],
+  "taco": [
+   {
+    "id": "d47cb474",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:43.343Z",
+    "round1": [
+     "Dripping with spicy red sauce.",
+     "Folded neatly into a curved shape.",
+     "Sprinkled heavily with fresh chopped cilantro.",
+     "Ordered by the trio at trucks.",
+     "Crumbles apart in your lap easily."
+    ],
+    "round2": [
+     "Rough outer grain",
+     "Warm golden shell",
+     "Bright mix of colors",
+     "Bitten from the corner",
+     "Loaded central mound"
+    ],
+    "banned": [
+     "shell",
+     "tortilla",
+     "mexican"
     ]
    }
   ],
@@ -3052,6 +3521,34 @@
     ]
    }
   ],
+  "umbrella": [
+   {
+    "id": "e28ddc5e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:01:28.953Z",
+    "round1": [
+     "Folds up small for easy storage.",
+     "Often left behind in public places.",
+     "Has a curved grip.",
+     "Pushed up until it clicks.",
+     "Kept near the front door."
+    ],
+    "round2": [
+     "Sits in a narrow tall holder",
+     "Metal tip points downward",
+     "Slips inside a cloth sleeve",
+     "Leans against a hallway wall",
+     "Strap wraps around the middle"
+    ],
+    "banned": [
+     "rain",
+     "handle",
+     "canopy",
+     "waterproof"
+    ]
+   }
+  ],
   "violin": [
    {
     "id": "86ebcc1a",
@@ -3272,6 +3769,33 @@
      "cork",
      "bottle",
      "glass"
+    ]
+   }
+  ],
+  "wrench": [
+   {
+    "id": "1b4f9332",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T15:02:27.582Z",
+    "round1": [
+     "Swivels around circular metal fasteners.",
+     "Built entirely out of heavy steel.",
+     "Stored hanging on a garage pegboard.",
+     "Uses leverage to increase turning power.",
+     "Sold in sets of graduating sizes."
+    ],
+    "round2": [
+     "Jaws wrap around six-sided fasteners.",
+     "Features a smooth silver finish.",
+     "Stored neatly along a metal strip.",
+     "Pulled hard to tighten loose fittings.",
+     "Often found inside a canvas roll."
+    ],
+    "banned": [
+     "tightens bolts",
+     "adjustable jaw",
+     "socket set"
     ]
    }
   ],
