@@ -1167,6 +1167,34 @@
     ]
    }
   ],
+  "elephant": [
+   {
+    "id": "aad2972a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T19:09:20.607Z",
+    "round1": [
+     "Living in a large family group.",
+     "Eating tons of plants daily.",
+     "Swishing water over the back.",
+     "Flapping large ears back and forth.",
+     "Stomping loudly while walking."
+    ],
+    "round2": [
+     "Swaying a flexible nose around.",
+     "Swishing flies with a thin tail.",
+     "Showing massive flat molars.",
+     "Walking barefoot on hard soil.",
+     "Resting while standing up straight."
+    ],
+    "banned": [
+     "trunk",
+     "tusks",
+     "ivory",
+     "huge gray body"
+    ]
+   }
+  ],
   "eraser": [
    {
     "id": "3025864a",
@@ -1247,6 +1275,34 @@
      "vampires",
      "papery skin",
      "breath"
+    ]
+   }
+  ],
+  "giraffe": [
+   {
+    "id": "6fa1a393",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T19:09:20.607Z",
+    "round1": [
+     "Reaching high tree tops.",
+     "Chewing green leaves slowly.",
+     "Having a long dark tongue.",
+     "Sleeping very little each night.",
+     "Spotted coat pattern."
+    ],
+    "round2": [
+     "Bending way down to drink water.",
+     "Kicking backwards at swift predators.",
+     "Short knobby horns on top.",
+     "Running with a loping gait.",
+     "Swishing a tail with tassels."
+    ],
+    "banned": [
+     "long neck",
+     "spots",
+     "tallest",
+     "patches"
     ]
    }
   ],
@@ -2224,6 +2280,34 @@
     ]
    }
   ],
+  "panda": [
+   {
+    "id": "e681e6e1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T19:09:20.607Z",
+    "round1": [
+     "Climbing trees for fun.",
+     "Spending hours just chewing.",
+     "Round face with dark patches.",
+     "Living mostly alone.",
+     "Clumsy way of moving."
+    ],
+    "round2": [
+     "Rolling around in soft snow.",
+     "An extra thumb on paws.",
+     "Munching plants all afternoon.",
+     "Heavy body with short legs.",
+     "Making soft bleating sounds."
+    ],
+    "banned": [
+     "black and white",
+     "bamboo",
+     "china",
+     "bear"
+    ]
+   }
+  ],
   "paperclip": [
    {
     "id": "80ea23f2",
@@ -2801,6 +2885,34 @@
      "carved face",
      "halloween",
      "pie"
+    ]
+   }
+  ],
+  "rabbit": [
+   {
+    "id": "0d4c32b2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T19:09:20.607Z",
+    "round1": [
+     "Living in underground tunnels.",
+     "Chewing on garden greens.",
+     "Having a fluffy tail.",
+     "Being very active at dusk.",
+     "Soft furry coat."
+    ],
+    "round2": [
+     "Thumping hind feet on soil.",
+     "Wiggling a tiny round puff.",
+     "Quick sideways leaps away.",
+     "Keeping whiskers very clean.",
+     "Soft fur on big paws."
+    ],
+    "banned": [
+     "long ears",
+     "hopping",
+     "carrots",
+     "burrow"
     ]
    }
   ],
