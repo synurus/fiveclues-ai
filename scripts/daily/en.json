@@ -410,5 +410,31 @@
    "dorsal fin",
    "predator"
   ]
+ },
+ "2026-10-15": {
+  "word": "pot",
+  "category": "Kitchenware",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Sits heavy on a flat burner.",
+   "Holds enough liquid for a crowd.",
+   "Warms up slowly over time.",
+   "Gets scrubbed with a rough sponge.",
+   "Lives inside a deep bottom cabinet."
+  ],
+  "round2": [
+   "Deep walls keep splashes completely inside.",
+   "Takes a long time to cool down.",
+   "Two side grips for lifting safely.",
+   "Made of shiny metal or dark enamel.",
+   "Stirring a thick stew inside it."
+  ],
+  "banned": [
+   "boiling water",
+   "making soup",
+   "lid",
+   "handles"
+  ]
  }
 }
