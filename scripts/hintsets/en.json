@@ -140,6 +140,34 @@
     ]
    }
   ],
+  "badminton": [
+   {
+    "id": "ed951678",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:04:34.943Z",
+    "round1": [
+     "has real feathers attached",
+     "floats strangely in air",
+     "swung high overhead often",
+     "comes in a tall tube",
+     "popular at family picnics"
+    ],
+    "round2": [
+     "stored upside down in cardboard",
+     "tips over when set down",
+     "rubber tip on the bottom",
+     "gets stuck in tree branches",
+     "frays after heavy use"
+    ],
+    "banned": [
+     "birdie",
+     "shuttlecock",
+     "racket",
+     "net"
+    ]
+   }
+  ],
   "banana": [
    {
     "id": "3737a85d",
@@ -193,6 +221,90 @@
      "home plate",
      "pitcher",
      "diamond"
+    ]
+   }
+  ],
+  "basketball": [
+   {
+    "id": "656b7b93",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:04:34.943Z",
+    "round1": [
+     "bounces easily on hard floors",
+     "fits nicely in two hands",
+     "made with textured rubber",
+     "left outside in the driveway",
+     "needs a quick pump sometimes"
+    ],
+    "round2": [
+     "fits inside a tall net bag",
+     "bumpy surface wears down over time",
+     "stored on a rack",
+     "leaves black marks on shoes",
+     "makes a loud thud indoors"
+    ],
+    "banned": [
+     "orange",
+     "hoop",
+     "dribble",
+     "court"
+    ]
+   }
+  ],
+  "beach": [
+   {
+    "id": "2ad592fe",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:55.898Z",
+    "round1": [
+     "Footprints wash away quickly",
+     "Towels spread on the ground",
+     "Strong wind blows hats off",
+     "People walk here barefoot",
+     "Bright sun beats down hard"
+    ],
+    "round2": [
+     "Lifeguard towers stand on stilts.",
+     "Colorful umbrellas block the sun.",
+     "Seashells scatter along the shore.",
+     "Tide pools form in rocks.",
+     "Boardwalks run parallel behind us."
+    ],
+    "banned": [
+     "sand",
+     "ocean",
+     "waves",
+     "swimsuit"
+    ]
+   }
+  ],
+  "beer": [
+   {
+    "id": "ac2f5cae",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Poured with a bubbly white head",
+     "Sold in packs of six bottles",
+     "Bitter taste on the tongue",
+     "Often served with salted pretzels",
+     "Coasters required on the wooden table"
+    ],
+    "round2": [
+     "Cardboard six pack rings",
+     "Sweaty glass exterior",
+     "Skunky smell outside",
+     "Recycled glass bins",
+     "Gold liquid shimmer"
+    ],
+    "banned": [
+     "alcohol",
+     "foam",
+     "pub",
+     "bar"
     ]
    }
   ],
@@ -304,6 +416,34 @@
      "meow",
      "purr",
      "nine lives"
+    ]
+   }
+  ],
+  "cello": [
+   {
+    "id": "1569dc75",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:12.883Z",
+    "round1": [
+     "Held between the knees while sitting.",
+     "Requires a seated player.",
+     "Rests on the floor via a spike.",
+     "Has four strings tuned in fifths.",
+     "Often featured in chamber groups."
+    ],
+    "round2": [
+     "Leans against your left shoulder",
+     "Drawn across thick horsehair",
+     "Played sitting on a low stool",
+     "Produces deep resonant vibrations",
+     "Features a wooden scroll"
+    ],
+    "banned": [
+     "large wooden body",
+     "endpin",
+     "played with a bow",
+     "deep rich tone"
     ]
    }
   ],
@@ -555,6 +695,33 @@
     ]
    }
   ],
+  "dolphin": [
+   {
+    "id": "f1515ed0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:13.177Z",
+    "round1": [
+     "Often seen near boats.",
+     "Travels in social pods.",
+     "Smooth skin and curved back.",
+     "Makes clicking and whistling noises.",
+     "Highly intelligent marine animal."
+    ],
+    "round2": [
+     "Leaps high into the air",
+     "Rides the waves near a boat",
+     "Snaps up small swimming fish",
+     "Glides smoothly right beside boats",
+     "Swims with a small family group"
+    ],
+    "banned": [
+     "jumps out of water",
+     "echolocation",
+     "bottlenose"
+    ]
+   }
+  ],
   "dragonfly": [
    {
     "id": "819904b1",
@@ -639,6 +806,34 @@
     ]
    }
   ],
+  "drum": [
+   {
+    "id": "45552760",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:12.883Z",
+    "round1": [
+     "Played by striking the surface.",
+     "Cylindrical shell shape.",
+     "Often tuned with metal lugs.",
+     "Found in almost every marching band.",
+     "Provides the pulse for a song."
+    ],
+    "round2": [
+     "Hit stretched animal skin",
+     "Hollow cylinder design",
+     "Resonates when struck",
+     "Set up on metal stands",
+     "Adjust tension with a key"
+    ],
+    "banned": [
+     "hit with sticks",
+     "stretched membrane",
+     "beats and rhythms",
+     "percussion family"
+    ]
+   }
+  ],
   "eagle": [
    {
     "id": "9c8d5a0f",
@@ -663,6 +858,33 @@
      "bald head",
      "national symbol",
      "white tail"
+    ]
+   }
+  ],
+  "eraser": [
+   {
+    "id": "3025864a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:34.891Z",
+    "round1": [
+     "disappears slowly over time",
+     "leaves tiny crumbs behind",
+     "fixes mistakes",
+     "rubbed against surfaces",
+     "held in one hand"
+    ],
+    "round2": [
+     "often shaped like a block",
+     "gently dragged across paper",
+     "soft to the touch",
+     "gets smaller with use",
+     "leaves a textured surface behind"
+    ],
+    "banned": [
+     "rubber",
+     "pencil marks",
+     "pink"
     ]
    }
   ],
@@ -834,6 +1056,34 @@
     ]
    }
   ],
+  "hot cocoa": [
+   {
+    "id": "e52114c1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Top with a mountain of whipped cream",
+     "Sweet treat after playing in snow",
+     "Stir it constantly with a spoon",
+     "Rich and comforting flavor",
+     "Sold at ski resort lodges"
+    ],
+    "round2": [
+     "Melts marshmallows instantly",
+     "Leaves powder clumps",
+     "Coats the spoon bottom",
+     "Steam fogs your glasses",
+     "Packaged in paper packets"
+    ],
+    "banned": [
+     "marshmallows",
+     "chocolate",
+     "winter",
+     "mug"
+    ]
+   }
+  ],
   "ice cream": [
    {
     "id": "7ecf61d1",
@@ -886,6 +1136,33 @@
      "ocean",
      "glacier",
      "floating ice"
+    ]
+   }
+  ],
+  "jellyfish": [
+   {
+    "id": "3a002f59",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:13.177Z",
+    "round1": [
+     "Floats gently with the current.",
+     "Mostly made of water.",
+     "Bell shaped body.",
+     "Washes up on sandy beaches.",
+     "Lacks a backbone or brain."
+    ],
+    "round2": [
+     "Drifts near the shallow water top",
+     "Stings when touched by skin",
+     "Pulsates while moving forward",
+     "Bright neon glow at night",
+     "Catches tiny swimming meals"
+    ],
+    "banned": [
+     "sting",
+     "tentacles",
+     "transparent"
     ]
    }
   ],
@@ -973,6 +1250,34 @@
     ]
    }
   ],
+  "lemonade": [
+   {
+    "id": "6c33b063",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Stir in extra sugar to taste",
+     "Refreshes you on warm days",
+     "Cloudy appearance in the glass",
+     "Kids sell it on the sidewalk",
+     "Served cold over crushed ice"
+    ],
+    "round2": [
+     "Floated with thin slices",
+     "Puckers your mouth",
+     "Bottom settled pulp",
+     "Bright yellow hue",
+     "Mixed from powder packs"
+    ],
+    "banned": [
+     "yellow",
+     "lemons",
+     "sour",
+     "stand"
+    ]
+   }
+  ],
   "librarian": [
    {
     "id": "a6939822",
@@ -998,6 +1303,34 @@
      "shush",
      "library",
      "shelves"
+    ]
+   }
+  ],
+  "library": [
+   {
+    "id": "d9bfd040",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:55.898Z",
+    "round1": [
+     "Rows of tall wooden shelves",
+     "Needs a quiet voice",
+     "Rows of tables and chairs",
+     "Open to the general public",
+     "Free entry for everyone"
+    ],
+    "round2": [
+     "Card catalogs sit near the front desk.",
+     "Dewey decimals written on spines.",
+     "Stamps mark the due date inside.",
+     "Return slots built into walls.",
+     "Copy machines hum in the corner."
+    ],
+    "banned": [
+     "books",
+     "librarian",
+     "reading",
+     "silence"
     ]
    }
   ],
@@ -1168,6 +1501,34 @@
     ]
    }
   ],
+  "museum": [
+   {
+    "id": "b22830a4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:55.898Z",
+    "round1": [
+     "Glass cases protect the items",
+     "Guards stand in the rooms",
+     "Guided tours start every hour",
+     "Large crowds on weekends",
+     "Small gift shop near exit"
+    ],
+    "round2": [
+     "Audio devices rent at the entrance.",
+     "Velvet ropes block off the floor.",
+     "Fossil bones mounted on steel frames.",
+     "Permanent collections span several halls.",
+     "Docents lead groups around exhibits."
+    ],
+    "banned": [
+     "artifacts",
+     "dinosaurs",
+     "exhibits",
+     "curator"
+    ]
+   }
+  ],
   "New York": [
    {
     "id": "a08bded4",
@@ -1303,6 +1664,33 @@
      "fluffy",
      "breakfast",
      "flat"
+    ]
+   }
+  ],
+  "paperclip": [
+   {
+    "id": "80ea23f2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:34.891Z",
+    "round1": [
+     "comes in silver or color",
+     "easily slips on and off",
+     "stored in a small tub",
+     "twists if forced",
+     "small enough to lose"
+    ],
+    "round2": [
+     "thin metallic wire",
+     "smooth and shiny surface",
+     "fits easily between fingers",
+     "springy when squeezed",
+     "makes a faint metallic clink"
+    ],
+    "banned": [
+     "bending wire",
+     "holding sheets",
+     "metal loop"
     ]
    }
   ],
@@ -1472,6 +1860,33 @@
     ]
    }
   ],
+  "piano": [
+   {
+    "id": "4991be8a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:12.883Z",
+    "round1": [
+     "Played sitting on a bench.",
+     "Produces sound via internal hammers.",
+     "Features a hinged lid.",
+     "Has a wide pitch range.",
+     "Commonly found in living rooms."
+    ],
+    "round2": [
+     "Press levers with your fingers",
+     "Struck strings inside a box",
+     "Features an openable top flap",
+     "Stands on wooden legs",
+     "Rests against a wall"
+    ],
+    "banned": [
+     "black and white keys",
+     "foot pedals",
+     "grand size"
+    ]
+   }
+  ],
   "pillow": [
    {
     "id": "249f2d79",
@@ -1524,6 +1939,34 @@
      "cockpit",
      "flight",
      "wings"
+    ]
+   }
+  ],
+  "ping pong": [
+   {
+    "id": "fdc0e281",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:04:34.943Z",
+    "round1": [
+     "hollow sound on impact",
+     "carried in a square box",
+     "light enough to blow away",
+     "played in garages and pubs",
+     "held with a pen grip"
+    ],
+    "round2": [
+     "dents when stepped on",
+     "sold in clear plastic tubes",
+     "floats on water easily",
+     "printed with star ratings",
+     "thin plastic shell"
+    ],
+    "banned": [
+     "table",
+     "paddle",
+     "small white ball",
+     "net"
     ]
    }
   ],
@@ -1890,6 +2333,33 @@
     ]
    }
   ],
+  "scissors": [
+   {
+    "id": "d0d9e6ec",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:34.891Z",
+    "round1": [
+     "metal and plastic parts",
+     "has two finger loops",
+     "opens and closes",
+     "leaves straight edges",
+     "can be dangerous"
+    ],
+    "round2": [
+     "pivots on a central screw",
+     "cold to the touch",
+     "handled with thumb and fingers",
+     "rests flat on a table",
+     "shiny silver finish"
+    ],
+    "banned": [
+     "cutting paper",
+     "blades",
+     "sharp"
+    ]
+   }
+  ],
   "shark": [
    {
     "id": "87b8270e",
@@ -1915,6 +2385,62 @@
      "teeth",
      "dorsal fin",
      "predator"
+    ]
+   }
+  ],
+  "slushie": [
+   {
+    "id": "6adafec2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Bright neon red or blue color",
+     "Melts into flavored water quickly",
+     "Kids love the sugary taste",
+     "Spinning barrels behind the counter",
+     "Eat with a spoon when it jams"
+    ],
+    "round2": [
+     "Sticky fingers after",
+     "Spoon straw combo",
+     "Liquid settles below",
+     "Neon puddle outside",
+     "Giant dome lids"
+    ],
+    "banned": [
+     "brain freeze",
+     "7-eleven",
+     "machine",
+     "ice"
+    ]
+   }
+  ],
+  "smoothie": [
+   {
+    "id": "84c4d92e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Naturally very sweet",
+     "Often bright pink or green",
+     "Keeps you full for hours",
+     "Comes with a tiny paper umbrella sometimes",
+     "Popular after a gym workout"
+    ],
+    "round2": [
+     "Leaves pulp behind",
+     "Needs a thick straw",
+     "Seeds stuck in teeth",
+     "Packed with frozen fruit",
+     "Separates if left sitting"
+    ],
+    "banned": [
+     "blender",
+     "straw",
+     "thick",
+     "frozen fruit"
     ]
    }
   ],
@@ -1971,6 +2497,33 @@
      "scraping bowls",
      "flexible rubber",
      "flipping burgers"
+    ]
+   }
+  ],
+  "stapler": [
+   {
+    "id": "430458fe",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:34.891Z",
+    "round1": [
+     "makes a loud click",
+     "holds papers together",
+     "pressed with a palm",
+     "sits on a desk",
+     "loaded from the top"
+    ],
+    "round2": [
+     "has a heavy metal base",
+     "springs back up quickly",
+     "pushed down with force",
+     "painted in solid colors",
+     "hinged at the back"
+    ],
+    "banned": [
+     "metal wire",
+     "binding pages",
+     "pressing down"
     ]
    }
   ],
@@ -2169,6 +2722,62 @@
     ]
    }
   ],
+  "tea": [
+   {
+    "id": "fb13c9a0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Often poured over ice",
+     "Stir in a spoonful of sugar",
+     "Poured from a glass pitcher",
+     "Sipped slowly while reading",
+     "Found on nearly every cafe menu"
+    ],
+    "round2": [
+     "Earth tone in the cup",
+     "Stained old mug rings",
+     "Soothes a scratchy throat",
+     "Kept in little paper boxes",
+     "Often brewed too long"
+    ],
+    "banned": [
+     "green leaves",
+     "bag",
+     "British",
+     "hot water"
+    ]
+   }
+  ],
+  "tennis": [
+   {
+    "id": "cc91c274",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:04:34.943Z",
+    "round1": [
+     "scored with strange numbers",
+     "played on various surfaces",
+     "makes a sharp popping sound",
+     "tossed high before hitting",
+     "watched closely by linesmen"
+    ],
+    "round2": [
+     "comes sealed in a metal tin",
+     "fuzz rubs off easily",
+     "bounces high on pavement",
+     "bought in packs of three",
+     "dogs love chasing them"
+    ],
+    "banned": [
+     "yellow ball",
+     "racket",
+     "net",
+     "court"
+    ]
+   }
+  ],
   "tiger": [
    {
     "id": "b54019c1",
@@ -2357,6 +2966,33 @@
      "rails",
      "locomotive",
      "conductor"
+    ]
+   }
+  ],
+  "trumpet": [
+   {
+    "id": "c2ceb833",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:06:12.883Z",
+    "round1": [
+     "Uses finger buttons to change notes.",
+     "Requires buzzing lips into a mouthpiece.",
+     "Often leads a jazz melody.",
+     "Comes with a detachable metal cup.",
+     "Short, coiled tubing design."
+    ],
+    "round2": [
+     "Pressed with three fingers",
+     "Blown with tight lips",
+     "Compact metal tubing loops",
+     "Flares at the end",
+     "Held up to your mouth"
+    ],
+    "banned": [
+     "valves",
+     "shiny brass bell",
+     "held horizontally"
     ]
    }
   ],
@@ -2581,6 +3217,89 @@
      "red inside",
      "black seeds",
      "large"
+    ]
+   }
+  ],
+  "whale": [
+   {
+    "id": "9b64637c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:13.177Z",
+    "round1": [
+     "Breaks the surface for air.",
+     "Travels across vast open waters.",
+     "Mammal that lives in the deep.",
+     "Produces deep rumbling sounds.",
+     "Swims alongside large groups."
+    ],
+    "round2": [
+     "Leaps right out of the water",
+     "Keeps a small baby close",
+     "Huge shadow beneath a boat",
+     "Dives down for a long time",
+     "Travels with a small family group"
+    ],
+    "banned": [
+     "huge size",
+     "blowhole",
+     "baleen"
+    ]
+   }
+  ],
+  "wine": [
+   {
+    "id": "64bae36d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:02:30.040Z",
+    "round1": [
+     "Stained lips after a few sips",
+     "Paired with a fancy cheese board",
+     "Red or white varieties available",
+     "Let it breathe before drinking",
+     "Brought as a host gift"
+    ],
+    "round2": [
+     "Cork pieces float",
+     "Heavy glass bottle bottom",
+     "Spills stain tablecloths",
+     "Stemmed glassware required",
+     "Ruby purple tint"
+    ],
+    "banned": [
+     "grapes",
+     "cork",
+     "bottle",
+     "glass"
+    ]
+   }
+  ],
+  "zoo": [
+   {
+    "id": "8c33b92a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T12:03:55.898Z",
+    "round1": [
+     "Paved paths wind through trees",
+     "Maps handed out at entrance",
+     "Fences separate you from them",
+     "Families push strollers here",
+     "Small snack stands spaced apart"
+    ],
+    "round2": [
+     "Feeding times posted on signs.",
+     "Stroller rentals near the turnstiles.",
+     "Petting areas with farm goats.",
+     "Concrete moats replace iron bars.",
+     "Reptile houses stay very warm."
+    ],
+    "banned": [
+     "animals",
+     "cages",
+     "zookeeper",
+     "safari"
     ]
    }
   ]
