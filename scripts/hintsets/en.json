@@ -586,6 +586,34 @@
     ]
    }
   ],
+  "cherry": [
+   {
+    "id": "d1e66abb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:04:09.836Z",
+    "round1": [
+     "small red globes on stems",
+     "small hard seed inside",
+     "paired with vanilla ice cream",
+     "sweet bite with tart notes",
+     "draped over frosted baked goods"
+    ],
+    "round2": [
+     "pairs dangle from green twigs",
+     "cooked down for thick jam",
+     "stiff little stems hold pairs",
+     "dark red stains fingers quickly",
+     "pitted before baking into tarts"
+    ],
+    "banned": [
+     "stem",
+     "pie topping",
+     "pit",
+     "maraschino"
+    ]
+   }
+  ],
   "chocolate": [
    {
     "id": "72607b62",
@@ -610,6 +638,34 @@
      "cocoa",
      "bar",
      "cacao"
+    ]
+   }
+  ],
+  "coconut": [
+   {
+    "id": "6644bd3b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:04:09.836Z",
+    "round1": [
+     "hairy brown shell on the outside",
+     "white solid meat inside lining",
+     "liquid sloshes around the core",
+     "heavy round ball to carry",
+     "flakes added to sweet macaroons"
+    ],
+    "round2": [
+     "cracked open with heavy tools",
+     "shredded white flakes top desserts",
+     "hard brown husk needs smashing",
+     "clear milk sloshes inside hollow",
+     "tropical beaches drop these down"
+    ],
+    "banned": [
+     "husk",
+     "milk",
+     "shell",
+     "tropical palm"
     ]
    }
   ],
@@ -1110,6 +1166,34 @@
     ]
    }
   ],
+  "grape": [
+   {
+    "id": "7910316f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:04:09.836Z",
+    "round1": [
+     "grows in tight bunches on vines",
+     "soft skin bursts in your mouth",
+     "small round bites in green or purple",
+     "sweet juice drips when you bite",
+     "tossed into fruit salads often"
+    ],
+    "round2": [
+     "shrinks down into chewy dried snacks",
+     "pressed for communion cups",
+     "smooth oval globes on stems",
+     "chilled in bowls at parties",
+     "snacked on during long drives"
+    ],
+    "banned": [
+     "wine",
+     "vine",
+     "raisin",
+     "cluster"
+    ]
+   }
+  ],
   "grater": [
    {
     "id": "b2602458",
@@ -1412,6 +1496,34 @@
      "boiling water",
      "whistling sound",
      "spout"
+    ]
+   }
+  ],
+  "kiwi": [
+   {
+    "id": "a2bd672c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:04:09.836Z",
+    "round1": [
+     "fuzzy brown exterior like a mouse",
+     "bright green center with tiny dots",
+     "tangy sweet tropical bite",
+     "small oval shape in hand",
+     "topped on birthday cake slices"
+    ],
+    "round2": [
+     "sliced open to reveal black rings",
+     "fuzz rubbed off before eating",
+     "small oval fuzz covered exterior",
+     "bright emerald flesh in slices",
+     "spooned right out of the skin"
+    ],
+    "banned": [
+     "fuzzy brown skin",
+     "bird name",
+     "green flesh",
+     "black seeds"
     ]
    }
   ],
@@ -1889,6 +2001,34 @@
     ]
    }
   ],
+  "orange": [
+   {
+    "id": "14362fd2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:04:09.836Z",
+    "round1": [
+     "bumpy skin shares name with color",
+     "divided into inner natural sections",
+     "zesty scent from the rind",
+     "tangy juice bursts when squeezed",
+     "packed inside a mesh bag"
+    ],
+    "round2": [
+     "pulled apart into natural wedges",
+     "zesty outer layer adds flavor",
+     "packed into lunch boxes daily",
+     "thick rind peels in strips",
+     "morning glasses sit on tables"
+    ],
+    "banned": [
+     "citrus",
+     "peel",
+     "segments",
+     "vitamin c"
+    ]
+   }
+  ],
   "owl": [
    {
     "id": "5a86c7cc",
@@ -2023,6 +2163,34 @@
      "talks",
      "mimics",
      "colorful"
+    ]
+   }
+  ],
+  "peach": [
+   {
+    "id": "0567d473",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-08T17:04:09.836Z",
+    "round1": [
+     "soft fuzz covers the outer surface",
+     "hard wooden center inside the flesh",
+     "pink and yellow blush on skin",
+     "drips juice down your chin",
+     "baked into warm summer pies"
+    ],
+    "round2": [
+     "sliced over morning cereal bowls",
+     "canned in heavy sugary syrup",
+     "smooth stone holds the center",
+     "tender flesh smells heavily perfumed",
+     "blends into thick smooth shakes"
+    ],
+    "banned": [
+     "fuzzy skin",
+     "stone pit",
+     "cobbler",
+     "nectarine"
     ]
    }
   ],
