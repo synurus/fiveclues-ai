@@ -196,6 +196,34 @@
     ]
    }
   ],
+  "axe": [
+   {
+    "id": "ab8dc849",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:06.380Z",
+    "round1": [
+     "Swung with both arms.",
+     "Found near a fireplace.",
+     "Made with a wooden handle.",
+     "Used outside in forests.",
+     "Leaves a deep split behind."
+    ],
+    "round2": [
+     "Features a sharp wedge end",
+     "Often rests on workshop benches",
+     "Swing down with force",
+     "Painted red or black",
+     "Balanced right in your grip"
+    ],
+    "banned": [
+     "chop",
+     "wood",
+     "logs",
+     "blade"
+    ]
+   }
+  ],
   "badminton": [
    {
     "id": "ed951678",
@@ -249,6 +277,34 @@
      "oven",
      "pastry",
      "flour"
+    ]
+   }
+  ],
+  "Bali": [
+   {
+    "id": "51edf6fd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:32.815Z",
+    "round1": [
+     "Tropical weather all year long.",
+     "Popular spot for digital workers.",
+     "Mopeds everywhere on narrow roads.",
+     "Famous for relaxing spa treatments.",
+     "Lots of local artisan markets."
+    ],
+    "round2": [
+     "Bright yellow surfboards stacked on sand.",
+     "Offerings of flowers left on doorsteps.",
+     "Tall palm trees line black sand.",
+     "Sound of traditional wooden xylophones.",
+     "Intricate stone carvings on gates."
+    ],
+    "banned": [
+     "surfing",
+     "temples",
+     "volcano",
+     "ubud"
     ]
    }
   ],
@@ -500,6 +556,34 @@
      "hollow inside",
      "capsicum",
      "red green yellow"
+    ]
+   }
+  ],
+  "bench": [
+   {
+    "id": "29db196f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T17:05:46.294Z",
+    "round1": [
+     "Long enough to hold several people together.",
+     "Often seen outdoors on a patio or porch.",
+     "Usually has a hard, solid surface.",
+     "Many don't have any armrests at all.",
+     "Handy near the entrance for taking off shoes."
+    ],
+    "round2": [
+     "Frequently built without any back support whatsoever.",
+     "Can slide completely under a long table.",
+     "Often rests at the foot of beds.",
+     "Sometimes the whole top lifts on hinges.",
+     "Just a thick wooden plank across supports."
+    ],
+    "banned": [
+     "park seating",
+     "long backless seat",
+     "bleachers",
+     "wooden slats"
     ]
    }
   ],
@@ -1411,6 +1495,34 @@
     ]
    }
   ],
+  "curtain": [
+   {
+    "id": "a2a96163",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:06:47.308Z",
+    "round1": [
+     "Gently sways in a summer breeze",
+     "Needs washing after a long season",
+     "Pushed aside every single morning",
+     "Hangs straight from tall rings",
+     "Matches the living room rug"
+    ],
+    "round2": [
+     "Slightly damp on humid mornings",
+     "Catches the draft from outside",
+     "Gathers nicely into vertical folds",
+     "Fades slowly in afternoon sun",
+     "Gathered up with a fabric tie"
+    ],
+    "banned": [
+     "window",
+     "fabric",
+     "rod",
+     "privacy"
+    ]
+   }
+  ],
   "cutting board": [
    {
     "id": "ee8e287c",
@@ -1908,6 +2020,34 @@
     ]
    }
   ],
+  "Egypt": [
+   {
+    "id": "90974a24",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:32.815Z",
+    "round1": [
+     "Hot and dry desert climate.",
+     "Bargaining at outdoor bazaars.",
+     "Camel rides near the sand.",
+     "Heavy traffic in the capital.",
+     "Remnants of ancient stone carvings."
+    ],
+    "round2": [
+     "Towering minarets rise above rooftops.",
+     "Felucca sailboats drift on wide water.",
+     "Bustling spice stalls smell like cumin.",
+     "Palm trees cluster around desert springs.",
+     "Heavy wooden doors with brass knockers."
+    ],
+    "banned": [
+     "pyramids",
+     "sphinx",
+     "pharaoh",
+     "nile"
+    ]
+   }
+  ],
   "electric fan": [
    {
     "id": "9846429b",
@@ -2070,6 +2210,34 @@
     "banned": [
      "pink",
      "long legs"
+    ]
+   }
+  ],
+  "flashlight": [
+   {
+    "id": "a9881026",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:06:47.308Z",
+    "round1": [
+     "Clicks firmly with your thumb",
+     "Grabbed when the power goes out",
+     "Rolls off the nightstand",
+     "Carried down dark basement stairs",
+     "Needs new cells every year"
+    ],
+    "round2": [
+     "Rattles when shaken near your ear",
+     "Feels heavy in a jacket pocket",
+     "Sits upright on a flat base",
+     "Cold metal cylinder in your palm",
+     "Smells like old plastic and dust"
+    ],
+    "banned": [
+     "batteries",
+     "beam",
+     "dark",
+     "bulb"
     ]
    }
   ],
@@ -2464,6 +2632,34 @@
     ]
    }
   ],
+  "hanger": [
+   {
+    "id": "9e5e4087",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:06:47.308Z",
+    "round1": [
+     "Keeps your favorite shirts neat",
+     "Bends a little under heavy coats",
+     "Often sold in big plastic packs",
+     "Slides easily across a metal rod",
+     "Sits empty in the spare room"
+    ],
+    "round2": [
+     "Squeaks slightly on a wooden pole",
+     "Twists around in the back row",
+     "Tucked away inside a dark wardrobe",
+     "Has a small notch on each side",
+     "Cold to the touch at first"
+    ],
+    "banned": [
+     "closet",
+     "wire",
+     "hook",
+     "clothes"
+    ]
+   }
+  ],
   "hat": [
    {
     "id": "ba32ad36",
@@ -2741,6 +2937,34 @@
     ]
    }
   ],
+  "Iceland": [
+   {
+    "id": "338f63eb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:32.815Z",
+    "round1": [
+     "Driving on the ring road.",
+     "Lots of steam rising outdoors.",
+     "Very few trees in sight.",
+     "Long daylight hours in summer.",
+     "Wild horses roaming around."
+    ],
+    "round2": [
+     "Black volcanic sand stretches for miles.",
+     "Waterfalls cascade down mossy cliffs.",
+     "Tiny purple flowers cover lava fields.",
+     "Single lane bridges over rushing rivers.",
+     "Geothermal pools near snowy mountains."
+    ],
+    "banned": [
+     "aurora",
+     "geysers",
+     "glaciers",
+     "viking"
+    ]
+   }
+  ],
   "jacket": [
    {
     "id": "45178aee",
@@ -2936,6 +3160,33 @@
     ]
    }
   ],
+  "lamp": [
+   {
+    "id": "e559b051",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T17:05:46.294Z",
+    "round1": [
+     "Often positioned right next to an armchair.",
+     "Comes in standing or tabletop sizes.",
+     "Has a slender stem rising from a base.",
+     "Controlled by a small switch or cord.",
+     "Often has a weighted base for balance."
+    ],
+    "round2": [
+     "Topped with a fabric or paper cover.",
+     "Diffuses harsh brightness into a gentle glow.",
+     "Positioned directly over your late-night reading.",
+     "Kept glowing as subtle background evening glow.",
+     "Houses a replaceable screw-in threaded socket."
+    ],
+    "banned": [
+     "light bulb",
+     "lampshade",
+     "illumination"
+    ]
+   }
+  ],
   "lavender": [
    {
     "id": "4331b22d",
@@ -3045,6 +3296,34 @@
      "librarian",
      "reading",
      "silence"
+    ]
+   }
+  ],
+  "light bulb": [
+   {
+    "id": "c4e40464",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:06:47.308Z",
+    "round1": [
+     "Gets quite warm after long hours",
+     "Stored inside a cardboard box",
+     "Shatters easily on hard floors",
+     "Changed when the room gets dim",
+     "Tucked under a paper shade"
+    ],
+    "round2": [
+     "Tingies when tapped with a nail",
+     "Fits snugly in a small carton",
+     "Smooth round sphere of thin glass",
+     "Collects dust around the top edge",
+     "Sits dead on the workbench"
+    ],
+    "banned": [
+     "lamp",
+     "socket",
+     "screw",
+     "watts"
     ]
    }
   ],
@@ -3489,6 +3768,32 @@
      "Statue of Liberty",
      "Central Park",
      "Broadway"
+    ]
+   }
+  ],
+  "nightstand": [
+   {
+    "id": "ab8b2682",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T17:05:46.294Z",
+    "round1": [
+     "About waist-high or a bit lower.",
+     "Usually has a small drawer or shelf.",
+     "Great spot to rest your charging phone.",
+     "Often bought in a matching pair.",
+     "Holds a glass of water within reach."
+    ],
+    "round2": [
+     "Strictly flanks a sleeping area on sides.",
+     "Holds reading glasses and paperbacks overnight.",
+     "Easy to reach without sitting up fully.",
+     "Typically matches the height of the mattress.",
+     "Modern styles often hide built-in charging ports."
+    ],
+    "banned": [
+     "next to the bed",
+     "bedside table"
     ]
    }
   ],
@@ -4454,6 +4759,34 @@
     ]
    }
   ],
+  "rake": [
+   {
+    "id": "ba1755ff",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:06.380Z",
+    "round1": [
+     "Pulled across the grass.",
+     "Has a long wooden stick.",
+     "Used outside in autumn.",
+     "Found leaning against a wall.",
+     "Makes a scratching noise."
+    ],
+    "round2": [
+     "Has multiple skinny fingers",
+     "Rests flat against fences",
+     "Drag it toward your feet",
+     "Painted bright green often",
+     "Stands tall in corners"
+    ],
+    "banned": [
+     "leaves",
+     "tines",
+     "yard",
+     "gather"
+    ]
+   }
+  ],
   "refrigerator": [
    {
     "id": "18884501",
@@ -4535,6 +4868,34 @@
      "flatten",
      "bakery",
      "cylindrical"
+    ]
+   }
+  ],
+  "Rome": [
+   {
+    "id": "693aaa12",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:32.815Z",
+    "round1": [
+     "Lots of ancient ruin sites around.",
+     "Warm summers and mild winters.",
+     "Cobblestone paths in the center.",
+     "Famous fountains on public squares.",
+     "Lots of good local food spots."
+    ],
+    "round2": [
+     "Huge white monument dominates the main plaza.",
+     "Electric scooters parked by old walls.",
+     "Opera singing echoes in old spaces.",
+     "Lines outside small artisanal ice shops.",
+     "Green pine trees stand tall on hills."
+    ],
+    "banned": [
+     "Colosseum",
+     "Vatican",
+     "pasta",
+     "gladiator"
     ]
    }
   ],
@@ -4899,6 +5260,34 @@
     ]
    }
   ],
+  "shovel": [
+   {
+    "id": "1ed89b7a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:06.380Z",
+    "round1": [
+     "Needs two hands to hold.",
+     "Leaves a mark on the lawn.",
+     "Found in a garden shed.",
+     "Used outside in winter.",
+     "Has a long wooden stick."
+    ],
+    "round2": [
+     "Has a curved metal blade",
+     "Commonly rests on garage floors",
+     "Lift heavy piles with it",
+     "Painted bright yellow sometimes",
+     "Kept upright by the wall"
+    ],
+    "banned": [
+     "digging",
+     "dirt",
+     "scoop",
+     "blade"
+    ]
+   }
+  ],
   "skiing": [
    {
     "id": "34bad93e",
@@ -5036,6 +5425,33 @@
      "net",
      "cleats",
      "pitch"
+    ]
+   }
+  ],
+  "sofa": [
+   {
+    "id": "41653762",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T17:05:46.294Z",
+    "round1": [
+     "Often covered in soft fabric or leather.",
+     "People love curling up on it.",
+     "Pillows and blankets get tossed here often.",
+     "Usually placed right against a long wall.",
+     "Heavy enough that two people usually carry it."
+    ],
+    "round2": [
+     "Great for lying flat while watching TV.",
+     "Deep padded sections compress under your weight.",
+     "Divides open floor plans into distinct zones.",
+     "Loose coins and remotes slip down cracks.",
+     "Usually built to seat three people comfortably."
+    ],
+    "banned": [
+     "couch",
+     "cushions for three",
+     "pull-out bed"
     ]
    }
   ],
@@ -6166,6 +6582,34 @@
      "huge size",
      "blowhole",
      "baleen"
+    ]
+   }
+  ],
+  "wheelbarrow": [
+   {
+    "id": "49d95380",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T17:07:06.380Z",
+    "round1": [
+     "Pushed with two hands.",
+     "Found in a garden.",
+     "Moved across the dirt.",
+     "Leaves tracks in mud.",
+     "Left outside in the rain."
+    ],
+    "round2": [
+     "Has a deep metal basin",
+     "Tips forward to empty",
+     "Rests upside down outside",
+     "Painted blue or red",
+     "Sits on dual metal legs"
+    ],
+    "banned": [
+     "push",
+     "dirt",
+     "load",
+     "wheel"
     ]
    }
   ],
