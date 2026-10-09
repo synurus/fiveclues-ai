@@ -583,6 +583,34 @@
     ]
    }
   ],
+  "bus": [
+   {
+    "id": "3ed5f71e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:44:21.809Z",
+    "round1": [
+     "Stops at painted street corners.",
+     "Has windows along both sides.",
+     "Takes up multiple parking spaces.",
+     "Requires routine maintenance checks.",
+     "Burned fuel during the morning rush."
+    ],
+    "round2": [
+     "Long body with folding doors.",
+     "Pulls up to covered shelters.",
+     "Rattles over downtown potholes.",
+     "Yellow paint on school versions.",
+     "Drawn along fixed daily schedules."
+    ],
+    "banned": [
+     "passengers",
+     "route",
+     "schedule",
+     "fare"
+    ]
+   }
+  ],
   "butterfly": [
    {
     "id": "471830b9",
@@ -887,6 +915,33 @@
     ]
    }
   ],
+  "clam": [
+   {
+    "id": "8ab14da5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "buried in the sand",
+     "dug up at low tide",
+     "main ingredient in chowder",
+     "snaps shut when touched",
+     "static most of the time"
+    ],
+    "round2": [
+     "rounded shell pair",
+     "smooth inner surface",
+     "muddy bottom dweller",
+     "slow gap motion",
+     "tight closure action"
+    ],
+    "banned": [
+     "pearl",
+     "two shells",
+     "bivalve"
+    ]
+   }
+  ],
   "cloud": [
    {
     "id": "44dd772e",
@@ -1023,6 +1078,33 @@
      "baking",
      "dough",
      "oven"
+    ]
+   }
+  ],
+  "crab": [
+   {
+    "id": "18cd8339",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "frequently seen scurrying on sand",
+     "popular in coastal seafood boils",
+     "has a hard outer covering",
+     "often hides under rocks",
+     "pinches when feeling threatened"
+    ],
+    "round2": [
+     "jointed leg pairs",
+     "low scuttling posture",
+     "bumpy shell texture",
+     "coastal floor resident",
+     "defensive arm display"
+    ],
+    "banned": [
+     "claws",
+     "sideways walk",
+     "shell"
     ]
    }
   ],
@@ -1965,6 +2047,34 @@
     ]
    }
   ],
+  "helicopter": [
+   {
+    "id": "152ba875",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:44:21.809Z",
+    "round1": [
+     "Needs an open clearing to land.",
+     "Stirred up dust on the ground.",
+     "Parked on a concrete pad.",
+     "Washed after flying through rain.",
+     "Checked by mechanics before takeoff."
+    ],
+    "round2": [
+     "Spins overhead with loud chops.",
+     "Hovers steady above city rooftops.",
+     "Glass bubble cabin upfront.",
+     "Tails sport a tiny fan.",
+     "Lands on hospital roofs."
+    ],
+    "banned": [
+     "blades",
+     "pilot",
+     "rotor",
+     "hover"
+    ]
+   }
+  ],
   "hospital": [
    {
     "id": "cc89ac8c",
@@ -1990,6 +2100,34 @@
      "nurses",
      "patients",
      "surgery"
+    ]
+   }
+  ],
+  "hot air balloon": [
+   {
+    "id": "4788e4cc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:44:21.809Z",
+    "round1": [
+     "Packed into a large canvas bag.",
+     "Drifted over quiet morning fields.",
+     "Followed by a ground crew truck.",
+     "Tethered before letting people in.",
+     "Stretched out across the grass."
+    ],
+    "round2": [
+     "Giant fabric sphere overhead.",
+     "Rises slow with sudden roars.",
+     "Painted with bright rainbow stripes.",
+     "Wander wherever the breeze blows.",
+     "Packed tight inside nylon sacks."
+    ],
+    "banned": [
+     "basket",
+     "burner",
+     "envelope",
+     "fire"
     ]
    }
   ],
@@ -2492,6 +2630,33 @@
     ]
    }
   ],
+  "lobster": [
+   {
+    "id": "ca684abc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "turns bright red when cooked",
+     "lives on the ocean floor",
+     "prized restaurant menu item",
+     "long antennae near the head",
+     "crawls along the seabed"
+    ],
+    "round2": [
+     "jointed tail segments",
+     "dark heavy armor",
+     "slow seabed walker",
+     "benthic floor dweller",
+     "long facial feelers"
+    ],
+    "banned": [
+     "large claws",
+     "expensive seafood",
+     "whiskers"
+    ]
+   }
+  ],
   "London": [
    {
     "id": "df37ef42",
@@ -2657,6 +2822,34 @@
      "sucks blood",
      "itchy bump",
      "annoying buzz"
+    ]
+   }
+  ],
+  "motorcycle": [
+   {
+    "id": "f00ccf71",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:44:21.809Z",
+    "round1": [
+     "Requires balancing when stopped.",
+     "Leaves tracks on dirt roads.",
+     "Fits in a narrow garage spot.",
+     "Uses a kickstand.",
+     "Exposed to the open weather."
+    ],
+    "round2": [
+     "Sits low on two tires.",
+     "Lean hard into every curve.",
+     "Roars loud at green lights.",
+     "Worn leather jacket mandatory.",
+     "Splits between stopped highway traffic."
+    ],
+    "banned": [
+     "helmet",
+     "handlebars",
+     "two wheels",
+     "engine"
     ]
    }
   ],
@@ -3931,6 +4124,60 @@
     ]
    }
   ],
+  "seahorse": [
+   {
+    "id": "635cfebd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "swims in an upright position",
+     "found near coral reefs",
+     "slowest swimmer in the sea",
+     "uses a tail to hold seaweed",
+     "bony plates instead of scales"
+    ],
+    "round2": [
+     "curled tail tip",
+     "ridged body plates",
+     "vertical resting drift",
+     "shallow weed dweller",
+     "horse like head"
+    ],
+    "banned": [
+     "horse head",
+     "male gives birth",
+     "curled tail"
+    ]
+   }
+  ],
+  "seal": [
+   {
+    "id": "374108c1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "often rests on sandy shores",
+     "performs tricks in shows",
+     "thick coat of fur",
+     "whiskers on the face",
+     "spends time on icy rocks"
+    ],
+    "round2": [
+     "streamlined body shape",
+     "smooth coat feel",
+     "coastal rock lounger",
+     "large dark eyes",
+     "hydrodynamic swimming form"
+    ],
+    "banned": [
+     "barks",
+     "flippers",
+     "blubber"
+    ]
+   }
+  ],
   "shark": [
    {
     "id": "87b8270e",
@@ -4126,6 +4373,33 @@
     ]
    }
   ],
+  "squid": [
+   {
+    "id": "c7a68f04",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "often served fried as rings",
+     "changes color for camouflage",
+     "large eyes for deep water",
+     "moves fast by pushing water",
+     "soft body without a shell"
+    ],
+    "round2": [
+     "soft muscular mantle",
+     "jet propulsion speed",
+     "pointed tail fin",
+     "open water resident",
+     "flexible arm group"
+    ],
+    "banned": [
+     "ink",
+     "tentacles",
+     "jet propulsion"
+    ]
+   }
+  ],
   "stapler": [
    {
     "id": "430458fe",
@@ -4150,6 +4424,33 @@
      "metal wire",
      "binding pages",
      "pressing down"
+    ]
+   }
+  ],
+  "starfish": [
+   {
+    "id": "ce61afed",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T14:43:56.394Z",
+    "round1": [
+     "often spotted in tide pools",
+     "popular in beach decorations",
+     "comes in bright colors",
+     "flat shape on rocks",
+     "slow moving on the bottom"
+    ],
+    "round2": [
+     "textured upper surface",
+     "firm rigid feel",
+     "found on ocean floors",
+     "patterned back dots",
+     "passive coastal dweller"
+    ],
+    "banned": [
+     "five arms",
+     "regenerates limbs",
+     "tube feet"
     ]
    }
   ],
