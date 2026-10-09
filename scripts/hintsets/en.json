@@ -1,5 +1,33 @@
 {
  "sets": {
+  "air conditioner": [
+   {
+    "id": "5497c3cb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:47:35.748Z",
+    "round1": [
+     "blows steady air",
+     "has removable plastic filters",
+     "makes a loud humming noise",
+     "mounted high on a wall",
+     "drips moisture outside"
+    ],
+    "round2": [
+     "has a condensation drain tube",
+     "uses an outdoor compressor unit",
+     "has metal cooling fins",
+     "blows chilled air forward",
+     "draws room air inward"
+    ],
+    "banned": [
+     "cool",
+     "temperature",
+     "window unit",
+     "thermostat"
+    ]
+   }
+  ],
   "airplane": [
    {
     "id": "672558cd",
@@ -53,6 +81,34 @@
      "flights",
      "pilots",
      "runway"
+    ]
+   }
+  ],
+  "amusement park": [
+   {
+    "id": "57411ee7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Bright lights flash after dark.",
+     "Walking outside for hours.",
+     "Music playing from hidden speakers.",
+     "Carrying heavy bags around.",
+     "Waiting in the sun."
+    ],
+    "round2": [
+     "Huge metal towers rising high.",
+     "Paved paths winding around.",
+     "Fenced areas with turnstiles.",
+     "Painted wooden structures.",
+     "Brightly colored banners flying."
+    ],
+    "banned": [
+     "roller coaster",
+     "ferris wheel",
+     "ticket",
+     "thrill"
     ]
    }
   ],
@@ -165,6 +221,34 @@
      "shuttlecock",
      "racket",
      "net"
+    ]
+   }
+  ],
+  "bakery": [
+   {
+    "id": "2234e4a7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Warm air hits your face.",
+     "Early morning rushes.",
+     "White paper bags.",
+     "Sweet smells drifting outside.",
+     "Glass display cases."
+    ],
+    "round2": [
+     "Flour dusted on wooden tables.",
+     "Metal racks cooling down.",
+     "Tied string around boxes.",
+     "Small bells chiming at doors.",
+     "Chalkboard menus on walls."
+    ],
+    "banned": [
+     "bread",
+     "oven",
+     "pastry",
+     "flour"
     ]
    }
   ],
@@ -528,6 +612,34 @@
     ]
    }
   ],
+  "bowling": [
+   {
+    "id": "c51041d6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:40.945Z",
+    "round1": [
+     "Done under bright indoor lights.",
+     "You slide your hand backward first.",
+     "Involves slippery floor surfaces nearby.",
+     "People eat snacks between turns.",
+     "Loud crashing sounds happen often."
+    ],
+    "round2": [
+     "Special tape protects human fingers.",
+     "Overhead screens show funny animations.",
+     "House shoes slide smoothly.",
+     "Rotatable racks hold heavy items.",
+     "Triangular arrangements wait at the end."
+    ],
+    "banned": [
+     "pins",
+     "lane",
+     "heavy ball",
+     "strike"
+    ]
+   }
+  ],
   "broccoli": [
    {
     "id": "b5f968bd",
@@ -639,6 +751,61 @@
     ]
    }
   ],
+  "cake": [
+   {
+    "id": "d1445737",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Very soft and spongy to bite.",
+     "Often coated with a creamy layer.",
+     "Easy to cut into sharing portions.",
+     "Commonly flavored with chocolate or vanilla.",
+     "Dries out quickly if left uncovered."
+    ],
+    "round2": [
+     "Multiple circular layers stacked tall together.",
+     "Piped messages often written across the top.",
+     "Carved with a wide knife and server.",
+     "The centerpiece at major milestone celebrations.",
+     "Delicate crumb made from thoroughly whipped batter."
+    ],
+    "banned": [
+     "birthday candles",
+     "layered frosting",
+     "wedding tiers"
+    ]
+   }
+  ],
+  "calculator": [
+   {
+    "id": "3ee4467e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:49.104Z",
+    "round1": [
+     "Rests flat on the table.",
+     "Tapped repeatedly with one finger.",
+     "Has little rubber feet underneath.",
+     "Slips inside backpacks easily.",
+     "Shared among students during tests."
+    ],
+    "round2": [
+     "Makes soft clicking sounds when pressed.",
+     "Sits beside math notebooks.",
+     "Runs on tiny batteries.",
+     "Flips open with a hard cover.",
+     "Solves long division problems."
+    ],
+    "banned": [
+     "buttons",
+     "screen",
+     "math",
+     "solar"
+    ]
+   }
+  ],
   "can opener": [
    {
     "id": "9add3eac",
@@ -692,6 +859,32 @@
      "wick",
      "fire",
      "flame"
+    ]
+   }
+  ],
+  "candy": [
+   {
+    "id": "6af4ac33",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Comes in tiny bite-sized pieces.",
+     "Often has very bright, unnatural colors.",
+     "Dissolves slowly if held in mouth.",
+     "Can have an intense sour burst.",
+     "Leaves fingers feeling sugary and tacky."
+    ],
+    "round2": [
+     "Individually wrapped with twisted shiny ends.",
+     "Cooked sugar cooled into a hard glass.",
+     "Risk cracking teeth if bitten too early.",
+     "Collected door-to-door in huge bags each autumn.",
+     "Can melt into goo inside warm pockets."
+    ],
+    "banned": [
+     "sold in small bags",
+     "hard sugar drops"
     ]
    }
   ],
@@ -862,6 +1055,34 @@
     ]
    }
   ],
+  "chewing gum": [
+   {
+    "id": "84b7278c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Stays rubbery no matter how chewed.",
+     "Delivers a sudden sharp peppermint kick.",
+     "Often comes as flat thin strips.",
+     "Gradually loses taste the longer chewed.",
+     "Stretches out if pulled apart."
+    ],
+    "round2": [
+     "Blown into thin balloons that pop loudly.",
+     "Meant strictly for chewing, never for swallowing.",
+     "Ends up stuck like glue on sidewalks.",
+     "Small pellets coated in a crunchy shell.",
+     "Pushed out of foil-backed blister cards."
+    ],
+    "banned": [
+     "blowing bubbles",
+     "do not swallow",
+     "spit out in paper",
+     "chicle base"
+    ]
+   }
+  ],
   "chicken": [
    {
     "id": "98b0ddae",
@@ -912,6 +1133,34 @@
      "cocoa",
      "bar",
      "cacao"
+    ]
+   }
+  ],
+  "cinema": [
+   {
+    "id": "f2a3e59d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Sticky floors under shoes.",
+     "Sitting very close together.",
+     "Bright flashes in the dark.",
+     "Loud speakers shaking walls.",
+     "Renting a large space."
+    ],
+    "round2": [
+     "Stepped rows of chairs.",
+     "Heavy velvet curtains hanging.",
+     "Small lights on floors.",
+     "Emergency exits glowing green.",
+     "Cup holders in armrests."
+    ],
+    "banned": [
+     "movie",
+     "popcorn",
+     "screen",
+     "ticket"
     ]
    }
   ],
@@ -1162,6 +1411,34 @@
     ]
    }
   ],
+  "cutting board": [
+   {
+    "id": "ee8e287c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:46:44.209Z",
+    "round1": [
+     "Flat surface for working.",
+     "Often has a handle hole.",
+     "Takes up space.",
+     "Washed in the sink.",
+     "Keeps counters safe."
+    ],
+    "round2": [
+     "Takes a beating daily.",
+     "Damp sponge wipes it down.",
+     "Stands upright when stored.",
+     "Wood grain shows through.",
+     "Heavy enough to stay put."
+    ],
+    "banned": [
+     "chop",
+     "wooden",
+     "countertop",
+     "protect"
+    ]
+   }
+  ],
   "daisy": [
    {
     "id": "ab83b731",
@@ -1380,6 +1657,34 @@
      "jumps out of water",
      "echolocation",
      "bottlenose"
+    ]
+   }
+  ],
+  "donut": [
+   {
+    "id": "064f18a6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Soft and bready on the inside.",
+     "The outside can be quite sticky.",
+     "Usually picked up and eaten by hand.",
+     "Has a golden brown outer skin.",
+     "Tastes best when freshly warm."
+    ],
+    "round2": [
+     "Fried submerged in hot bubbling oil.",
+     "Often dipped head-first into shiny icing.",
+     "Frequently covered in tiny rainbow sprinkles.",
+     "Sometimes pumped full of jelly or custard.",
+     "Often bought by the dozen in boxes."
+    ],
+    "banned": [
+     "hole in the center",
+     "fried dough ring",
+     "glaze and sprinkles",
+     "torus shape"
     ]
    }
   ],
@@ -1603,6 +1908,34 @@
     ]
    }
   ],
+  "electric fan": [
+   {
+    "id": "9846429b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:47:35.748Z",
+    "round1": [
+     "rotates back and forth",
+     "protected by a wire cage",
+     "has a simple button panel",
+     "sits on a tall stand",
+     "gathers dust on the edges"
+    ],
+    "round2": [
+     "has a tilting head joint",
+     "features a front grill cover",
+     "uses a multi speed switch",
+     "driven by a small motor",
+     "moves air across a room"
+    ],
+    "banned": [
+     "blades",
+     "breeze",
+     "oscillate",
+     "wind"
+    ]
+   }
+  ],
   "elephant": [
    {
     "id": "aad2972a",
@@ -1740,6 +2073,34 @@
     ]
    }
   ],
+  "flute": [
+   {
+    "id": "628c1ac4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:06.494Z",
+    "round1": [
+     "Held sideways while played.",
+     "Made of shiny metal tubes.",
+     "Sits near the front row.",
+     "Uses rapid finger tapping.",
+     "Makes a high whistling tone."
+    ],
+    "round2": [
+     "Uses a lip plate",
+     "Has no reed inside",
+     "Balanced with the right pinky",
+     "Found in wind ensembles",
+     "Uses inline key rods"
+    ],
+    "banned": [
+     "silver",
+     "holes",
+     "mouthpiece",
+     "blow across"
+    ]
+   }
+  ],
   "garlic": [
    {
     "id": "3b094a5e",
@@ -1821,6 +2182,62 @@
      "fingers",
      "mittens",
      "pair"
+    ]
+   }
+  ],
+  "glue stick": [
+   {
+    "id": "c8422bd6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:49.104Z",
+    "round1": [
+     "Leaves a shiny trail when dried.",
+     "Pressed down firmly during use.",
+     "Often smells a bit sweet.",
+     "Rolls off tables if left sideways.",
+     "Used heavily by young children."
+    ],
+    "round2": [
+     "Leaves a cold damp patch behind.",
+     "Sticks paper edges together fast.",
+     "Turns clear as it dries up.",
+     "Gathered in craft bins.",
+     "Wears down into a round dome."
+    ],
+    "banned": [
+     "adhesive",
+     "paper",
+     "twist",
+     "cap"
+    ]
+   }
+  ],
+  "golf": [
+   {
+    "id": "7360d0bb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:40.945Z",
+    "round1": [
+     "Done in quiet outdoor spaces.",
+     "Involves walking long green areas.",
+     "People wear special footwear here.",
+     "Friends chat between turns.",
+     "Often takes hours to finish."
+    ],
+    "round2": [
+     "Requires a very gentle tap sometimes.",
+     "Tiny markers sit on the grass.",
+     "Players check small pocket books.",
+     "Pounds per square inch of tire pressure matters.",
+     "Stiff fabric caps shield the face."
+    ],
+    "banned": [
+     "club",
+     "hole",
+     "putting",
+     "tee"
     ]
    }
   ],
@@ -1933,6 +2350,62 @@
      "pick",
      "six strings",
      "strap"
+    ]
+   }
+  ],
+  "gym": [
+   {
+    "id": "97ca7444",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Mirrors covering the walls.",
+     "Carrying a small towel.",
+     "Pumping music playing loudly.",
+     "Heavy breathing all around.",
+     "Wiping down equipment."
+    ],
+    "round2": [
+     "Rubber flooring under foot.",
+     "Metal bars mounted high.",
+     "Rows of lockers lining walls.",
+     "Large fans blowing air.",
+     "Digital clocks ticking loudly."
+    ],
+    "banned": [
+     "workout",
+     "weights",
+     "treadmill",
+     "sweat"
+    ]
+   }
+  ],
+  "hair dryer": [
+   {
+    "id": "8e3d7f06",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:47:35.748Z",
+    "round1": [
+     "held with one hand",
+     "has a long flexible cord",
+     "features a simple switch",
+     "gets warm during operation",
+     "stored in a bathroom drawer"
+    ],
+    "round2": [
+     "has a small fan inside",
+     "features a cool shot button",
+     "held by a pistol grip",
+     "has a rear intake grille",
+     "blows warm air forward"
+    ],
+    "banned": [
+     "hair",
+     "blowout",
+     "heat",
+     "salon"
     ]
    }
   ],
@@ -2072,6 +2545,34 @@
      "pilot",
      "rotor",
      "hover"
+    ]
+   }
+  ],
+  "highlighter": [
+   {
+    "id": "50975c6d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:49.104Z",
+    "round1": [
+     "Has a wide chisel tip.",
+     "Smells like mild chemicals.",
+     "Pressed firmly across words.",
+     "Snap the lid back on tightly.",
+     "Held just like a pen."
+    ],
+    "round2": [
+     "Marks textbook sentences.",
+     "Shows through thin notebook pages.",
+     "Brightens up dull paragraphs.",
+     "Collected by students for studying.",
+     "Cap posts on the back."
+    ],
+    "banned": [
+     "neon",
+     "marker",
+     "yellow",
+     "bleed"
     ]
    }
   ],
@@ -2713,6 +3214,33 @@
     ]
    }
   ],
+  "marshmallow": [
+   {
+    "id": "419eaa05",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Squishy and bounces back when pressed.",
+     "Extremely light when held in hand.",
+     "Dusted with light white powder outside.",
+     "Gets gooey and stringy when heated.",
+     "Often plain white or pastel shades."
+    ],
+    "round2": [
+     "Impaled on skewers to roast over flames.",
+     "Bobbing gently on dark, steaming mugs.",
+     "Catches fire easily, blackening the surface.",
+     "Spongy, airy foam whipped from gelatin.",
+     "Sandwiched alongside melted chocolate squares."
+    ],
+    "banned": [
+     "puffy white cylinder",
+     "s'mores ingredient",
+     "floats in hot cocoa"
+    ]
+   }
+  ],
   "microwave": [
    {
     "id": "08b7be9c",
@@ -2850,6 +3378,34 @@
      "handlebars",
      "two wheels",
      "engine"
+    ]
+   }
+  ],
+  "muffin": [
+   {
+    "id": "a2a2969f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Dense and moist on the inside.",
+     "Frequently baked with whole berries inside.",
+     "Puffs up rounded over its base.",
+     "Eaten directly without forks or spoons.",
+     "Slightly firmer crust around the edges."
+    ],
+    "round2": [
+     "Peeled out of a pleated paper cup.",
+     "Baked in metal pans with circular indents.",
+     "Fluffy domed top spreading over the rim.",
+     "Often sprinkled with coarse crumbly streusel.",
+     "Often split open and spread with butter."
+    ],
+    "banned": [
+     "paper baking cup",
+     "mushroom dome top",
+     "quick bread cup",
+     "baker's tin cup"
     ]
    }
   ],
@@ -3429,6 +3985,32 @@
     ]
    }
   ],
+  "pie": [
+   {
+    "id": "3f6497b5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Flaky and crisp on the outside.",
+     "Soft and thick in the center.",
+     "Often made with baked fruit pieces.",
+     "Usually sliced into pointed wedge pieces.",
+     "Rich with a buttery taste."
+    ],
+    "round2": [
+     "Woven pastry strips crisscross the top.",
+     "Bakes inside a shallow, sloping metal dish.",
+     "Pinched or crimped along the outer rim.",
+     "Frequently crowned with cold vanilla ice cream.",
+     "Can be packed with meat instead."
+    ],
+    "banned": [
+     "crimped crust",
+     "lattice top"
+    ]
+   }
+  ],
   "pillow": [
    {
     "id": "249f2d79",
@@ -3620,6 +4202,61 @@
      "kernels",
      "cinema",
      "butter"
+    ]
+   }
+  ],
+  "popsicle": [
+   {
+    "id": "308a516d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-09T16:42:13.847Z",
+    "round1": [
+     "Chilled and soothing to lick.",
+     "Leaves bright color on your tongue.",
+     "Hard and brittle straight from freezing.",
+     "Drips down fast if eaten slowly.",
+     "Comes in intense fruit-like colors."
+    ],
+    "round2": [
+     "Anchored to a smooth, flat wooden stick.",
+     "Fruit juice frozen solid inside narrow molds.",
+     "Can painfully cling to dry warm lips.",
+     "Some varieties snap cleanly into twin bars.",
+     "Handed out from neighborhood music-playing trucks."
+    ],
+    "banned": [
+     "ice pop",
+     "melts down the stick",
+     "freezer pop mold"
+    ]
+   }
+  ],
+  "post office": [
+   {
+    "id": "3dbe7166",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Licking small sticky squares.",
+     "Placing items on scales.",
+     "Filling out paper forms.",
+     "Standing behind a counter.",
+     "Stacking cardboard boxes."
+    ],
+    "round2": [
+     "Rolled twine on spools.",
+     "Metal mailboxes lined up.",
+     "Clear tape rolls sitting.",
+     "Printed postal rates posted.",
+     "Rubber stamps leaving ink."
+    ],
+    "banned": [
+     "mail",
+     "stamp",
+     "letter",
+     "package"
     ]
    }
   ],
@@ -3845,6 +4482,34 @@
     ]
    }
   ],
+  "restaurant": [
+   {
+    "id": "fc038ba1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Waiting near the entrance.",
+     "Low lighting at night.",
+     "Talking across a table.",
+     "Checking the daily specials.",
+     "Leaving extra cash behind."
+    ],
+    "round2": [
+     "Cloth napkins folded neatly.",
+     "Small candles flickering gently.",
+     "Numbered plates on doors.",
+     "Empty glasses waiting nearby.",
+     "Hanging pendant lamps glowing."
+    ],
+    "banned": [
+     "menu",
+     "waiter",
+     "food",
+     "bill"
+    ]
+   }
+  ],
   "rolling pin": [
    {
     "id": "f4a6b082",
@@ -3982,6 +4647,34 @@
      "teeth",
      "blade",
      "cut"
+    ]
+   }
+  ],
+  "saxophone": [
+   {
+    "id": "42a90d35",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:06.494Z",
+    "round1": [
+     "Shiny metal body with keys.",
+     "Popular in smoky lounges.",
+     "Hung from a neck strap.",
+     "Blown into through a mouthpiece.",
+     "Projects a smooth, loud tone."
+    ],
+    "round2": [
+     "Uses a tight ligature",
+     "Has a flared opening",
+     "Requires thumb rest pressure",
+     "Found on concert stages",
+     "Uses lots of padded keys"
+    ],
+    "banned": [
+     "reed",
+     "jazz",
+     "curved neck",
+     "fingers"
     ]
    }
   ],
@@ -4203,6 +4896,34 @@
      "teeth",
      "dorsal fin",
      "predator"
+    ]
+   }
+  ],
+  "skiing": [
+   {
+    "id": "34bad93e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:40.945Z",
+    "round1": [
+     "Done in freezing cold air.",
+     "Involves gliding down steep hills.",
+     "People wear tinted protective eyewear.",
+     "Hot drinks taste good afterward.",
+     "Legs feel sore the next day."
+    ],
+    "round2": [
+     "Metal edges grip frozen paths.",
+     "Overhead cables pull riders up.",
+     "Puffy jackets trap warm air.",
+     "Numbered gates mark the path.",
+     "Wax keeps sliding surfaces fast."
+    ],
+    "banned": [
+     "snow",
+     "slopes",
+     "mountain",
+     "poles"
     ]
    }
   ],
@@ -4537,6 +5258,34 @@
     ]
    }
   ],
+  "supermarket": [
+   {
+    "id": "8e6c75a0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:04.118Z",
+    "round1": [
+     "Pushing things on wheels.",
+     "Chilly air near the back.",
+     "Reading labels carefully.",
+     "Busy weekend crowds.",
+     "Sliding glass doors."
+    ],
+    "round2": [
+     "Barcode scanners beeping constantly.",
+     "Plastic crates stacked high.",
+     "Conveyor belts moving forward.",
+     "Wide aisles crossing paths.",
+     "Clear pricing tags displayed."
+    ],
+    "banned": [
+     "groceries",
+     "checkout",
+     "cart",
+     "aisle"
+    ]
+   }
+  ],
   "sushi": [
    {
     "id": "cc878701",
@@ -4588,6 +5337,34 @@
     "banned": [
      "long neck",
      "graceful"
+    ]
+   }
+  ],
+  "swimming": [
+   {
+    "id": "dd32f70c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:44:40.945Z",
+    "round1": [
+     "Done in wet enclosed areas.",
+     "Involves steady rhythmic breathing.",
+     "People wear minimal lightweight clothing.",
+     "Skin gets pruned up afterward.",
+     "Hair stays damp for hours."
+    ],
+    "round2": [
+     "Rubber caps keep hair contained.",
+     "Lane ropes divide the blue water.",
+     "Tiled edges offer quick rests.",
+     "Plastic numbers tick on walls.",
+     "Ear plugs block trapped drops."
+    ],
+    "banned": [
+     "water",
+     "pool",
+     "goggles",
+     "lap"
     ]
    }
   ],
@@ -4671,6 +5448,34 @@
      "shell",
      "tortilla",
      "mexican"
+    ]
+   }
+  ],
+  "tape": [
+   {
+    "id": "d9aed296",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:49.104Z",
+    "round1": [
+     "Pulls off in jagged edges.",
+     "Gets stuck to itself by mistake.",
+     "Pulled across surfaces quickly.",
+     "Makes a tearing sound when pulled.",
+     "Leaves behind fuzzy lint over time."
+    ],
+    "round2": [
+     "Wraps securely around torn cardboard.",
+     "Clings to fingers instantly.",
+     "Spins freely on a plastic core.",
+     "Leaves a gummy edge.",
+     "Hides repairs on paper."
+    ],
+    "banned": [
+     "dispenser",
+     "sticky",
+     "clear",
+     "roll"
     ]
    }
   ],
@@ -4974,6 +5779,34 @@
      "rails",
      "locomotive",
      "conductor"
+    ]
+   }
+  ],
+  "trombone": [
+   {
+    "id": "3a3cf9e7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T16:45:06.494Z",
+    "round1": [
+     "Extends to reach different notes.",
+     "Needs lots of lung power.",
+     "Sits near the back rows.",
+     "Made of shiny yellow metal.",
+     "Makes a booming honk."
+    ],
+    "round2": [
+     "Requires a heavy hand brace",
+     "Ends in a wide bell",
+     "Found in marching formations",
+     "Uses a small cup mouthpiece",
+     "Projected from the bell section"
+    ],
+    "banned": [
+     "slide",
+     "brass",
+     "mouthpiece",
+     "jazz"
     ]
    }
   ],
