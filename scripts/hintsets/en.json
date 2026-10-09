@@ -196,6 +196,34 @@
     ]
    }
   ],
+  "Bangkok": [
+   {
+    "id": "0fdc2737",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:56:24.430Z",
+    "round1": [
+     "Bustling street food stalls.",
+     "Ornate golden roofs.",
+     "Chaotic traffic jams.",
+     "Busy river boats.",
+     "Vibrant night markets."
+    ],
+    "round2": [
+     "Spicy aromas drifting down crowded lanes.",
+     "Towering skyscrapers meeting wooden shacks.",
+     "Intricate tile work flashing bright colors.",
+     "Humming neon signs after dark.",
+     "Sweating through humid tropical heat."
+    ],
+    "banned": [
+     "tuk-tuk",
+     "temple",
+     "pad thai",
+     "tuk tuks"
+    ]
+   }
+  ],
   "baseball": [
    {
     "id": "8bdca8ab",
@@ -280,6 +308,61 @@
     ]
    }
   ],
+  "bed": [
+   {
+    "id": "b21aa56b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:05.239Z",
+    "round1": [
+     "Often pushed against a wall.",
+     "Can collect dust underneath.",
+     "Usually covered with fabric.",
+     "Can squeak when you move.",
+     "Takes up decent floor space."
+    ],
+    "round2": [
+     "Often needs multiple layers added",
+     "Can sit low or high up",
+     "Often piled high with cushions",
+     "Usually paired with matching side units",
+     "Often sits right on the carpet"
+    ],
+    "banned": [
+     "mattress",
+     "sheets",
+     "pillows",
+     "sleep"
+    ]
+   }
+  ],
+  "bee": [
+   {
+    "id": "338d73ae",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:47.932Z",
+    "round1": [
+     "attracted to colorful blooms",
+     "lives in a big group",
+     "helps plants grow",
+     "found buzzing near flowers",
+     "busy worker all day"
+    ],
+    "round2": [
+     "fuzzy body texture",
+     "builds hexagon wax cells",
+     "does a wiggle dance",
+     "collects yellow powder",
+     "dies after stinging"
+    ],
+    "banned": [
+     "makes honey",
+     "hive",
+     "stinger"
+    ]
+   }
+  ],
   "beer": [
    {
     "id": "ac2f5cae",
@@ -336,6 +419,34 @@
     ]
    }
   ],
+  "bicycle": [
+   {
+    "id": "ba436f3b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:54:14.095Z",
+    "round1": [
+     "Often stored in a garage.",
+     "Popular in crowded cities.",
+     "Ridden for fun or fitness.",
+     "Has a seat on top.",
+     "Can have a small basket."
+    ],
+    "round2": [
+     "Requires leg power to move forward.",
+     "Narrow profile helps squeeze past traffic.",
+     "Found lined up near school racks.",
+     "Needs a kickstand to stay upright.",
+     "Equipped with rubber hand grips."
+    ],
+    "banned": [
+     "two wheels",
+     "pedals",
+     "handlebar",
+     "chain"
+    ]
+   }
+  ],
   "blanket": [
    {
     "id": "de15f3ef",
@@ -361,6 +472,31 @@
      "warmth",
      "bed",
      "cotton"
+    ]
+   }
+  ],
+  "blender": [
+   {
+    "id": "5c4dc39a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:54:40.046Z",
+    "round1": [
+     "Lifts off the heavy base.",
+     "Press down to pulse.",
+     "Pour liquid out the spout.",
+     "Rinses under the faucet.",
+     "Rubber ring stops leaks."
+    ],
+    "round2": [
+     "Rests on the kitchen counter.",
+     "Rubber feet prevent sliding.",
+     "Loud motor whine during use.",
+     "Plastic lid seals the top.",
+     "Small toggle switch for speed."
+    ],
+    "banned": [
+     "crushing ice cubes"
     ]
    }
   ],
@@ -614,6 +750,34 @@
     ]
    }
   ],
+  "chair": [
+   {
+    "id": "35ac7eac",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:05.239Z",
+    "round1": [
+     "Can tuck under a ledge.",
+     "Can collect dust underneath.",
+     "Usually covered with fabric.",
+     "Can wobble on uneven floors.",
+     "Often sold in sets."
+    ],
+    "round2": [
+     "Can slide right up close",
+     "Usually holds extra coats piled high",
+     "Often lined up in neat rows",
+     "Can stack directly on top",
+     "Usually has four upright supports"
+    ],
+    "banned": [
+     "seat",
+     "legs",
+     "sit",
+     "backrest"
+    ]
+   }
+  ],
   "chef": [
    {
     "id": "f43bad25",
@@ -670,6 +834,32 @@
     ]
    }
   ],
+  "chicken": [
+   {
+    "id": "98b0ddae",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Spends daylight hours searching for seeds",
+     "Prefers running over taking flight",
+     "Gathers in small farmyard groups",
+     "Takes dust baths to stay clean",
+     "Sleeps safely up off the ground"
+    ],
+    "round2": [
+     "Pecks at grain in dirt",
+     "Has a fleshy red crest",
+     "Scratching ground with sharp claws",
+     "Loves sunbathing in warm dirt",
+     "Roosts up high at night"
+    ],
+    "banned": [
+     "cluck",
+     "eggs"
+    ]
+   }
+  ],
   "chocolate": [
    {
     "id": "72607b62",
@@ -694,6 +884,34 @@
      "cocoa",
      "bar",
      "cacao"
+    ]
+   }
+  ],
+  "cloud": [
+   {
+    "id": "44dd772e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:58.054Z",
+    "round1": [
+     "Blocks out the sun.",
+     "Drifts across the view.",
+     "Looks soft and gray sometimes.",
+     "Grows bigger in the wind.",
+     "Gets heavy before a storm."
+    ],
+    "round2": [
+     "Looks like fluffy wool.",
+     "Cast shadows on grass.",
+     "Turns dark purple evening.",
+     "Piles up very tall.",
+     "Catches the sunset glow."
+    ],
+    "banned": [
+     "rain",
+     "fluffy",
+     "white",
+     "sky"
     ]
    }
   ],
@@ -808,6 +1026,32 @@
     ]
    }
   ],
+  "crow": [
+   {
+    "id": "964787ed",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Known to use simple tools",
+     "Often seen mobbing larger animals",
+     "Gathers in noisy evening groups",
+     "Very clever at solving problems",
+     "Adapts easily to city life"
+    ],
+    "round2": [
+     "Builds bulky stick tree nests",
+     "Eats almost any scrap found",
+     "Chases hawks away from territory",
+     "Smart enough to recognize faces",
+     "Gathers in huge winter roosts"
+    ],
+    "banned": [
+     "black",
+     "caw"
+    ]
+   }
+  ],
   "cucumber": [
    {
     "id": "15702f49",
@@ -916,6 +1160,62 @@
      "drill",
      "cavity",
      "floss"
+    ]
+   }
+  ],
+  "desert": [
+   {
+    "id": "68cea986",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:58.054Z",
+    "round1": [
+     "Hard to find much water here.",
+     "Very little shade around.",
+     "Stretches out for miles.",
+     "The ground gets dusty.",
+     "Sun beats down hard all day."
+    ],
+    "round2": [
+     "Wears bright orange tones.",
+     "Rocks get super hot.",
+     "Footprints blow away.",
+     "Winds pile up ridges.",
+     "Far from any ocean."
+    ],
+    "banned": [
+     "sand",
+     "cactus",
+     "hot",
+     "camel"
+    ]
+   }
+  ],
+  "desk": [
+   {
+    "id": "f6161780",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:05.239Z",
+    "round1": [
+     "Often pushed against a wall.",
+     "Can collect dust underneath.",
+     "Usually has a flat top.",
+     "Can wobble on uneven floors.",
+     "Takes up decent floor space."
+    ],
+    "round2": [
+     "Can hold a tall metal lamp",
+     "Often paired with rolling wheels seating",
+     "Usually stacked with loose paper piles",
+     "Often has wires running behind it",
+     "Can hold stacks of heavy books"
+    ],
+    "banned": [
+     "drawers",
+     "computer",
+     "office",
+     "homework"
     ]
    }
   ],
@@ -1029,6 +1329,34 @@
     ]
    }
   ],
+  "dress": [
+   {
+    "id": "bb3eb924",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:32.636Z",
+    "round1": [
+     "Can have floral prints.",
+     "Worn to a party.",
+     "Needs matching shoes.",
+     "Swishes when walking.",
+     "Has a zipper in back."
+    ],
+    "round2": [
+     "Flowing fabric.",
+     "Tied with a ribbon.",
+     "Wide hem.",
+     "Sleeveless option.",
+     "Smooth satin lining."
+    ],
+    "banned": [
+     "one piece",
+     "formal",
+     "prom",
+     "gown"
+    ]
+   }
+  ],
   "dresser": [
    {
     "id": "73938d47",
@@ -1110,6 +1438,32 @@
      "stretched membrane",
      "beats and rhythms",
      "percussion family"
+    ]
+   }
+  ],
+  "duck": [
+   {
+    "id": "ac0be7e0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Dips head down to grab snacks",
+     "Bobs along on the surface",
+     "Frequently waddles across the grass",
+     "Common sight in public parks",
+     "Keeps warm with downy layers"
+    ],
+    "round2": [
+     "Tips tail up to graze",
+     "Preens oil onto waterproof coat",
+     "Flocks together in winter months",
+     "Nests hidden in tall grass",
+     "Dabblin' near reed-filled shores"
+    ],
+    "banned": [
+     "quack",
+     "webbed feet"
     ]
    }
   ],
@@ -1250,6 +1604,60 @@
     ]
    }
   ],
+  "firefly": [
+   {
+    "id": "01de1463",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:47.932Z",
+    "round1": [
+     "active during warm evenings",
+     "caught in glass jars",
+     "soft blinking in the dark",
+     "resting on summer leaves",
+     "childhood backyard memories"
+    ],
+    "round2": [
+     "soft beetle shell",
+     "chemical reaction creates glow",
+     "signals for a mate",
+     "lands on porch screens",
+     "slow lazy flight"
+    ],
+    "banned": [
+     "glows in the dark",
+     "lightning bug",
+     "flashes light",
+     "lantern"
+    ]
+   }
+  ],
+  "flamingo": [
+   {
+    "id": "08d2ce22",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Often seen standing on one limb",
+     "Found near warm coastal wetlands",
+     "Filter feeds with a curved bill",
+     "Loves hanging out in large crowds",
+     "Builds a muddy mound for nesting"
+    ],
+    "round2": [
+     "Wades in shallow salty water",
+     "Born with grey fluffy feathers",
+     "Filters tiny shrimp for meals",
+     "Nests in thick salty mud",
+     "Stays close to warm lagoons"
+    ],
+    "banned": [
+     "pink",
+     "long legs"
+    ]
+   }
+  ],
   "garlic": [
    {
     "id": "3b094a5e",
@@ -1359,6 +1767,34 @@
      "vine",
      "raisin",
      "cluster"
+    ]
+   }
+  ],
+  "grasshopper": [
+   {
+    "id": "c10bbab7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:47.932Z",
+    "round1": [
+     "hides in tall plants",
+     "munching on green leaves",
+     "quick escape artist",
+     "often heard in summer fields",
+     "long antennae on its head"
+    ],
+    "round2": [
+     "rubs legs together to sing",
+     "chewy garden pest",
+     "large hind thighs",
+     "spits brown liquid",
+     "blends into dry grass"
+    ],
+    "banned": [
+     "jumps high",
+     "green body",
+     "chirps with legs",
+     "long back legs"
     ]
    }
   ],
@@ -1501,6 +1937,34 @@
     ]
    }
   ],
+  "Hawaii": [
+   {
+    "id": "83d73da5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:56:24.430Z",
+    "round1": [
+     "Dramatic coastal cliffs.",
+     "Lush green mountains.",
+     "Fresh flower garlands.",
+     "Relaxed island vibe.",
+     "Rolling ocean waves."
+    ],
+    "round2": [
+     "Black sand beaches meeting blue tides.",
+     "Wearing bright floral print shirts.",
+     "Hearing rhythmic acoustic guitar notes.",
+     "Spreading sunscreen under palm trees.",
+     "Sipping sweet pineapple juices outdoors."
+    ],
+    "banned": [
+     "volcano",
+     "surf",
+     "ukulele",
+     "luau"
+    ]
+   }
+  ],
   "hospital": [
    {
     "id": "cc89ac8c",
@@ -1557,6 +2021,32 @@
     ]
    }
   ],
+  "hummingbird": [
+   {
+    "id": "719ddc08",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Rapid wingbeats create a hum",
+     "Sips nectar from tubular blossoms",
+     "Flies backward with ease",
+     "Needs high-energy meals constantly",
+     "Builds tiny cup-shaped nests"
+    ],
+    "round2": [
+     "Uses a long grooved tongue",
+     "Builds spiderweb-bound stretchy nests",
+     "Goes into torpor at night",
+     "Hovers motionless near bright blooms",
+     "Has weak feet for perching"
+    ],
+    "banned": [
+     "hover",
+     "small"
+    ]
+   }
+  ],
   "ice cream": [
    {
     "id": "7ecf61d1",
@@ -1609,6 +2099,62 @@
      "ocean",
      "glacier",
      "floating ice"
+    ]
+   }
+  ],
+  "jacket": [
+   {
+    "id": "45178aee",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:32.636Z",
+    "round1": [
+     "Has deep pockets.",
+     "Thrown over a sweater.",
+     "Worn outside in autumn.",
+     "Hung by the door.",
+     "Has a collar."
+    ],
+    "round2": [
+     "Snug cuffs.",
+     "Padded lining.",
+     "Heavy snaps.",
+     "Cropped cut.",
+     "Quilted squares."
+    ],
+    "banned": [
+     "zipper front",
+     "sleeves",
+     "outerwear",
+     "hood"
+    ]
+   }
+  ],
+  "jeans": [
+   {
+    "id": "9c15cc53",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:32.636Z",
+    "round1": [
+     "Stitched with thick thread.",
+     "Worn with a belt.",
+     "Found on laundry day.",
+     "Paired with a t-shirt.",
+     "Has metal hardware."
+    ],
+    "round2": [
+     "Stiff when brand new.",
+     "Fades over the years.",
+     "Rough texture.",
+     "Curved seams.",
+     "Rolled cuffs."
+    ],
+    "banned": [
+     "denim",
+     "blue",
+     "five pockets",
+     "rivets"
     ]
    }
   ],
@@ -1863,6 +2409,34 @@
     ]
    }
   ],
+  "lightning": [
+   {
+    "id": "569fbe04",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:58.054Z",
+    "round1": [
+     "Lights up the whole sky.",
+     "Lasts just a second.",
+     "Strikes from way above.",
+     "Can burn a tall tree.",
+     "Comes with a loud boom."
+    ],
+    "round2": [
+     "Melts metal fence wires.",
+     "Leaves a burned mark.",
+     "Smells like burning wood.",
+     "Splits thick tree trunks.",
+     "Flashes in purple hues."
+    ],
+    "banned": [
+     "bolt",
+     "thunder",
+     "flash",
+     "spark"
+    ]
+   }
+  ],
   "lily": [
    {
     "id": "b8cfba83",
@@ -2058,6 +2632,34 @@
     ]
    }
   ],
+  "mosquito": [
+   {
+    "id": "85dde68a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:47.932Z",
+    "round1": [
+     "active near backyard puddles",
+     "buzzing near your ear",
+     "leaves an annoying mark",
+     "thrives in humid weather",
+     "swat it away fast"
+    ],
+    "round2": [
+     "needle mouth part",
+     "stands on still water",
+     "only females bite",
+     "drawn to body heat",
+     "fragile delicate frame"
+    ],
+    "banned": [
+     "bites humans",
+     "sucks blood",
+     "itchy bump",
+     "annoying buzz"
+    ]
+   }
+  ],
   "museum": [
    {
     "id": "b22830a4",
@@ -2222,6 +2824,58 @@
      "peel",
      "segments",
      "vitamin c"
+    ]
+   }
+  ],
+  "ostrich": [
+   {
+    "id": "88a77a3b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Lays remarkably large eggs",
+     "Has a very long, powerful stride",
+     "Pecks at shrubs for meals",
+     "Keeps a sharp lookout across grasslands",
+     "Prefers wide open dry spaces"
+    ],
+    "round2": [
+     "Sports just two toes each",
+     "Swallows pebbles to grind food",
+     "Shares massive communal sand nests",
+     "Big eyes protected by lashes",
+     "Wanders hot dry savanna plains"
+    ],
+    "banned": [
+     "cannot fly",
+     "fast runner"
+    ]
+   }
+  ],
+  "oven": [
+   {
+    "id": "67179dfc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:54:40.046Z",
+    "round1": [
+     "Pull the handle straight down.",
+     "Twist a knob to start.",
+     "Glows red in the dark.",
+     "Takes time to warm up.",
+     "Wipes clean with a sponge."
+    ],
+    "round2": [
+     "Sits beneath the kitchen counter.",
+     "Metal hinges on the door.",
+     "Faint hum from internal fans.",
+     "Warm air escapes the edges.",
+     "Digital clock display on top."
+    ],
+    "banned": [
+     "baking a cake",
+     "metal wire racks"
     ]
    }
   ],
@@ -2415,6 +3069,32 @@
      "stone pit",
      "cobbler",
      "nectarine"
+    ]
+   }
+  ],
+  "peacock": [
+   {
+    "id": "3ba6aefd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Males display a massive train",
+     "Often strolls around manicured gardens",
+     "Lets out a loud, piercing call",
+     "Spends most waking hours foraging",
+     "Roosts high up at night"
+    ],
+    "round2": [
+     "Sports a fancy head crest",
+     "Spends nights resting in trees",
+     "Scratches dirt for tasty seeds",
+     "Prefers walking over flying high",
+     "Gathers in small harem groups"
+    ],
+    "banned": [
+     "tail feathers",
+     "blue green"
     ]
    }
   ],
@@ -3195,6 +3875,34 @@
     ]
    }
   ],
+  "scooter": [
+   {
+    "id": "d1f2acfe",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:54:14.095Z",
+    "round1": [
+     "Stored by the front door.",
+     "Popular with young kids.",
+     "Foldable for easy carrying.",
+     "Used on smooth sidewalks.",
+     "Lightweight metal frame."
+    ],
+    "round2": [
+     "Short platform for your shoes.",
+     "Guided with upright vertical bars.",
+     "Stashed inside a school locker.",
+     "Rolled down residential paved paths.",
+     "Picked up by one hand easily."
+    ],
+    "banned": [
+     "small wheels",
+     "platform",
+     "stand up",
+     "handlebars"
+    ]
+   }
+  ],
   "screwdriver": [
    {
     "id": "fd123d11",
@@ -3248,6 +3956,34 @@
      "teeth",
      "dorsal fin",
      "predator"
+    ]
+   }
+  ],
+  "skirt": [
+   {
+    "id": "82bdcf95",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:32.636Z",
+    "round1": [
+     "Paired with a blouse.",
+     "Flutters in the wind.",
+     "Has an elastic band.",
+     "Worn in warm weather.",
+     "Can be short or long."
+    ],
+    "round2": [
+     "Light weight.",
+     "Layered tulle.",
+     "Button front.",
+     "A-line shape.",
+     "Plaid pattern."
+    ],
+    "banned": [
+     "waist down",
+     "pleated",
+     "miniskirt",
+     "no legs"
     ]
    }
   ],
@@ -3525,6 +4261,32 @@
      "seaweed",
      "soy sauce",
      "chopsticks"
+    ]
+   }
+  ],
+  "swan": [
+   {
+    "id": "50405ca8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:53:23.532Z",
+    "round1": [
+     "Pairs up for life",
+     "Can be quite aggressive when nesting",
+     "Paddles smoothly across quiet water",
+     "Eats plants growing underwater",
+     "Keeps eggs in a bulky waterside pile"
+    ],
+    "round2": [
+     "Dips long neck below surface",
+     "Defends large territory fiercely",
+     "Starts life as grey cygnet",
+     "Prefers calm ponds and lakes",
+     "Needs a long runway to fly"
+    ],
+    "banned": [
+     "long neck",
+     "graceful"
     ]
    }
   ],
@@ -3831,6 +4593,34 @@
     ]
    }
   ],
+  "tornado": [
+   {
+    "id": "7e31604c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:55:58.054Z",
+    "round1": [
+     "Spins around really fast.",
+     "Pulls things up high.",
+     "Dark sky overhead.",
+     "Knocks down big trees.",
+     "Makes a roaring sound."
+    ],
+    "round2": [
+     "Touches the ground briefly.",
+     "Air pressure drops fast.",
+     "Twists metal poles.",
+     "Pulls roofs right off.",
+     "Howls through the night."
+    ],
+    "banned": [
+     "funnel cloud",
+     "rotate",
+     "siren",
+     "twister"
+    ]
+   }
+  ],
   "towel": [
    {
     "id": "50d30090",
@@ -3994,6 +4784,59 @@
      "handle",
      "canopy",
      "waterproof"
+    ]
+   }
+  ],
+  "vacuum cleaner": [
+   {
+    "id": "25b744a3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:54:40.046Z",
+    "round1": [
+     "Pull back and push forward.",
+     "Step on a pedal to tilt.",
+     "Whirs loud on hard floors.",
+     "Wrap the cord up neatly.",
+     "Brush roll spins underneath."
+    ],
+    "round2": [
+     "Parked in a hallway closet.",
+     "Plastic wheels roll smoothly.",
+     "Roaring sound in the room.",
+     "Flimsy plastic air filter inside.",
+     "Foot switch clicks down."
+    ],
+    "banned": [
+     "emptying a dirt bag"
+    ]
+   }
+  ],
+  "Venice": [
+   {
+    "id": "7ae2dd3c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-09T11:56:24.430Z",
+    "round1": [
+     "Boats instead of cars.",
+     "Famous bridges crossing water.",
+     "Narrow cobblestone walkways.",
+     "Bustling central plaza.",
+     "Historic palaces facing water."
+    ],
+    "round2": [
+     "Gliding under low arching bridges.",
+     "Fading pastel buildings touching canals.",
+     "Hearing echoing steps on brick paths.",
+     "Winding alleys without any cars.",
+     "Lined with historic waterfront doors."
+    ],
+    "banned": [
+     "canals",
+     "gondola",
+     "mask",
+     "pigeons"
     ]
    }
   ],
