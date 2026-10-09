@@ -436,5 +436,30 @@
    "lid",
    "handles"
   ]
+ },
+ "2026-10-16": {
+  "word": "brownie",
+  "category": "Snacks & Desserts",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Rich cocoa taste",
+   "Dense heavy bite",
+   "Dark crust top",
+   "Cold glass of milk",
+   "Baked sheet cut"
+  ],
+  "round2": [
+   "Sticky fingers after eating.",
+   "Cracked dry top.",
+   "Cut with a knife.",
+   "Heavy on the plate.",
+   "Melts in the mouth."
+  ],
+  "banned": [
+   "square cut",
+   "fudge center",
+   "nuts inside"
+  ]
  }
 }
