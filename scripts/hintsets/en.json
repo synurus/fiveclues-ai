@@ -1,5 +1,33 @@
 {
  "sets": {
+  "accordion": [
+   {
+    "id": "8dc45969",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:08:27.436Z",
+    "round1": [
+     "Held against your chest.",
+     "Pushed in and out.",
+     "Heard in folk tunes.",
+     "Has multiple bass buttons.",
+     "Worn with shoulder straps."
+    ],
+    "round2": [
+     "Pleated central folding section.",
+     "Side covered in small round buttons.",
+     "Expands and compresses repeatedly.",
+     "Metal reeds inside vibrate.",
+     "Decorative grille on the front."
+    ],
+    "banned": [
+     "bellows",
+     "squeezebox",
+     "keyboard",
+     "straps"
+    ]
+   }
+  ],
   "air conditioner": [
    {
     "id": "5497c3cb",
@@ -336,6 +364,34 @@
     ]
    }
   ],
+  "bamboo": [
+   {
+    "id": "e2aa524f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:52.221Z",
+    "round1": [
+     "Stands tall in clumps",
+     "Used for garden fences",
+     "Kept in glass vases",
+     "Swaying in warm breeze",
+     "Bought at garden centers"
+    ],
+    "round2": [
+     "Sprouts from underground runner roots",
+     "Features hard jointed green stems",
+     "Thrives near swampy river banks",
+     "Forms dense vertical thickets",
+     "Presents woody yellow rings"
+    ],
+    "banned": [
+     "panda food",
+     "stalks",
+     "fast growing",
+     "hollow"
+    ]
+   }
+  ],
   "banana": [
    {
     "id": "3737a85d",
@@ -639,6 +695,34 @@
     ]
    }
   ],
+  "belt": [
+   {
+    "id": "b3fb0814",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:26.668Z",
+    "round1": [
+     "Fastens securely with a sturdy metal piece.",
+     "Has multiple little holes to adjust sizing.",
+     "Wraps snugly around your midsection.",
+     "Helps keep loose clothing sitting in place.",
+     "Often made of stiff, thick brown leather."
+    ],
+    "round2": [
+     "Slips through small fabric loops.",
+     "Often has a metal tongue.",
+     "Ends usually hang slightly loose.",
+     "Frequently paired with casual denim.",
+     "Can show wear near the middle."
+    ],
+    "banned": [
+     "loops around waist",
+     "buckle and notches",
+     "holds pants up",
+     "leather strap"
+    ]
+   }
+  ],
   "bench": [
    {
     "id": "29db196f",
@@ -745,6 +829,34 @@
     ],
     "banned": [
      "crushing ice cubes"
+    ]
+   }
+  ],
+  "blueberry": [
+   {
+    "id": "92f1b691",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:09.212Z",
+    "round1": [
+     "Sweet little bite",
+     "Stains fingers purple",
+     "Soft skin pops open",
+     "Often baked in muffins",
+     "Handfuls disappear quickly"
+    ],
+    "round2": [
+     "tiny spherical shape",
+     "tight cluster grower",
+     "pale green inside",
+     "smooth skin",
+     "temperate brush grower"
+    ],
+    "banned": [
+     "small and round",
+     "grows in clusters",
+     "blue skin",
+     "tiny seeds"
     ]
    }
   ],
@@ -940,6 +1052,34 @@
      "caterpillar stage",
      "nectar",
      "metamorphosis"
+    ]
+   }
+  ],
+  "cactus": [
+   {
+    "id": "2114936e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:52.221Z",
+    "round1": [
+     "Sits on windowsills",
+     "Survives long without care",
+     "Kept in tiny pots",
+     "Found in classrooms",
+     "Common desk decoration"
+    ],
+    "round2": [
+     "Thrives in harsh desert heat",
+     "Displays sharp defensive spikes",
+     "Stores moisture in heavy stems",
+     "Grows in sandy ground",
+     "Presents ribbed green textures"
+    ],
+    "banned": [
+     "spikes",
+     "desert",
+     "prickly",
+     "succulent"
     ]
    }
   ],
@@ -1159,6 +1299,34 @@
      "spins a cocoon",
      "fuzzy woolly bear",
      "eats into chrysalis"
+    ]
+   }
+  ],
+  "cave": [
+   {
+    "id": "5c7d2737",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:18.273Z",
+    "round1": [
+     "Echoes your voice when you shout.",
+     "Requires carrying a strong flashlight.",
+     "Carved out by flowing water over ages.",
+     "Sheltered early humans long ago.",
+     "Keeps the same temperature year round."
+    ],
+    "round2": [
+     "Bats sleep upside down up high.",
+     "Cold stone walls all around you.",
+     "Drips water from the rocky ceiling.",
+     "Narrow tunnels lead deeper inside.",
+     "Total darkness without any lamps."
+    ],
+    "banned": [
+     "underground cavern",
+     "rock formation",
+     "bats living inside",
+     "stalactites"
     ]
    }
   ],
@@ -1463,6 +1631,34 @@
     ]
    }
   ],
+  "cocktail": [
+   {
+    "id": "3a6bdab8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:44.370Z",
+    "round1": [
+     "Mixed with ice",
+     "Drunk on weekend nights",
+     "Ordered by adults",
+     "Mixed in a shaker",
+     "Found on restaurant menus"
+    ],
+    "round2": [
+     "Stirred with a tiny spoon",
+     "Often comes with a paper straw",
+     "Ordered across a sticky wooden bar",
+     "Sipped slowly at a rooftop lounge",
+     "Rim dipped in salt or sugar"
+    ],
+    "banned": [
+     "alcohol",
+     "bartender",
+     "martini",
+     "margarita"
+    ]
+   }
+  ],
   "coconut": [
    {
     "id": "6644bd3b",
@@ -1519,6 +1715,34 @@
     ]
    }
   ],
+  "cola": [
+   {
+    "id": "cc1a5df4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:44.370Z",
+    "round1": [
+     "Dark brown liquid in cups",
+     "Served at birthday parties",
+     "Bought in large plastic bottles",
+     "Found in vending machines",
+     "Poured over ice cubes"
+    ],
+    "round2": [
+     "Pairs with burgers and fries",
+     "Leaves sticky spots when spilled",
+     "Classic fountain dispenser option",
+     "Sipping from a red paper cup",
+     "Commonly sold in fast food combos"
+    ],
+    "banned": [
+     "pepsi",
+     "coke",
+     "carbonated",
+     "sweet"
+    ]
+   }
+  ],
   "colander": [
    {
     "id": "f62a6a32",
@@ -1571,6 +1795,34 @@
      "baking",
      "dough",
      "oven"
+    ]
+   }
+  ],
+  "corn": [
+   {
+    "id": "79ccc37a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:36.267Z",
+    "round1": [
+     "Cooks fast in boiling water.",
+     "Bought in big mesh bags.",
+     "Sticks between your teeth easily.",
+     "Grows in tall green rows.",
+     "Tastes great with melted butter."
+    ],
+    "round2": [
+     "Comes off the cob easily",
+     "Turns charred on a grill",
+     "Adds a pop of texture",
+     "Stays good in the freezer",
+     "Makes a loud noise popping"
+    ],
+    "banned": [
+     "yellow",
+     "cobs",
+     "kernels",
+     "sweet"
     ]
    }
   ],
@@ -2260,6 +2512,62 @@
     ]
    }
   ],
+  "earthquake": [
+   {
+    "id": "c31fc9bd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:18.273Z",
+    "round1": [
+     "Rattles dishes in kitchen cupboards.",
+     "Makes indoor hanging lamps swing.",
+     "Triggers sudden worry for pets.",
+     "Lasts only a minute usually.",
+     "Happens without any prior warning."
+    ],
+    "round2": [
+     "Books tumble off bedroom shelves.",
+     "Makes people run outside fast.",
+     "Felt across whole towns at once.",
+     "Car alarms start blaring loudly.",
+     "Creaks the wooden house frames."
+    ],
+    "banned": [
+     "tectonic plates",
+     "richter scale",
+     "seismic activity",
+     "ground shaking"
+    ]
+   }
+  ],
+  "eggplant": [
+   {
+    "id": "1d7b9df4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:36.267Z",
+    "round1": [
+     "Needs salt to draw moisture.",
+     "Holds heavy tomato sauce well.",
+     "Grows hanging from sturdy vines.",
+     "Softens completely when baked.",
+     "Has a stem on top."
+    ],
+    "round2": [
+     "Sucks up oil like crazy",
+     "Feels heavy in your hand",
+     "Turns creamy inside when fried",
+     "Has tiny seeds inside",
+     "Requires a sharp knife"
+    ],
+    "banned": [
+     "purple",
+     "spongy",
+     "parmesan",
+     "gourd"
+    ]
+   }
+  ],
   "Egypt": [
    {
     "id": "90974a24",
@@ -2344,6 +2652,34 @@
     ]
    }
   ],
+  "energy drink": [
+   {
+    "id": "ebb74941",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:44.370Z",
+    "round1": [
+     "Bought at gas stations",
+     "Drunk by tired students",
+     "Bright colorful packaging",
+     "Consumed during long drives",
+     "Opened with a loud pop"
+    ],
+    "round2": [
+     "Chugged before hitting the gym",
+     "Often stacked near the cash register",
+     "Tasted by late-night gamers",
+     "Pulled from a convenience store cooler",
+     "Smells like sweet vitamin syrup"
+    ],
+    "banned": [
+     "caffeine",
+     "red bull",
+     "monster",
+     "awake"
+    ]
+   }
+  ],
   "eraser": [
    {
     "id": "3025864a",
@@ -2396,6 +2732,34 @@
      "crops",
      "animals",
      "barn"
+    ]
+   }
+  ],
+  "ferry": [
+   {
+    "id": "9be3ef10",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:08:02.114Z",
+    "round1": [
+     "Moves back and forth all day.",
+     "Ties up at a concrete dock.",
+     "Takes you across a gap.",
+     "Has room for many foot passengers.",
+     "Runs on a very strict timetable."
+    ],
+    "round2": [
+     "painted with bright white railings",
+     "rows of plastic outdoor seats",
+     "wide open back for loading",
+     "rubber tires hung along sides",
+     "heavy chains lock the gates"
+    ],
+    "banned": [
+     "cars",
+     "river",
+     "commuter",
+     "ramp"
     ]
    }
   ],
@@ -2534,6 +2898,34 @@
      "holes",
      "mouthpiece",
      "blow across"
+    ]
+   }
+  ],
+  "fog": [
+   {
+    "id": "12fe897a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:18.273Z",
+    "round1": [
+     "Slows down morning drivers.",
+     "Softens distant streetlights.",
+     "Hides the tops of tall buildings.",
+     "Makes footsteps sound muffled.",
+     "Dissolves when the sun warms things up."
+    ],
+    "round2": [
+     "Leaves your jacket damp outside.",
+     "Rolls in quietly from the water.",
+     "Turns the forest into a blur.",
+     "Blankets the early fields completely.",
+     "Cool breath on your face."
+    ],
+    "banned": [
+     "reduces visibility",
+     "cloud on the ground",
+     "humid moisture",
+     "morning mist"
     ]
    }
   ],
@@ -3314,6 +3706,34 @@
     ]
    }
   ],
+  "island": [
+   {
+    "id": "442bdebd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:06:18.273Z",
+    "round1": [
+     "Requires a boat or plane trip.",
+     "Has sandy edges all around.",
+     "Often shaped by ancient volcanoes.",
+     "Features a distinct local community.",
+     "Limited space for expanding roads."
+    ],
+    "round2": [
+     "Birds nest in the tall palms.",
+     "Surrounded by blue waves everywhere.",
+     "Small enough to walk across quickly.",
+     "Seashells wash ashore on the sand.",
+     "Ferry boats bring visitors over daily."
+    ],
+    "banned": [
+     "surrounded by water",
+     "tropical beach",
+     "isolated landmass",
+     "archipelago"
+    ]
+   }
+  ],
   "jacket": [
    {
     "id": "45178aee",
@@ -3699,6 +4119,34 @@
     ]
    }
   ],
+  "lettuce": [
+   {
+    "id": "95bc091f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:36.267Z",
+    "round1": [
+     "Gets soggy with warm dressing.",
+     "Cut into thin strips.",
+     "Found stacked in plastic tubs.",
+     "Adds a light crunch.",
+     "Watery taste on its own."
+    ],
+    "round2": [
+     "Tears apart with your hands",
+     "Grows close to the dirt",
+     "Holds dressing between the folds",
+     "Loses crispness by tomorrow",
+     "Makes a rustling sound"
+    ],
+    "banned": [
+     "salad",
+     "crisp",
+     "leaves",
+     "green"
+    ]
+   }
+  ],
   "librarian": [
    {
     "id": "a6939822",
@@ -3946,6 +4394,34 @@
      "muddy pond",
      "floating leaves",
      "sacred symbol"
+    ]
+   }
+  ],
+  "mango": [
+   {
+    "id": "9a678275",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:09.212Z",
+    "round1": [
+     "Sweet orange flesh",
+     "Juicy and messy to eat",
+     "Sweet tropical flavor",
+     "Smooth curved shape",
+     "Softens up as it ripens"
+    ],
+    "round2": [
+     "oval hanging shape",
+     "smooth skin surface",
+     "warm climate grower",
+     "golden meat inside",
+     "clinging pit"
+    ],
+    "banned": [
+     "large pit",
+     "creamy texture",
+     "orange flesh",
+     "smooth skin"
     ]
    }
   ],
@@ -4421,6 +4897,34 @@
     ]
    }
   ],
+  "orchid": [
+   {
+    "id": "13b680a4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:52.221Z",
+    "round1": [
+     "Sits in bright windows",
+     "Comes in a small pot",
+     "Often given as gifts",
+     "Sold at grocery stores",
+     "Needs careful weekly soaking"
+    ],
+    "round2": [
+     "Sits on bright tropical forest bark",
+     "Has thick velvety green leaves",
+     "Requires damp humid kitchen air",
+     "Sprouts aerial root clusters",
+     "Features striking speckled patterns"
+    ],
+    "banned": [
+     "tropical flower",
+     "air plant",
+     "expensive",
+     "complex bloom"
+    ]
+   }
+  ],
   "ostrich": [
    {
     "id": "88a77a3b",
@@ -4497,6 +5001,34 @@
      "rotates head",
      "wise",
      "nocturnal"
+    ]
+   }
+  ],
+  "palm tree": [
+   {
+    "id": "083f10e1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:52.221Z",
+    "round1": [
+     "Lines sunny streets",
+     "Grows very tall outside",
+     "Seen on vacation postcards",
+     "Provides pleasant shade",
+     "Sways in ocean winds"
+    ],
+    "round2": [
+     "Sways during heavy tropical storms",
+     "Displays giant feathered fronds",
+     "Rises on straight woody pillars",
+     "Thrives in salty coastal soil",
+     "Drops heavy fibrous husks"
+    ],
+    "banned": [
+     "coconut",
+     "tropical",
+     "beach",
+     "fronds"
     ]
    }
   ],
@@ -4689,6 +5221,34 @@
     "banned": [
      "tail feathers",
      "blue green"
+    ]
+   }
+  ],
+  "pear": [
+   {
+    "id": "8734fb81",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:09.212Z",
+    "round1": [
+     "Juicy dripping bite",
+     "Sweet autumn harvest",
+     "Tapered top half",
+     "Thin delicate skin",
+     "Bruises easily in bags"
+    ],
+    "round2": [
+     "curved neck profile",
+     "thin peel",
+     "temperate climate grower",
+     "pale flesh inside",
+     "fragrant scent"
+    ],
+    "banned": [
+     "bell shape",
+     "gritty texture",
+     "stem on top",
+     "soft skin"
     ]
    }
   ],
@@ -4908,6 +5468,34 @@
      "cockpit",
      "flight",
      "wings"
+    ]
+   }
+  ],
+  "pineapple": [
+   {
+    "id": "065de4a0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:09.212Z",
+    "round1": [
+     "Rough exterior armor",
+     "Sweet yellow chunks",
+     "Heavy and awkward to hold",
+     "Popular on party platters",
+     "Smells very sweet when ripe"
+    ],
+    "round2": [
+     "crown of stiff green spikes",
+     "heavy cylindrical shape",
+     "golden meat inside",
+     "tropic climate grower",
+     "rough diamond pattern"
+    ],
+    "banned": [
+     "spiky skin",
+     "crown of leaves",
+     "tropical",
+     "yellow flesh"
     ]
    }
   ],
@@ -5439,6 +6027,34 @@
     ]
    }
   ],
+  "rocket": [
+   {
+    "id": "e165c041",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:08:02.114Z",
+    "round1": [
+     "Leaves a trail of smoke.",
+     "Needs a very tall tower.",
+     "Points straight up before moving.",
+     "Starts with a massive flash.",
+     "Built in very secure areas."
+    ],
+    "round2": [
+     "shaped like a giant metal pencil",
+     "has tiny windows near the top",
+     "built in sections that drop off",
+     "covered in tiny warning stickers",
+     "bolts snap away at liftoff"
+    ],
+    "banned": [
+     "space",
+     "launch",
+     "moon",
+     "nasa"
+    ]
+   }
+  ],
   "rolling pin": [
    {
     "id": "f4a6b082",
@@ -5551,6 +6167,34 @@
     ]
    }
   ],
+  "sailboat": [
+   {
+    "id": "30e26cfa",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:08:02.114Z",
+    "round1": [
+     "Tied to a wooden dock.",
+     "Painted in bright summer colors.",
+     "Rocked by gentle waves.",
+     "Steered with a simple handle.",
+     "Has ropes dangling on the sides."
+    ],
+    "round2": [
+     "thin metal wires cross above",
+     "small wooden steering wheel",
+     "tiny windows along the hull",
+     "coiled lines on the deck",
+     "narrow space below the floor"
+    ],
+    "banned": [
+     "wind",
+     "mast",
+     "ocean",
+     "sail"
+    ]
+   }
+  ],
   "salad": [
    {
     "id": "6c5ff43f",
@@ -5576,6 +6220,34 @@
      "dressing",
      "croutons",
      "raw greens"
+    ]
+   }
+  ],
+  "sandals": [
+   {
+    "id": "a8e4a4fb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:26.668Z",
+    "round1": [
+     "A go-to pick for boiling hot days.",
+     "Lets plenty of cool air circulate around.",
+     "You see them everywhere near the beach.",
+     "Fastened with quick buckles or velcro straps.",
+     "Super lightweight and easy to slide into."
+    ],
+    "round2": [
+     "Leaves most of the foot exposed.",
+     "Often worn beside swimming pools.",
+     "Frequently paired with casual shorts.",
+     "Can have flat cork soles.",
+     "Sometimes feature toe rings."
+    ],
+    "banned": [
+     "open-toe flip-flops",
+     "thong strap",
+     "exposed toes",
+     "bare feet slip-on"
     ]
    }
   ],
@@ -6052,6 +6724,34 @@
     ]
    }
   ],
+  "sneakers": [
+   {
+    "id": "0ecbe647",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:26.668Z",
+    "round1": [
+     "Great pick for doing lots of walking.",
+     "Often has soft, bouncy cushioning inside.",
+     "Super popular for everyday casual streetwear.",
+     "Squeaks when stopping quickly on polished floors.",
+     "Can get scuffed and dirty pretty fast."
+    ],
+    "round2": [
+     "Often secured with woven strings.",
+     "Commonly paired with athletic shorts.",
+     "Frequently seen on city streets.",
+     "Can feature mesh side panels.",
+     "Often decorated with side logos."
+    ],
+    "banned": [
+     "running footwear",
+     "athletic trainers",
+     "tennis footwear",
+     "rubber sole lace-up"
+    ]
+   }
+  ],
   "soccer": [
    {
     "id": "63c6ec4c",
@@ -6077,6 +6777,34 @@
      "net",
      "cleats",
      "pitch"
+    ]
+   }
+  ],
+  "socks": [
+   {
+    "id": "cfa1d18c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:26.668Z",
+    "round1": [
+     "Always comes as a matching set of two.",
+     "Stretchy fabric hugs you pretty tight.",
+     "Keeps your lower half warm and dry.",
+     "Tends to get holes in high-friction spots.",
+     "People sometimes slide across hardwood floors in them."
+    ],
+    "round2": [
+     "Hidden inside footwear most of the day.",
+     "Often sold secured with plastic hangers.",
+     "Sometimes mismatched for fun styles.",
+     "Usually worn inside athletic shoes.",
+     "Can bunch up inside footwear."
+    ],
+    "banned": [
+     "toes",
+     "heel",
+     "goes inside shoes",
+     "worn on feet"
     ]
    }
   ],
@@ -6187,6 +6915,34 @@
      "eight legs",
      "arachnid",
      "deadly venomous bite"
+    ]
+   }
+  ],
+  "spinach": [
+   {
+    "id": "1a3a0752",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:07:36.267Z",
+    "round1": [
+     "Wilts down to almost nothing.",
+     "Blends into green drinks.",
+     "Tastes slightly bitter raw.",
+     "Sold in crinkly handfuls.",
+     "Stirred into hot soup."
+    ],
+    "round2": [
+     "Leaves cling to your fork",
+     "Shrinks down in a pan",
+     "Leaves a metallic taste",
+     "Tucked inside flaky pastry shells",
+     "Dirt hides in the stems"
+    ],
+    "banned": [
+     "popeye",
+     "shrinks",
+     "iron",
+     "smoothie"
     ]
    }
   ],
@@ -6380,6 +7136,34 @@
     ]
    }
   ],
+  "submarine": [
+   {
+    "id": "6e635dfc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:08:02.114Z",
+    "round1": [
+     "Painted a dark grey color.",
+     "People inside look through a glass.",
+     "Starts below the surface.",
+     "Uses a long metal tube to see.",
+     "Has very cramped rooms inside."
+    ],
+    "round2": [
+     "long round metal pipe shape",
+     "tiny round doors with heavy wheels",
+     "metal ladders link the floors",
+     "pipes run along the ceiling",
+     "rows of tight bunk beds"
+    ],
+    "banned": [
+     "ocean",
+     "dive",
+     "periscope",
+     "torpedo"
+    ]
+   }
+  ],
   "subway": [
    {
     "id": "a4f490d7",
@@ -6518,6 +7302,34 @@
     ]
    }
   ],
+  "sweater": [
+   {
+    "id": "6c2a898f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:26.668Z",
+    "round1": [
+     "Keeps you cozy on chilly autumn days.",
+     "Soft and stretchy when you pull it on.",
+     "You usually pull it over your head.",
+     "People love wearing funny versions in December.",
+     "Can feel uncomfortably scratchy against bare skin."
+    ],
+    "round2": [
+     "Often layered over a collared shirt.",
+     "Can have ribbed cuffs and hems.",
+     "Sometimes decorated with buttons or zippers.",
+     "Usually paired with casual denim pants.",
+     "Frequently folded on closet shelves."
+    ],
+    "banned": [
+     "knit wool pullover",
+     "jumper",
+     "cardigan",
+     "crewneck"
+    ]
+   }
+  ],
   "swimming": [
    {
     "id": "dd32f70c",
@@ -6626,6 +7438,34 @@
      "shell",
      "tortilla",
      "mexican"
+    ]
+   }
+  ],
+  "tambourine": [
+   {
+    "id": "d148e069",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:08:27.436Z",
+    "round1": [
+     "Hit with your palm.",
+     "Round wooden rim.",
+     "Small metal discs attached.",
+     "Common at outdoor parties.",
+     "Lightweight and portable."
+    ],
+    "round2": [
+     "Small metal jingles mounted loosely.",
+     "Slapped against your other hand.",
+     "Circular wooden shell.",
+     "Thumb rubs the head sometimes.",
+     "Plastic skin stretched tightly."
+    ],
+    "banned": [
+     "jingles",
+     "shaking",
+     "head",
+     "handheld"
     ]
    }
   ],
@@ -6766,6 +7606,34 @@
      "racket",
      "net",
      "court"
+    ]
+   }
+  ],
+  "tie": [
+   {
+    "id": "8112acd2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T14:05:26.668Z",
+    "round1": [
+     "Very common sight in strict office jobs.",
+     "You have to loop and knot it carefully.",
+     "Often made of slick, shiny silk fabric.",
+     "Dangles down the front of your chest.",
+     "Picked out to add a pop of pattern."
+    ],
+    "round2": [
+     "Narrows slightly toward the top.",
+     "Often held by a small clasp.",
+     "Frequently spotted at formal events.",
+     "Can feature diagonal stripes.",
+     "Tucked under a jacket front."
+    ],
+    "banned": [
+     "necktie",
+     "knotted around neck",
+     "formal suit collar",
+     "Windsor knot"
     ]
    }
   ],
