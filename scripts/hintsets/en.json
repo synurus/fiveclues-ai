@@ -168,6 +168,34 @@
     ]
    }
   ],
+  "apron": [
+   {
+    "id": "cbe676b6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:57.695Z",
+    "round1": [
+     "Loop goes around the neck",
+     "Drapes over clothes",
+     "Pockets in the front",
+     "Spots on the front",
+     "Knotted at the back"
+    ],
+    "round2": [
+     "Soft cotton fabric folds.",
+     "Stitched border hem.",
+     "Hanging loose over legs.",
+     "Long fabric tie string.",
+     "Faded from many washes."
+    ],
+    "banned": [
+     "tie",
+     "fabric",
+     "wear",
+     "cloth"
+    ]
+   }
+  ],
   "astronaut": [
    {
     "id": "81fe4b0b",
@@ -448,6 +476,31 @@
     ]
    }
   ],
+  "bear": [
+   {
+    "id": "01e28b37",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Stands tall on hind legs to inspect surroundings.",
+     "Snags fresh fish straight out of rushing water.",
+     "Loves gorging on wild berries by summer's end.",
+     "Leaves deep scratch marks high on tree trunks.",
+     "Bulks up massive fat reserves for cold seasons."
+    ],
+    "round2": [
+     "Walks flat-footed like humans do.",
+     "Spends months sleeping straight through deep winter.",
+     "Non-retractable claws dig out roots and grubs.",
+     "Famous weakness for sweet comb-filled hives.",
+     "Humped muscular shoulders power through rocky dirt."
+    ],
+    "banned": [
+     "loves pots of honey"
+    ]
+   }
+  ],
   "bed": [
    {
     "id": "b21aa56b",
@@ -528,6 +581,33 @@
      "foam",
      "pub",
      "bar"
+    ]
+   }
+  ],
+  "beetle": [
+   {
+    "id": "dec671d5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:12:50.136Z",
+    "round1": [
+     "Shiny and tough on the outside.",
+     "Flies even though it looks too heavy.",
+     "Hides under rotting logs and loose bark.",
+     "Drawn to bright porch lights in summer.",
+     "Tends to flip over and get stuck."
+    ],
+    "round2": [
+     "Heavy, loud buzz when taking flight.",
+     "Chews deep tunnels into decaying wood.",
+     "Some sport wicked pincers up front.",
+     "Sturdy armor shields delicate hidden wings.",
+     "Starts out as an underground grub."
+    ],
+    "banned": [
+     "hard wing covers",
+     "scarab",
+     "dung roller"
     ]
    }
   ],
@@ -779,6 +859,34 @@
     ]
    }
   ],
+  "burrito": [
+   {
+    "id": "d5a304f9",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Packed full of layered savory fillings.",
+     "Held with both hands to eat.",
+     "Heavy cylinder that fills you up.",
+     "Peels out of wrapper bite by bite.",
+     "Great portable meal on the go."
+    ],
+    "round2": [
+     "Both ends tucked shut before rolling.",
+     "A scoop of mashed avocado rests inside.",
+     "Lightly toasted on a flat griddle.",
+     "Often sliced diagonally to reveal the layers.",
+     "Bursts open if stuffed too ambitiously."
+    ],
+    "banned": [
+     "tortilla wrap",
+     "rice and beans",
+     "Mexican roll",
+     "tin foil"
+    ]
+   }
+  ],
   "bus": [
    {
     "id": "3ed5f71e",
@@ -1024,6 +1132,33 @@
      "meow",
      "purr",
      "nine lives"
+    ]
+   }
+  ],
+  "caterpillar": [
+   {
+    "id": "a57e3663",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:12:50.136Z",
+    "round1": [
+     "Munches holes clean through leafy greens.",
+     "Ripples in a wave to push forward.",
+     "Soft and squishy to the touch.",
+     "Clings tightly to slender plant stems.",
+     "Bright patterns warn predators to back off."
+    ],
+    "round2": [
+     "Rows of tiny suction feet grip twigs.",
+     "Some varieties cause burning rashes if touched.",
+     "Sheds its tight skin several times over.",
+     "Anchors itself with tiny silk pads.",
+     "Enters a motionless shell before adult life."
+    ],
+    "banned": [
+     "spins a cocoon",
+     "fuzzy woolly bear",
+     "eats into chrysalis"
     ]
    }
   ],
@@ -1303,6 +1438,31 @@
     ]
    }
   ],
+  "cockroach": [
+   {
+    "id": "86c6b613",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:12:50.136Z",
+    "round1": [
+     "Squeezes through shockingly narrow gaps.",
+     "Dashes straight into dark baseboard crevices.",
+     "Has long, twitching feelers out front.",
+     "Thrives in warm, humid basement corners.",
+     "Smooth, shiny back with a reddish tint."
+    ],
+    "round2": [
+     "Scrambles away the moment lights flick on.",
+     "Feeds on wallpaper paste and book bindings.",
+     "Leaves distinct, leathery egg cases in cupboards.",
+     "Produces a greasy, foul, musty smell.",
+     "Has wings tucked away, but rarely flies."
+    ],
+    "banned": [
+     "flat brown shell"
+    ]
+   }
+  ],
   "coconut": [
    {
     "id": "6644bd3b",
@@ -1495,6 +1655,33 @@
     ]
    }
   ],
+  "curry": [
+   {
+    "id": "cf8f0213",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Thick sauce rich with warm spices.",
+     "Stains your shirt easily if dropped.",
+     "Slow-cooked with tender meat and vegetables.",
+     "Deep golden or reddish brown color.",
+     "Almost always ladled over grains."
+    ],
+    "round2": [
+     "Often simmered with rich coconut milk.",
+     "A thin layer of oil surfaces atop.",
+     "Starts with onions browned into dark paste.",
+     "Fragrance lingers in curtains for days.",
+     "Scooped up with warm, blistered flatbread."
+    ],
+    "banned": [
+     "turmeric yellow",
+     "spiced gravy",
+     "roux block"
+    ]
+   }
+  ],
   "curtain": [
    {
     "id": "a2a96163",
@@ -1603,6 +1790,31 @@
      "yellow weed",
      "blow the seeds",
      "make a wish"
+    ]
+   }
+  ],
+  "deer": [
+   {
+    "id": "cb2e7eed",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Ears swivel in all directions listening closely.",
+     "Leaps effortlessly over tall garden fences.",
+     "Flips a flash of white tail when alarmed.",
+     "Chews cud quietly while resting in shadows.",
+     "Hooves make crisp tapping sounds on pavement."
+    ],
+    "round2": [
+     "Bony branched headgear sheds and regrows yearly.",
+     "Spots speckle newborn coats for natural camouflage.",
+     "Slender spindly legs end in cloven hooves.",
+     "Freezes dead still in glaring headlights.",
+     "Skittish herds dart into dense forest brush."
+    ],
+    "banned": [
+     "Bambi fawn"
     ]
    }
   ],
@@ -1715,6 +1927,34 @@
      "plates and cups",
      "soap pods",
      "kitchen"
+    ]
+   }
+  ],
+  "doctor": [
+   {
+    "id": "cdd089f7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Requires years of advanced schooling.",
+     "Deals with high stress situations.",
+     "Often keeps strange shift hours.",
+     "Uses specialized metal instruments daily.",
+     "Carries liability insurance."
+    ],
+    "round2": [
+     "Washes hands constantly throughout the day.",
+     "Looks at charts before walking in.",
+     "Speaks with quiet, serious tones.",
+     "Tells patients what not to eat.",
+     "Has diplomas hanging on the wall."
+    ],
+    "banned": [
+     "stethoscope",
+     "hospital",
+     "patient",
+     "medicine"
     ]
    }
   ],
@@ -2131,6 +2371,34 @@
     ]
    }
   ],
+  "farmer": [
+   {
+    "id": "00ad8363",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Watches weather forecasts constantly.",
+     "Operates heavy machinery.",
+     "Dependent on market commodity prices.",
+     "Works seven days a week.",
+     "Manages seasonal harvest pressure."
+    ],
+    "round2": [
+     "Wears faded denim pants.",
+     "Watches the clouds roll by.",
+     "Wipes dirt from tired eyes.",
+     "Keeps muddy boots by the door.",
+     "Checks fences for loose wires."
+    ],
+    "banned": [
+     "tractor",
+     "crops",
+     "animals",
+     "barn"
+    ]
+   }
+  ],
   "firefighter": [
    {
     "id": "5503a7f0",
@@ -2266,6 +2534,59 @@
      "holes",
      "mouthpiece",
      "blow across"
+    ]
+   }
+  ],
+  "fox": [
+   {
+    "id": "5d690d82",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Dives headfirst into deep snow for prey.",
+     "Often sneaks through suburban yards at night.",
+     "Leaves a distinct musky scent marking territory.",
+     "High-pitched yelps can sound almost human.",
+     "Digs underground dens to raise tiny pups."
+    ],
+    "round2": [
+     "Slender pointed muzzle with bright triangular ears.",
+     "Tail ends in an unmistakable white tip.",
+     "Slit pupils react just like cat eyes.",
+     "Prowls solo unlike most wild canine relatives.",
+     "Fiery orange pelt blends with autumn leaves."
+    ],
+    "banned": [
+     "bright red fur coat"
+    ]
+   }
+  ],
+  "french fries": [
+   {
+    "id": "5952fec0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Golden yellow on the outside.",
+     "Crispy bite, soft on the inside.",
+     "Usually picked up with your fingers.",
+     "Best right out of the oil.",
+     "Great for dipping into sauces."
+    ],
+    "round2": [
+     "Cut into slender, straight sticks.",
+     "Heavily dusted with fine salt grains.",
+     "Leaves oily marks on paper bags.",
+     "Turns limp and sad when microwaved.",
+     "Served in a small cardboard scoop."
+    ],
+    "banned": [
+     "potato",
+     "ketchup",
+     "deep-fried sticks",
+     "fast food side"
     ]
    }
   ],
@@ -2629,6 +2950,34 @@
      "claw",
      "hit",
      "handle"
+    ]
+   }
+  ],
+  "hamster": [
+   {
+    "id": "30e5861f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Fits easily in the palm of your hand.",
+     "Tends to hoard snacks for later.",
+     "Super active once night rolls around.",
+     "Loves burrowing beneath shredded bedding or wood.",
+     "Constantly gnawing to keep its teeth trimmed."
+    ],
+    "round2": [
+     "Faces swell up double carrying food back home.",
+     "Spins in circles on metal plastic toys.",
+     "Round body with basically no tail visible.",
+     "Often kept in plastic modular habitrails.",
+     "Short pink feet scurry along wire bars."
+    ],
+    "banned": [
+     "running wheel",
+     "cheek pouches",
+     "caged pet rodent",
+     "tiny round cage"
     ]
    }
   ],
@@ -3048,6 +3397,62 @@
     ]
    }
   ],
+  "judge": [
+   {
+    "id": "3d0323b7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Makes final binding decisions.",
+     "Reads long legal briefs.",
+     "Controls unruly room behavior.",
+     "Requires a legal background.",
+     "Sits elevated above others."
+    ],
+    "round2": [
+     "Listens quietly with folded hands.",
+     "Tells people when to stand up.",
+     "Looks down from raised platforms.",
+     "Speaks with absolute final authority.",
+     "Rests chin on folded fingers."
+    ],
+    "banned": [
+     "gavel",
+     "courtroom",
+     "robe",
+     "sentence"
+    ]
+   }
+  ],
+  "kangaroo": [
+   {
+    "id": "b95171b5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Uses a heavy tail to balance standing up.",
+     "Can cover huge distances jumping forward.",
+     "Rests in the shade during midday heat.",
+     "Grazes in large, open grassy plains.",
+     "Leans back to deliver powerful rear kicks."
+    ],
+    "round2": [
+     "Carries growing babies right on its belly.",
+     "Massive long feet dwarf its front paws.",
+     "Boxer-like stance when facing off against rivals.",
+     "Cannot walk backwards easily at all.",
+     "Iconic symbol across the southern continent."
+    ],
+    "banned": [
+     "pouch for joey",
+     "boxing pose",
+     "hopping marsupial",
+     "outback icon"
+    ]
+   }
+  ],
   "kettle": [
    {
     "id": "ec5942bc",
@@ -3102,6 +3507,29 @@
      "green flesh",
      "black seeds"
     ]
+   }
+  ],
+  "koala": [
+   {
+    "id": "c1ea8cbe",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Spends almost the whole day dozing off.",
+     "Hardly ever comes down from high branches.",
+     "Has thick padded paws with sharp claws.",
+     "Smells strongly of the herbal leaves eaten.",
+     "Moves surprisingly slow and clumsy on ground."
+    ],
+    "round2": [
+     "Two opposable thumbs on each front paw.",
+     "Large round ears covered in bushy fur.",
+     "Diet consists strictly of toxic gum foliage.",
+     "Big dark leathery nose dominates its face.",
+     "Never drinks water; gets moisture from greenery."
+    ],
+    "banned": []
    }
   ],
   "ladder": [
@@ -3212,6 +3640,34 @@
      "calming scent",
      "essential oil",
      "provence fields"
+    ]
+   }
+  ],
+  "lawyer": [
+   {
+    "id": "6d0ab746",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Bill hours in tight increments.",
+     "Reviews thick document stacks.",
+     "Deals with difficult clients.",
+     "Faces strict filing deadlines.",
+     "Wears formal business attire."
+    ],
+    "round2": [
+     "Speaks in very measured sentences.",
+     "Carries heavy leather portfolios.",
+     "Adjusts neckties before speaking.",
+     "Takes notes on yellow legal pads.",
+     "Walks briskly down marble halls."
+    ],
+    "banned": [
+     "courtroom",
+     "judge",
+     "suit",
+     "law"
     ]
    }
   ],
@@ -3520,6 +3976,34 @@
     ]
    }
   ],
+  "mechanic": [
+   {
+    "id": "007717d0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Investigates strange noises.",
+     "Lifts heavy metal parts.",
+     "Buys expensive personal tool sets.",
+     "Consults technical repair manuals.",
+     "Deals with angry customers."
+    ],
+    "round2": [
+     "Wears shirts with names stitched on.",
+     "Wipes hands on dirty rags.",
+     "Leans over fenders for hours.",
+     "Rolls around on low wheeled creepers.",
+     "Points out worn rubber belts."
+    ],
+    "banned": [
+     "wrench",
+     "car",
+     "grease",
+     "engine"
+    ]
+   }
+  ],
   "microwave": [
    {
     "id": "08b7be9c",
@@ -3797,6 +4281,34 @@
     ]
    }
   ],
+  "nurse": [
+   {
+    "id": "761aa9ba",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Stands on their feet for hours.",
+     "Keeps track of vital signs.",
+     "Works on rotating shifts.",
+     "Requires a state license.",
+     "Deals with bodily fluids."
+    ],
+    "round2": [
+     "Changes sheets between people.",
+     "Carries pens in chest pockets.",
+     "Asks about pain levels often.",
+     "Brings small paper cups with pills.",
+     "Pushes rolling carts down halls."
+    ],
+    "banned": [
+     "stethoscope",
+     "hospital",
+     "patient",
+     "syringe"
+    ]
+   }
+  ],
   "octopus": [
    {
     "id": "5f412645",
@@ -3822,6 +4334,34 @@
      "ink",
      "suction cups",
      "camouflage"
+    ]
+   }
+  ],
+  "omelet": [
+   {
+    "id": "e95f4507",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Fluffy and soft to cut into.",
+     "Stuffed with cheese or chopped veggies.",
+     "Often flipped halfway through cooking.",
+     "Pale yellow on the surface.",
+     "A classic morning order."
+    ],
+    "round2": [
+     "Folded neatly into a crescent shape.",
+     "Beaten smooth before hitting the pan.",
+     "Turns unpleasantly rubbery if overcooked.",
+     "Ready in just two flat minutes.",
+     "Customized at breakfast buffet stations."
+    ],
+    "banned": [
+     "eggs",
+     "folded over",
+     "breakfast diner",
+     "scrambled"
     ]
    }
   ],
@@ -4483,6 +5023,34 @@
     ]
    }
   ],
+  "police officer": [
+   {
+    "id": "f5ddeb67",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Wears a heavy duty belt.",
+     "Writes formal incident reports.",
+     "Responds to emergency calls.",
+     "Faces potential danger daily.",
+     "Works rotating day and night shifts."
+    ],
+    "round2": [
+     "Drinks coffee from paper cups.",
+     "Keeps notepad in shirt pocket.",
+     "Speaks into shoulder radios.",
+     "Parks on the side of streets.",
+     "Walks with heavy boots on pavement."
+    ],
+    "banned": [
+     "badge",
+     "gun",
+     "siren",
+     "handcuffs"
+    ]
+   }
+  ],
   "popcorn": [
    {
     "id": "3409766d",
@@ -4787,6 +5355,34 @@
     ]
    }
   ],
+  "ramen": [
+   {
+    "id": "7e124506",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Topped with sliced meat and scallions.",
+     "You drink the rich base dry.",
+     "Steamy, savory aroma fills the air.",
+     "Eaten with chopsticks in hand.",
+     "Quick stop after a late night."
+    ],
+    "round2": [
+     "Topped with a soft, marinated halved egg.",
+     "A dark sheet of seaweed hugs rim.",
+     "Deep, heavy ceramic bowl retains heat.",
+     "Base chosen between salt, soy, or paste.",
+     "Vending machines dispense tickets to order."
+    ],
+    "banned": [
+     "noodles",
+     "broth",
+     "slurping",
+     "noodle shop"
+    ]
+   }
+  ],
   "refrigerator": [
    {
     "id": "18884501",
@@ -4952,6 +5548,34 @@
      "centimeters",
      "measure",
      "straight edge"
+    ]
+   }
+  ],
+  "salad": [
+   {
+    "id": "6c5ff43f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Lots of crunch in every bite.",
+     "Tossed together right before eating.",
+     "Bright mix of reds and greens.",
+     "Often ordered as a starter.",
+     "Feels light and refreshing."
+    ],
+    "round2": [
+     "Often served in a wide wooden bowl.",
+     "Coated with a tangy, shaken emulsion.",
+     "Becomes limp and soggy under sauce.",
+     "Served raw without any heating involved.",
+     "Leaves a puddle at the bottom."
+    ],
+    "banned": [
+     "lettuce",
+     "dressing",
+     "croutons",
+     "raw greens"
     ]
    }
   ],
@@ -5400,6 +6024,34 @@
     ]
    }
   ],
+  "snail": [
+   {
+    "id": "f5d7d922",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:12:50.136Z",
+    "round1": [
+     "Comes out on sidewalks after heavy rain.",
+     "Moves at an agonizingly slow pace.",
+     "Loves cool, damp spots under garden stones.",
+     "Pulls everything inside when touched.",
+     "Leaves a glistening wet path behind."
+    ],
+    "round2": [
+     "Devours garden hostas down to stems.",
+     "Shrivels right up if sprinkled with salt.",
+     "Can seal itself shut during dry spells.",
+     "Glides safely right across razor blades.",
+     "Tucks safe inside a coiled, calcified dome."
+    ],
+    "banned": [
+     "spiral shell",
+     "slime trail",
+     "salt melts it",
+     "escargot"
+    ]
+   }
+  ],
   "soccer": [
    {
     "id": "63c6ec4c",
@@ -5510,6 +6162,62 @@
     ]
    }
   ],
+  "spider": [
+   {
+    "id": "bb87b8bd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:12:50.136Z",
+    "round1": [
+     "Hangs out in high ceiling corners.",
+     "Sits completely motionless waiting for prey.",
+     "Startles you by dropping down without warning.",
+     "Helps keep other pests from spreading inside.",
+     "Moves in quick, sudden bursts of speed."
+    ],
+    "round2": [
+     "Spins strong silk into round egg sacks.",
+     "Liquefies its meal before drinking it.",
+     "Zero antennae sprouting from its head.",
+     "Feels faint vibrations through the floor.",
+     "Hunts at night without ever flying."
+    ],
+    "banned": [
+     "spins webs",
+     "eight legs",
+     "arachnid",
+     "deadly venomous bite"
+    ]
+   }
+  ],
+  "spoon": [
+   {
+    "id": "be837dbc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:57.695Z",
+    "round1": [
+     "Rounded at the end",
+     "Lifted to the mouth",
+     "Rests on a saucer",
+     "Stirs morning drinks",
+     "Balanced on the fingers"
+    ],
+    "round2": [
+     "Glossy concave tip reflects light.",
+     "Smooth curved underside.",
+     "Slips into deep mugs easily.",
+     "Tapped against the rim.",
+     "Sliding through soft pudding."
+    ],
+    "banned": [
+     "bowl",
+     "soup",
+     "liquid",
+     "scoop"
+    ]
+   }
+  ],
   "squid": [
    {
     "id": "c7a68f04",
@@ -5534,6 +6242,32 @@
      "ink",
      "tentacles",
      "jet propulsion"
+    ]
+   }
+  ],
+  "squirrel": [
+   {
+    "id": "b3182a48",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Darting quickly across power lines overhead.",
+     "Buries food all over, then forgets where.",
+     "Chatters loudly when warning rivals nearby.",
+     "Uses its rear ankles to climb downwards.",
+     "Always scanning surroundings with twitchy motions."
+    ],
+    "round2": [
+     "Huge feathered tail curls over its back.",
+     "Caches countless oak seeds before winter freezes.",
+     "Builds messy leaf nests high in forks.",
+     "Two giant front buckteeth crack hard shells.",
+     "Silvery gray or rusty red roadside regular."
+    ],
+    "banned": [
+     "acorns hoarder",
+     "bushy fluffy tail"
     ]
    }
   ],
@@ -5588,6 +6322,34 @@
      "five arms",
      "regenerates limbs",
      "tube feet"
+    ]
+   }
+  ],
+  "steak": [
+   {
+    "id": "d796a8f3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:07:58.366Z",
+    "round1": [
+     "Needs a sharp knife to slice.",
+     "Dark crust on the outer sear.",
+     "Juicy and tender in the center.",
+     "You pick how done it gets.",
+     "A heavy, protein-packed main course."
+    ],
+    "round2": [
+     "Must rest a few minutes before carving.",
+     "Topped with a melting herb butter pat.",
+     "Seared on screaming-hot cast iron.",
+     "Comes in bone-in or boneless cuts.",
+     "Red liquid runs across the plate."
+    ],
+    "banned": [
+     "beef cut",
+     "rare medium well",
+     "steakhouse",
+     "grill marks"
     ]
    }
   ],
@@ -5948,6 +6710,34 @@
      "bag",
      "British",
      "hot water"
+    ]
+   }
+  ],
+  "teacher": [
+   {
+    "id": "47392436",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T11:13:06.902Z",
+    "round1": [
+     "Gets summers off.",
+     "Prepares material at home.",
+     "Deals with unruly behavior.",
+     "Buys supplies with personal cash.",
+     "Requires continuous education credits."
+    ],
+    "round2": [
+     "Speaks to groups without sitting.",
+     "Taps dry markers on desks.",
+     "Keeps rows of small chairs neat.",
+     "Tells people to quiet down.",
+     "Passes out stapled paper packets."
+    ],
+    "banned": [
+     "classroom",
+     "chalkboard",
+     "students",
+     "grades"
     ]
    }
   ],
@@ -6638,6 +7428,59 @@
      "cork",
      "bottle",
      "glass"
+    ]
+   }
+  ],
+  "wolf": [
+   {
+    "id": "21dee26a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:10:23.461Z",
+    "round1": [
+     "Coordinates hunts with others using team tactics.",
+     "Thick double coat withstands freezing arctic winds.",
+     "Long-distance runner built for chasing down prey.",
+     "Strong social hierarchy controls feeding order.",
+     "Deep vocal calls carry across vast valleys."
+    ],
+    "round2": [
+     "Massive broad paws act like natural snowshoes.",
+     "Howls together in haunting chorus at dusk.",
+     "Wild direct ancestor of every domestic dog.",
+     "Yellow or amber piercing eyes look straight ahead.",
+     "Roams territories covering hundreds of square miles."
+    ],
+    "banned": [
+     "howling at the moon",
+     "alpha pack leader",
+     "fairy tale big bad"
+    ]
+   }
+  ],
+  "worm": [
+   {
+    "id": "93e9dac0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T11:12:50.136Z",
+    "round1": [
+     "Stranded on wet pavement after storms.",
+     "Spends nearly all its time burrowing underground.",
+     "Dries out fast under baking sunlight.",
+     "Stretches long then bunches up tightly.",
+     "Quickly retreats deep inside when uncovered."
+    ],
+    "round2": [
+     "Breathes fresh air right through moist skin.",
+     "Swallows dirt whole to digest decaying matter.",
+     "Has a swollen fleshy ring around midsection.",
+     "Lacks any eyes, ears, or facial features.",
+     "Tugged out from turf by hungry robins."
+    ],
+    "banned": [
+     "makes garden compost",
+     "no legs at all"
     ]
    }
   ],
