@@ -461,5 +461,30 @@
    "fudge center",
    "nuts inside"
   ]
+ },
+ "2026-10-17": {
+  "word": "jellyfish",
+  "category": "Sea Creatures",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Floats gently with the current.",
+   "Mostly made of water.",
+   "Bell shaped body.",
+   "Washes up on sandy beaches.",
+   "Lacks a backbone or brain."
+  ],
+  "round2": [
+   "Drifts near the shallow water top",
+   "Stings when touched by skin",
+   "Pulsates while moving forward",
+   "Bright neon glow at night",
+   "Catches tiny swimming meals"
+  ],
+  "banned": [
+   "sting",
+   "tentacles",
+   "transparent"
+  ]
  }
 }
