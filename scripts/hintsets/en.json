@@ -224,6 +224,34 @@
     ]
    }
   ],
+  "archery": [
+   {
+    "id": "9517e449",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:36:56.271Z",
+    "round1": [
+     "Held for steady aiming",
+     "Involves stationary standing",
+     "Practiced at targets",
+     "Focuses on precise release",
+     "Improves steady focus"
+    ],
+    "round2": [
+     "Shooters wear arm guards",
+     "Uses a quivering holder",
+     "Requires keen eyesight",
+     "One side faces the target",
+     "Strict shooting lines"
+    ],
+    "banned": [
+     "bullseye",
+     "bow and arrow",
+     "quiver",
+     "fletching"
+    ]
+   }
+  ],
   "astronaut": [
    {
     "id": "81fe4b0b",
@@ -916,6 +944,34 @@
     ]
    }
   ],
+  "boxing": [
+   {
+    "id": "b368a10f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:36:56.271Z",
+    "round1": [
+     "Done in rounds",
+     "Requires protective hand wear",
+     "Performed inside ropes",
+     "Focuses on upper body strikes",
+     "Win by points or stoppage"
+    ],
+    "round2": [
+     "Fighters wear shorts",
+     "Corner stool between breaks",
+     "Referees wear white shirts",
+     "Scored by judges",
+     "Weight classes matter"
+    ],
+    "banned": [
+     "ring",
+     "gloves",
+     "knockout",
+     "heavyweight"
+    ]
+   }
+  ],
   "broccoli": [
    {
     "id": "b5f968bd",
@@ -1135,6 +1191,61 @@
      "screen",
      "math",
      "solar"
+    ]
+   }
+  ],
+  "calendar": [
+   {
+    "id": "1934df60",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:38:14.081Z",
+    "round1": [
+     "Often gifted during the holidays",
+     "Filled with handwritten ink notes",
+     "Flips to a fresh new page",
+     "Held together by a metal spiral",
+     "Kept near the kitchen fridge"
+    ],
+    "round2": [
+     "Shows a grid of small squares",
+     "Rolled up tightly during shipping",
+     "Marked with red pen circles",
+     "Full of numbers and abbreviations",
+     "Gets replaced once a year"
+    ],
+    "banned": [
+     "month",
+     "date",
+     "year",
+     "paper"
+    ]
+   }
+  ],
+  "camera": [
+   {
+    "id": "28a14442",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:40.342Z",
+    "round1": [
+     "Hangs securely from a neck strap.",
+     "Twisting a dial switches different modes.",
+     "Bright flash briefly blinds the room.",
+     "Removable memory card stores everything inside.",
+     "Cap protects the delicate front glass."
+    ],
+    "round2": [
+     "Half-pressing top button locks in focus.",
+     "Threaded hole on bottom fits a tripod.",
+     "Textured ring twists to bring objects closer.",
+     "Metal bracket on top holds extra attachments.",
+     "Molded grip gives right hand firm control."
+    ],
+    "banned": [
+     "taking photographs",
+     "shutter and lens",
+     "tripod photo capture"
     ]
    }
   ],
@@ -1523,6 +1634,34 @@
     ]
    }
   ],
+  "chopsticks": [
+   {
+    "id": "66029094",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Usually made of smooth bamboo wood.",
+     "Tapered down to a thinner tip.",
+     "Needs a good grip between fingers.",
+     "Used to pick up individual bites.",
+     "Thin, light, and completely straight."
+    ],
+    "round2": [
+     "Always used alongside an identical twin.",
+     "Rolls right off smooth countertops easily.",
+     "Rests flat on tiny ceramic pillows.",
+     "Cheap take-out versions snap apart before eating.",
+     "Pinches slippery noodles without cutting them."
+    ],
+    "banned": [
+     "pair of sticks",
+     "eating sushi",
+     "wooden sticks",
+     "two together"
+    ]
+   }
+  ],
   "cinema": [
    {
     "id": "f2a3e59d",
@@ -1850,6 +1989,34 @@
      "claws",
      "sideways walk",
      "shell"
+    ]
+   }
+  ],
+  "crayon": [
+   {
+    "id": "46ed6f0c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:37:22.396Z",
+    "round1": [
+     "Leaves colorful streaks behind.",
+     "Wears down flat with heavy use.",
+     "Smells faintly like old art class.",
+     "Rolls easily across smooth tables.",
+     "Often tossed in a plastic tub."
+    ],
+    "round2": [
+     "Warmed up by a tight grip.",
+     "Leaves waxy residue on hands.",
+     "Point dulls after repeated coloring.",
+     "Melts near a hot window.",
+     "Stained bits stick to tables."
+    ],
+    "banned": [
+     "wax",
+     "coloring",
+     "paper wrapper",
+     "children drawing"
     ]
    }
   ],
@@ -2432,6 +2599,34 @@
     ]
    }
   ],
+  "Dubai": [
+   {
+    "id": "7fba3b5f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:39:19.824Z",
+    "round1": [
+     "Fast cars patrol the police station parking",
+     "Gold jewelry sparkles bright in shop windows",
+     "Huge fountains shoot water high up dancing",
+     "Endless sand stretches out beyond the skyscrapers",
+     "Giant indoor malls keep everyone cool inside"
+    ],
+    "round2": [
+     "Glass tunnels let people walk under sharks",
+     "Wide highways have many busy lanes",
+     "Bright neon signs glow across night expressways",
+     "Flat coastal shores meet calm turquoise sea",
+     "Posh hotels serve afternoon tea on trays"
+    ],
+    "banned": [
+     "Burj Khalifa",
+     "Palm Jumeirah",
+     "Tallest building",
+     "Indoor ski slope"
+    ]
+   }
+  ],
   "duck": [
    {
     "id": "ac0be7e0",
@@ -2680,6 +2875,34 @@
     ]
    }
   ],
+  "envelope": [
+   {
+    "id": "0db47344",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:37:22.396Z",
+    "round1": [
+     "Torn open with a finger.",
+     "Tucked inside a filing cabinet.",
+     "Sold in boxes of fifty.",
+     "Left sitting by the front door.",
+     "Slightly see-through under bright lights."
+    ],
+    "round2": [
+     "Folded flap seals shut.",
+     "Paper flap tastes slightly sweet.",
+     "Creased down the middle tightly.",
+     "Slid under a closed door.",
+     "Paper crinkles when squeezed."
+    ],
+    "banned": [
+     "mailing a letter",
+     "licking the flap",
+     "stamp",
+     "sealed shut"
+    ]
+   }
+  ],
   "eraser": [
    {
     "id": "3025864a",
@@ -2732,6 +2955,34 @@
      "crops",
      "animals",
      "barn"
+    ]
+   }
+  ],
+  "fencing": [
+   {
+    "id": "b7695923",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:36:56.271Z",
+    "round1": [
+     "Points awarded for touches",
+     "Uses a narrow strip",
+     "Requires protective mesh headwear",
+     "Fast lunging movements",
+     "Opponents face each other"
+    ],
+    "round2": [
+     "Competitors wear white jackets",
+     "Connected by a cord",
+     "Referees hold cards",
+     "Quick retreat steps",
+     "Fast electronic scoring"
+    ],
+    "banned": [
+     "foil",
+     "epée",
+     "en garde",
+     "mask"
     ]
    }
   ],
@@ -2929,6 +3180,34 @@
     ]
    }
   ],
+  "fork": [
+   {
+    "id": "075bccb8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Held in the non-dominant hand often.",
+     "Pierces right into solid food.",
+     "Has a flat, slightly curved head.",
+     "Can press down and mash soft things.",
+     "Sleek metal that shines when clean."
+    ],
+    "round2": [
+     "Sharp parallel tips line the front edge.",
+     "Leaves a neat row of tiny holes.",
+     "Twirls long pasta strands around tight.",
+     "Slides easily between teeth during each bite.",
+     "Lies directly left of the meal setup."
+    ],
+    "banned": [
+     "prongs",
+     "tines",
+     "twirling spaghetti",
+     "stabbing meat"
+    ]
+   }
+  ],
   "fox": [
    {
     "id": "5d690d82",
@@ -2979,6 +3258,34 @@
      "ketchup",
      "deep-fried sticks",
      "fast food side"
+    ]
+   }
+  ],
+  "frying pan": [
+   {
+    "id": "c74f35ff",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Usually has one long handle.",
+     "Sits right on the burner.",
+     "Often black and quite heavy.",
+     "Needs a little oil before starting.",
+     "Wider across the top than bottom."
+    ],
+    "round2": [
+     "Low sloped sides make tossing food easy.",
+     "Food sizzles loudly the moment it lands.",
+     "Often paired with a flat metal spatula.",
+     "Slick interior coating keeps things from sticking.",
+     "Leaves golden crisp crusts on dinner."
+    ],
+    "banned": [
+     "skillet",
+     "sizzle",
+     "flip pancakes",
+     "non-stick coating"
     ]
    }
   ],
@@ -3457,6 +3764,32 @@
     ]
    }
   ],
+  "headphones": [
+   {
+    "id": "9f7bde7f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:40.342Z",
+    "round1": [
+     "Rest directly on your body comfortably.",
+     "Padded cushions wear down over time.",
+     "Keeps shared spaces completely quiet.",
+     "Foldable arms help pack them down.",
+     "People wear them around their neck casually."
+    ],
+    "round2": [
+     "Marked with small L and R letters.",
+     "Switch cancels out constant background rumble.",
+     "Metal band clicks to adjust the fit.",
+     "Detachable cord plugs right into one side.",
+     "Gentle tension clamps lightly around your head."
+    ],
+    "banned": [
+     "earpads and headband",
+     "wear over your ears"
+    ]
+   }
+  ],
   "helicopter": [
    {
     "id": "152ba875",
@@ -3706,6 +4039,32 @@
     ]
    }
   ],
+  "iron": [
+   {
+    "id": "ba430f2b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:40.342Z",
+    "round1": [
+     "Dangerous to leave resting face down.",
+     "Takes a few minutes to heat up.",
+     "Small tank needs clean tap water.",
+     "Glides across flat surfaces by hand.",
+     "Hisses softly when releasing trapped heat."
+    ],
+    "round2": [
+     "Comes to a tapered point up front.",
+     "Smooth metal underside needs occasional wiping.",
+     "Small button sprays a fine wet mist.",
+     "Stands upright on its flat back heel.",
+     "Dial adjusts heat for delicate or sturdy."
+    ],
+    "banned": [
+     "steaming board",
+     "pressing clothes"
+    ]
+   }
+  ],
   "island": [
    {
     "id": "442bdebd",
@@ -3901,6 +4260,34 @@
     ]
    }
   ],
+  "key": [
+   {
+    "id": "5b8a29e8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:38:14.081Z",
+    "round1": [
+     "Slips onto a metal ring easily",
+     "Often kept in pockets or bowls",
+     "Easy to lose in the couch",
+     "Has distinct ridges along one edge",
+     "Might have a colored plastic cap"
+    ],
+    "round2": [
+     "Cold when you pick it up",
+     "Fits nicely right in your palm",
+     "Makes a sharp clinking noise",
+     "Tossed onto a hallway table",
+     "Carried around every single day"
+    ],
+    "banned": [
+     "lock",
+     "metal",
+     "door",
+     "turn"
+    ]
+   }
+  ],
   "kiwi": [
    {
     "id": "a2bd672c",
@@ -3926,6 +4313,34 @@
      "bird name",
      "green flesh",
      "black seeds"
+    ]
+   }
+  ],
+  "knife": [
+   {
+    "id": "364c367d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Requires steady downward pressure to work.",
+     "Often has a wooden, textured handle.",
+     "Best kept away from tiny hands.",
+     "Can scrape things across a board.",
+     "Runs along a whetstone sometimes."
+    ],
+    "round2": [
+     "Has one paper-thin side and one blunt.",
+     "Rocks smoothly back and forth during prep.",
+     "Parts raw onions into tiny neat cubes.",
+     "Glides through tough tomato skin cleanly.",
+     "Slips into wooden slots on the counter."
+    ],
+    "banned": [
+     "blade",
+     "sharp edge",
+     "cutting bread",
+     "slicing meat"
     ]
    }
   ],
@@ -3977,6 +4392,34 @@
      "reaches roofs",
      "extension steps",
      "rungs"
+    ]
+   }
+  ],
+  "ladle": [
+   {
+    "id": "7d30f7e4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Has a rounded, hollow bowl part.",
+     "Extended handle keeps hands safe.",
+     "Carries liquid without spilling over.",
+     "Reaches down into deep pots easily.",
+     "Can rest upright against a rim."
+    ],
+    "round2": [
+     "The deep cup sits at sharp angle.",
+     "Has a hooked tip for hanging up.",
+     "Plunges down deep into bubbling broth.",
+     "Pours cleanly from a tiny curved rim.",
+     "Passed around big family buffet tables often."
+    ],
+    "banned": [
+     "scooping soup",
+     "deep bowl spoon",
+     "punch bowl",
+     "pouring stew"
     ]
    }
   ],
@@ -4032,6 +4475,34 @@
      "light bulb",
      "lampshade",
      "illumination"
+    ]
+   }
+  ],
+  "Las Vegas": [
+   {
+    "id": "e5f3a3dd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:39:19.824Z",
+    "round1": [
+     "Fake Eiffel Tower sits on the boulevard",
+     "Desert heat hits hard outside the air conditioning",
+     "Monorail moves visitors up and down blocks",
+     "Buffet lines stretch out for very long",
+     "Wedding chapels ready for quick impromptu marriages"
+    ],
+    "round2": [
+     "Escalators move crowds between hotel floors",
+     "Giant video screens display massive advertisements",
+     "Wide carpeted hallways connect massive rooms",
+     "Taxi lines form outside glass doors",
+     "Planted palm trees line paved driveways"
+    ],
+    "banned": [
+     "The Strip",
+     "Casino",
+     "Slot machines",
+     "Elvis impersonator"
     ]
    }
   ],
@@ -4648,6 +5119,33 @@
     ]
    }
   ],
+  "mug": [
+   {
+    "id": "dcf46b2f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Thick walls help keep warmth inside.",
+     "Comfortable loop to hook fingers through.",
+     "Round base that sits flat down.",
+     "Often shows off funny printed pictures.",
+     "Steam rises straight out the top."
+    ],
+    "round2": [
+     "Leaves wet dark rings on coffee tables.",
+     "Both palms wrap around for quick warmth.",
+     "Clinks softly when stirred with small spoons.",
+     "Holds way more liquid than dainty cups.",
+     "Interior stains brown from dark brews over time."
+    ],
+    "banned": [
+     "drinking coffee",
+     "hot tea",
+     "ceramic cup"
+    ]
+   }
+  ],
   "museum": [
    {
     "id": "b22830a4",
@@ -4704,6 +5202,34 @@
     ]
    }
   ],
+  "nail": [
+   {
+    "id": "cb7a6272",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:38:39.504Z",
+    "round1": [
+     "Sold in heavy boxes.",
+     "Disappears when driven in.",
+     "Hard to pull back out.",
+     "Sits flush with surfaces.",
+     "Very cheap to buy."
+    ],
+    "round2": [
+     "Leaves a tiny dent behind.",
+     "Stays hidden when finished.",
+     "Shiny silver finish.",
+     "Straight and narrow.",
+     "Needs a solid surface."
+    ],
+    "banned": [
+     "hit with a hammer",
+     "sharp point",
+     "joins wood",
+     "made of metal"
+    ]
+   }
+  ],
   "New York": [
    {
     "id": "a08bded4",
@@ -4754,6 +5280,34 @@
     "banned": [
      "next to the bed",
      "bedside table"
+    ]
+   }
+  ],
+  "notebook": [
+   {
+    "id": "62f3f5a6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:37:22.396Z",
+    "round1": [
+     "Piled high on classroom shelves.",
+     "Edges get slightly bent over time.",
+     "Flipped through one sheet at a time.",
+     "Slipped inside a locker slot.",
+     "Bought in bulk before September."
+    ],
+    "round2": [
+     "Pages stick together sometimes.",
+     "Corners get dog-eared easily.",
+     "Rattles when shaken fast.",
+     "Back cover bends too far.",
+     "Stacked in tall leaning towers."
+    ],
+    "banned": [
+     "spiral binding",
+     "lined paper",
+     "taking notes",
+     "pages to tear out"
     ]
    }
   ],
@@ -5001,6 +5555,34 @@
      "rotates head",
      "wise",
      "nocturnal"
+    ]
+   }
+  ],
+  "paintbrush": [
+   {
+    "id": "4651d435",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:38:39.504Z",
+    "round1": [
+     "Requires frequent cleaning sessions.",
+     "Leaves behind flat surfaces.",
+     "Found near metal cans.",
+     "Dips into liquid frequently.",
+     "Stiffens if left out."
+    ],
+    "round2": [
+     "Has a hole for hanging.",
+     "Wears out over time.",
+     "Smooths out thick stuff.",
+     "Needs a gentle rinse.",
+     "Comes in flat shapes."
+    ],
+    "banned": [
+     "applies paint",
+     "has bristles",
+     "wooden handle",
+     "artist tool"
     ]
    }
   ],
@@ -5555,6 +6137,34 @@
     ]
    }
   ],
+  "plate": [
+   {
+    "id": "cd3111c6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Broad, flat surface with raised edges.",
+     "Stacked directly on top of others.",
+     "Can chip if dropped on tile.",
+     "Usually centered right before a seat.",
+     "Holds a single serving of solids."
+    ],
+    "round2": [
+     "Shallow outer brim keeps rich sauces contained.",
+     "Makes screeching noises if metal scrapes hard.",
+     "Warmed in ovens before serving fancy courses.",
+     "Comes sized for bread, salad, or dinner.",
+     "Cleared away empty after a full meal."
+    ],
+    "banned": [
+     "flat round dish",
+     "serving dinner",
+     "porcelain dish",
+     "dinnerware"
+    ]
+   }
+  ],
   "pliers": [
    {
     "id": "42b596c5",
@@ -5999,6 +6609,31 @@
     ]
    }
   ],
+  "remote control": [
+   {
+    "id": "61a91b16",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:40.342Z",
+    "round1": [
+     "Always slips between the couch cushions.",
+     "Needs clear line of sight to work.",
+     "Works completely without a connected cord.",
+     "Slapping it sometimes revives weak batteries.",
+     "Held in one hand while relaxing."
+    ],
+    "round2": [
+     "Bright red button sits in top corner.",
+     "Arrow ring circles around a center button.",
+     "Back cover slides off to reveal batteries.",
+     "Full grid of numbers zero through nine.",
+     "Pointed directly forward during ordinary use."
+    ],
+    "banned": [
+     "infrared clicker"
+    ]
+   }
+  ],
   "restaurant": [
    {
     "id": "fc038ba1",
@@ -6024,6 +6659,34 @@
      "waiter",
      "food",
      "bill"
+    ]
+   }
+  ],
+  "rock climbing": [
+   {
+    "id": "6712b14f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:36:56.271Z",
+    "round1": [
+     "Points awarded for reaching tops",
+     "Uses a vertical wall",
+     "Requires rope safety gear",
+     "Slow pulling movements",
+     "Climbers face the stone"
+    ],
+    "round2": [
+     "Climbers wear special rubber shoes",
+     "Uses a chalk bag",
+     "Requires strong grip strength",
+     "Scrambling up overhangs",
+     "Outdoor cliff sites"
+    ],
+    "banned": [
+     "chalk bag",
+     "belay",
+     "carabiner",
+     "bouldering"
     ]
    }
   ],
@@ -6528,6 +7191,34 @@
     ]
    }
   ],
+  "Seoul": [
+   {
+    "id": "5d03a3b6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:39:19.824Z",
+    "round1": [
+     "Steaming hot soup served in metal bowls",
+     "Subway trains run fast and very clean",
+     "Green mountains surround the concrete towers",
+     "Night markets stay open past midnight hours",
+     "Palace guards wearing colorful historical uniforms"
+    ],
+    "round2": [
+     "Narrow alleys hide small coffee shops",
+     "Bicycles park neatly in paved station racks",
+     "Brisk autumn wind blows yellow tree leaves",
+     "Long concrete bridges cross wide flowing rivers",
+     "Apartment blocks stretch endlessly into distance"
+    ],
+    "banned": [
+     "K-pop",
+     "Gyeongbokgung",
+     "BTS",
+     "DMZ"
+    ]
+   }
+  ],
   "shark": [
    {
     "id": "87b8270e",
@@ -6553,6 +7244,34 @@
      "teeth",
      "dorsal fin",
      "predator"
+    ]
+   }
+  ],
+  "sharpener": [
+   {
+    "id": "90fc96d7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:37:22.396Z",
+    "round1": [
+     "Metal inside does the hard work.",
+     "Gets emptied when full of debris.",
+     "Kept in a corner of the room.",
+     "Fingers reach into a small slot.",
+     "Usually bolted down or heavy plastic."
+    ],
+    "round2": [
+     "Scraping sound while turning.",
+     "Wood dust gathers inside.",
+     "Creates a very fine tip.",
+     "Metal teeth bite the wood.",
+     "Plastic casing gets scratched up."
+    ],
+    "banned": [
+     "blades",
+     "pencil shavings",
+     "turning a crank",
+     "pointy tip"
     ]
    }
   ],
@@ -6749,6 +7468,34 @@
      "athletic trainers",
      "tennis footwear",
      "rubber sole lace-up"
+    ]
+   }
+  ],
+  "snowboarding": [
+   {
+    "id": "339aca93",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:36:56.271Z",
+    "round1": [
+     "Requires good balance",
+     "Done on a steep slope",
+     "Popular at mountain resorts",
+     "Involves gliding downward",
+     "Uses a flat platform"
+    ],
+    "round2": [
+     "Boots lock in tightly",
+     "Riders wear goggles",
+     "Usually done standing sideways",
+     "Leaves deep carved lines",
+     "Popular winter vacation activity"
+    ],
+    "banned": [
+     "halfpipe",
+     "winter resort",
+     "powder snow",
+     "bindings"
     ]
    }
   ],
@@ -7358,6 +8105,34 @@
     ]
    }
   ],
+  "Sydney": [
+   {
+    "id": "0ba88a48",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:39:19.824Z",
+    "round1": [
+     "Great place for catching waves all day",
+     "Bright fireworks light up the dark sky",
+     "Big ferries move people across the bay",
+     "Warm weather makes shorts a must wear",
+     "Huge botanical gardens right downtown"
+    ],
+    "round2": [
+     "Trains run underground past busy platforms",
+     "Seagulls gather near open fish markets",
+     "Sailboats dock tightly in blue water marinas",
+     "Tall glass office towers reflect morning sun",
+     "Steep stone steps lead up to parks"
+    ],
+    "banned": [
+     "Opera House",
+     "Harbour Bridge",
+     "Koala",
+     "Kangaroo"
+    ]
+   }
+  ],
   "T-shirt": [
    {
     "id": "ac3ecaf6",
@@ -7581,6 +8356,31 @@
     ]
    }
   ],
+  "television": [
+   {
+    "id": "62639f67",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:40.342Z",
+    "round1": [
+     "Often mounted directly against the wall.",
+     "People gather in front of it together.",
+     "Operated mostly from across the room.",
+     "Collects dust very quickly when off.",
+     "Size is measured diagonally across corners."
+    ],
+    "round2": [
+     "Looks like a dark mirror when off.",
+     "Tiny glowing red light marks standby mode.",
+     "Rests on two small angled corner feet.",
+     "Row of ports hidden behind the frame.",
+     "Built-in speakers fire downwards along the bottom."
+    ],
+    "banned": [
+     "cable channels"
+    ]
+   }
+  ],
   "tennis": [
    {
     "id": "cc91c274",
@@ -7743,6 +8543,34 @@
      "seeds inside",
      "ketchup",
      "juice"
+    ]
+   }
+  ],
+  "toolbox": [
+   {
+    "id": "9e8ba3f4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:38:39.504Z",
+    "round1": [
+     "Keeps small items sorted.",
+     "Rattles when you walk.",
+     "Sits on the floor.",
+     "Taken to repair jobs.",
+     "Often dusty inside."
+    ],
+    "round2": [
+     "Has a lift-out tray.",
+     "Closes with a snap.",
+     "Takes up shelf space.",
+     "Gets scratched up easily.",
+     "Has metal hinges."
+    ],
+    "banned": [
+     "holds hammers",
+     "metal latch",
+     "carries gear",
+     "heavy lid"
     ]
    }
   ],
@@ -8020,6 +8848,34 @@
     ]
    }
   ],
+  "vase": [
+   {
+    "id": "8ddfa2fe",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:38:14.081Z",
+    "round1": [
+     "Has a narrow neck and base",
+     "Often given as a wedding present",
+     "Sits empty in a dark cabinet",
+     "Painted with bright colorful patterns",
+     "Needs heavy scrubbing inside sometimes"
+    ],
+    "round2": [
+     "Heavier at the bottom",
+     "Hollow space on the inside",
+     "Gives a dull thud when tapped",
+     "Dust gathers around the rim",
+     "Pushed back on a high shelf"
+    ],
+    "banned": [
+     "flower",
+     "water",
+     "glass",
+     "plant"
+    ]
+   }
+  ],
   "Venice": [
    {
     "id": "7ae2dd3c",
@@ -8271,6 +9127,34 @@
     ]
    }
   ],
+  "whisk": [
+   {
+    "id": "f24ef576",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-10T15:36:03.018Z",
+    "round1": [
+     "Held firmly and moved very fast.",
+     "Mostly made of thin, bendy metal.",
+     "Works best in a deep bowl.",
+     "Helps smooth out stubborn lumps.",
+     "Light and easy to spin around."
+    ],
+    "round2": [
+     "Bendy loops meet together at the base.",
+     "Traps air bubbles into liquids very quickly.",
+     "Thin batter drips freely between its gaps.",
+     "Rings against metal bowls during quick stirring.",
+     "Can be balloon-shaped or totally flat."
+    ],
+    "banned": [
+     "beating eggs",
+     "whipping cream",
+     "metal wires",
+     "balloon shape"
+    ]
+   }
+  ],
   "wine": [
    {
     "id": "64bae36d",
@@ -8376,6 +9260,34 @@
      "tightens bolts",
      "adjustable jaw",
      "socket set"
+    ]
+   }
+  ],
+  "yoga": [
+   {
+    "id": "09709537",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-10T15:36:56.271Z",
+    "round1": [
+     "Held for deep stretches",
+     "Involves barefoot posing",
+     "Practiced indoors quietly",
+     "Focuses on breathing control",
+     "Improves daily flexibility"
+    ],
+    "round2": [
+     "Practitioners wear stretchy pants",
+     "Uses a strap sometimes",
+     "Focus on inner calm",
+     "Barefoot on floors",
+     "Group classes follow instructors"
+    ],
+    "banned": [
+     "mat",
+     "downward dog",
+     "namaste",
+     "meditation"
     ]
    }
   ],
