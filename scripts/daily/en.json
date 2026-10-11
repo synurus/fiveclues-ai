@@ -486,5 +486,31 @@
    "tentacles",
    "transparent"
   ]
+ },
+ "2026-10-18": {
+  "word": "omelet",
+  "category": "Food",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Fluffy and soft to cut into.",
+   "Stuffed with cheese or chopped veggies.",
+   "Often flipped halfway through cooking.",
+   "Pale yellow on the surface.",
+   "A classic morning order."
+  ],
+  "round2": [
+   "Folded neatly into a crescent shape.",
+   "Beaten smooth before hitting the pan.",
+   "Turns unpleasantly rubbery if overcooked.",
+   "Ready in just two flat minutes.",
+   "Customized at breakfast buffet stations."
+  ],
+  "banned": [
+   "eggs",
+   "folded over",
+   "breakfast diner",
+   "scrambled"
+  ]
  }
 }
