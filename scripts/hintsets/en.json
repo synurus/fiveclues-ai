@@ -392,6 +392,34 @@
     ]
    }
   ],
+  "bacon": [
+   {
+    "id": "c511c407",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:04:14.793Z",
+    "round1": [
+     "Cooks on a flat surface",
+     "Shrinks when heated",
+     "Smells strong when cooking",
+     "Brown when done",
+     "Often comes in strips"
+    ],
+    "round2": [
+     "Salty flavor",
+     "Laying flat in pans",
+     "Dark red raw look",
+     "Leaves oil behind",
+     "Snaps when bent"
+    ],
+    "banned": [
+     "pork",
+     "pig",
+     "crispy",
+     "grease"
+    ]
+   }
+  ],
   "badminton": [
    {
     "id": "ed951678",
@@ -1082,6 +1110,34 @@
     ]
    }
   ],
+  "boots": [
+   {
+    "id": "f803bcd7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:03:50.063Z",
+    "round1": [
+     "Often hits the ankle or higher.",
+     "Found near the front door.",
+     "Makes a heavy sound on pavement.",
+     "Good for stepping in puddles.",
+     "Popular in the colder months."
+    ],
+    "round2": [
+     "Often laced up tightly before walking.",
+     "Pull tabs help get them on.",
+     "Tucked under heavy winter pants.",
+     "Takes a moment to untie.",
+     "Thick treads underneath for grip."
+    ],
+    "banned": [
+     "laces",
+     "leather",
+     "soles",
+     "mud"
+    ]
+   }
+  ],
   "bowling": [
    {
     "id": "c51041d6",
@@ -1662,6 +1718,33 @@
     ]
    }
   ],
+  "celery": [
+   {
+    "id": "1e238c57",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T16:03:33.451Z",
+    "round1": [
+     "Very crunchy with tons of water.",
+     "Classic starter base for soup broth.",
+     "Pale green all the way through.",
+     "Great for scooping up creamy dips.",
+     "Tough fibers running down the surface."
+    ],
+    "round2": [
+     "Standard crunchy sidekick served with chicken wings.",
+     "Crowned with leafy, bitter flat tops.",
+     "Juiced straight for trendy morning detox drinks.",
+     "Tiny dried seeds season pickles and slaws.",
+     "Forms tight, upright clusters from one base."
+    ],
+    "banned": [
+     "ants on a log",
+     "buffalo wing side",
+     "stringy stalk"
+    ]
+   }
+  ],
   "cello": [
    {
     "id": "1569dc75",
@@ -1687,6 +1770,34 @@
      "endpin",
      "played with a bow",
      "deep rich tone"
+    ]
+   }
+  ],
+  "cereal": [
+   {
+    "id": "4d89d268",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:04:14.793Z",
+    "round1": [
+     "Stored in a tall container",
+     "Kept in the pantry",
+     "Often has sweet flavors",
+     "Eaten from a dish",
+     "Many choices on shelves"
+    ],
+    "round2": [
+     "Floats in liquid",
+     "Small dry pieces",
+     "Sweet morning bite",
+     "Pour from the box",
+     "Gets soft quickly"
+    ],
+    "banned": [
+     "milk",
+     "bowl",
+     "spoon",
+     "box"
     ]
    }
   ],
@@ -3677,6 +3788,34 @@
     ]
    }
   ],
+  "ginger": [
+   {
+    "id": "539a405c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T16:03:33.451Z",
+    "round1": [
+     "Packs a sharp, fiery warmth.",
+     "Bumpy, tan skin on the outside.",
+     "Goes into sizzling oil for stir-fries.",
+     "Steeped in hot water for soothing drinks.",
+     "Flesh grates into moist, fibrous shreds."
+    ],
+    "round2": [
+     "Scraped clean using just an edge spoon.",
+     "Candied in sugar crystals for chewy treats.",
+     "Go-to folk remedy for settling upset stomachs.",
+     "Forms sprawling, branching knuckles beneath the soil.",
+     "Spices up dark holiday molasses baked goods."
+    ],
+    "banned": [
+     "gingerbread",
+     "pickled sushi side",
+     "rhizome root",
+     "motion sickness tea"
+    ]
+   }
+  ],
   "giraffe": [
    {
     "id": "6fa1a393",
@@ -3702,6 +3841,34 @@
      "spots",
      "tallest",
      "patches"
+    ]
+   }
+  ],
+  "glasses": [
+   {
+    "id": "a1d1f151",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:03:50.063Z",
+    "round1": [
+     "Pushed back up the nose often.",
+     "Needs a tiny little cleaning cloth.",
+     "Sits on the nightstand while sleeping.",
+     "Leaves red marks on the skin.",
+     "Folds neatly when you take them off."
+    ],
+    "round2": [
+     "Hooked securely behind the ears.",
+     "Slipping down when you sweat.",
+     "Resting face down on tables.",
+     "Nose pads leave little indents.",
+     "Adjusted with a tiny screwdriver."
+    ],
+    "banned": [
+     "lenses",
+     "frames",
+     "eyes",
+     "vision"
     ]
    }
   ],
@@ -4037,6 +4204,34 @@
      "cheek pouches",
      "caged pet rodent",
      "tiny round cage"
+    ]
+   }
+  ],
+  "handbag": [
+   {
+    "id": "cd2e1bbf",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:03:50.063Z",
+    "round1": [
+     "Often placed on an extra chair.",
+     "Rests neatly on a forearm.",
+     "Contains lots of random small items.",
+     "Matches the color of your shoes.",
+     "Usually has handles on top."
+    ],
+    "round2": [
+     "Draped over the passenger seat.",
+     "Magnetic snap keeps it closed.",
+     "Sits on your lap at dinner.",
+     "Inner lining gets messy inside.",
+     "Metal feet protect the bottom."
+    ],
+    "banned": [
+     "purse",
+     "shoulder strap",
+     "zipper",
+     "makeup"
     ]
    }
   ],
@@ -4916,6 +5111,33 @@
      "light bulb",
      "lampshade",
      "illumination"
+    ]
+   }
+  ],
+  "laptop": [
+   {
+    "id": "933b92ab",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:05:20.031Z",
+    "round1": [
+     "Folds shut like a book",
+     "Slips easily into a backpack",
+     "Gets warm on your lap",
+     "Has a plastic trackpad",
+     "Opens with a hinge"
+    ],
+    "round2": [
+     "Has tiny rubber feet underneath.",
+     "Features a row of small function keys.",
+     "Has a webcam lens at the top center.",
+     "Connects with a round barrel plug.",
+     "Has air vents along the back edge."
+    ],
+    "banned": [
+     "keyboard",
+     "screen",
+     "battery"
     ]
    }
   ],
@@ -6111,6 +6333,34 @@
     ]
    }
   ],
+  "pajamas": [
+   {
+    "id": "dbd1c988",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:03:50.063Z",
+    "round1": [
+     "First thing put on at night.",
+     "Often features fun cartoon patterns.",
+     "Loose fit feels very relaxing.",
+     "Rarely worn outside the house.",
+     "Usually comes as a matched set."
+    ],
+    "round2": [
+     "Pulls on with elastic waist.",
+     "Checked patterns are very popular.",
+     "Top slips over the head.",
+     "Piped edges along the collar.",
+     "Loosely draped over a chair."
+    ],
+    "banned": [
+     "bedtime",
+     "sleep",
+     "cotton",
+     "flannel"
+    ]
+   }
+  ],
   "palm tree": [
    {
     "id": "083f10e1",
@@ -6274,6 +6524,33 @@
      "talks",
      "mimics",
      "colorful"
+    ]
+   }
+  ],
+  "pea": [
+   {
+    "id": "1e767231",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T16:03:33.451Z",
+    "round1": [
+     "Sweet when you pop them fresh.",
+     "Tiny and rolls off your fork.",
+     "Commonly tossed into fried rice.",
+     "Stays bright green after a quick steam.",
+     "Easily mashed into a thick paste."
+    ],
+    "round2": [
+     "Sold by the bag in freezer aisles.",
+     "Grows neatly aligned inside leafy jackets.",
+     "Classic sidekick paired beside diced carrots.",
+     "Young sprouting tendrils sold as tender greens.",
+     "Whizzed into velvety pale-green spring soups."
+    ],
+    "banned": [
+     "pod",
+     "split soup",
+     "princess story"
     ]
    }
   ],
@@ -7134,6 +7411,32 @@
     ]
    }
   ],
+  "radish": [
+   {
+    "id": "483e2381",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T16:03:33.451Z",
+    "round1": [
+     "Sharp, peppery kick when eaten raw.",
+     "Bright white, crisp flesh inside.",
+     "Sliced super thin over street tacos.",
+     "Grows quickly underground from seed.",
+     "Soaking in ice water makes it extra crisp."
+    ],
+    "round2": [
+     "Bright scarlet skin hides a snowy center.",
+     "Carved into decorative rosettes for party platters.",
+     "Spicy, serrated leafy greens taste great braised.",
+     "Pickled into bright yellow or pink disks.",
+     "Fastest harvest in the home garden patch."
+    ],
+    "banned": [
+     "daikon",
+     "peppery round root"
+    ]
+   }
+  ],
   "rainbow": [
    {
     "id": "c49c9f01",
@@ -7159,6 +7462,34 @@
      "seven colors",
      "pot of gold",
      "sky arc"
+    ]
+   }
+  ],
+  "raincoat": [
+   {
+    "id": "5a1a65bc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:03:50.063Z",
+    "round1": [
+     "Slipping it on takes seconds.",
+     "Dries off pretty quickly.",
+     "Easy to fold up small.",
+     "Bright colors are quite common.",
+     "Keeps your regular shirt dry."
+    ],
+    "round2": [
+     "Snaps shut down the front.",
+     "Draped over a chair when wet.",
+     "Pockets keep little things dry.",
+     "Belt ties around the waist.",
+     "Collar stands up against wind."
+    ],
+    "banned": [
+     "hood",
+     "waterproof",
+     "yellow",
+     "umbrella"
     ]
    }
   ],
@@ -7296,6 +7627,34 @@
      "waiter",
      "food",
      "bill"
+    ]
+   }
+  ],
+  "ring": [
+   {
+    "id": "348af843",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:03:50.063Z",
+    "round1": [
+     "Slips on and off very easily.",
+     "Kept in a tiny velvet box.",
+     "Often tapped on hard tables.",
+     "Leaves a faint circle on skin.",
+     "Bought in specific numbered sizes."
+    ],
+    "round2": [
+     "Twisted around when nervous.",
+     "Slips off when hands get cold.",
+     "Polished up with a cloth.",
+     "Catching sunlight on your hand.",
+     "Snug fit over the knuckle."
+    ],
+    "banned": [
+     "finger",
+     "diamond",
+     "gold",
+     "marriage"
     ]
    }
   ],
@@ -8105,6 +8464,33 @@
     ]
    }
   ],
+  "smartphone": [
+   {
+    "id": "59e93be1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:05:20.031Z",
+    "round1": [
+     "Slipped into jacket pockets",
+     "Rings loudly during meetings",
+     "Fits in one hand",
+     "Has a glass front",
+     "Taken out while waiting"
+    ],
+    "round2": [
+     "Has a slim volume rocker on the side.",
+     "Features a tiny charging slot at the bottom.",
+     "Has camera lenses clustered in the corner.",
+     "Vibrates gently against your leg.",
+     "Has a tiny SIM card tray."
+    ],
+    "banned": [
+     "phone call",
+     "touchscreen",
+     "pocket"
+    ]
+   }
+  ],
   "smoothie": [
    {
     "id": "84c4d92e",
@@ -8300,6 +8686,34 @@
     ]
    }
   ],
+  "soup": [
+   {
+    "id": "a67e3bf7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:04:14.793Z",
+    "round1": [
+     "Often comes in a can",
+     "Can have noodles inside",
+     "Often eaten for lunch",
+     "Can be creamy",
+     "Needs to be heated up"
+    ],
+    "round2": [
+     "Comes in liquid form",
+     "Often has soft vegetables floating",
+     "Warm drink alternative",
+     "Poured from a pot",
+     "Sip it slowly"
+    ],
+    "banned": [
+     "broth",
+     "bowl",
+     "spoon",
+     "liquid"
+    ]
+   }
+  ],
   "spaghetti": [
    {
     "id": "f5fb3b1a",
@@ -8352,6 +8766,33 @@
      "scraping bowls",
      "flexible rubber",
      "flipping burgers"
+    ]
+   }
+  ],
+  "speaker": [
+   {
+    "id": "2ad287a3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:05:20.031Z",
+    "round1": [
+     "Sits on the bookshelf",
+     "Vibrates when turned up",
+     "Comes wrapped in black cloth",
+     "Connects with a thin wire",
+     "Fills the room with sound"
+    ],
+    "round2": [
+     "Has a circular paper cone inside.",
+     "Features a simple power toggle switch.",
+     "Stands on four tiny foam pads.",
+     "Has a metal mesh grille on the front.",
+     "Uses standard push-release spring clips."
+    ],
+    "banned": [
+     "music",
+     "bluetooth",
+     "volume"
     ]
    }
   ],
@@ -8492,6 +8933,34 @@
     ]
    }
   ],
+  "stamp": [
+   {
+    "id": "549e4cf0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:04:53.349Z",
+    "round1": [
+     "Press down firmly on paper",
+     "Leaves a purple mark",
+     "Used to show it is official",
+     "Found on paperwork and documents",
+     "Quick downward motion"
+    ],
+    "round2": [
+     "Needs a little metal handle.",
+     "Sits upside down on desks.",
+     "Smells like rubber and chemicals.",
+     "Leaves a colorful square.",
+     "Used before signing names."
+    ],
+    "banned": [
+     "ink pad",
+     "mail",
+     "post office",
+     "envelope"
+    ]
+   }
+  ],
   "stapler": [
    {
     "id": "430458fe",
@@ -8599,6 +9068,34 @@
      "rare medium well",
      "steakhouse",
      "grill marks"
+    ]
+   }
+  ],
+  "sticky note": [
+   {
+    "id": "1e73e1bb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:04:53.349Z",
+    "round1": [
+     "Sticks to the computer monitor",
+     "Leave a quick message here",
+     "Bright neon shades",
+     "Tossed in the trash after",
+     "Catches your eye on the fridge"
+    ],
+    "round2": [
+     "Leaves a tiny glue residue.",
+     "Found stuck on kitchen jars.",
+     "Curls up at the corners.",
+     "Thin paper sheet.",
+     "Barely stays on walls."
+    ],
+    "banned": [
+     "yellow square",
+     "peel off",
+     "reminder",
+     "glue strip"
     ]
    }
   ],
@@ -9234,6 +9731,34 @@
     "banned": [
      "stripes",
      "orange and black"
+    ]
+   }
+  ],
+  "toast": [
+   {
+    "id": "03a607c2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:04:14.793Z",
+    "round1": [
+     "Turns brown with heat",
+     "Crunchy outer edge",
+     "Made in a small machine",
+     "Often eaten in the morning",
+     "Smells good when cooking"
+    ],
+    "round2": [
+     "Flat shape",
+     "Holds spreads well",
+     "Warm surface",
+     "Rigid feel",
+     "Cut in half sometimes"
+    ],
+    "banned": [
+     "butter",
+     "bread",
+     "toaster",
+     "jam"
     ]
    }
   ],
@@ -9896,6 +10421,33 @@
      "closet",
      "doors open",
      "mirrored front"
+    ]
+   }
+  ],
+  "washing machine": [
+   {
+    "id": "2d9db879",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T16:05:20.031Z",
+    "round1": [
+     "Sits in the utility room",
+     "Shakes a lot when running",
+     "Has a heavy glass door",
+     "Needs powder to do its job",
+     "Runs for about an hour"
+    ],
+    "round2": [
+     "Has a rotating central dial.",
+     "Opens via a plastic latch.",
+     "Sits on four rubber feet.",
+     "Has a pull-out detergent drawer.",
+     "Emits a dull hum during cycles."
+    ],
+    "banned": [
+     "spin cycle",
+     "water",
+     "laundry"
     ]
    }
   ],
