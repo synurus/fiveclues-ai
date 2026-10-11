@@ -112,6 +112,34 @@
     ]
    }
   ],
+  "ambulance": [
+   {
+    "id": "584c7b69",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:52.541Z",
+    "round1": [
+     "Built on a van base.",
+     "Roomy on the inside.",
+     "Has tinted rear windows.",
+     "Drivers pull over for it.",
+     "Always ready to roll."
+    ],
+    "round2": [
+     "Has flashing lights on the corners.",
+     "Parked outside emergency room doors.",
+     "Driver sits in a separate front cab.",
+     "Cabin smells like clean antiseptic.",
+     "Metal steps fold out near doors."
+    ],
+    "banned": [
+     "hospital",
+     "stretcher",
+     "paramedic",
+     "patient"
+    ]
+   }
+  ],
   "amusement park": [
    {
     "id": "57411ee7",
@@ -224,6 +252,34 @@
     ]
    }
   ],
+  "aquarium": [
+   {
+    "id": "cc4597a4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:26.822Z",
+    "round1": [
+     "Dim indoor lighting",
+     "Blue glow everywhere",
+     "People walk slowly",
+     "Large glass walls",
+     "Families visit weekends"
+    ],
+    "round2": [
+     "Thick clear panels curve over walking paths.",
+     "Algae scrubbers hang beside the deep pools.",
+     "Metal grates cover the drainage channels.",
+     "Black rubber seals frame the viewing glass.",
+     "Soft blue light reflects off damp concrete."
+    ],
+    "banned": [
+     "fish",
+     "tank",
+     "shark",
+     "coral"
+    ]
+   }
+  ],
   "archery": [
    {
     "id": "9517e449",
@@ -280,6 +336,34 @@
     ]
    }
   ],
+  "avocado": [
+   {
+    "id": "6a32c375",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:44:21.059Z",
+    "round1": [
+     "Smooth and buttery when fully ripe.",
+     "Often added to green salads.",
+     "Has a dark, pebbly outer skin.",
+     "Grows heavily on warm weather trees.",
+     "Requires a sturdy knife to cut."
+    ],
+    "round2": [
+     "Requires a twist to pull apart halves.",
+     "Stays firm until left on the counter.",
+     "Leaves a rich smear on your toast.",
+     "Shaded in muted greens and browns.",
+     "Sits snugly in a palm when ripe."
+    ],
+    "banned": [
+     "guacamole",
+     "pit",
+     "green flesh",
+     "toast"
+    ]
+   }
+  ],
   "axe": [
    {
     "id": "ab8dc849",
@@ -333,6 +417,33 @@
      "shuttlecock",
      "racket",
      "net"
+    ]
+   }
+  ],
+  "bagpipes": [
+   {
+    "id": "eb4f6bf0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:36:16.658Z",
+    "round1": [
+     "You squeeze it right under your arm.",
+     "Produces continuous sound without stopping for breath.",
+     "Heard loud and clear across open fields.",
+     "Famous for leading street parades.",
+     "Several tubes stick out at different angles."
+    ],
+    "round2": [
+     "A steady continuous hum buzzes underneath melodies.",
+     "An airtight pouch stores air under pressure.",
+     "Fingers cover holes along one lower pipe.",
+     "Decorative fringe hangs from the upright pipes.",
+     "Long pipes lean backward over your shoulder."
+    ],
+    "banned": [
+     "tartan kilt",
+     "chanter and drones",
+     "Scotland"
     ]
    }
   ],
@@ -473,6 +584,61 @@
      "temple",
      "pad thai",
      "tuk tuks"
+    ]
+   }
+  ],
+  "banjo": [
+   {
+    "id": "69eec833",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:36:16.658Z",
+    "round1": [
+     "Rests on your lap with a long neck.",
+     "Fast fingers pluck away on metal wires.",
+     "Features a distinctly bright and twangy tone.",
+     "A staple of traditional American roots music.",
+     "Wood and metal combine to shape the body."
+    ],
+    "round2": [
+     "A stretched circular membrane acts as soundboard.",
+     "Metal brackets clamp tightly around the rim.",
+     "Metal picks wrap snugly onto fingertips.",
+     "Downward striking fingers hammer down on rhythm.",
+     "A detachable wooden bowl covers the back."
+    ],
+    "banned": [
+     "drum head skin",
+     "bluegrass picking",
+     "clawhammer"
+    ]
+   }
+  ],
+  "bank": [
+   {
+    "id": "4974b75a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:26.822Z",
+    "round1": [
+     "Lots of waiting in lines here",
+     "Rows of glass windows",
+     "Needs paperwork signed",
+     "People bring questions daily",
+     "Quiet hum inside"
+    ],
+    "round2": [
+     "Sturdy metal boxes line the back wall.",
+     "Heavy doors open on thick hinges.",
+     "Felt pens sit by the deposit slips.",
+     "Carpet squares show heavy walking paths.",
+     "Leather chairs face the front desk."
+    ],
+    "banned": [
+     "vault",
+     "money",
+     "deposits",
+     "teller"
     ]
    }
   ],
@@ -1331,6 +1497,61 @@
     ]
    }
   ],
+  "canoe": [
+   {
+    "id": "8c444c67",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:52.541Z",
+    "round1": [
+     "Pointed at both ends.",
+     "Kept light for easy carrying.",
+     "Sits very low.",
+     "Used for lazy summer days.",
+     "Tied to the roof racks."
+    ],
+    "round2": [
+     "Slips smoothly through glassy morning lakes.",
+     "Usually built with natural wood.",
+     "Takes two people working together.",
+     "Simple shape with no motor.",
+     "Tips over if you stand up."
+    ],
+    "banned": [
+     "paddle",
+     "wood",
+     "water",
+     "indigenous"
+    ]
+   }
+  ],
+  "canyon": [
+   {
+    "id": "7e5e4df4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:43:56.515Z",
+    "round1": [
+     "Takes forever to cross.",
+     "Deep drop below.",
+     "Layered earth walls.",
+     "Wind whistles through.",
+     "Carved out over ages."
+    ],
+    "round2": [
+     "Echoes bounce off walls.",
+     "Mules walk the path.",
+     "River at the bottom.",
+     "Red stone layers show.",
+     "Hiking down takes hours."
+    ],
+    "banned": [
+     "rocks",
+     "cliff",
+     "echo"
+    ]
+   }
+  ],
   "carrot": [
    {
     "id": "6ebd6e54",
@@ -1662,6 +1883,34 @@
     ]
    }
   ],
+  "church": [
+   {
+    "id": "0ee29348",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:26.822Z",
+    "round1": [
+     "Standing tall in town",
+     "People dress nicely",
+     "Organ music plays",
+     "Quiet whispers inside",
+     "Donations collected weekly"
+    ],
+    "round2": [
+     "Red hymnal books sit in small slots.",
+     "Tall peaked roofs catch the morning sun.",
+     "Velvet cushions line the long seating rows.",
+     "Carpet runners deaden footsteps down the center.",
+     "Heavy wooden doors open outward."
+    ],
+    "banned": [
+     "pope",
+     "altar",
+     "sermon",
+     "pews"
+    ]
+   }
+  ],
   "cinema": [
    {
     "id": "f2a3e59d",
@@ -1717,6 +1966,34 @@
     ]
    }
   ],
+  "clock": [
+   {
+    "id": "d032425b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:46:42.918Z",
+    "round1": [
+     "Often placed near a bed.",
+     "Features a round face.",
+     "Usually has moving plastic parts.",
+     "Can be wiped with a damp cloth.",
+     "Available in various bright colors."
+    ],
+    "round2": [
+     "Often hung high up on walls.",
+     "Features glass over the front.",
+     "Contains small metal gears inside.",
+     "Can have numbers printed around edges.",
+     "Sits on office desks too."
+    ],
+    "banned": [
+     "ticking sound",
+     "hands and numbers",
+     "wall hanging",
+     "alarm function"
+    ]
+   }
+  ],
   "cloud": [
    {
     "id": "44dd772e",
@@ -1742,6 +2019,34 @@
      "fluffy",
      "white",
      "sky"
+    ]
+   }
+  ],
+  "clover": [
+   {
+    "id": "9e871a65",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:43:26.627Z",
+    "round1": [
+     "Spreads quickly across suburban lawns.",
+     "Wild rabbits love munching on it.",
+     "Produces tiny, rounded white blossoms.",
+     "Helps naturally enrich garden soil.",
+     "Stays very low to the ground."
+    ],
+    "round2": [
+     "Tiny three-part foliage on slender upright stems.",
+     "Popular nectar flower for making golden honey.",
+     "Nutritious pasture feed for grazing dairy cows.",
+     "Folds its leaves together when dusk falls.",
+     "Dried blossoms steeped into sweet herbal tea."
+    ],
+    "banned": [
+     "four-leaf",
+     "shamrock",
+     "lucky",
+     "St. Patrick's"
     ]
    }
   ],
@@ -1934,6 +2239,33 @@
      "baking",
      "dough",
      "oven"
+    ]
+   }
+  ],
+  "coral": [
+   {
+    "id": "dd05cf17",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:28:10.326Z",
+    "round1": [
+     "feels hard and rocky to touch",
+     "stays glued to one spot forever",
+     "provides shelter for tiny striped fish",
+     "grows slowly over dozens of years",
+     "thrives best in clear, sunlit shallows"
+    ],
+    "round2": [
+     "Turns ghostly white when stressed by heat.",
+     "Leaves behind hard limestone when it dies.",
+     "Thousands of tiny mouths opening after dark.",
+     "Massive underwater colonies visible from high above.",
+     "Catches drifting food with tiny stinging arms."
+    ],
+    "banned": [
+     "bleaching",
+     "Great Barrier Reef",
+     "polyp colony"
     ]
    }
   ],
@@ -3014,6 +3346,34 @@
     ]
    }
   ],
+  "fire truck": [
+   {
+    "id": "b3c09957",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:52.541Z",
+    "round1": [
+     "Takes up lots of road space.",
+     "Carries heavy equipment.",
+     "Parked at a station.",
+     "Kids love climbing inside.",
+     "Shines bright in the dark."
+    ],
+    "round2": [
+     "Holds several workers in the back.",
+     "Hooked up to outdoor hydrants.",
+     "Has compartments with rolling metal doors.",
+     "Stops traffic at every intersection.",
+     "Engine rumbles loudly while idling."
+    ],
+    "banned": [
+     "hose",
+     "ladder",
+     "siren",
+     "red"
+    ]
+   }
+  ],
   "firefighter": [
    {
     "id": "5503a7f0",
@@ -3705,6 +4065,59 @@
      "wire",
      "hook",
      "clothes"
+    ]
+   }
+  ],
+  "harmonica": [
+   {
+    "id": "652a56ae",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:36:16.658Z",
+    "round1": [
+     "Held right against your mouth with both hands.",
+     "Air moves straight through its shiny metal body.",
+     "Frequently heard in folk and country songs.",
+     "Light enough to carry around all day.",
+     "No plugs or cords needed at all."
+    ],
+    "round2": [
+     "Breathing in and out both make sounds.",
+     "Wearable metal brackets hold it hands-free.",
+     "Cupping your palms alters and bends tone.",
+     "Thin metal tongues vibrate freely inside.",
+     "Numbered little openings line one long edge."
+    ],
+    "banned": [
+     "blues harp",
+     "reed plates"
+    ]
+   }
+  ],
+  "harp": [
+   {
+    "id": "c00064ab",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:36:16.658Z",
+    "round1": [
+     "You sit right behind it to play.",
+     "Taller than most people when standing.",
+     "Both hands pluck directly without tools.",
+     "Wood and tight wire run all through it.",
+     "Often seen front and center in classical orchestras."
+    ],
+    "round2": [
+     "Leans gently against your right shoulder.",
+     "Pedals down below change pitch while playing.",
+     "Colored markers show where key notes are.",
+     "A giant open frame full of empty space.",
+     "One quick sweep sets off a cascade."
+    ],
+    "banned": [
+     "angels",
+     "triangular frame",
+     "glissando"
     ]
    }
   ],
@@ -4451,6 +4864,34 @@
     ]
    }
   ],
+  "lake": [
+   {
+    "id": "4d1e03d4",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:43:56.515Z",
+    "round1": [
+     "Reflects the trees.",
+     "Calm morning surface.",
+     "Ripples when tossed a pebble.",
+     "Good spot for skipping stones.",
+     "Surrounded by dirt banks."
+    ],
+    "round2": [
+     "Docks stick out far.",
+     "Boats drop anchors here.",
+     "Swimmers watch for weeds.",
+     "Fish jump for bugs.",
+     "Cabins built nearby."
+    ],
+    "banned": [
+     "fish",
+     "boat",
+     "swim",
+     "dock"
+    ]
+   }
+  ],
   "lamp": [
    {
     "id": "e559b051",
@@ -4896,6 +5337,34 @@
     ]
    }
   ],
+  "maple tree": [
+   {
+    "id": "a0dac623",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:43:26.627Z",
+    "round1": [
+     "Turns bright vibrant red in autumn.",
+     "Provides broad, dense shade during summer.",
+     "People tap the trunk in spring.",
+     "Planted widely along suburban streets.",
+     "Drops all its leaves before winter."
+    ],
+    "round2": [
+     "Flat winged seeds spin like little propellers.",
+     "Broad leaves shaped like an outstretched palm.",
+     "Boiled spring sap makes sweet morning syrup.",
+     "Dense hardwood favored for bowling alley lanes.",
+     "Hard curly grain prized for violin backs."
+    ],
+    "banned": [
+     "syrup",
+     "Canadian flag",
+     "pointed leaf shape",
+     "helicopter seeds"
+    ]
+   }
+  ],
   "marshmallow": [
    {
     "id": "419eaa05",
@@ -5060,6 +5529,34 @@
      "sucks blood",
      "itchy bump",
      "annoying buzz"
+    ]
+   }
+  ],
+  "moss": [
+   {
+    "id": "136d6a94",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:43:26.627Z",
+    "round1": [
+     "Feels surprisingly plush and damp.",
+     "Thrives on damp, shaded stone.",
+     "Creeps flat without any real stem.",
+     "Popular pick for tiny glass terrariums.",
+     "Bounces back after drying completely out."
+    ],
+    "round2": [
+     "Spreads tiny dust-like spores without any seeds.",
+     "Anchors to rock using tiny fine threads.",
+     "Folklore says it guides hikers facing north.",
+     "Dried bags sold for holding potting moisture.",
+     "Planted as a velvety, mowing-free lawn."
+    ],
+    "banned": [
+     "grows on north side",
+     "peat",
+     "spores",
+     "green carpet"
     ]
    }
   ],
@@ -5280,6 +5777,34 @@
     "banned": [
      "next to the bed",
      "bedside table"
+    ]
+   }
+  ],
+  "northern lights": [
+   {
+    "id": "32f85cb7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:43:56.515Z",
+    "round1": [
+     "Takes patience to catch.",
+     "Dancing colored ribbons.",
+     "Best seen wrapped in blankets.",
+     "Unpredictable show overhead.",
+     "Faint glow that shifts."
+    ],
+    "round2": [
+     "Charged particles from space.",
+     "Cameras catch faint pinks.",
+     "Trip to Alaska or Norway.",
+     "Curtains rippling above.",
+     "Solar wind hits air."
+    ],
+    "banned": [
+     "aurora",
+     "green",
+     "poles",
+     "arctic"
     ]
    }
   ],
@@ -6053,6 +6578,34 @@
     ]
    }
   ],
+  "pine tree": [
+   {
+    "id": "ac0378fb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:43:26.627Z",
+    "round1": [
+     "The bark feels rough and thick.",
+     "Leaves sticky sap on your fingers.",
+     "Stands tall through freezing winter cold.",
+     "Often harvested for lumber and timber.",
+     "Grows very tall in dense forests."
+    ],
+    "round2": [
+     "Clusters of sharp green spikes, never flat.",
+     "Woody, scaled cones fall onto the dirt.",
+     "Strung with tinsel and bright festive bulbs.",
+     "Fresh resin scent used in floor cleaner.",
+     "Pale softwood widely ground for paper pulp."
+    ],
+    "banned": [
+     "pinecone",
+     "needles",
+     "Christmas tree",
+     "evergreen"
+    ]
+   }
+  ],
   "pineapple": [
    {
     "id": "065de4a0",
@@ -6165,6 +6718,34 @@
     ]
    }
   ],
+  "playground": [
+   {
+    "id": "7f75d5ee",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:26.822Z",
+    "round1": [
+     "Loud yelling echoes",
+     "Metal equipment warms",
+     "Parents watch nearby",
+     "Rubber ground covers",
+     "Afternoon rush peaks"
+    ],
+    "round2": [
+     "Bright primary colors paint the metal poles.",
+     "Wood chips scatter across the dirt border.",
+     "Chain links stretch across climbing frames.",
+     "Green plastic tunnels loop in circles.",
+     "Rubber mulch bounces under small shoes."
+    ],
+    "banned": [
+     "swings",
+     "slide",
+     "sandbox",
+     "seesaw"
+    ]
+   }
+  ],
   "pliers": [
    {
     "id": "42b596c5",
@@ -6190,6 +6771,34 @@
      "grips small objects",
      "needle nose",
      "jaw hinge"
+    ]
+   }
+  ],
+  "plum": [
+   {
+    "id": "f7975b19",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:44:21.059Z",
+    "round1": [
+     "Covered in a thin dusty bloom.",
+     "Soft and dripping when ripe.",
+     "Grows on slender orchard branches.",
+     "Features a distinct center crease line.",
+     "Bounced into summer dessert recipes."
+    ],
+    "round2": [
+     "Fits easily inside a lunch box.",
+     "Gives slightly under gentle thumb pressure.",
+     "Tastes both tart and sugary sweet.",
+     "Glistens under kitchen light.",
+     "Slipped into brown paper bags to soften."
+    ],
+    "banned": [
+     "prune",
+     "purple skin",
+     "stone fruit",
+     "sweet jam"
     ]
    }
   ],
@@ -6246,6 +6855,34 @@
      "gun",
      "siren",
      "handcuffs"
+    ]
+   }
+  ],
+  "pomegranate": [
+   {
+    "id": "ba98acfd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:44:21.059Z",
+    "round1": [
+     "Packed with dozens of tiny juicy sacs.",
+     "Has a thick and tough leathery rind.",
+     "Often pressed for tart beverages.",
+     "Heavy for its size when picked.",
+     "Takes patience to harvest the pieces."
+    ],
+    "round2": [
+     "Sounds hollow when tapped all around.",
+     "Sectioned neatly by pale interior walls.",
+     "Requires scoring the rind before pulling.",
+     "Rolls heavily across the kitchen table.",
+     "Spurt bright drops if pressed too hard."
+    ],
+    "banned": [
+     "arils",
+     "ruby seeds",
+     "crown",
+     "red juice"
     ]
    }
   ],
@@ -6886,6 +7523,33 @@
     ]
    }
   ],
+  "salmon": [
+   {
+    "id": "02383476",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:28:10.326Z",
+    "round1": [
+     "known for rich, orange-pink meat",
+     "lives comfortably in fresh or saltwater",
+     "frequently cured and sliced very thin",
+     "pushes through powerful moving currents",
+     "flashes silver along its sleek sides"
+    ],
+    "round2": [
+     "Journeys back to where it hatched originally.",
+     "Leaps clean out of churning white riverbeds.",
+     "Brown bears wait patiently to snatch them.",
+     "Males develop sharply hooked jaws before breeding.",
+     "Often smoked slowly over fragrant cedar planks."
+    ],
+    "banned": [
+     "leaping waterfalls",
+     "spawning upstream",
+     "bear catching fish"
+    ]
+   }
+  ],
   "sandals": [
    {
     "id": "a8e4a4fb",
@@ -7327,6 +7991,33 @@
      "dirt",
      "scoop",
      "blade"
+    ]
+   }
+  ],
+  "shrimp": [
+   {
+    "id": "ddabd92d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:28:10.326Z",
+    "round1": [
+     "turns bright pink when cooked",
+     "often ordered battered and fried",
+     "scuttles along the sandy floor",
+     "sheds its hard shell to grow",
+     "popular choice on a sushi menu"
+    ],
+    "round2": [
+     "Snaps its tail backward to dart away.",
+     "Nearly transparent bodies until hitting the pan.",
+     "Piled in a circle around dipping sauce.",
+     "Long, fragile feelers twitching out in front.",
+     "Quickly plucked out with wooden chopsticks."
+    ],
+    "banned": [
+     "cocktail",
+     "prawn",
+     "curved pink body"
     ]
    }
   ],
@@ -7828,6 +8519,34 @@
     ]
    }
   ],
+  "star": [
+   {
+    "id": "007c7245",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:43:56.515Z",
+    "round1": [
+     "Hard to count them all.",
+     "Seen better away from towns.",
+     "Tiny pinpricks of light.",
+     "Ancient travelers trusted them.",
+     "Familiar summer gazing."
+    ],
+    "round2": [
+     "Needs a clear night.",
+     "Connect the dots pictures.",
+     "Binoculars bring them closer.",
+     "Hotter than a stove.",
+     "Farther than planes fly."
+    ],
+    "banned": [
+     "twinkle",
+     "galaxy",
+     "constellation",
+     "telescope"
+    ]
+   }
+  ],
   "starfish": [
    {
     "id": "ce61afed",
@@ -7991,6 +8710,34 @@
      "tall stem",
      "edible seeds",
      "brown center disc"
+    ]
+   }
+  ],
+  "sunset": [
+   {
+    "id": "25634fe8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:43:56.515Z",
+    "round1": [
+     "Happens every single day.",
+     "Hard to photograph well.",
+     "People stop to watch.",
+     "Warm glow on faces.",
+     "Quickly turns dark."
+    ],
+    "round2": [
+     "Long shadows stretch out.",
+     "Streetlights flicker on soon.",
+     "Temperature starts dropping fast.",
+     "Traffic crawls right then.",
+     "Windows catch the glare."
+    ],
+    "banned": [
+     "orange",
+     "sky",
+     "evening",
+     "sun"
     ]
    }
   ],
@@ -8683,6 +9430,34 @@
     ]
    }
   ],
+  "tractor": [
+   {
+    "id": "cb4c8844",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:45:52.541Z",
+    "round1": [
+     "Massive rubber treads.",
+     "Sits up high.",
+     "Pulls heavy loads.",
+     "Seen out in the countryside.",
+     "Built for tough jobs."
+    ],
+    "round2": [
+     "Exhaust stack points straight up.",
+     "Metal hitch on the back end.",
+     "Climb up metal steps to sit.",
+     "Rear fenders curve over big rubber.",
+     "Diesel engine shakes the frame."
+    ],
+    "banned": [
+     "farm",
+     "plow",
+     "trailer",
+     "mud"
+    ]
+   }
+  ],
   "train": [
    {
     "id": "6cc10077",
@@ -8708,6 +9483,32 @@
      "rails",
      "locomotive",
      "conductor"
+    ]
+   }
+  ],
+  "triangle": [
+   {
+    "id": "b5dec4fc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:36:16.658Z",
+    "round1": [
+     "Made entirely of one piece of steel.",
+     "Held in one hand, struck with the other.",
+     "Produces a clear, bright ringing pitch.",
+     "Tucked into the back of the orchestra.",
+     "Looks tiny next to almost everything else."
+    ],
+    "round2": [
+     "Hangs from a thin dangling string loop.",
+     "The bent bar never connects back together.",
+     "Fingers squeeze it mid-ring to stop sound.",
+     "A skinny steel wand taps the side.",
+     "Traditionally banged to call people to supper."
+    ],
+    "banned": [
+     "open corner",
+     "ding sound"
     ]
    }
   ],
@@ -8931,6 +9732,34 @@
     ]
    }
   ],
+  "venus flytrap": [
+   {
+    "id": "97e8fcac",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:43:26.627Z",
+    "round1": [
+     "Naturally grows in swampy, damp soil.",
+     "Physically reacts when touched directly.",
+     "Prefers pure rainwater over tap water.",
+     "Inner parts show a reddish tint.",
+     "Kept indoors as a novelty houseplant."
+    ],
+    "round2": [
+     "Fringed leaf edges interlock like barred cages.",
+     "Hinged pads clamp shut in a flash.",
+     "Traps bugs to survive nutrient-poor swamp soil.",
+     "Tiny internal bristles trigger the leaf mechanism.",
+     "Blooms sit atop stalks high above traps."
+    ],
+    "banned": [
+     "snaps shut",
+     "eats bugs",
+     "carnivorous",
+     "trigger hairs"
+    ]
+   }
+  ],
   "violin": [
    {
     "id": "86ebcc1a",
@@ -9015,6 +9844,33 @@
     ]
    }
   ],
+  "walrus": [
+   {
+    "id": "e023b7ba",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:28:10.326Z",
+    "round1": [
+     "heavily packed with blubber for warmth",
+     "hauls out onto floating ice sheets",
+     "makes loud bellowing calls ashore",
+     "roots around the mud for clams",
+     "clumsy on shore but swift underwater"
+    ],
+    "round2": [
+     "Thick, wrinkled hide folding into heavy rolls.",
+     "Dense, bristly bristles covering its blunt snout.",
+     "Rotates back flippers forward to crawl ashore.",
+     "Gathers tightly in huge, noisy crowds.",
+     "Adults weigh as much as small cars."
+    ],
+    "banned": [
+     "tusks",
+     "ivory",
+     "whiskered moustache"
+    ]
+   }
+  ],
   "wardrobe": [
    {
     "id": "715faea6",
@@ -9096,6 +9952,34 @@
      "red inside",
      "black seeds",
      "large"
+    ]
+   }
+  ],
+  "wave": [
+   {
+    "id": "f5e5a3b8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T14:43:56.515Z",
+    "round1": [
+     "Rhythm against the shore.",
+     "Knocks over sandcastles.",
+     "Fun to jump over.",
+     "Constant moving surface.",
+     "Gradual building up."
+    ],
+    "round2": [
+     "Surfers paddle out waiting.",
+     "Pushes driftwood ashore.",
+     "Foamy white edges.",
+     "Swells under a board.",
+     "Rhythmic splashing sound."
+    ],
+    "banned": [
+     "ocean",
+     "surf",
+     "beach",
+     "tide"
     ]
    }
   ],
@@ -9314,6 +10198,33 @@
      "tightens bolts",
      "adjustable jaw",
      "socket set"
+    ]
+   }
+  ],
+  "xylophone": [
+   {
+    "id": "f544888b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T14:36:16.658Z",
+    "round1": [
+     "You stand up while playing it.",
+     "Both hands hold sticks to strike it.",
+     "Needs lots of horizontal floor space.",
+     "Found in school band rooms everywhere.",
+     "Bright, sharp tones that cut through loud noise."
+    ],
+    "round2": [
+     "Arranged in two rows just like keys.",
+     "Solid wooden planks make up the surface.",
+     "Metal pipes hang underneath to catch sound.",
+     "Hard rubber heads tap along the surface.",
+     "Pieces get shorter as the pitch rises."
+    ],
+    "banned": [
+     "wooden bars",
+     "mallets",
+     "skeleton bones"
     ]
    }
   ],
