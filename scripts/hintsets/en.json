@@ -1222,6 +1222,33 @@
     ]
    }
   ],
+  "broom": [
+   {
+    "id": "63b06989",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:10:31.608Z",
+    "round1": [
+     "Tall item in the closet.",
+     "Pushed back and forth.",
+     "Gathers up loose bits.",
+     "Needs a dustpan nearby.",
+     "Has a hanging loop."
+    ],
+    "round2": [
+     "Bright orange plastic bristles.",
+     "Leans in the corner.",
+     "Has a threaded screw top.",
+     "Stiff fibers at the bottom.",
+     "Knocked over very easily."
+    ],
+    "banned": [
+     "sweeping",
+     "handle",
+     "bristles"
+    ]
+   }
+  ],
   "brownie": [
    {
     "id": "0f23bf82",
@@ -1441,6 +1468,34 @@
      "date",
      "year",
      "paper"
+    ]
+   }
+  ],
+  "camel": [
+   {
+    "id": "aa596605",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:11:50.047Z",
+    "round1": [
+     "Carries heavy loads on its back.",
+     "Long legs for walking far.",
+     "Survives with very little water.",
+     "Wide feet on soft ground.",
+     "Tall shadow on dry land."
+    ],
+    "round2": [
+     "Long curved neck reaching high up",
+     "Two thick toes on each foot",
+     "Thick eyelashes keeping dust away",
+     "Shaggy coat shedding in clumps",
+     "Leathery patches on bent knees"
+    ],
+    "banned": [
+     "hump",
+     "desert",
+     "spit",
+     "sand"
     ]
    }
   ],
@@ -3956,6 +4011,34 @@
     ]
    }
   ],
+  "gorilla": [
+   {
+    "id": "3f8adc55",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:11:50.047Z",
+    "round1": [
+     "Walks on knuckles through the brush.",
+     "Eats leaves and stems all day.",
+     "Large dark shape in the mist.",
+     "Strong arms and wide shoulders.",
+     "Rests in nests made of twigs."
+    ],
+    "round2": [
+     "Broad chest covered in dark fur",
+     "Prominent brow ridge above eyes",
+     "Thick fingers gripping loose dirt",
+     "Short legs supporting heavy weight",
+     "Large nostrils sniffing green plants"
+    ],
+    "banned": [
+     "chest beating",
+     "silverback",
+     "king kong",
+     "ape"
+    ]
+   }
+  ],
   "grape": [
    {
     "id": "7910316f",
@@ -5726,6 +5809,34 @@
     ]
    }
   ],
+  "monkey": [
+   {
+    "id": "d954acae",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:11:50.047Z",
+    "round1": [
+     "Sits on branches eating small snacks.",
+     "Lives in warm jungle areas.",
+     "Uses hands to grab things quickly.",
+     "Jumps from plant to plant.",
+     "Travels in large noisy groups."
+    ],
+    "round2": [
+     "Flat face with bright curious eyes",
+     "Flexible fingers picking tiny bugs",
+     "Short fur covering small shoulders",
+     "Quick steps along thin wood",
+     "Cheeks stuffing food right in"
+    ],
+    "banned": [
+     "banana",
+     "tail",
+     "tree",
+     "swing"
+    ]
+   }
+  ],
   "mosquito": [
    {
     "id": "85dde68a",
@@ -5973,6 +6084,32 @@
      "Statue of Liberty",
      "Central Park",
      "Broadway"
+    ]
+   }
+  ],
+  "Niagara Falls": [
+   {
+    "id": "9687d6d9",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:11:22.002Z",
+    "round1": [
+     "Roars louder than a passing freight train.",
+     "Always wearing a thick white mist coat.",
+     "Powering light bulbs for nearby cities.",
+     "Stunning from both sides of the fence.",
+     "Soaking visitors before they even realize."
+    ],
+    "round2": [
+     "Lit in rainbow colors at night.",
+     "Wooden pathways near roaring currents.",
+     "Helicopter rides overhead for tourists.",
+     "Distant mist visible from high towers.",
+     "Cool spray on hot summer days."
+    ],
+    "banned": [
+     "horseshoe shape",
+     "honeymoon hotspot"
     ]
    }
   ],
@@ -8603,6 +8740,33 @@
     ]
    }
   ],
+  "soap": [
+   {
+    "id": "2d340e73",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:10:31.608Z",
+    "round1": [
+     "Slips right through your fingers.",
+     "Washes away completely.",
+     "Disappears slowly over time.",
+     "Leaves a clean scent.",
+     "Comes in a pump bottle."
+    ],
+    "round2": [
+     "Soft pink or white color.",
+     "Turns mushy when wet.",
+     "Wrapped in thin paper.",
+     "Sits on a little dish.",
+     "Melts down in the rain."
+    ],
+    "banned": [
+     "lather",
+     "bubbles",
+     "bar"
+    ]
+   }
+  ],
   "soccer": [
    {
     "id": "63c6ec4c",
@@ -9873,6 +10037,33 @@
     ]
    }
   ],
+  "toothbrush": [
+   {
+    "id": "cf994ac3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:10:31.608Z",
+    "round1": [
+     "Used every single morning.",
+     "Rinse well after use.",
+     "Stands in a cup.",
+     "Comes in bright colors.",
+     "Replaced every few months."
+    ],
+    "round2": [
+     "Has a rubber grip handle.",
+     "Travels in a plastic case.",
+     "Stiff plastic rows inside.",
+     "Sold in packs of four.",
+     "Fits nicely into mugs."
+    ],
+    "banned": [
+     "bristles",
+     "toothpaste",
+     "bathroom"
+    ]
+   }
+  ],
   "toothpaste": [
    {
     "id": "bfc5f26a",
@@ -10805,6 +10996,34 @@
      "downward dog",
      "namaste",
      "meditation"
+    ]
+   }
+  ],
+  "zebra": [
+   {
+    "id": "d282b574",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-11T19:11:50.047Z",
+    "round1": [
+     "Stands in herds out in the sun.",
+     "Has hooves and runs across plains.",
+     "Keeps watch for big cats.",
+     "Munching on tall grass all day.",
+     "Patterned coat blending into the brush."
+    ],
+    "round2": [
+     "Short stiff mane standing straight up",
+     "Long tail with a tufted end",
+     "Rounded ears twitching at sounds",
+     "Dark muzzle sniffing the air",
+     "Compact body with strong muscle"
+    ],
+    "banned": [
+     "stripes",
+     "black and white",
+     "savanna",
+     "horse"
     ]
    }
   ],
