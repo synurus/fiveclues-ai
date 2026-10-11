@@ -7137,6 +7137,33 @@
     ]
    }
   ],
+  "seagull": [
+   {
+    "id": "4ffd93ff",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T11:27:49.581Z",
+    "round1": [
+     "Known for boldly snatching food scraps.",
+     "Mostly white with gray across the back.",
+     "Has webbed feet for paddling around.",
+     "Makes harsh, loud squawking cries.",
+     "Gathers in huge crowds near water."
+    ],
+    "round2": [
+     "Can safely drink both fresh and saltwater.",
+     "Young ones start out mottled and brownish.",
+     "Stomps on damp grass to lure worms.",
+     "Glides easily on rising coastal breezes.",
+     "A tiny bright spot marks its bill."
+    ],
+    "banned": [
+     "boardwalk scavenger",
+     "beach pier bird",
+     "gull"
+    ]
+   }
+  ],
   "seahorse": [
    {
     "id": "635cfebd",
@@ -9207,6 +9234,33 @@
      "howling at the moon",
      "alpha pack leader",
      "fairy tale big bad"
+    ]
+   }
+  ],
+  "woodpecker": [
+   {
+    "id": "c94f0426",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-11T11:27:49.581Z",
+    "round1": [
+     "Perches upright against rough tree trunks.",
+     "Likes nesting inside hollow wood cavities.",
+     "Hunts for bugs hiding under bark.",
+     "Uses stiff tail feathers for balance.",
+     "Has a stout, sharp-pointed bill."
+    ],
+    "round2": [
+     "Two toes point forward, two point back.",
+     "Flaps upward, then swoops down in waves.",
+     "An extra long, sticky tongue for crevices.",
+     "Often shows a splash of bright red.",
+     "Loud rhythmic tapping warns rivals away."
+    ],
+    "banned": [
+     "drilling wood",
+     "pecking trees",
+     "red crest"
     ]
    }
   ],
