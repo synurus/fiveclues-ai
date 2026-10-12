@@ -1666,6 +1666,34 @@
     ]
    }
   ],
+  "campsite": [
+   {
+    "id": "9d59b53b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:06:53.845Z",
+    "round1": [
+     "Dirt ground beneath your feet.",
+     "People cook meals over open flames.",
+     "Vehicles parked right on the grass.",
+     "Flashlights needed after the sun sets.",
+     "Water spigots shared by nearby visitors."
+    ],
+    "round2": [
+     "Coolers sit on the ground.",
+     "Metal fire rings hold ash.",
+     "Tall poles hold lantern lights.",
+     "Trash cans stand nearby.",
+     "Gravel covers the parking space."
+    ],
+    "banned": [
+     "campfire",
+     "tent",
+     "sleeping bag",
+     "marshmallows"
+    ]
+   }
+  ],
   "can opener": [
    {
     "id": "9add3eac",
@@ -2518,6 +2546,34 @@
      "drain",
      "strain",
      "holes"
+    ]
+   }
+  ],
+  "compass": [
+   {
+    "id": "d87ecb47",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:04:42.982Z",
+    "round1": [
+     "has a sharp metal point",
+     "often comes in a plastic case",
+     "needs steady hands to use",
+     "found on many desks",
+     "stored in a backpack"
+    ],
+    "round2": [
+     "Made mostly of shiny metal.",
+     "Opens and closes like scissors.",
+     "Leaves a tiny hole behind sometimes.",
+     "Has a little adjustable wheel.",
+     "Kept upright inside a pouch."
+    ],
+    "banned": [
+     "draws circles",
+     "pencil holder",
+     "geometry tool",
+     "two metal legs"
     ]
    }
   ],
@@ -3980,6 +4036,34 @@
      "ketchup",
      "deep-fried sticks",
      "fast food side"
+    ]
+   }
+  ],
+  "fried rice": [
+   {
+    "id": "798ba2f3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:06:02.388Z",
+    "round1": [
+     "Mixed in a hot pan.",
+     "Combines leftover bits.",
+     "Seasoned with salt and pepper.",
+     "Quick to toss together.",
+     "Pairs with chicken or beef."
+    ],
+    "round2": [
+     "Small yellow patches mixed throughout.",
+     "Specks of green scattered across.",
+     "Grains slide around the spoon easily.",
+     "Oily sheen catches the light.",
+     "Warm steam rising from the bowl."
+    ],
+    "banned": [
+     "grains",
+     "wok",
+     "soy sauce",
+     "eggs"
     ]
    }
   ],
@@ -5532,6 +5616,34 @@
     ]
    }
   ],
+  "lasagna": [
+   {
+    "id": "dcc690d2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:06:02.388Z",
+    "round1": [
+     "Slices hold together on a plate.",
+     "Eaten with a fork.",
+     "Often reheated for leftovers.",
+     "Cut into squares.",
+     "Made with herbs and garlic."
+    ],
+    "round2": [
+     "Ridged edges peek from the side.",
+     "Shows distinct red and white bands.",
+     "Soft resistance against a dull knife.",
+     "Heavy on the stomach after eating.",
+     "Richer taste on the second day."
+    ],
+    "banned": [
+     "pasta sheets",
+     "layered",
+     "ricotta cheese",
+     "tomato sauce"
+    ]
+   }
+  ],
   "lavender": [
    {
     "id": "4331b22d",
@@ -5974,6 +6086,34 @@
      "puffy white cylinder",
      "s'mores ingredient",
      "floats in hot cocoa"
+    ]
+   }
+  ],
+  "meatball": [
+   {
+    "id": "bbcb2846",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:06:02.388Z",
+    "round1": [
+     "Browned on the outside.",
+     "Comes in a group.",
+     "Simmered in a pot.",
+     "Good on a sandwich.",
+     "Tossed in gravy."
+    ],
+    "round2": [
+     "Rolls smoothly across a flat surface.",
+     "Coated in a glossy dark glaze.",
+     "Slightly spongy when pressed down.",
+     "Specks of dried herbs on top.",
+     "Fits neatly inside a tablespoon."
+    ],
+    "banned": [
+     "ground beef",
+     "spaghetti partner",
+     "rolled shape",
+     "marinara"
     ]
    }
   ],
@@ -9627,6 +9767,34 @@
     ]
    }
   ],
+  "stingray": [
+   {
+    "id": "0e61cd4b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:03:51.180Z",
+    "round1": [
+     "Super flat, almost pressed against the floor.",
+     "Loves kicking up sand to hide itself.",
+     "Looks like it's gracefully flying underwater.",
+     "Smooth, slick, and rubbery to touch.",
+     "Step carefully, or you'll get hurt."
+    ],
+    "round2": [
+     "Wide and thin like a heavy blanket.",
+     "Long skinny whip trailing behind it.",
+     "Eyes placed right on top.",
+     "Mouth hidden underneath.",
+     "Floats just above the mud."
+    ],
+    "banned": [
+     "stinger on tail",
+     "venomous barb",
+     "diamond shaped disc",
+     "Steve Irwin"
+    ]
+   }
+  ],
   "strawberry": [
    {
     "id": "7f668e8f",
@@ -9735,6 +9903,32 @@
      "tunnel",
      "station tokens",
      "third rail"
+    ]
+   }
+  ],
+  "sun": [
+   {
+    "id": "0bf5761a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:05:35.976Z",
+    "round1": [
+     "Blinds you if you stare too long.",
+     "Pushes morning fog away quickly.",
+     "Turns green plants toward its place.",
+     "Melts leftover winter snow piles.",
+     "Makes solar panels generate power."
+    ],
+    "round2": [
+     "Blinding glare on summer water.",
+     "Long shadows stretch across the grass.",
+     "Bakes the dry summer soil.",
+     "Golden rays pierce through tall trees.",
+     "Forces people to squint outside."
+    ],
+    "banned": [
+     "gives us sunburns",
+     "yellow dwarf star"
     ]
    }
   ],
@@ -10647,6 +10841,34 @@
      "rails",
      "locomotive",
      "conductor"
+    ]
+   }
+  ],
+  "trash can": [
+   {
+    "id": "38a7f822",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T17:05:10.009Z",
+    "round1": [
+     "Sits quietly in the corner.",
+     "Gets kicked by accident.",
+     "Often lined with film.",
+     "Pushed underneath a desk.",
+     "Needs an empty pass."
+    ],
+    "round2": [
+     "Press down with your foot.",
+     "Stays hidden inside a cabinet.",
+     "Gets dragged to the curb weekly.",
+     "Fitted with a thin barrier.",
+     "Swings open and shuts back."
+    ],
+    "banned": [
+     "garbage",
+     "lid",
+     "pedestal",
+     "plastic"
     ]
    }
   ],
