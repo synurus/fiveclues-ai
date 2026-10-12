@@ -2659,6 +2659,34 @@
     ]
    }
   ],
+  "cow": [
+   {
+    "id": "6776749b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:28:34.475Z",
+    "round1": [
+     "Spends hours chewing food in fields.",
+     "Black and white patches on skin.",
+     "Stands around in muddy pastures.",
+     "Farmers keep large groups of them.",
+     "Swishes flies away with its tail."
+    ],
+    "round2": [
+     "Heavy body with blunt horns.",
+     "Chews cud for hours.",
+     "Stares blankly at passing cars.",
+     "Has large wet nostrils.",
+     "Kept behind barbed wire."
+    ],
+    "banned": [
+     "milk",
+     "moo",
+     "beef",
+     "udder"
+    ]
+   }
+  ],
   "crab": [
    {
     "id": "18cd8339",
@@ -3426,6 +3454,34 @@
      "bald head",
      "national symbol",
      "white tail"
+    ]
+   }
+  ],
+  "earrings": [
+   {
+    "id": "0ff08092",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:29:51.698Z",
+    "round1": [
+     "Held on by a tiny backing",
+     "Hang down near the jawline",
+     "Catch the light when you turn",
+     "Stored on a felt display card",
+     "Often chosen to match an outfit"
+    ],
+    "round2": [
+     "Dangles just above the shoulders",
+     "Secured with a metal butterfly backing",
+     "Sways gently with head movements",
+     "Shimmers brightly under indoor lights",
+     "Framed nicely by short hairstyles"
+    ],
+    "banned": [
+     "ears",
+     "piercing",
+     "studs",
+     "hoops"
     ]
    }
   ],
@@ -4845,6 +4901,34 @@
     ]
    }
   ],
+  "horse": [
+   {
+    "id": "4a0551b1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:28:34.475Z",
+    "round1": [
+     "Often seen in a fenced field.",
+     "People brush its long tail.",
+     "Runs very fast across open grass.",
+     "Eats fresh green grass all day.",
+     "Wears metal shoes on its feet."
+    ],
+    "round2": [
+     "Tall animal with strong legs.",
+     "People pull up to sit.",
+     "Leaps over low wooden bars.",
+     "Wears straps across its face.",
+     "Sleeps standing up sometimes."
+    ],
+    "banned": [
+     "neigh",
+     "hooves",
+     "saddle",
+     "riding"
+    ]
+   }
+  ],
   "hospital": [
    {
     "id": "cc89ac8c",
@@ -4926,6 +5010,34 @@
      "chocolate",
      "winter",
      "mug"
+    ]
+   }
+  ],
+  "hotel": [
+   {
+    "id": "d8c83d0e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:29:25.008Z",
+    "round1": [
+     "Lots of small rooms lined up.",
+     "Long carpeted hallways everywhere.",
+     "Keys are handed over at counters.",
+     "Elevators moving up and down constantly.",
+     "Bright signs glow outside at night."
+    ],
+    "round2": [
+     "Cars parked tightly in neat outdoor lots.",
+     "Ice machines humming down quiet hallways.",
+     "Vending machines glowing in corners.",
+     "Heavy glass doors swinging wide open.",
+     "Sturdy luggage carts parked near walls."
+    ],
+    "banned": [
+     "bed",
+     "reception desk",
+     "swimming pool",
+     "lobby"
     ]
    }
   ],
@@ -6257,6 +6369,34 @@
     ]
    }
   ],
+  "moon": [
+   {
+    "id": "a6b15820",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:28:06.749Z",
+    "round1": [
+     "shines at night",
+     "pulls the water",
+     "bright in the dark",
+     "seen from earth",
+     "cycles every month"
+    ],
+    "round2": [
+     "shadows cross the surface",
+     "causes rare daytime visibility",
+     "half illuminated by sunlight",
+     "reflects distant sunlight",
+     "drifts across stars"
+    ],
+    "banned": [
+     "crater",
+     "orbit",
+     "phases",
+     "satellite"
+    ]
+   }
+  ],
   "mosquito": [
    {
     "id": "85dde68a",
@@ -6477,6 +6617,34 @@
      "sharp point",
      "joins wood",
      "made of metal"
+    ]
+   }
+  ],
+  "necklace": [
+   {
+    "id": "546ea2c1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:29:51.698Z",
+    "round1": [
+     "Secured with a tiny metal clasp",
+     "Rests against the upper chest",
+     "Made of thin interlocking links",
+     "Sway slightly when you walk",
+     "Often paired with matching rings"
+    ],
+    "round2": [
+     "Adjusts using a small extension chain",
+     "Rests right below the collarbone",
+     "Catches the light when moving",
+     "Features delicate metal beads",
+     "Pairs well with open necklines"
+    ],
+    "banned": [
+     "neck",
+     "chain",
+     "pendant",
+     "jewelery"
     ]
    }
   ],
@@ -7385,6 +7553,34 @@
     ]
    }
   ],
+  "pig": [
+   {
+    "id": "b0ed526e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:28:34.475Z",
+    "round1": [
+     "Likes to roll around in dirt.",
+     "Has a short, curly tail.",
+     "Eats almost any food given.",
+     "Lives inside a wooden pen.",
+     "Pink skin with short bristles."
+    ],
+    "round2": [
+     "Round belly close to earth.",
+     "Pushes dirt with flat snout.",
+     "Squeals loud when picked up.",
+     "Stumpy legs support heavy frame.",
+     "Loves muddy water puddles."
+    ],
+    "banned": [
+     "oink",
+     "bacon",
+     "mud",
+     "snout"
+    ]
+   }
+  ],
   "pillow": [
    {
     "id": "249f2d79",
@@ -7910,6 +8106,34 @@
      "twisted knot shape",
      "coarse salt",
      "mustard dip"
+    ]
+   }
+  ],
+  "printer": [
+   {
+    "id": "57867173",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:27:40.946Z",
+    "round1": [
+     "Needs a fresh tray sometimes",
+     "Connected to the Wi-Fi",
+     "Sits quietly until called upon",
+     "Has a small status screen",
+     "Often bought with extra cartridges"
+    ],
+    "round2": [
+     "Sits heavy on a wooden desk.",
+     "Folds out when feeding pages through.",
+     "Whirs loudly before a big job.",
+     "Takes up corner space near keyboards.",
+     "Has a hinged cover on top."
+    ],
+    "banned": [
+     "ink cartridge",
+     "paper jam",
+     "scanner",
+     "printhead"
     ]
    }
   ],
@@ -8907,6 +9131,34 @@
      "pencil shavings",
      "turning a crank",
      "pointy tip"
+    ]
+   }
+  ],
+  "sheep": [
+   {
+    "id": "0e3cf9d2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:28:34.475Z",
+    "round1": [
+     "Clumps together in large grassy groups.",
+     "Coated in thick white fluff.",
+     "Gets shaved during warmer months.",
+     "Follows the others up steep hills.",
+     "Has tiny hooves on soft ground."
+    ],
+    "round2": [
+     "Bouncy coat catches on briers.",
+     "Crowds through narrow gate openings.",
+     "Panics easily when dogs bark.",
+     "Short tail wiggles when eating.",
+     "Wanders rocky mountain sides."
+    ],
+    "banned": [
+     "wool",
+     "baa",
+     "sweater",
+     "flock"
     ]
    }
   ],
@@ -10154,6 +10406,34 @@
     ]
    }
   ],
+  "swimsuit": [
+   {
+    "id": "a6095fdf",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:29:51.698Z",
+    "round1": [
+     "Made of stretchy nylon material",
+     "Sits very close to the skin",
+     "Dries quickly in the sun",
+     "Often has a bright floral print",
+     "Packaged neatly on a plastic hanger"
+    ],
+    "round2": [
+     "Ties securely behind the neck",
+     "Comes in vibrant neon shades",
+     "Snug fit around the legs",
+     "Features a smooth polyester lining",
+     "Popular for tropical vacations"
+    ],
+    "banned": [
+     "water",
+     "pool",
+     "beach",
+     "summer"
+    ]
+   }
+  ],
   "Sydney": [
    {
     "id": "0ba88a48",
@@ -11255,6 +11535,34 @@
      "tip",
      "tray",
      "food"
+    ]
+   }
+  ],
+  "wallet": [
+   {
+    "id": "d6d06432",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:29:51.698Z",
+    "round1": [
+     "Folds neatly in half",
+     "Slips easily into a back pocket",
+     "Features a smooth fabric lining inside",
+     "Held together by tight stitching",
+     "Often gifted during the holidays"
+    ],
+    "round2": [
+     "Includes a clear plastic ID window",
+     "Slides out smoothly from jackets",
+     "Features stitched edge details",
+     "Fits comfortably in coat pockets",
+     "Commonly embossed with initials"
+    ],
+    "banned": [
+     "money",
+     "cash",
+     "cards",
+     "leather"
     ]
    }
   ],
