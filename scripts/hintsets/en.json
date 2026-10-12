@@ -28,6 +28,34 @@
     ]
    }
   ],
+  "actor": [
+   {
+    "id": "4f27a0b1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:10:24.723Z",
+    "round1": [
+     "Waits for a cue",
+     "Pretends on command",
+     "Works late nights",
+     "Changes appearance often",
+     "Follows a director"
+    ],
+    "round2": [
+     "Waits around most days.",
+     "Studies human behavior closely.",
+     "Rejects many auditions.",
+     "Keeps a resume updated.",
+     "Works temporary side jobs."
+    ],
+    "banned": [
+     "script",
+     "movie",
+     "theater",
+     "lines"
+    ]
+   }
+  ],
   "air conditioner": [
    {
     "id": "5497c3cb",
@@ -308,6 +336,34 @@
     ]
    }
   ],
+  "artist": [
+   {
+    "id": "07b7c312",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:10:24.723Z",
+    "round1": [
+     "Makes a big mess",
+     "Shows work publicly",
+     "Sits for hours",
+     "Needs good lighting",
+     "Sells creations"
+    ],
+    "round2": [
+     "Stares at blank surfaces.",
+     "Mixes colors on palettes.",
+     "Throws away ruined pieces.",
+     "Works in natural daylight.",
+     "Keeps sketchbooks everywhere."
+    ],
+    "banned": [
+     "paint",
+     "canvas",
+     "easel",
+     "gallery"
+    ]
+   }
+  ],
   "astronaut": [
    {
     "id": "81fe4b0b",
@@ -389,6 +445,34 @@
      "wood",
      "logs",
      "blade"
+    ]
+   }
+  ],
+  "backpack": [
+   {
+    "id": "30ff8217",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:11:40.145Z",
+    "round1": [
+     "Sling over your shoulders",
+     "Packs away heavy loads",
+     "Often stuffed with notebooks",
+     "Hangs on a hook",
+     "Zips shut safely"
+    ],
+    "round2": [
+     "Has a loop at the top",
+     "Often rests on the floor",
+     "Holds a water bottle on the side",
+     "Gets tossed into trunks",
+     "Padded against your spine"
+    ],
+    "banned": [
+     "straps",
+     "zipper",
+     "fabric",
+     "worn on back"
     ]
    }
   ],
@@ -1138,6 +1222,34 @@
     ]
    }
   ],
+  "bowl": [
+   {
+    "id": "6547fdc5",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:13:23.197Z",
+    "round1": [
+     "Holds your morning meal well.",
+     "Often stacked in piles.",
+     "Sits on the table.",
+     "Can be ceramic or glass.",
+     "Filled with tasty things."
+    ],
+    "round2": [
+     "Curved edges hold liquid just fine.",
+     "Deep center keeps contents from spilling.",
+     "Bottom sits flat on wooden surfaces.",
+     "Rim warms up with hot contents.",
+     "Sides slope outward toward the top."
+    ],
+    "banned": [
+     "soup",
+     "cereal",
+     "spoon",
+     "round"
+    ]
+   }
+  ],
   "bowling": [
    {
     "id": "c51041d6",
@@ -1357,6 +1469,34 @@
      "caterpillar stage",
      "nectar",
      "metamorphosis"
+    ]
+   }
+  ],
+  "cable car": [
+   {
+    "id": "690bf3e1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:12:58.076Z",
+    "round1": [
+     "Suspended high above the ground.",
+     "Moving slowly on a line.",
+     "Enjoying scenic tourist views.",
+     "Glass windows for sightseeing.",
+     "Waiting in a long queue."
+    ],
+    "round2": [
+     "Pulls steady overhead.",
+     "Glass walls all around.",
+     "Swings gently in wind.",
+     "Glides above treetops.",
+     "Holds a small crowd."
+    ],
+    "banned": [
+     "mountain",
+     "cable",
+     "san francisco",
+     "steep"
     ]
    }
   ],
@@ -2819,6 +2959,34 @@
     ]
    }
   ],
+  "detective": [
+   {
+    "id": "e9e0d6ef",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:10:24.723Z",
+    "round1": [
+     "Asks many questions",
+     "Searches every room",
+     "Works long hours",
+     "Drives a car",
+     "Wears a coat"
+    ],
+    "round2": [
+     "Takes endless phone calls.",
+     "Deals with paperwork piles.",
+     "Scans security camera footage.",
+     "Speaks with nervous witnesses.",
+     "Carries heavy key rings."
+    ],
+    "banned": [
+     "magnifying glass",
+     "clues",
+     "badge",
+     "mystery"
+    ]
+   }
+  ],
   "dishwasher": [
    {
     "id": "f7d73e5d",
@@ -3509,6 +3677,34 @@
      "river",
      "commuter",
      "ramp"
+    ]
+   }
+  ],
+  "figure skating": [
+   {
+    "id": "65e45ab1",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:11:15.524Z",
+    "round1": [
+     "Set to music",
+     "Wears specialized boots",
+     "Performed individually or pairs",
+     "Requires precise timing",
+     "Involves colorful costumes"
+    ],
+    "round2": [
+     "Leaving deep curved lines behind.",
+     "Bowing to judges after finishing.",
+     "Quick spins make skirts flare out.",
+     "Guards protect sharp shoe bottoms.",
+     "Stretching arms wide for balance."
+    ],
+    "banned": [
+     "ice",
+     "jump",
+     "spin",
+     "blade"
     ]
    }
   ],
@@ -4207,6 +4403,34 @@
     ]
    }
   ],
+  "hairdresser": [
+   {
+    "id": "714d590c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:10:24.723Z",
+    "round1": [
+     "Sweeps the floor",
+     "Wraps a cape around",
+     "Holds a mirror",
+     "Turns a chair",
+     "Blows warm air"
+    ],
+    "round2": [
+     "Cleans hair traps constantly.",
+     "Clears chemical smells out.",
+     "Sanitizes metal clips daily.",
+     "Buys professional styling products.",
+     "Listens to endless gossip."
+    ],
+    "banned": [
+     "scissors",
+     "salon",
+     "haircut",
+     "comb"
+    ]
+   }
+  ],
   "hamburger": [
    {
     "id": "c2ec5b28",
@@ -4674,6 +4898,34 @@
     ]
    }
   ],
+  "ice hockey": [
+   {
+    "id": "d26683cb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:11:15.524Z",
+    "round1": [
+     "Played on a frozen surface",
+     "Involves heavy padding",
+     "High physical contact",
+     "Uses metal blades",
+     "Fast shifting positions"
+    ],
+    "round2": [
+     "Teammates tap sticks on the floor.",
+     "Squirting water bottles through face masks.",
+     "Panting heavily during short shifts.",
+     "Scraped white markings on smooth surfaces.",
+     "Thick gloves protect the hands."
+    ],
+    "banned": [
+     "puck",
+     "stick",
+     "rink",
+     "goal"
+    ]
+   }
+  ],
   "iceberg": [
    {
     "id": "537a5d64",
@@ -4920,6 +5172,34 @@
      "boxing pose",
      "hopping marsupial",
      "outback icon"
+    ]
+   }
+  ],
+  "karate": [
+   {
+    "id": "5f1b0512",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:11:15.524Z",
+    "round1": [
+     "Practiced barefoot",
+     "Uses loose clothing",
+     "Involves rapid movements",
+     "Requires high focus",
+     "Follows strict rules"
+    ],
+    "round2": [
+     "Often ties a fabric waist band.",
+     "Practiced facing a partner or mirror.",
+     "Involves sharp snapping hand strikes.",
+     "Stamping feet create loud impacts.",
+     "Pacing around a square padded mat."
+    ],
+    "banned": [
+     "martial arts",
+     "belt",
+     "dojo",
+     "punch"
     ]
    }
   ],
@@ -6856,6 +7136,34 @@
     ]
    }
   ],
+  "pharmacy": [
+   {
+    "id": "26f63089",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:12:32.435Z",
+    "round1": [
+     "Brightly lit aisles with cold medicine.",
+     "Buy greeting cards and candy near the front.",
+     "Lines form by the back counter.",
+     "Pick up quick snacks and magazines.",
+     "Drive-through window for fast pickups."
+    ],
+    "round2": [
+     "Sliding glass automatic doors at entry.",
+     "Paper receipts hanging from the counter.",
+     "Small plastic baskets on the floor.",
+     "Digital screens showing waiting numbers.",
+     "Metal security gates pulled shut nightly."
+    ],
+    "banned": [
+     "prescription drugs",
+     "pharmacist",
+     "pill bottles",
+     "white coat"
+    ]
+   }
+  ],
   "photographer": [
    {
     "id": "c589c093",
@@ -8517,6 +8825,62 @@
     ]
    }
   ],
+  "singer": [
+   {
+    "id": "600262ec",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:10:24.723Z",
+    "round1": [
+     "Requires a crowd",
+     "Often takes requests",
+     "Takes a bow",
+     "Travels for work",
+     "Stands on a platform"
+    ],
+    "round2": [
+     "Warms up vocal cords daily.",
+     "Rehearses harmony parts repeatedly.",
+     "Sips warm tea constantly.",
+     "Protects hearing from loud noise.",
+     "Learns lyrics by heart."
+    ],
+    "banned": [
+     "microphone",
+     "lyrics",
+     "album",
+     "stage"
+    ]
+   }
+  ],
+  "skateboard": [
+   {
+    "id": "53c9c3ce",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:12:58.076Z",
+    "round1": [
+     "Carried under one arm.",
+     "Used mostly by teenagers.",
+     "Ridden on concrete sidewalks.",
+     "Colorful stickers on the bottom.",
+     "Making a loud rolling sound."
+    ],
+    "round2": [
+     "Thin wooden board.",
+     "Flips into the air.",
+     "Kept in a backpack.",
+     "Pushed with one foot.",
+     "Scuffed up bottom side."
+    ],
+    "banned": [
+     "ollie",
+     "deck",
+     "wheels",
+     "halfpipe"
+    ]
+   }
+  ],
   "skiing": [
    {
     "id": "34bad93e",
@@ -9290,6 +9654,34 @@
     ]
    }
   ],
+  "stroller": [
+   {
+    "id": "7c50f530",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:12:58.076Z",
+    "round1": [
+     "Fabric seat with safety straps.",
+     "Folding up for easy storage.",
+     "Shopping bags hung on handles.",
+     "Navigating crowded shopping malls.",
+     "Plastic tray for snacks."
+    ],
+    "round2": [
+     "Small front wheels.",
+     "Pushed by parents.",
+     "Collapses flat quickly.",
+     "Foam grip handles.",
+     "Fabric canopy shade."
+    ],
+    "banned": [
+     "baby",
+     "infant",
+     "child",
+     "push"
+    ]
+   }
+  ],
   "submarine": [
    {
     "id": "6e635dfc",
@@ -9427,6 +9819,34 @@
      "checkout",
      "cart",
      "aisle"
+    ]
+   }
+  ],
+  "surfing": [
+   {
+    "id": "10a9b4eb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:11:15.524Z",
+    "round1": [
+     "Requires good balance",
+     "Done outdoors near water",
+     "Relies on natural elements",
+     "Uses a flat platform",
+     "Dependent on weather conditions"
+    ],
+    "round2": [
+     "Often starts very early in the morning.",
+     "Sticker-covered boards show personal style.",
+     "Involves paddling out past breaking water.",
+     "Saltwater dries in hair all day.",
+     "Leash keeps gear close by."
+    ],
+    "banned": [
+     "waves",
+     "ocean",
+     "board",
+     "paddle"
     ]
    }
   ],
@@ -9676,6 +10096,34 @@
      "shaking",
      "head",
      "handheld"
+    ]
+   }
+  ],
+  "tank": [
+   {
+    "id": "a20f309e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:12:58.076Z",
+    "round1": [
+     "Flattening obstacles in its path.",
+     "Often painted in camouflage green.",
+     "Moving slowly across mud.",
+     "Heavy metal construction.",
+     "Leaving deep grooves in dirt."
+    ],
+    "round2": [
+     "Sits low to the ground.",
+     "Built for rough terrain.",
+     "Covered in steel plates.",
+     "Leaves behind messy trails.",
+     "Bumps over bumpy dirt."
+    ],
+    "banned": [
+     "cannon",
+     "tracks",
+     "armor",
+     "military"
     ]
    }
   ],
@@ -10557,6 +11005,34 @@
      "spike",
      "court",
      "kneepads"
+    ]
+   }
+  ],
+  "waiter": [
+   {
+    "id": "bbe4a4bd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T13:10:24.723Z",
+    "round1": [
+     "Remembers orders well",
+     "Carries a notepad",
+     "Checks on tables",
+     "Stands all day",
+     "Wears an apron"
+    ],
+    "round2": [
+     "Balances heavy plates carefully.",
+     "Sweeps dining room floors.",
+     "Folds cloth napkins neatly.",
+     "Manages multiple tables at once.",
+     "Smiles through stressful rushes."
+    ],
+    "banned": [
+     "menu",
+     "tip",
+     "tray",
+     "food"
     ]
    }
   ],
