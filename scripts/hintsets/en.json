@@ -1859,6 +1859,34 @@
     ]
    }
   ],
+  "castle": [
+   {
+    "id": "e72e9ae7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:57:46.395Z",
+    "round1": [
+     "Massive heavy doors guard the entrance.",
+     "Thick walls keep the rooms very chilly.",
+     "Perched up high overlooking surrounding land.",
+     "Tight spiral stairs wind between floors.",
+     "Old woven banners hang along the corridors."
+    ],
+    "round2": [
+     "Narrow slit windows pierce the thick masonry.",
+     "Iron portcullis hangs ready above the gateway.",
+     "Rooftop battlements look out over green valleys.",
+     "Cold stone floors chill barefoot visitors instantly.",
+     "Heavy wooden beams support the vaulted ceilings."
+    ],
+    "banned": [
+     "moat and drawbridge",
+     "royalty",
+     "dungeon",
+     "tall stone turrets"
+    ]
+   }
+  ],
   "cat": [
    {
     "id": "fc60ea04",
@@ -3708,6 +3736,34 @@
     ]
    }
   ],
+  "farm": [
+   {
+    "id": "103064c2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:57:46.395Z",
+    "round1": [
+     "Daily chores start before the sun rises.",
+     "Tall wire fences stretch across vast grounds.",
+     "Boots get caked in thick mud.",
+     "Heavy wooden gates keep things locked in.",
+     "Strong earthy smells drift through the air."
+    ],
+    "round2": [
+     "Rows of red machinery parked near the shed.",
+     "Graveled paths lead toward the main house.",
+     "Metal windmills spin slowly in the wind.",
+     "Wooden troughs sit ready for morning feeding.",
+     "Tin roofs clatter when the wind blows."
+    ],
+    "banned": [
+     "tractor",
+     "harvesting crops",
+     "barn and silo",
+     "livestock animals"
+    ]
+   }
+  ],
   "farmer": [
    {
     "id": "00ad8363",
@@ -4176,6 +4232,34 @@
      "vampires",
      "papery skin",
      "breath"
+    ]
+   }
+  ],
+  "gas station": [
+   {
+    "id": "5130ac39",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:57:46.395Z",
+    "round1": [
+     "Bright glowing signs sit beside the highway.",
+     "You can grab quick snacks inside.",
+     "Visitors usually stay for five minutes only.",
+     "A strong chemical smell lingers around.",
+     "A tall roof covers the driving lanes."
+    ],
+    "round2": [
+     "Row of metal levers waiting by the pavement.",
+     "Air machine hums quietly near the corner.",
+     "Glass doors slide open automatically for customers.",
+     "Trash cans overflow with empty coffee cups.",
+     "Concrete islands protect the dispensing units."
+    ],
+    "banned": [
+     "fuel pump",
+     "petroleum",
+     "filling the tank",
+     "hose nozzle"
     ]
    }
   ],
@@ -6481,6 +6565,33 @@
     ]
    }
   ],
+  "Mount Everest": [
+   {
+    "id": "c277d43f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-12T19:53:38.178Z",
+    "round1": [
+     "Most climbers need bottled oxygen up high.",
+     "Sudden blizzards can trap people for days.",
+     "Trekkers gather at a sprawling tent camp.",
+     "Subzero winds howl around the summit.",
+     "Permits cost thousands just to start climbing."
+    ],
+    "round2": [
+     "Bright prayer flags flutter along chilly ridges.",
+     "Heavy-coated yaks haul supplies along rocky trails.",
+     "Deep glacial cracks require ladder bridges to cross.",
+     "Trekkers sometimes get stuck in summit traffic jams.",
+     "The ultimate climb usually takes two whole months."
+    ],
+    "banned": [
+     "Himalayas",
+     "Sherpa",
+     "death zone"
+    ]
+   }
+  ],
   "muffin": [
    {
     "id": "a2a2969f",
@@ -8467,6 +8578,34 @@
     ]
    }
   ],
+  "Rio de Janeiro": [
+   {
+    "id": "8c60d91e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-12T19:53:38.178Z",
+    "round1": [
+     "Crowds pack the sandy beaches until sundown.",
+     "Cable cars carry riders high above water.",
+     "Live street music plays late into night.",
+     "Steep green peaks tower behind the coast.",
+     "Warm sunshine dominates almost the entire year."
+    ],
+    "round2": [
+     "Dancers in dazzling plumage parade through grand avenues.",
+     "Locals play barefoot soccer right on the shoreline.",
+     "Fresh green coconuts are sold straight from carts.",
+     "Dense tropical rainforest spreads right inside city limits.",
+     "Tightly packed colorful homes climb steep coastal hills."
+    ],
+    "banned": [
+     "Christ the Redeemer",
+     "Copacabana",
+     "Carnival",
+     "Brazil"
+    ]
+   }
+  ],
   "rock climbing": [
    {
     "id": "6712b14f",
@@ -9853,6 +9992,34 @@
     ]
    }
   ],
+  "stadium": [
+   {
+    "id": "4897b7b8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-12T19:57:46.395Z",
+    "round1": [
+     "Huge floodlights light it up at night.",
+     "Crowds cheer and make massive noise together.",
+     "Your ticket assigns you a specific seat.",
+     "Security checks your bag before entering.",
+     "Long lines form around the snack counters."
+    ],
+    "round2": [
+     "Huge screens replay the best moments instantly.",
+     "Rows of red plastic seats stretch endlessly.",
+     "Concrete ramps guide thousands upward at once.",
+     "Vendors walk the aisles balancing heavy trays.",
+     "Open sky towers directly above the turf."
+    ],
+    "banned": [
+     "sports arena",
+     "bleachers",
+     "scoreboard",
+     "playing field"
+    ]
+   }
+  ],
   "stamp": [
    {
     "id": "549e4cf0",
@@ -10763,6 +10930,62 @@
      "racket",
      "net",
      "court"
+    ]
+   }
+  ],
+  "the Alps": [
+   {
+    "id": "86a3a365",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-12T19:53:38.178Z",
+    "round1": [
+     "People travel here just to go skiing.",
+     "Snow stays on the peaks year-round.",
+     "Stretches across several different countries.",
+     "Cozy wooden cabins dot the slopes.",
+     "Winding roads climb through deep green valleys."
+    ],
+    "round2": [
+     "Melting cheese over potatoes is huge here.",
+     "Bright bells clatter on cattle in pastures.",
+     "Scenic red trains cross high stone bridges.",
+     "Crystal-clear turquoise lakes sit below rugged cliffs.",
+     "Lush meadows burst with wild flowers each spring."
+    ],
+    "banned": [
+     "Matterhorn",
+     "Mont Blanc",
+     "Switzerland",
+     "yodeling"
+    ]
+   }
+  ],
+  "the Sahara": [
+   {
+    "id": "b6014778",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-12T19:53:38.178Z",
+    "round1": [
+     "Scorching hot during the daylight hours.",
+     "Temperatures plummet once the sun sets.",
+     "Endless sand dunes shift in the wind.",
+     "Months can pass without a single raindrop.",
+     "Incredible stargazing with zero city lights around."
+    ],
+    "round2": [
+     "Dust storms can turn midday into total darkness.",
+     "Most of the ground is gravel, not sand.",
+     "Long cloth wraps protect faces from blowing grit.",
+     "Prehistoric rock art hides inside weathered cliff caves.",
+     "Mirages of water shimmer on flat horizons."
+    ],
+    "banned": [
+     "largest hot desert",
+     "camel caravan",
+     "oasis",
+     "North Africa"
     ]
    }
   ],
