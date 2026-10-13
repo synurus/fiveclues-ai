@@ -5447,6 +5447,34 @@
     ]
    }
   ],
+  "jet ski": [
+   {
+    "id": "e80aee16",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-13T17:25:52.847Z",
+    "round1": [
+     "You straddle the seat like a bike.",
+     "A safety cord clips to your wrist.",
+     "Handlebars control both steering and throttle.",
+     "Built for just one or two riders.",
+     "Leaning into turns helps you carve corners."
+    ],
+    "round2": [
+     "Riders typically suit up in life vests.",
+     "Launches right off a trailer into water.",
+     "Internal impeller drives the powerful thrust.",
+     "Blasts a high arc spray behind it.",
+     "Drives right onto floating drive-on docks."
+    ],
+    "banned": [
+     "watercraft",
+     "lake",
+     "spray of water",
+     "wake"
+    ]
+   }
+  ],
   "judge": [
    {
     "id": "3d0323b7",
@@ -9646,6 +9674,34 @@
     ]
    }
   ],
+  "sled": [
+   {
+    "id": "0c2c19eb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-13T17:25:52.847Z",
+    "round1": [
+     "Runs completely silent without any motor.",
+     "Gravity does all the hard work downhill.",
+     "Easy to pull behind with a rope.",
+     "Rides very low to the ground.",
+     "You steer mainly by shifting your weight."
+    ],
+    "round2": [
+     "Smooth slick underside glides with zero wheels.",
+     "Packed in the attic until freezing weather.",
+     "Dragging boot heels acts as your brake.",
+     "Leaves two parallel pressed grooves behind.",
+     "A quick running shove launches it forward."
+    ],
+    "banned": [
+     "snow",
+     "husky",
+     "winter hill",
+     "metal runners"
+    ]
+   }
+  ],
   "slushie": [
    {
     "id": "6adafec2",
@@ -12241,6 +12297,34 @@
      "dirt",
      "load",
      "wheel"
+    ]
+   }
+  ],
+  "wheelchair": [
+   {
+    "id": "96fa1361",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash",
+    "generatedAt": "2026-10-13T17:25:52.847Z",
+    "round1": [
+     "Can be moved using just your hands.",
+     "Fits through standard doorways with ease.",
+     "Has armrests and a padded back.",
+     "Handbrakes lock it firmly in place.",
+     "Works best on flat, smooth pavement."
+    ],
+    "round2": [
+     "Two small plates fold down for feet.",
+     "Folds flat down the middle for trunks.",
+     "Twin big wheels balance on tiny casters.",
+     "Twin rubber grips stick out behind back.",
+     "Designed to roll right up gentle ramps."
+    ],
+    "banned": [
+     "hospital",
+     "paralyzed",
+     "ramp",
+     "handicap"
     ]
    }
   ],
