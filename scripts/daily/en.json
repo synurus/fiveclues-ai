@@ -532,5 +532,31 @@
    "Big dark leathery nose dominates its face.",
    "Never drinks water; gets moisture from greenery."
   ]
+ },
+ "2026-10-20": {
+  "word": "pumpkin",
+  "category": "Vegetables",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Round and orange exterior.",
+   "Grows heavy on vine patches.",
+   "Roasted seeds inside the middle.",
+   "Baked into sweet dessert treats.",
+   "Thick outer shell protects the inside."
+  ],
+  "round2": [
+   "Warm orange flesh inside.",
+   "Cooked down into thick puree.",
+   "Ribbed lines along the outside.",
+   "Flat stems attached firmly.",
+   "Salted seeds toasted for snacks."
+  ],
+  "banned": [
+   "jack-o'-lantern",
+   "carved face",
+   "halloween",
+   "pie"
+  ]
  }
 }
