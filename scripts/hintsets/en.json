@@ -810,6 +810,33 @@
     ]
    }
   ],
+  "bat": [
+   {
+    "id": "43bdbedc",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:37:13.866Z",
+    "round1": [
+     "hangs upside down",
+     "active when sun sets",
+     "soft furry body",
+     "lives in large groups",
+     "thin webbed skin"
+    ],
+    "round2": [
+     "elongated finger bones",
+     "large leather ears",
+     "tiny weak feet",
+     "dark brown coat",
+     "short stubby snout"
+    ],
+    "banned": [
+     "echolocation",
+     "vampire",
+     "wings"
+    ]
+   }
+  ],
   "beach": [
    {
     "id": "2ad592fe",
@@ -1854,6 +1881,33 @@
     ]
    }
   ],
+  "carpenter": [
+   {
+    "id": "30c88eb7",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:36:07.942Z",
+    "round1": [
+     "Builds custom pieces for local homes.",
+     "Cleans up piles of dust at quitting time.",
+     "Wears heavy boots for safety reasons.",
+     "Reads blueprints to figure out the layout.",
+     "Swings arms constantly while on the clock."
+    ],
+    "round2": [
+     "Lifts heavy planks",
+     "Uses measuring tools",
+     "Works with timber",
+     "Sweeps up debris",
+     "Fastens pieces together"
+    ],
+    "banned": [
+     "hammer",
+     "saw",
+     "wood"
+    ]
+   }
+  ],
   "carrot": [
    {
     "id": "6ebd6e54",
@@ -2100,6 +2154,33 @@
      "legs",
      "sit",
      "backrest"
+    ]
+   }
+  ],
+  "cheetah": [
+   {
+    "id": "a32351ad",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:37:13.866Z",
+    "round1": [
+     "long slender tail",
+     "hunts during daylight hours",
+     "lives in warm grasslands",
+     "sharp curved claws",
+     "yellowish brown fur coat"
+    ],
+    "round2": [
+     "small round head",
+     "narrow chest",
+     "deep chest for breathing",
+     "blunt claws that stay out",
+     "pale yellow coat with spots"
+    ],
+    "banned": [
+     "spots",
+     "fastest land animal",
+     "teardrop markings"
     ]
    }
   ],
@@ -5058,6 +5139,33 @@
     ]
    }
   ],
+  "hedgehog": [
+   {
+    "id": "fd608345",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:37:13.866Z",
+    "round1": [
+     "small rounded body",
+     "active after sunset",
+     "short little legs",
+     "eats bugs and worms",
+     "pointed tiny snout"
+    ],
+    "round2": [
+     "tiny damp nose",
+     "hidden tiny tail",
+     "brown and white mix",
+     "loose skin underneath",
+     "short stout neck"
+    ],
+    "banned": [
+     "spikes",
+     "rolls into a ball",
+     "quills"
+    ]
+   }
+  ],
   "helicopter": [
    {
     "id": "152ba875",
@@ -6191,6 +6299,34 @@
     ]
    }
   ],
+  "lifeguard": [
+   {
+    "id": "f8a1c9eb",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:36:07.942Z",
+    "round1": [
+     "Stares closely at moving water all afternoon.",
+     "Blows loud signals to warn kids running.",
+     "Wears sunglasses to block morning glare.",
+     "Sits high up on an elevated chair.",
+     "Keeps people safe while they cool down."
+    ],
+    "round2": [
+     "Carries a rescue device",
+     "Stands in direct sun",
+     "Warns rule breakers",
+     "Tanned from daily exposure",
+     "Maintains safety gear"
+    ],
+    "banned": [
+     "whistle",
+     "pool",
+     "red swimsuit",
+     "rescue"
+    ]
+   }
+  ],
   "light bulb": [
    {
     "id": "c4e40464",
@@ -6851,6 +6987,34 @@
      "Himalayas",
      "Sherpa",
      "death zone"
+    ]
+   }
+  ],
+  "mouse": [
+   {
+    "id": "3cb712fa",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:37:38.445Z",
+    "round1": [
+     "Likes to hide in dark corners",
+     "Has very tiny paws",
+     "Searches for little bits of food",
+     "Fits through very narrow gaps",
+     "Often feared by people standing on chairs"
+    ],
+    "round2": [
+     "Wiggles a thin tail behind it",
+     "Has a pointed snout for sniffing",
+     "Keeps two big front teeth busy",
+     "Sports fuzzy ears on top",
+     "Wears a coat of soft gray fur"
+    ],
+    "banned": [
+     "cheese",
+     "cat",
+     "trap",
+     "computer"
     ]
    }
   ],
@@ -8510,6 +8674,34 @@
     ]
    }
   ],
+  "programmer": [
+   {
+    "id": "80bd8d4d",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:36:07.942Z",
+    "round1": [
+     "Types fast with both hands for hours.",
+     "Drinks endless cups of hot coffee daily.",
+     "Resolves frustrating errors before final deadlines.",
+     "Thinks through logical steps in silence.",
+     "Wears casual clothes like plain hoodies."
+    ],
+    "round2": [
+     "Stares at glowing displays",
+     "Attends morning meetings",
+     "Sits in quiet rooms",
+     "Types on keyboards",
+     "Sips morning beverages"
+    ],
+    "banned": [
+     "code",
+     "computer",
+     "keyboard",
+     "bug"
+    ]
+   }
+  ],
   "pudding": [
    {
     "id": "4b3a1833",
@@ -8590,6 +8782,33 @@
      "hopping",
      "carrots",
      "burrow"
+    ]
+   }
+  ],
+  "raccoon": [
+   {
+    "id": "d5f945b0",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:37:13.866Z",
+    "round1": [
+     "dexterous front paws",
+     "ringed bushy tail",
+     "scavenges near human homes",
+     "climbs up tall trees",
+     "gray and black fur"
+    ],
+    "round2": [
+     "stocky heavy body",
+     "pointed snout",
+     "short rounded ears",
+     "salt and pepper coat",
+     "curved back posture"
+    ],
+    "banned": [
+     "mask",
+     "trash panda",
+     "washes food"
     ]
    }
   ],
@@ -9309,6 +9528,34 @@
      "learning",
      "teachers",
      "classrooms"
+    ]
+   }
+  ],
+  "scientist": [
+   {
+    "id": "b9b2c0fd",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T19:36:07.942Z",
+    "round1": [
+     "Solves complex problems every single day.",
+     "Needs lots of schooling before starting.",
+     "Stares at screens for hours straight.",
+     "Writes up long reports about findings.",
+     "Teems with curiosity about how things work."
+    ],
+    "round2": [
+     "Uses safety gear",
+     "Keeps records daily",
+     "Works in teams",
+     "Measures samples carefully",
+     "Analyzes trends over time"
+    ],
+    "banned": [
+     "lab coat",
+     "test tube",
+     "experiment",
+     "research"
     ]
    }
   ],
