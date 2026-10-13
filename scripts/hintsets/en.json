@@ -1388,6 +1388,29 @@
     ]
    }
   ],
+  "bungee jumping": [
+   {
+    "id": "40b5426c",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:50:40.378Z",
+    "round1": [
+     "The entire thrill lasts only a few seconds.",
+     "You end up hanging completely upside down.",
+     "Tall bridges are classic launch points.",
+     "A sudden free fall catches your breath.",
+     "Takes serious courage just to step off."
+    ],
+    "round2": [
+     "Wind whips past screaming faces.",
+     "Tight ankle straps press hard.",
+     "Rubber stretches beneath body weight.",
+     "Rebound bounces shake the stomach.",
+     "Dizzy head follows wild drops."
+    ],
+    "banned": []
+   }
+  ],
   "burrito": [
    {
     "id": "d5a304f9",
@@ -4599,6 +4622,31 @@
     ]
    }
   ],
+  "gymnastics": [
+   {
+    "id": "1eb269b3",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:50:40.378Z",
+    "round1": [
+     "Extreme flexibility is pretty much required here.",
+     "You are graded on form, not time.",
+     "Sticking the landing cleanly is crucial.",
+     "One tiny wobble can ruin your score.",
+     "Music often plays during individual routines."
+    ],
+    "round2": [
+     "Chalk dust coats sweaty palms.",
+     "Bare feet smack hard mats.",
+     "Spins leave athletes completely dizzy.",
+     "Sweat drips from arched brows.",
+     "Quick bows acknowledge applauding crowds."
+    ],
+    "banned": [
+     "pommel horse"
+    ]
+   }
+  ],
   "hair dryer": [
    {
     "id": "8e3d7f06",
@@ -5427,6 +5475,32 @@
     ]
    }
   ],
+  "jump rope": [
+   {
+    "id": "94d2eeed",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:50:40.378Z",
+    "round1": [
+     "Stay light on the balls of your feet.",
+     "Leaping constantly to a steady, repetitive rhythm.",
+     "The gear fits inside a tiny pocket.",
+     "One mistimed hop halts the entire streak.",
+     "Repeated bouncing sets your lower calves on fire."
+    ],
+    "round2": [
+     "Swishing plastic echoes off walls.",
+     "Sore shins throb at night.",
+     "Stinging welts hit bare shins.",
+     "Slippery palms grip plastic handles.",
+     "Sweat drips off the nose."
+    ],
+    "banned": [
+     "boxer rhythm skip",
+     "doing double unders"
+    ]
+   }
+  ],
   "kangaroo": [
    {
     "id": "b95171b5",
@@ -6202,6 +6276,62 @@
     ]
    }
   ],
+  "magician": [
+   {
+    "id": "a5007e1e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:51:16.118Z",
+    "round1": [
+     "Lots of travel for gigs.",
+     "People clap at the end.",
+     "Needs good hand control.",
+     "Practice takes many hours.",
+     "Often hired for big parties."
+    ],
+    "round2": [
+     "uses cards and ropes",
+     "hides secrets from onlookers",
+     "stands before a seated crowd",
+     "buys special props online",
+     "needs a quick distraction"
+    ],
+    "banned": [
+     "rabbit",
+     "wand",
+     "stage",
+     "card tricks"
+    ]
+   }
+  ],
+  "mail carrier": [
+   {
+    "id": "ce044d6e",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:51:16.118Z",
+    "round1": [
+     "Up very early every morning.",
+     "Lots of steps taken daily.",
+     "Works in all kinds of weather.",
+     "Dogs sometimes bark nearby.",
+     "People look for your arrival."
+    ],
+    "round2": [
+     "sorts paper into slots",
+     "knocks on front doors",
+     "checks house numbers closely",
+     "carries bundles of flyers",
+     "opens small metal lids"
+    ],
+    "banned": [
+     "letter",
+     "uniform",
+     "satchel",
+     "mailbox"
+    ]
+   }
+  ],
   "mango": [
    {
     "id": "9a678275",
@@ -6256,6 +6386,29 @@
      "pointed leaf shape",
      "helicopter seeds"
     ]
+   }
+  ],
+  "marathon": [
+   {
+    "id": "3d4e1279",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:50:40.378Z",
+    "round1": [
+     "Pacing your speed early saves your energy.",
+     "Takes hours of nonstop movement to finish.",
+     "Usually organized on open public roads.",
+     "Thousands of people start at the same time.",
+     "Grabbing drinks on the go is normal."
+    ],
+    "round2": [
+     "Salty sweat stings tired eyes.",
+     "Sticky gel packets give quick energy.",
+     "Heavy legs slow the final mile.",
+     "Sponge stations cool hot heads.",
+     "Blistered toes hurt inside socks."
+    ],
+    "banned": []
    }
   ],
   "marshmallow": [
@@ -8746,6 +8899,31 @@
     ]
    }
   ],
+  "rugby": [
+   {
+    "id": "da5d3c9a",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:50:40.378Z",
+    "round1": [
+     "Heavy tackling with very little body padding.",
+     "Tossing the ball backward to advance forward.",
+     "Passing an oddly shaped, oblong ball around.",
+     "Grabbing around the waist halts a runner.",
+     "Play keeps going without constant commercial breaks."
+    ],
+    "round2": [
+     "Torn shirts show rough contact.",
+     "Mud cakes thick on knees.",
+     "Bruised ribs hurt when laughing.",
+     "Sore muscles ache for days.",
+     "Sweaty shoulders slam together hard."
+    ],
+    "banned": [
+     "scoring a try"
+    ]
+   }
+  ],
   "ruler": [
    {
     "id": "cc92fa6d",
@@ -9742,6 +9920,34 @@
      "couch",
      "cushions for three",
      "pull-out bed"
+    ]
+   }
+  ],
+  "soldier": [
+   {
+    "id": "6776397b",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:51:16.118Z",
+    "round1": [
+     "Lots of running outside.",
+     "Away from home for months.",
+     "Listens to orders all day.",
+     "Keeps boots very clean.",
+     "Works in a large group."
+    ],
+    "round2": [
+     "follows strict daily schedules",
+     "eats canned meals outside",
+     "sleeps in a shared bunk",
+     "carries metal gear everywhere",
+     "stands in straight lines"
+    ],
+    "banned": [
+     "rifle",
+     "uniform",
+     "war",
+     "combat helmet"
     ]
    }
   ],
@@ -11649,6 +11855,34 @@
     ]
    }
   ],
+  "vet": [
+   {
+    "id": "aa661973",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:51:16.118Z",
+    "round1": [
+     "Long hours on your feet.",
+     "Lots of school required first.",
+     "Need a gentle touch here.",
+     "Deals with messy surprises daily.",
+     "People are grateful for help."
+    ],
+    "round2": [
+     "wears a blue coat",
+     "lifts heavy crates sometimes",
+     "calms nervous creatures down",
+     "washes hands very often",
+     "writes notes after checks"
+    ],
+    "banned": [
+     "dog",
+     "stethoscope",
+     "clinic",
+     "animal cage"
+    ]
+   }
+  ],
   "violin": [
    {
     "id": "86ebcc1a",
@@ -12170,6 +12404,31 @@
      "tightens bolts",
      "adjustable jaw",
      "socket set"
+    ]
+   }
+  ],
+  "wrestling": [
+   {
+    "id": "c86dd1ef",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T12:50:40.378Z",
+    "round1": [
+     "Constant body contact through the entire round.",
+     "Competitors are matched strictly by body weight.",
+     "Good leverage matters more than raw height.",
+     "Holding an opponent flat down scores big.",
+     "Bare hands only, no striking or kicking."
+    ],
+    "round2": [
+     "Slippery sweat drips on opponents.",
+     "Red friction burns cover knees.",
+     "Sore shoulders ache next morning.",
+     "Tuned ears show blunt trauma.",
+     "Heavy breathing echoes close by."
+    ],
+    "banned": [
+     "Greco-Roman style"
     ]
    }
   ],
