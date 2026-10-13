@@ -2793,6 +2793,33 @@
     ]
    }
   ],
+  "crocodile": [
+   {
+    "id": "b63e08b8",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T17:43:42.235Z",
+    "round1": [
+     "Basks on muddy river banks",
+     "Waits quietly for prey",
+     "Rough scaly skin",
+     "Swims with eyes above water",
+     "Sharp teeth in rows"
+    ],
+    "round2": [
+     "Powerful sweeping tail",
+     "Low creeping belly stance",
+     "Long snout full of teeth",
+     "Bursts from shallow water",
+     "Lurks near muddy shores"
+    ],
+    "banned": [
+     "snout",
+     "jaw",
+     "gator"
+    ]
+   }
+  ],
   "crow": [
    {
     "id": "964787ed",
@@ -4202,6 +4229,33 @@
     ]
    }
   ],
+  "frog": [
+   {
+    "id": "d6a4e4c2",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T17:43:42.235Z",
+    "round1": [
+     "Sits on lily pads",
+     "Starts life swimming",
+     "Sings loudly at night",
+     "Bulgy eyes on top",
+     "Long tongue snaps out"
+    ],
+    "round2": [
+     "Springy back legs",
+     "Sticky pink tongue",
+     "Sits near wet reeds",
+     "Puffed throat during call",
+     "Swims as a tadpole"
+    ],
+    "banned": [
+     "ribbit",
+     "tadpole",
+     "jump"
+    ]
+   }
+  ],
   "frying pan": [
    {
     "id": "c74f35ff",
@@ -4423,6 +4477,33 @@
      "paper",
      "twist",
      "cap"
+    ]
+   }
+  ],
+  "goat": [
+   {
+    "id": "c17a95ea",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T17:43:42.235Z",
+    "round1": [
+     "Chews on practically anything",
+     "Climbs steep rocky slopes",
+     "Male leads the herd",
+     "Known to headbutt things",
+     "Kept for milk and wool"
+    ],
+    "round2": [
+     "Slits inside horizontal eyes",
+     "Curved horns on head",
+     "Bouncy step on cliffs",
+     "Eats tough dry brush",
+     "Stubborn when led around"
+    ],
+    "banned": [
+     "horns",
+     "beard",
+     "billy"
     ]
    }
   ],
@@ -12158,6 +12239,34 @@
      "spin cycle",
      "water",
      "laundry"
+    ]
+   }
+  ],
+  "watch": [
+   {
+    "id": "30096644",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-13T17:45:14.127Z",
+    "round1": [
+     "Buckles securely around your arm.",
+     "Often features shiny metal links.",
+     "Can be digital or display needles.",
+     "Slips easily beneath a shirt cuff.",
+     "Small knob adjusts inner parts."
+    ],
+    "round2": [
+     "Press the side to light up.",
+     "Some models track daily steps.",
+     "Keeps running in the pool.",
+     "Swap the leather band easily.",
+     "Needs a charge every night."
+    ],
+    "banned": [
+     "time",
+     "wrist",
+     "tick",
+     "hands"
     ]
    }
   ],
