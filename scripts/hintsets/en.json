@@ -5222,6 +5222,33 @@
     ]
    }
   ],
+  "hippo": [
+   {
+    "id": "de4323c6",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-14T13:10:19.921Z",
+    "round1": [
+     "Spends hot daylight soaking in water.",
+     "Surprisingly fast on land despite heavy bulk.",
+     "Fiercely protective of its personal territory.",
+     "Thick, mostly hairless grayish hide.",
+     "Leaves the water at night to graze."
+    ],
+    "round2": [
+     "Yawns wide to show huge teeth.",
+     "Spends most daytime submerged deep.",
+     "Has stubby little tail hairs.",
+     "Can stay underwater for minutes.",
+     "Mostly active after the sun sets."
+    ],
+    "banned": [
+     "red sweat",
+     "river horse",
+     "hungry hungry"
+    ]
+   }
+  ],
   "horse": [
    {
     "id": "4a0551b1",
@@ -10141,6 +10168,33 @@
     ]
    }
   ],
+  "snake": [
+   {
+    "id": "122a6a5f",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-14T13:10:19.921Z",
+    "round1": [
+     "Swallows meals whole without any chewing.",
+     "Flicks its tongue to taste the air.",
+     "Needs the sun to warm its body.",
+     "Creeps silently without making footsteps.",
+     "Hatchlings break out of leathery eggs."
+    ],
+    "round2": [
+     "Can unhinge its jaw to eat.",
+     "Sheds its skin as it grows.",
+     "Lacks any limbs at all.",
+     "Senses ground vibrations very well.",
+     "Often coils up in warm places."
+    ],
+    "banned": [
+     "sheds skin",
+     "rattle",
+     "venomous fangs"
+    ]
+   }
+  ],
   "sneakers": [
    {
     "id": "0ecbe647",
@@ -12071,6 +12125,34 @@
      "cup shape",
      "spring bloom",
      "dutch fields"
+    ]
+   }
+  ],
+  "turtle": [
+   {
+    "id": "81c57ddf",
+    "promptVersion": "152535d5",
+    "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+    "generatedAt": "2026-10-14T13:10:19.921Z",
+    "round1": [
+     "Moves famously slowly on land.",
+     "Starts life digging out of buried eggs.",
+     "Known to live for many decades.",
+     "Equally comfortable swimming or sunning on logs.",
+     "A tough exterior keeps it safe."
+    ],
+    "round2": [
+     "Tucks its head completely out of sight.",
+     "Has a beak instead of teeth.",
+     "Webbed feet help it swim.",
+     "Spends hours resting on muddy banks.",
+     "Lays round white eggs in sand."
+    ],
+    "banned": [
+     "shell",
+     "pulls head inside",
+     "snapping",
+     "ninja"
     ]
    }
   ],
