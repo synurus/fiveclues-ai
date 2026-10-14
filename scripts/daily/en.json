@@ -558,5 +558,29 @@
    "halloween",
    "pie"
   ]
+ },
+ "2026-10-21": {
+  "word": "squirrel",
+  "category": "Animals",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Darting quickly across power lines overhead.",
+   "Buries food all over, then forgets where.",
+   "Chatters loudly when warning rivals nearby.",
+   "Uses its rear ankles to climb downwards.",
+   "Always scanning surroundings with twitchy motions."
+  ],
+  "round2": [
+   "Huge feathered tail curls over its back.",
+   "Caches countless oak seeds before winter freezes.",
+   "Builds messy leaf nests high in forks.",
+   "Two giant front buckteeth crack hard shells.",
+   "Silvery gray or rusty red roadside regular."
+  ],
+  "banned": [
+   "acorns hoarder",
+   "bushy fluffy tail"
+  ]
  }
 }
