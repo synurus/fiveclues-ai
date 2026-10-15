@@ -582,5 +582,31 @@
    "acorns hoarder",
    "bushy fluffy tail"
   ]
+ },
+ "2026-10-22": {
+  "word": "Sydney",
+  "category": "Travel Destinations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Great place for catching waves all day",
+   "Bright fireworks light up the dark sky",
+   "Big ferries move people across the bay",
+   "Warm weather makes shorts a must wear",
+   "Huge botanical gardens right downtown"
+  ],
+  "round2": [
+   "Trains run underground past busy platforms",
+   "Seagulls gather near open fish markets",
+   "Sailboats dock tightly in blue water marinas",
+   "Tall glass office towers reflect morning sun",
+   "Steep stone steps lead up to parks"
+  ],
+  "banned": [
+   "Opera House",
+   "Harbour Bridge",
+   "Koala",
+   "Kangaroo"
+  ]
  }
 }
