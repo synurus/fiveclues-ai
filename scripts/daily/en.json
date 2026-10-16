@@ -608,5 +608,30 @@
    "Koala",
    "Kangaroo"
   ]
+ },
+ "2026-10-23": {
+  "word": "Tokyo",
+  "category": "Travel Destinations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Famous busy crosswalk area",
+   "Very tall observation tower",
+   "Huge train system daily",
+   "Bright neon sign displays",
+   "Traditional market stalls"
+  ],
+  "round2": [
+   "Vending machines on every narrow alley",
+   "Tangled utility wires overhead",
+   "Small concrete buildings stacked tightly",
+   "Paper lanterns hanging outside doorways",
+   "Covered shopping arcades with roofs"
+  ],
+  "banned": [
+   "Mount Fuji",
+   "Senso-ji",
+   "Shibuya Crossing"
+  ]
  }
 }
