@@ -633,5 +633,30 @@
    "Senso-ji",
    "Shibuya Crossing"
   ]
+ },
+ "2026-10-24": {
+  "word": "banjo",
+  "category": "Musical Instruments",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Rests on your lap with a long neck.",
+   "Fast fingers pluck away on metal wires.",
+   "Features a distinctly bright and twangy tone.",
+   "A staple of traditional American roots music.",
+   "Wood and metal combine to shape the body."
+  ],
+  "round2": [
+   "A stretched circular membrane acts as soundboard.",
+   "Metal brackets clamp tightly around the rim.",
+   "Metal picks wrap snugly onto fingertips.",
+   "Downward striking fingers hammer down on rhythm.",
+   "A detachable wooden bowl covers the back."
+  ],
+  "banned": [
+   "drum head skin",
+   "bluegrass picking",
+   "clawhammer"
+  ]
  }
 }
