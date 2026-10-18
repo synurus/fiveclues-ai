@@ -658,5 +658,30 @@
    "bluegrass picking",
    "clawhammer"
   ]
+ },
+ "2026-10-25": {
+  "word": "cheetah",
+  "category": "Animals",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "long slender tail",
+   "hunts during daylight hours",
+   "lives in warm grasslands",
+   "sharp curved claws",
+   "yellowish brown fur coat"
+  ],
+  "round2": [
+   "small round head",
+   "narrow chest",
+   "deep chest for breathing",
+   "blunt claws that stay out",
+   "pale yellow coat with spots"
+  ],
+  "banned": [
+   "spots",
+   "fastest land animal",
+   "teardrop markings"
+  ]
  }
 }
