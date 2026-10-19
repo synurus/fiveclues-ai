@@ -683,5 +683,31 @@
    "fastest land animal",
    "teardrop markings"
   ]
+ },
+ "2026-10-26": {
+  "word": "volleyball",
+  "category": "Sports",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Played indoors or on the beach.",
+   "Played in short winning sets.",
+   "Jumping up into the air.",
+   "Athletes wearing short spandex.",
+   "Keeping the object off the ground."
+  ],
+  "round2": [
+   "Played across a divided court boundary.",
+   "Athletes dive onto the floor surface.",
+   "Team members rotate positions constantly.",
+   "Players communicate loudly before every hit.",
+   "Net stretches tight across the middle."
+  ],
+  "banned": [
+   "net",
+   "spike",
+   "court",
+   "kneepads"
+  ]
  }
 }
