@@ -735,5 +735,31 @@
    "paper wrapper",
    "children drawing"
   ]
+ },
+ "2026-10-28": {
+  "word": "dentist",
+  "category": "Occupations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Wears latex gloves all day.",
+   "Operates small handheld metal tools.",
+   "Asks people to open wide.",
+   "Keeps scheduled morning appointments.",
+   "Takes clean white coats home."
+  ],
+  "round2": [
+   "shines bright lights down",
+   "counts twenty visible parts",
+   "makes people rinse out",
+   "wears a face shield",
+   "reclines chairs back flat"
+  ],
+  "banned": [
+   "teeth",
+   "drill",
+   "cavity",
+   "floss"
+  ]
  }
 }
