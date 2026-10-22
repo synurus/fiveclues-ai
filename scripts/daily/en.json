@@ -761,5 +761,31 @@
    "cavity",
    "floss"
   ]
+ },
+ "2026-10-29": {
+  "word": "boxing",
+  "category": "Sports",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Done in rounds",
+   "Requires protective hand wear",
+   "Performed inside ropes",
+   "Focuses on upper body strikes",
+   "Win by points or stoppage"
+  ],
+  "round2": [
+   "Fighters wear shorts",
+   "Corner stool between breaks",
+   "Referees wear white shirts",
+   "Scored by judges",
+   "Weight classes matter"
+  ],
+  "banned": [
+   "ring",
+   "gloves",
+   "knockout",
+   "heavyweight"
+  ]
  }
 }
