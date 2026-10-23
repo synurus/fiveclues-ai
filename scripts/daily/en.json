@@ -787,5 +787,30 @@
    "knockout",
    "heavyweight"
   ]
+ },
+ "2026-10-30": {
+  "word": "goat",
+  "category": "Animals",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Chews on practically anything",
+   "Climbs steep rocky slopes",
+   "Male leads the herd",
+   "Known to headbutt things",
+   "Kept for milk and wool"
+  ],
+  "round2": [
+   "Slits inside horizontal eyes",
+   "Curved horns on head",
+   "Bouncy step on cliffs",
+   "Eats tough dry brush",
+   "Stubborn when led around"
+  ],
+  "banned": [
+   "horns",
+   "beard",
+   "billy"
+  ]
  }
 }
