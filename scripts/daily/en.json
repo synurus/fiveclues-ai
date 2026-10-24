@@ -812,5 +812,30 @@
    "beard",
    "billy"
   ]
+ },
+ "2026-10-31": {
+  "word": "toothpaste",
+  "category": "Household Items",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Squeezed from the end.",
+   "Kept on the counter.",
+   "Leaves a fresh taste.",
+   "Cap often gets lost.",
+   "Comes in a box."
+  ],
+  "round2": [
+   "Stripes running down the paste.",
+   "Rolled up from the bottom.",
+   "Small twist-off top.",
+   "Leaves a mess in the basin.",
+   "Stands upright on its cap."
+  ],
+  "banned": [
+   "mint flavor",
+   "squeeze tube",
+   "paste"
+  ]
  }
 }
