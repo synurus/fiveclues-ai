@@ -837,5 +837,31 @@
    "squeeze tube",
    "paste"
   ]
+ },
+ "2026-11-01": {
+  "word": "moss",
+  "category": "Plants & Flowers",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Feels surprisingly plush and damp.",
+   "Thrives on damp, shaded stone.",
+   "Creeps flat without any real stem.",
+   "Popular pick for tiny glass terrariums.",
+   "Bounces back after drying completely out."
+  ],
+  "round2": [
+   "Spreads tiny dust-like spores without any seeds.",
+   "Anchors to rock using tiny fine threads.",
+   "Folklore says it guides hikers facing north.",
+   "Dried bags sold for holding potting moisture.",
+   "Planted as a velvety, mowing-free lawn."
+  ],
+  "banned": [
+   "grows on north side",
+   "peat",
+   "spores",
+   "green carpet"
+  ]
  }
 }
