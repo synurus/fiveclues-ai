@@ -863,5 +863,31 @@
    "spores",
    "green carpet"
   ]
+ },
+ "2026-11-02": {
+  "word": "venus flytrap",
+  "category": "Plants & Flowers",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Naturally grows in swampy, damp soil.",
+   "Physically reacts when touched directly.",
+   "Prefers pure rainwater over tap water.",
+   "Inner parts show a reddish tint.",
+   "Kept indoors as a novelty houseplant."
+  ],
+  "round2": [
+   "Fringed leaf edges interlock like barred cages.",
+   "Hinged pads clamp shut in a flash.",
+   "Traps bugs to survive nutrient-poor swamp soil.",
+   "Tiny internal bristles trigger the leaf mechanism.",
+   "Blooms sit atop stalks high above traps."
+  ],
+  "banned": [
+   "snaps shut",
+   "eats bugs",
+   "carnivorous",
+   "trigger hairs"
+  ]
  }
 }
