@@ -889,5 +889,31 @@
    "carnivorous",
    "trigger hairs"
   ]
+ },
+ "2026-11-03": {
+  "word": "key",
+  "category": "Household Items",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Slips onto a metal ring easily",
+   "Often kept in pockets or bowls",
+   "Easy to lose in the couch",
+   "Has distinct ridges along one edge",
+   "Might have a colored plastic cap"
+  ],
+  "round2": [
+   "Cold when you pick it up",
+   "Fits nicely right in your palm",
+   "Makes a sharp clinking noise",
+   "Tossed onto a hallway table",
+   "Carried around every single day"
+  ],
+  "banned": [
+   "lock",
+   "metal",
+   "door",
+   "turn"
+  ]
  }
 }
