@@ -915,5 +915,30 @@
    "door",
    "turn"
   ]
+ },
+ "2026-11-04": {
+  "word": "mug",
+  "category": "Kitchenware",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Thick walls help keep warmth inside.",
+   "Comfortable loop to hook fingers through.",
+   "Round base that sits flat down.",
+   "Often shows off funny printed pictures.",
+   "Steam rises straight out the top."
+  ],
+  "round2": [
+   "Leaves wet dark rings on coffee tables.",
+   "Both palms wrap around for quick warmth.",
+   "Clinks softly when stirred with small spoons.",
+   "Holds way more liquid than dainty cups.",
+   "Interior stains brown from dark brews over time."
+  ],
+  "banned": [
+   "drinking coffee",
+   "hot tea",
+   "ceramic cup"
+  ]
  }
 }
