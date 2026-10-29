@@ -940,5 +940,31 @@
    "hot tea",
    "ceramic cup"
   ]
+ },
+ "2026-11-05": {
+  "word": "jacket",
+  "category": "Clothing & Accessories",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Has deep pockets.",
+   "Thrown over a sweater.",
+   "Worn outside in autumn.",
+   "Hung by the door.",
+   "Has a collar."
+  ],
+  "round2": [
+   "Snug cuffs.",
+   "Padded lining.",
+   "Heavy snaps.",
+   "Cropped cut.",
+   "Quilted squares."
+  ],
+  "banned": [
+   "zipper front",
+   "sleeves",
+   "outerwear",
+   "hood"
+  ]
  }
 }
