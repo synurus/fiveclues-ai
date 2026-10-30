@@ -966,5 +966,31 @@
    "outerwear",
    "hood"
   ]
+ },
+ "2026-11-06": {
+  "word": "cinema",
+  "category": "Places",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Sticky floors under shoes.",
+   "Sitting very close together.",
+   "Bright flashes in the dark.",
+   "Loud speakers shaking walls.",
+   "Renting a large space."
+  ],
+  "round2": [
+   "Stepped rows of chairs.",
+   "Heavy velvet curtains hanging.",
+   "Small lights on floors.",
+   "Emergency exits glowing green.",
+   "Cup holders in armrests."
+  ],
+  "banned": [
+   "movie",
+   "popcorn",
+   "screen",
+   "ticket"
+  ]
  }
 }
