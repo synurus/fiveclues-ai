@@ -992,5 +992,30 @@
    "screen",
    "ticket"
   ]
+ },
+ "2026-11-07": {
+  "word": "hedgehog",
+  "category": "Animals",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "small rounded body",
+   "active after sunset",
+   "short little legs",
+   "eats bugs and worms",
+   "pointed tiny snout"
+  ],
+  "round2": [
+   "tiny damp nose",
+   "hidden tiny tail",
+   "brown and white mix",
+   "loose skin underneath",
+   "short stout neck"
+  ],
+  "banned": [
+   "spikes",
+   "rolls into a ball",
+   "quills"
+  ]
  }
 }
