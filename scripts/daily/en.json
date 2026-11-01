@@ -1017,5 +1017,31 @@
    "rolls into a ball",
    "quills"
   ]
+ },
+ "2026-11-08": {
+  "word": "northern lights",
+  "category": "Nature & Weather",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Takes patience to catch.",
+   "Dancing colored ribbons.",
+   "Best seen wrapped in blankets.",
+   "Unpredictable show overhead.",
+   "Faint glow that shifts."
+  ],
+  "round2": [
+   "Charged particles from space.",
+   "Cameras catch faint pinks.",
+   "Trip to Alaska or Norway.",
+   "Curtains rippling above.",
+   "Solar wind hits air."
+  ],
+  "banned": [
+   "aurora",
+   "green",
+   "poles",
+   "arctic"
+  ]
  }
 }
