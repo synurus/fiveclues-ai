@@ -1043,5 +1043,31 @@
    "poles",
    "arctic"
   ]
+ },
+ "2026-11-09": {
+  "word": "toaster",
+  "category": "Appliances & Electronics",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Has a crumb tray underneath.",
+   "Features a browning dial.",
+   "Lightweight metal casing.",
+   "Gets warm on the sides.",
+   "Usually has two or four openings."
+  ],
+  "round2": [
+   "Has a push down lever.",
+   "Contains glowing wires inside.",
+   "Has a cancel button.",
+   "Sits on rubber feet.",
+   "Has a metal outer shell."
+  ],
+  "banned": [
+   "makes toast",
+   "bread slots",
+   "pop up lever",
+   "kitchen"
+  ]
  }
 }
