@@ -1069,5 +1069,31 @@
    "pop up lever",
    "kitchen"
   ]
+ },
+ "2026-11-10": {
+  "word": "magician",
+  "category": "Occupations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Lots of travel for gigs.",
+   "People clap at the end.",
+   "Needs good hand control.",
+   "Practice takes many hours.",
+   "Often hired for big parties."
+  ],
+  "round2": [
+   "uses cards and ropes",
+   "hides secrets from onlookers",
+   "stands before a seated crowd",
+   "buys special props online",
+   "needs a quick distraction"
+  ],
+  "banned": [
+   "rabbit",
+   "wand",
+   "stage",
+   "card tricks"
+  ]
  }
 }
