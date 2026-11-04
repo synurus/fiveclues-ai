@@ -1095,5 +1095,30 @@
    "stage",
    "card tricks"
   ]
+ },
+ "2026-11-11": {
+  "word": "laptop",
+  "category": "Appliances & Electronics",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Folds shut like a book",
+   "Slips easily into a backpack",
+   "Gets warm on your lap",
+   "Has a plastic trackpad",
+   "Opens with a hinge"
+  ],
+  "round2": [
+   "Has tiny rubber feet underneath.",
+   "Features a row of small function keys.",
+   "Has a webcam lens at the top center.",
+   "Connects with a round barrel plug.",
+   "Has air vents along the back edge."
+  ],
+  "banned": [
+   "keyboard",
+   "screen",
+   "battery"
+  ]
  }
 }
