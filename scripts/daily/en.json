@@ -1120,5 +1120,31 @@
    "screen",
    "battery"
   ]
+ },
+ "2026-11-12": {
+  "word": "smoothie",
+  "category": "Drinks",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Naturally very sweet",
+   "Often bright pink or green",
+   "Keeps you full for hours",
+   "Comes with a tiny paper umbrella sometimes",
+   "Popular after a gym workout"
+  ],
+  "round2": [
+   "Leaves pulp behind",
+   "Needs a thick straw",
+   "Seeds stuck in teeth",
+   "Packed with frozen fruit",
+   "Separates if left sitting"
+  ],
+  "banned": [
+   "blender",
+   "straw",
+   "thick",
+   "frozen fruit"
+  ]
  }
 }
