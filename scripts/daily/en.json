@@ -1146,5 +1146,31 @@
    "thick",
    "frozen fruit"
   ]
+ },
+ "2026-11-13": {
+  "word": "restaurant",
+  "category": "Places",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Waiting near the entrance.",
+   "Low lighting at night.",
+   "Talking across a table.",
+   "Checking the daily specials.",
+   "Leaving extra cash behind."
+  ],
+  "round2": [
+   "Cloth napkins folded neatly.",
+   "Small candles flickering gently.",
+   "Numbered plates on doors.",
+   "Empty glasses waiting nearby.",
+   "Hanging pendant lamps glowing."
+  ],
+  "banned": [
+   "menu",
+   "waiter",
+   "food",
+   "bill"
+  ]
  }
 }
