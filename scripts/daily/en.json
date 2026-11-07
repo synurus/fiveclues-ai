@@ -1172,5 +1172,30 @@
    "food",
    "bill"
   ]
+ },
+ "2026-11-14": {
+  "word": "clam",
+  "category": "Sea Creatures",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "buried in the sand",
+   "dug up at low tide",
+   "main ingredient in chowder",
+   "snaps shut when touched",
+   "static most of the time"
+  ],
+  "round2": [
+   "rounded shell pair",
+   "smooth inner surface",
+   "muddy bottom dweller",
+   "slow gap motion",
+   "tight closure action"
+  ],
+  "banned": [
+   "pearl",
+   "two shells",
+   "bivalve"
+  ]
  }
 }
