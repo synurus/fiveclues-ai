@@ -1197,5 +1197,31 @@
    "two shells",
    "bivalve"
   ]
+ },
+ "2026-11-15": {
+  "word": "swimming",
+  "category": "Sports",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Done in wet enclosed areas.",
+   "Involves steady rhythmic breathing.",
+   "People wear minimal lightweight clothing.",
+   "Skin gets pruned up afterward.",
+   "Hair stays damp for hours."
+  ],
+  "round2": [
+   "Rubber caps keep hair contained.",
+   "Lane ropes divide the blue water.",
+   "Tiled edges offer quick rests.",
+   "Plastic numbers tick on walls.",
+   "Ear plugs block trapped drops."
+  ],
+  "banned": [
+   "water",
+   "pool",
+   "goggles",
+   "lap"
+  ]
  }
 }
