@@ -1223,5 +1223,31 @@
    "goggles",
    "lap"
   ]
+ },
+ "2026-11-16": {
+  "word": "sweater",
+  "category": "Clothing & Accessories",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+  "round1": [
+   "Keeps you cozy on chilly autumn days.",
+   "Soft and stretchy when you pull it on.",
+   "You usually pull it over your head.",
+   "People love wearing funny versions in December.",
+   "Can feel uncomfortably scratchy against bare skin."
+  ],
+  "round2": [
+   "Often layered over a collared shirt.",
+   "Can have ribbed cuffs and hems.",
+   "Sometimes decorated with buttons or zippers.",
+   "Usually paired with casual denim pants.",
+   "Frequently folded on closet shelves."
+  ],
+  "banned": [
+   "knit wool pullover",
+   "jumper",
+   "cardigan",
+   "crewneck"
+  ]
  }
 }
