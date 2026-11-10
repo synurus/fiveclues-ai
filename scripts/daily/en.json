@@ -1249,5 +1249,31 @@
    "cardigan",
    "crewneck"
   ]
+ },
+ "2026-11-17": {
+  "word": "programmer",
+  "category": "Occupations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Types fast with both hands for hours.",
+   "Drinks endless cups of hot coffee daily.",
+   "Resolves frustrating errors before final deadlines.",
+   "Thinks through logical steps in silence.",
+   "Wears casual clothes like plain hoodies."
+  ],
+  "round2": [
+   "Stares at glowing displays",
+   "Attends morning meetings",
+   "Sits in quiet rooms",
+   "Types on keyboards",
+   "Sips morning beverages"
+  ],
+  "banned": [
+   "code",
+   "computer",
+   "keyboard",
+   "bug"
+  ]
  }
 }
