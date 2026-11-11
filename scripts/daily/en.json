@@ -1275,5 +1275,30 @@
    "keyboard",
    "bug"
   ]
+ },
+ "2026-11-18": {
+  "word": "seagull",
+  "category": "Birds",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Known for boldly snatching food scraps.",
+   "Mostly white with gray across the back.",
+   "Has webbed feet for paddling around.",
+   "Makes harsh, loud squawking cries.",
+   "Gathers in huge crowds near water."
+  ],
+  "round2": [
+   "Can safely drink both fresh and saltwater.",
+   "Young ones start out mottled and brownish.",
+   "Stomps on damp grass to lure worms.",
+   "Glides easily on rising coastal breezes.",
+   "A tiny bright spot marks its bill."
+  ],
+  "banned": [
+   "boardwalk scavenger",
+   "beach pier bird",
+   "gull"
+  ]
  }
 }
