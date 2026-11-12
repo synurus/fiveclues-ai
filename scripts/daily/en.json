@@ -1300,5 +1300,31 @@
    "beach pier bird",
    "gull"
   ]
+ },
+ "2026-11-19": {
+  "word": "ring",
+  "category": "Clothing & Accessories",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Slips on and off very easily.",
+   "Kept in a tiny velvet box.",
+   "Often tapped on hard tables.",
+   "Leaves a faint circle on skin.",
+   "Bought in specific numbered sizes."
+  ],
+  "round2": [
+   "Twisted around when nervous.",
+   "Slips off when hands get cold.",
+   "Polished up with a cloth.",
+   "Catching sunlight on your hand.",
+   "Snug fit over the knuckle."
+  ],
+  "banned": [
+   "finger",
+   "diamond",
+   "gold",
+   "marriage"
+  ]
  }
 }
