@@ -1326,5 +1326,30 @@
    "gold",
    "marriage"
   ]
+ },
+ "2026-11-20": {
+  "word": "raccoon",
+  "category": "Animals",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "dexterous front paws",
+   "ringed bushy tail",
+   "scavenges near human homes",
+   "climbs up tall trees",
+   "gray and black fur"
+  ],
+  "round2": [
+   "stocky heavy body",
+   "pointed snout",
+   "short rounded ears",
+   "salt and pepper coat",
+   "curved back posture"
+  ],
+  "banned": [
+   "mask",
+   "trash panda",
+   "washes food"
+  ]
  }
 }
