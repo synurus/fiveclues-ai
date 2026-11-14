@@ -1351,5 +1351,31 @@
    "trash panda",
    "washes food"
   ]
+ },
+ "2026-11-21": {
+  "word": "cloud",
+  "category": "Nature & Weather",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Blocks out the sun.",
+   "Drifts across the view.",
+   "Looks soft and gray sometimes.",
+   "Grows bigger in the wind.",
+   "Gets heavy before a storm."
+  ],
+  "round2": [
+   "Looks like fluffy wool.",
+   "Cast shadows on grass.",
+   "Turns dark purple evening.",
+   "Piles up very tall.",
+   "Catches the sunset glow."
+  ],
+  "banned": [
+   "rain",
+   "fluffy",
+   "white",
+   "sky"
+  ]
  }
 }
