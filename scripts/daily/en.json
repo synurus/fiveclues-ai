@@ -1377,5 +1377,31 @@
    "white",
    "sky"
   ]
+ },
+ "2026-11-22": {
+  "word": "moon",
+  "category": "Nature & Weather",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "shines at night",
+   "pulls the water",
+   "bright in the dark",
+   "seen from earth",
+   "cycles every month"
+  ],
+  "round2": [
+   "shadows cross the surface",
+   "causes rare daytime visibility",
+   "half illuminated by sunlight",
+   "reflects distant sunlight",
+   "drifts across stars"
+  ],
+  "banned": [
+   "crater",
+   "orbit",
+   "phases",
+   "satellite"
+  ]
  }
 }
