@@ -1403,5 +1403,31 @@
    "phases",
    "satellite"
   ]
+ },
+ "2026-11-23": {
+  "word": "farm",
+  "category": "Places",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash/gemini-3.5-flash-lite",
+  "round1": [
+   "Daily chores start before the sun rises.",
+   "Tall wire fences stretch across vast grounds.",
+   "Boots get caked in thick mud.",
+   "Heavy wooden gates keep things locked in.",
+   "Strong earthy smells drift through the air."
+  ],
+  "round2": [
+   "Rows of red machinery parked near the shed.",
+   "Graveled paths lead toward the main house.",
+   "Metal windmills spin slowly in the wind.",
+   "Wooden troughs sit ready for morning feeding.",
+   "Tin roofs clatter when the wind blows."
+  ],
+  "banned": [
+   "tractor",
+   "harvesting crops",
+   "barn and silo",
+   "livestock animals"
+  ]
  }
 }
