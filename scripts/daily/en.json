@@ -1429,5 +1429,29 @@
    "barn and silo",
    "livestock animals"
   ]
+ },
+ "2026-11-24": {
+  "word": "worm",
+  "category": "Insects & Bugs",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Stranded on wet pavement after storms.",
+   "Spends nearly all its time burrowing underground.",
+   "Dries out fast under baking sunlight.",
+   "Stretches long then bunches up tightly.",
+   "Quickly retreats deep inside when uncovered."
+  ],
+  "round2": [
+   "Breathes fresh air right through moist skin.",
+   "Swallows dirt whole to digest decaying matter.",
+   "Has a swollen fleshy ring around midsection.",
+   "Lacks any eyes, ears, or facial features.",
+   "Tugged out from turf by hungry robins."
+  ],
+  "banned": [
+   "makes garden compost",
+   "no legs at all"
+  ]
  }
 }
