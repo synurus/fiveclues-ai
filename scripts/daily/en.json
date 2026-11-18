@@ -1453,5 +1453,30 @@
    "makes garden compost",
    "no legs at all"
   ]
+ },
+ "2026-11-25": {
+  "word": "pudding",
+  "category": "Snacks & Desserts",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Soft texture in the mouth",
+   "Served chilled in cups",
+   "Quick mix packet",
+   "Smooth surface sheen",
+   "Kids love this"
+  ],
+  "round2": [
+   "Wobbles slightly on the plate.",
+   "Sticks to the utensil.",
+   "Eaten after dinner.",
+   "Comes in small plastic cups.",
+   "Sweet vanilla flavor."
+  ],
+  "banned": [
+   "gelatin",
+   "chocolate flavor",
+   "spoon"
+  ]
  }
 }
