@@ -1478,5 +1478,31 @@
    "chocolate flavor",
    "spoon"
   ]
+ },
+ "2026-11-26": {
+  "word": "hospital",
+  "category": "Places",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Beeping monitors keep you awake.",
+   "People wear pale green scrubs.",
+   "Small beds on rolling wheels.",
+   "Bright lights shining overhead.",
+   "Long corridors with shiny floors."
+  ],
+  "round2": [
+   "White paper rolls on examination tables.",
+   "Bottles of hand sanitizer everywhere.",
+   "Plastic cups with crushed ice.",
+   "Magazines stacked on low tables.",
+   "Glass jars filled with cotton balls."
+  ],
+  "banned": [
+   "doctors",
+   "nurses",
+   "patients",
+   "surgery"
+  ]
  }
 }
