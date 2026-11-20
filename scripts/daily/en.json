@@ -1504,5 +1504,31 @@
    "patients",
    "surgery"
   ]
+ },
+ "2026-11-27": {
+  "word": "accordion",
+  "category": "Musical Instruments",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Held against your chest.",
+   "Pushed in and out.",
+   "Heard in folk tunes.",
+   "Has multiple bass buttons.",
+   "Worn with shoulder straps."
+  ],
+  "round2": [
+   "Pleated central folding section.",
+   "Side covered in small round buttons.",
+   "Expands and compresses repeatedly.",
+   "Metal reeds inside vibrate.",
+   "Decorative grille on the front."
+  ],
+  "banned": [
+   "bellows",
+   "squeezebox",
+   "keyboard",
+   "straps"
+  ]
  }
 }
