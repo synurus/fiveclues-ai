@@ -1530,5 +1530,31 @@
    "keyboard",
    "straps"
   ]
+ },
+ "2026-11-28": {
+  "word": "earrings",
+  "category": "Clothing & Accessories",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Held on by a tiny backing",
+   "Hang down near the jawline",
+   "Catch the light when you turn",
+   "Stored on a felt display card",
+   "Often chosen to match an outfit"
+  ],
+  "round2": [
+   "Dangles just above the shoulders",
+   "Secured with a metal butterfly backing",
+   "Sways gently with head movements",
+   "Shimmers brightly under indoor lights",
+   "Framed nicely by short hairstyles"
+  ],
+  "banned": [
+   "ears",
+   "piercing",
+   "studs",
+   "hoops"
+  ]
  }
 }
