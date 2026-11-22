@@ -1556,5 +1556,31 @@
    "studs",
    "hoops"
   ]
+ },
+ "2026-11-29": {
+  "word": "vet",
+  "category": "Occupations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Long hours on your feet.",
+   "Lots of school required first.",
+   "Need a gentle touch here.",
+   "Deals with messy surprises daily.",
+   "People are grateful for help."
+  ],
+  "round2": [
+   "wears a blue coat",
+   "lifts heavy crates sometimes",
+   "calms nervous creatures down",
+   "washes hands very often",
+   "writes notes after checks"
+  ],
+  "banned": [
+   "dog",
+   "stethoscope",
+   "clinic",
+   "animal cage"
+  ]
  }
 }
