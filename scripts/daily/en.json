@@ -1582,5 +1582,31 @@
    "clinic",
    "animal cage"
   ]
+ },
+ "2026-11-30": {
+  "word": "can opener",
+  "category": "Kitchenware",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Squeezed to lock on.",
+   "Small handheld device.",
+   "Twisted in a circle.",
+   "Stored in a utensil drawer.",
+   "Has a rotating wheel."
+  ],
+  "round2": [
+   "Has a plastic knob.",
+   "Opens with tension.",
+   "Swings open wide.",
+   "Has shiny steel teeth.",
+   "Sits near the spices."
+  ],
+  "banned": [
+   "tin",
+   "lid",
+   "metal cans",
+   "crank"
+  ]
  }
 }
