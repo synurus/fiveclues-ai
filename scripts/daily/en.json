@@ -1608,5 +1608,31 @@
    "metal cans",
    "crank"
   ]
+ },
+ "2026-12-01": {
+  "word": "singer",
+  "category": "Occupations",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Requires a crowd",
+   "Often takes requests",
+   "Takes a bow",
+   "Travels for work",
+   "Stands on a platform"
+  ],
+  "round2": [
+   "Warms up vocal cords daily.",
+   "Rehearses harmony parts repeatedly.",
+   "Sips warm tea constantly.",
+   "Protects hearing from loud noise.",
+   "Learns lyrics by heart."
+  ],
+  "banned": [
+   "microphone",
+   "lyrics",
+   "album",
+   "stage"
+  ]
  }
 }
