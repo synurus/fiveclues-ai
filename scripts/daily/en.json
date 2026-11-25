@@ -1634,5 +1634,31 @@
    "album",
    "stage"
   ]
+ },
+ "2026-12-02": {
+  "word": "cereal",
+  "category": "Food",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Stored in a tall container",
+   "Kept in the pantry",
+   "Often has sweet flavors",
+   "Eaten from a dish",
+   "Many choices on shelves"
+  ],
+  "round2": [
+   "Floats in liquid",
+   "Small dry pieces",
+   "Sweet morning bite",
+   "Pour from the box",
+   "Gets soft quickly"
+  ],
+  "banned": [
+   "milk",
+   "bowl",
+   "spoon",
+   "box"
+  ]
  }
 }
