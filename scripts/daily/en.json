@@ -1660,5 +1660,31 @@
    "spoon",
    "box"
   ]
+ },
+ "2026-12-03": {
+  "word": "skirt",
+  "category": "Clothing & Accessories",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Paired with a blouse.",
+   "Flutters in the wind.",
+   "Has an elastic band.",
+   "Worn in warm weather.",
+   "Can be short or long."
+  ],
+  "round2": [
+   "Light weight.",
+   "Layered tulle.",
+   "Button front.",
+   "A-line shape.",
+   "Plaid pattern."
+  ],
+  "banned": [
+   "waist down",
+   "pleated",
+   "miniskirt",
+   "no legs"
+  ]
  }
 }
