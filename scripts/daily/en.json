@@ -1686,5 +1686,30 @@
    "miniskirt",
    "no legs"
   ]
+ },
+ "2026-12-04": {
+  "word": "piano",
+  "category": "Musical Instruments",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.5-flash-lite",
+  "round1": [
+   "Played sitting on a bench.",
+   "Produces sound via internal hammers.",
+   "Features a hinged lid.",
+   "Has a wide pitch range.",
+   "Commonly found in living rooms."
+  ],
+  "round2": [
+   "Press levers with your fingers",
+   "Struck strings inside a box",
+   "Features an openable top flap",
+   "Stands on wooden legs",
+   "Rests against a wall"
+  ],
+  "banned": [
+   "black and white keys",
+   "foot pedals",
+   "grand size"
+  ]
  }
 }
