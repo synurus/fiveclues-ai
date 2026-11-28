@@ -1711,5 +1711,31 @@
    "foot pedals",
    "grand size"
   ]
+ },
+ "2026-12-05": {
+  "word": "french fries",
+  "category": "Food",
+  "promptVersion": "152535d5",
+  "model": "gemini-3.8-flash",
+  "round1": [
+   "Golden yellow on the outside.",
+   "Crispy bite, soft on the inside.",
+   "Usually picked up with your fingers.",
+   "Best right out of the oil.",
+   "Great for dipping into sauces."
+  ],
+  "round2": [
+   "Cut into slender, straight sticks.",
+   "Heavily dusted with fine salt grains.",
+   "Leaves oily marks on paper bags.",
+   "Turns limp and sad when microwaved.",
+   "Served in a small cardboard scoop."
+  ],
+  "banned": [
+   "potato",
+   "ketchup",
+   "deep-fried sticks",
+   "fast food side"
+  ]
  }
 }
